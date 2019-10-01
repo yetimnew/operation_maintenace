@@ -1,0 +1,33 @@
+/* provides a red astrix to denote required fields - this should be included in common stylesheet */
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+    margin-left: 4px;
+	font-size: 20px;
+    font-weight: 900;
+}
+
+.btn-danger:hover {
+      background-color: #932A34 !important;
+    border-color: #bd2130 !important;
+	color: red !important;
+}
+.rounded, .circle {
+    border-radius: 500px;
+}
+
+.valid{
+ border: 2px solid green;   
+}
+.error{
+  color:red;  
+}
+.errorTxt{
+    border : 1px solid red;
+    min-height : 20px
+}
+}
+.breadcrumb-style {
+  float: right;
+  align-content: center;
+}
