@@ -14,6 +14,12 @@ class performanceByStatusController extends Controller
 {
     public function index()
     {
+        $average= DB::table('statuses')->select('statustype_id')->get();
+        return collect($average->map(function($value,$key){
+        return [$value];
+        }));
+
+
         $maxDate= DB::table('statuses')->MAX('registerddate');
         $newDate = Carbon::parse($maxDate)->diffForHumans();
         $maxautoid= DB::table('statuses')->MAX('autoid');
@@ -105,13 +111,7 @@ class performanceByStatusController extends Controller
         ->with('tds',$tds)
         ->with('status_date',$status_date)
         ->with('tdss',$tdss);
-//        } else{
 
-//         Session::flash('info', 'Cheeck the input Date Please' );
-//         return redirect()->route('performance_by_status');
-//        }
-     
-     
 
 }
   
@@ -128,21 +128,10 @@ class performanceByStatusController extends Controller
         $date_diff = ( strtotime( $start ) - strtotime( $end ) );
         $diff = abs( strtotime( $end ) - strtotime( $start ) );
 
-    $years = floor( $diff / ( 365 * 60 * 60 * 24 ) );
-    $months = floor( ( $diff - $years * 365 * 60 * 60 * 24 ) / ( 30 * 60 * 60 * 24 ) );
-    $days = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
+        $years = floor( $diff / ( 365 * 60 * 60 * 24 ) );
+        $months = floor( ( $diff - $years * 365 * 60 * 60 * 24 ) / ( 30 * 60 * 60 * 24 ) );
+        $days = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
 
-
-
-//        if(isset($start)){
-     
-//  SELECT  statuses.`statustype_id`, statuses.`plate`, statuses.`registerddate`,statustypes.name, count(statustype_id) as number
-//  FROM `statuses` 
-// LEFT JOIN statustypes 
-// ON statustypes.id = statuses.statustype_id
-// where plate= 10142
-// GROUP BY(statustype_id) 
-// ORDER by number DESC
 
         $status_date = DB::table('statuses')
                 ->select('statuses.statustype_id','statuses.plate','statuses.registerddate','statustypes.name'
@@ -162,19 +151,10 @@ class performanceByStatusController extends Controller
                 ->whereBetween('statuses.registerddate', [$first->toDateTimeString(), $second->toDateTimeString()])
                 ->orderBy('statuses.registerddate','ASC')
                 ->get();
-                // dd( $status_date);
-
- 
+    
         return view('operation.report.status_by_date.view')
         ->with('status_date',$status_date)
         ->with('status_summery',$status_summery);
-//        } else{
-
-//         Session::flash('info', 'Cheeck the input Date Please' );
-//         return redirect()->route('performance_by_status');
-//        }
-     
-     
 
 }
 

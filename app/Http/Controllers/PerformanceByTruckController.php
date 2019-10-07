@@ -14,7 +14,7 @@ class PerformanceByTruckController extends Controller
 {
     public function index()
     {
-        
+ 
         $trucks = DB::table('performances')
         
         ->select('trucks.id','trucks.plate','driver_truck.driverid','driver_truck.plate as plate','drivers.name'

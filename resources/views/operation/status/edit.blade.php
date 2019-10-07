@@ -2,13 +2,13 @@
 @section( 'title', 'TIMS | Status Edit' )
 
 @section( 'content' )
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item"><a href="#">Statuses</a>
-		</li>
-		<li class="breadcrumb-item active">Status Edit</li>
-	</ol>
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item"><a href="#">Statuses</a>
+	</li>
+	<li class="breadcrumb-item active">Status Edit</li>
+</ol>
 <div class="col-md-12">
 	@include('master.error') {{-- @include('master.success') --}}
 	<div class="card text-left">
@@ -16,7 +16,8 @@
 			<h2>Update Status</h2>
 		</div>
 		<div class="card-body">
-			<form method="post" action="{{route('status.update',['id'=>$status->id])}}" class="form-horizontal" id="truck_form">
+			<form method="post" action="{{route('status.update',['id'=>$status->id])}}" class="form-horizontal"
+				id="truck_form">
 				@csrf
 				<div class="row">
 					<div class="col-md-6">
@@ -24,16 +25,19 @@
 							<label class="control-label col-4">Registeration Date</label>
 
 							<div class="col-8">
-								<input type="date" id="rdate" name="rdate" class="form-control" required value="{{$status->registerddate}}">
+								<input type="date" id="rdate" name="rdate" class="form-control" required
+									value="{{$status->registerddate}}">
 
-								<small class="form-text">If You change the date The hole date can Your sure to do this?</small>
+								<small class="form-text">If You change the date The hole date can Your sure to do
+									this?</small>
 							</div>
 						</div>
 						<div class="form-group  row">
 							<label class="control-label col-4"> Id</label>
 
 							<div class="col-8">
-								<input name="aid" type="text" cass="form-control" id="aid" class="form-control" disabled value="{{$status->autoid}}">
+								<input name="aid" type="text" cass="form-control" id="aid" class="form-control" disabled
+									value="{{$status->autoid}}">
 							</div>
 						</div>
 
@@ -41,7 +45,8 @@
 							<label class="control-label col-4">Plate</label>
 
 							<div class="col-8">
-								<input type="text" id="plate" name="plate" class="form-control" disabled value="{{$status->plate}}">
+								<input type="text" id="plate" name="plate" class="form-control" disabled
+									value="{{$status->plate}}">
 							</div>
 						</div>
 
@@ -59,9 +64,6 @@
 						<div class="form-group required">
 							<button type="submit" class="btn btn-primary" name="save">Save</button>
 						</div>
-
-
-
 					</div>
 
 				</div>

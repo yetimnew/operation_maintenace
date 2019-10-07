@@ -2,18 +2,18 @@
 @section( 'title', 'TIMS | Performance Create' )
 
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item active">Performance</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item active">Performance</li>
+</ol>
 <div class="row col-12">
 	<div class="col-10">
 
 	</div>
 	<div class="col-2">
-<a href="{{route('performace.create')}}" class="btn btn-primary">Add Performance</a>
+		<a href="{{route('performace.create')}}" class="btn btn-primary">Add Performance</a>
 	</div>
 </div>
 <div class="row col-12">
@@ -46,18 +46,8 @@
 			</thead>
 			<tbody>
 				<?php $no = 0 ?>
-				 {{-- {{ dd($performances->drivers->nam) }} --}}
-				 @if ($performances->count()> 0)
-				{{-- {{dd($statuslist)}} --}}
-			 {{-- very important  --}}
-					{{-- @foreach ($statuslist as $key => $value )
-						@if ( $value)
-			 <a href="{{$key}}"> || {{ucwords($key)}} ({{ $value}} )</a>
-						@endif
-					@endforeach --}}
-					  
-		
-				  @foreach ($performances as $pr)
+				@if ($performances->count()> 0)
+				@foreach ($performances as $pr)
 				<tr>
 					<td class='m-1 p-1'>{{++$no}}</td>
 
@@ -68,11 +58,11 @@
 					@endif
 					<td class='m-1 p-1'>{{$pr->FOnumber}}</td>
 					<td class='m-1 p-1'>{{$pr->operation->operationid}}</td>
-					<td class='m-1 p-1' >{{$pr->driver_truck->plate}} - {{$pr->driver_truck->driverid}}</td>
-					{{-- <td class='m-1 p-1'>{{$pr->driver->name}}</td> --}}
-					<td class='m-1 p-1'  data-toggle="tooltip" data-placement="top" title="{{$pr->DateDispach}}">{{$pr->DateDispach}}</td>
+					<td class='m-1 p-1'>{{$pr->driver_truck->plate}} - {{$pr->driver_truck->driverid}}</td>
+					<td class='m-1 p-1' data-toggle="tooltip" data-placement="top" title="{{$pr->DateDispach}}">
+						{{$pr->DateDispach}}</td>
 					<td class='m-1 p-1'>{{$pr->orgion->name}}</td>
-					<td class='m-1 p-1' >{{$pr->destination->name}}</td>
+					<td class='m-1 p-1'>{{$pr->destination->name}}</td>
 					<td class='m-1 p-1'>{{$pr->DistanceWCargo}}</td>
 					<td class='m-1 p-1'>{{$pr->DistanceWOCargo}}</td>
 					<td class='m-1 p-1'>{{$pr->CargoVolumMT}}</td>
@@ -85,30 +75,32 @@
 					<td class='m-1 p-1'><span class="badge badge-danger">Not Returned</span>
 					</td>
 					@else
-					<td class='m-1 p-1' > <span class="badge badge-primary"> Returned</span>
+					<td class='m-1 p-1'> <span class="badge badge-primary"> Returned</span>
 					</td>
 					@endif
 
-					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a href="{{route('performace.edit',['id'=> $pr->id])}}" > <i class="fas fa-edit "></i> 
-					</a>
+					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
+							href="{{route('performace.edit',['id'=> $pr->id])}}"> <i class="fas fa-edit "></i>
+						</a>
 					</td>
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
-						<form action="{{route('performace.destroy',['id'=> $pr->id])}}" id="delete-form-{{$pr->id}}" style="display: none">
+						<form action="{{route('performace.destroy',['id'=> $pr->id])}}" id="delete-form-{{$pr->id}}"
+							style="display: none">
 							@csrf @method('DELETE')
 						</form>
-						<button type="submit" class="btn btn-sm"  onclick="if(confirm('Are you sure to delete this?')){
+						<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to delete this?')){
                                       event.preventDefault();
                                       document.getElementById('delete-form-{{$pr->id}}').submit();
                                     }else{
                                      event.preventDefault();
                                     }"> <i class="fas fa-trash red"></i>
 						</button>
-								</td>
+					</td>
 				</tr>
 
 				@endforeach
-				 @else
+				@else
 				<tr>
 					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
 				</tr>
@@ -116,7 +108,7 @@
 
 			</tbody>
 
-			</table>
+		</table>
 
 		@endsection @section('javascript')
 		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
