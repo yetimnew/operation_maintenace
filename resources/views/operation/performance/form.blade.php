@@ -67,8 +67,6 @@
                     {{$truck->plate}}-{{$truck->name}}</option>
                 @endforeach
             </select>
-
-
             @if ($errors->has('truck'))
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->first('truck') }}</strong>
@@ -163,8 +161,8 @@
 
                 <input name="cargovol" type="number"
                     class="form-control {{ $errors->has('cargovol') ? ' is-invalid' : '' }}" id="cargovol"
-                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" onfocusout="validateCargovol()"> @if
-                ($errors->has('cargovol'))
+                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" onfocusout="validateCargovol()">
+                @if($errors->has('cargovol'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('cargovol') }}</strong>
                 </span>
@@ -180,8 +178,8 @@
             <label class="control-label"> Fuel In Litter</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="fuell" type="number" class="form-control {{ $errors->has('fuell') ? ' is-invalid' : '' }}"
-                    id="fuell" value="{{ old('fuell') ?? $performance->fuelInLitter}}" onfocusout="validateFuell()"> @if
-                ($errors->has('fuell'))
+                    id="fuell" value="{{ old('fuell') ?? $performance->fuelInLitter}}" onfocusout="validateFuell()">
+                @if($errors->has('fuell'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('fuell') }}</strong>
                 </span>
@@ -194,8 +192,8 @@
             <label class="control-label"> Fuel In Birr</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="fuelb" type="number" class="form-control{{ $errors->has('fuelb') ? ' is-invalid' : '' }}"
-                    id="fuelb" value="{{ old('fuelb') ?? $performance->fuelInBirr}}" onfocusout="validateFuelb()"> @if
-                ($errors->has('fuelb'))
+                    id="fuelb" value="{{ old('fuelb') ?? $performance->fuelInBirr}}" onfocusout="validateFuelb()">
+                @if($errors->has('fuelb'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('fuelb') }}</strong>
                 </span>
@@ -209,8 +207,8 @@
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="perdiem" type="number"
                     class="form-control {{ $errors->has('perdiem') ? ' is-invalid' : '' }}" id="perdiem"
-                    value="{{ old('perdiem') ?? $performance->perdiem}}" onfocusout="validatePerdiem()"> @if
-                ($errors->has('perdiem'))
+                    value="{{ old('perdiem') ?? $performance->perdiem}}" onfocusout="validatePerdiem()">
+                @if($errors->has('perdiem'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('perdiem') }}</strong>
                 </span>
@@ -223,8 +221,8 @@
             <label class="control-label"> Work On Going</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="wog" type="number" class="form-control {{ $errors->has('wog') ? ' is-invalid' : '' }}"
-                    id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" onfocusout="validateWog()"> @if
-                ($errors->has('wog'))
+                    id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" onfocusout="validateWog()">
+                @if($errors->has('wog'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('wog') }}</strong>
                 </span>
@@ -237,8 +235,8 @@
             <label class="control-label"> Other</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="other" type="number" class="form-control {{ $errors->has('other') ? ' is-invalid' : '' }}"
-                    id="other" value="{{ old('other') ?? $performance->other}}" onfocusout="validatOther()"> @if
-                ($errors->has('other'))
+                    id="other" value="{{ old('other') ?? $performance->other}}" onfocusout="validatOther()">
+                @if($errors->has('other'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('other') }}</strong>
                 </span>
@@ -263,22 +261,22 @@
             @section( 'javascript' )
             <script>
                 const chinet = document.getElementById( 'chinet' );
-	const fo = document.getElementById( 'fo' );
-	const operation = document.getElementById( 'operation' );
-	const truck = document.getElementById( 'truck' );
-	const ddate = document.getElementById( 'ddate' );
-	const origion = document.getElementById( 'origion' );
-	const destination = document.getElementById( 'destination' );
-	const diswc = document.getElementById( 'diswc' );
-	const diswoc = document.getElementById( 'diswoc' );
-	const cargovol = document.getElementById( 'cargovol' );
-	const fuell = document.getElementById( 'fuell' );
-	const fuelb = document.getElementById( 'fuelb' );
-	const perdiem = document.getElementById( 'perdiem' );
-	const wog = document.getElementById( 'wog' );
-	const other = document.getElementById( 'other' );
-	const comment = document.getElementById( 'comment' );
-	const performance_edit_form = document.getElementById( 'performance_edit_form' );
+                const fo = document.getElementById( 'fo' );
+                const operation = document.getElementById( 'operation' );
+                const truck = document.getElementById( 'truck' );
+                const ddate = document.getElementById( 'ddate' );
+                const origion = document.getElementById( 'origion' );
+                const destination = document.getElementById( 'destination' );
+                const diswc = document.getElementById( 'diswc' );
+                const diswoc = document.getElementById( 'diswoc' );
+                const cargovol = document.getElementById( 'cargovol' );
+                const fuell = document.getElementById( 'fuell' );
+                const fuelb = document.getElementById( 'fuelb' );
+                const perdiem = document.getElementById( 'perdiem' );
+                const wog = document.getElementById( 'wog' );
+                const other = document.getElementById( 'other' );
+                const comment = document.getElementById( 'comment' );
+                const performance_edit_form = document.getElementById( 'performance_edit_form' );
 
 	performance_edit_form.addEventListener( 'submit', function ( event ) {
 		event.preventDefault();
@@ -377,7 +375,7 @@
 		if ( checkIfEmpty( diswc ) ) {
 			return false;
 		}
-		if ( !minmax( diswc, 50, 1500 ) ) {
+		if ( !minmax( diswc, 10, 1500 ) ) {
 			return false;
 		} else {
 			return true;
@@ -390,7 +388,7 @@
 		if ( checkIfEmpty( diswoc ) ) {
 			return false;
 		}
-		if ( !minmax( diswoc, 50, 1500 ) ) {
+		if ( !minmax( diswoc, 10, 1500 ) ) {
 			return false;
 		} else {
 			return true;

@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "realrashid/sweet-alert": "^1.1",
         "spatie/laravel-backup": "^6.2",
-        "uxweb/sweet-alert":"~1.4"
+        "spatie/laravel-permission": "^3.0",
+        "uxweb/sweet-alert": "~1.4"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

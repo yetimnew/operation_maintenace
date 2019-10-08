@@ -30,8 +30,6 @@
 						<option value="0"> Not Returnded</option>
 						@endif
 					</select>
-
-
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 				<div class="form-group">
