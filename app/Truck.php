@@ -4,10 +4,13 @@ namespace App;
 
 use App\Performance;
 use App\Vehecletype;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 
 class Truck extends Model
 {
+    use HasRoles;
+    protected $guard_name = 'web';
     protected $fillable = [
         'id',
         'plate',

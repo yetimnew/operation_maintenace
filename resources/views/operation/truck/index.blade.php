@@ -22,9 +22,10 @@
 	<div class="col-10">
 	</div>
 	<div class="col-2">
-
+		@can('create truck')
 		<a href="{{route('truck.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Truck</a>
 		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('trucks', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
+		@endcan
 	</div>
 </div>
 <div class="row col-12">
@@ -63,17 +64,22 @@
 					<td class='m-1 p-1'>{{number_format($truck->purchasePrice, 2)}}</td>
 					<td class='m-1 p-1'>{{$truck->productionDate}}</td>
 					<td class='m-1 p-1'>{{$truck->serviceStartDate}}</td>
+					@can('update truck')
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 							href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fas fa-edit"> </i></a></td>
+					@endcan
 					{{-- <td>
-                    <a><button class="btn btn-danger" onclick="deleteData({{ $post->id }})"
+							<a><button class="btn btn-danger" onclick="deleteData({{ $post->id }})"
 					type="submit">Delete</button></a>
 					</td> --}}
+					@can('delete truck')
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
+
 						<form action="{{route('truck.destroy',['id'=> $truck->id])}}" id="detach-form-{{$truck->id}}"
 							style="display: none">
 							@csrf @method('DELETE')
 						</form>
+
 						<button type="submit" class="btn btn-sm" id="first" onclick="if(confirm('Are you sure to Delete this?')){
                             event.preventDefault();
                             document.getElementById('detach-form-{{$truck->id}}').submit();
@@ -82,6 +88,7 @@
 						}"> <i class="fas fa-trash red"> </i>
 					</td>
 					</button>
+					@endcan
 				</tr>
 
 				@endforeach @else

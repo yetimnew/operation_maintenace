@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Truck;
 use App\Vehecletype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Permission;
 
 class TruckController extends Controller
 {
 
     public function index()
     {
+        // Role::create(['name'=>'admin']);
+        // Permission::create(['name'=>'create truck']);
+        // $role = Role::findById(1);
+        // $role->givePermissionTo($pr);
+        // return auth()->user()->givePermissionTo('create truck');
+        // auth()->user()->assignRole('super');
+    //    return auth()->user()->permissions;
         //  $trucks = Truck::all();
+    //     $pr = 
+    //    $user=  User::role('statstician')->get();
+    //    dd($user);
         $trucks = DB::table('trucks')
         ->join('vehecletypes','vehecletypes.id','=','vehecletype_id')
         ->select('trucks.*','vehecletypes.name as Name')
