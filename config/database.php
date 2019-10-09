@@ -54,11 +54,28 @@ return [
             'prefix_indexes' => true,
             'strict' => false,
             'engine' => null,
+            // 'dump_command_path'=> 'C:\xampp\mysql\bin',
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
-        ],
+            // 'dump' => [
+            //     'dump_binary_path' => '/path/to/the/binary', // only the path, so without `mysqldump` or `pg_dump`
+            //     'use_single_transaction',
+            //     'timeout' => 60 * 5, // 5 minute timeout
+            //     'exclude_tables' => ['table1', 'table2'],
+            //     'add_extra_option' => '--optionname=optionvalue', 
+            //  ]  
 
+            'dump' => [
+                'dump_binary_path' => 'C:/xampp/mysql/bin/', // only the path, so without `mysqldump` or `pg_dump`
+                'use_single_transaction',
+                'timeout' => 60 * 5, // 5 minute timeout
+             ],
+    
+            // 'dump_command_timeout'=> 60 * 5,
+            // 'dump_using_single_transaction' =>true,
+        ],
+      
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
