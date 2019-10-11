@@ -87,6 +87,7 @@ class BackupController extends Controller
     public function delete($file_name)
     {
         $disk = Storage::disk(config('backup.backup.destination.disks')[0]);
+        dd( $disk);
         if ($disk->exists(config('backup.backup.name') . '/' . $file_name)) 
         {
             $disk->delete(config('backup.backup.name') . '/' . $file_name);
@@ -108,7 +109,7 @@ class BackupController extends Controller
                 
                 return round($size, $precision).$units[$i];
             }
-            public function getDate($date_modify)
+        public function getDate($date_modify)
             {
                return Carbon::createFromTimeStamp($date_modify)->formatLocalized('%d %B %Y %H:%M');
             }

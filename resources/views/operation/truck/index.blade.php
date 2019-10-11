@@ -32,7 +32,7 @@
 
 	{{-- {{ message }} --}}
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="trucks">
+		<table class=".table-sm table table-bordered table-sm table-striped" id="trucks">
 			<thead>
 				<tr>
 					<th class="m-1 b-1" width="5%">No</th>
@@ -54,16 +54,16 @@
 				<?php $no = 0 ?>
 				@if ($trucks->count()> 0) @foreach ($trucks as $truck)
 				<tr>
-					<td class='m-1 p-1'>{{++$no }}</td>
-					<td class='m-1 p-1'>{{$truck->plate}}</td>
-					<td class='m-1 p-1'>{{$truck->Name}}</td>
-					<td class='m-1 p-1'>{{$truck->chasisNumber}}</td>
-					<td class='m-1 p-1'>{{$truck->engineNumber}}</td>
-					<td class='m-1 p-1'>{{$truck->tyreSyze}}</td>
-					<td class='m-1 p-1'>{{ number_format($truck->serviceIntervalKM , 2)}}</td>
-					<td class='m-1 p-1'>{{number_format($truck->purchasePrice, 2)}}</td>
-					<td class='m-1 p-1'>{{$truck->productionDate}}</td>
-					<td class='m-1 p-1'>{{$truck->serviceStartDate}}</td>
+					<td class='p-1'>{{++$no }}</td>
+					<td class='p-1'>{{$truck->plate}}</td>
+					<td class='p-1'>{{$truck->Name}}</td>
+					<td class='p-1'>{{$truck->chasisNumber}}</td>
+					<td class='p-1'>{{$truck->engineNumber}}</td>
+					<td class='p-1'>{{$truck->tyreSyze}}</td>
+					<td class='p-1'>{{ number_format($truck->serviceIntervalKM , 2)}}</td>
+					<td class='p-1'>{{number_format($truck->purchasePrice, 2)}}</td>
+					<td class='p-1'>{{$truck->productionDate}}</td>
+					<td class='p-1'>{{$truck->serviceStartDate}}</td>
 					@can('update truck')
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 							href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fas fa-edit"> </i></a></td>

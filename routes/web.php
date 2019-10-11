@@ -9,13 +9,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'DashbordController@index')->name('home');
     Route::get('/', 'DashbordController@index');
     //DAshbord
-    Route::get('backup', 'BackupController@index');
+    Route::get('backup', ['uses'=>'BackupController@index','as'=>'backup']);
     Route::get('backup/create', 'BackupController@create');
     Route::get('backup/download/{file_name}', 'BackupController@download');
     Route::get('backup/download/{file_name}', ['uses'=>'BackupController@download','as'=>'backupDownload']);
     Route::get('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
     // Route::get('backup/delete/{file_name}', 'BackupController@delete');
-
+    Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
+// role and permission
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);
 //  user profile start here

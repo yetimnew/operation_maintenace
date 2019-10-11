@@ -11,7 +11,8 @@
                     <div class="info d-flex align-items-center">
                         <div class="content">
                             <div class="logo">
-                                <div class="avatar text-center"><img src="img/logo.png" alt="..." class="img-fluid" width="350" height="350">
+                                <div class="avatar text-center"><img src="img/logo.png" alt="..." class="img-fluid"
+                                        width="500" height="350">
                                 </div>
                                 <div class="title">
 
@@ -36,20 +37,24 @@
                             <form method="POST" action="login.php">
                                 <div class="form-group required">
                                     <label for="email" class="control-label">User Name</label>
-                                    <input id="email" type="text" name="email" required class="form-control" placeholder="Email Address">
+                                    <input id="email" type="text" name="email" required class="form-control"
+                                        placeholder="Email Address">
 
                                 </div>
                                 <div class="form-group required">
                                     <label for="password" class="control-label">Password</label>
-                                    <input id="password" type="password" name="password" required class="form-control" placeholder="Password">
+                                    <input id="password" type="password" name="password" required class="form-control"
+                                        placeholder="Password">
                                 </div>
-                                <button type="submit" name="submit" id="submit" class="btn btn-primary btn-md btn-block"> Login</button>
+                                <button type="submit" name="submit" id="submit"
+                                    class="btn btn-primary btn-md btn-block"> Login</button>
                             </form>
-                            <a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.php" class="signup">Signup</a>
+                            <a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account?
+                            </small><a href="register.php" class="signup">Signup</a>
 
 
 
-                          
+
                         </div>
                     </div>
                 </div>
@@ -63,9 +68,9 @@
     </div>
     @endsection
     @section('javascript')
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}" > </script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"> </script>
     <script>
-    $(document).ready(function(){
+        $(document).ready(function(){
     $('#customer').DataTable();
     });
     </script>

@@ -2,12 +2,12 @@
 @section( 'title', 'TIMS | Performance Create' )
 
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item active">Performance</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item active">Performance</li>
+</ol>
 
 <div class="row col-12">
 	<h3 class="text-center"> REPORT : Performance By Truck</h3>
@@ -21,11 +21,13 @@
 					<div class="form-row">
 						<div class="form-group col-md-5">
 							<label for="inputCity">Start Date</label>
-							<input id="startDate" name="startDate" type="date" placeholder="Start Date" class="form-control" required>
+							<input id="startDate" name="startDate" type="date" placeholder="Start Date"
+								class="form-control" required>
 						</div>
 						<div class="form-group col-md-5">
 							<label for="inputState">Start Date</label>
-							<input id="endDate" name="endDate" type="date" placeholder="End Date" class="form-control" required>
+							<input id="endDate" name="endDate" type="date" placeholder="End Date" class="form-control"
+								required>
 
 						</div>
 						<div class="form-group col-md-2">
@@ -41,7 +43,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped table-hover" id="operation_performance">
+		<table class="table table-bordered table-sm table-striped table-hover" id="operation_performance">
 			<thead>
 				<tr>
 					<th>S/No</th>
@@ -62,16 +64,18 @@
 			<tbody>
 				{{-- {{dd($operationsReport)}} --}}
 				<?php $no = 0 ?> @if ($operationsReport->count()> 0)
-				 @foreach ($operationsReport as $td)
+				@foreach ($operationsReport as $td)
 				<tr>
 					<td class='m-1 p-1'>{{++$no}}</td>
-				<td class='m-1 p-1'>{{$td->operationid}} <span class="pull-right"><a href="{{ route('performance_by_opration.details',['id'=> $td->id])}}">Details</a></span></td>
+					<td class='m-1 p-1'>{{$td->operationid}} <span class="pull-right"><a
+								href="{{ route('performance_by_opration.details',['id'=> $td->id])}}">Details</a></span>
+					</td>
 					<td class='m-1 p-1'>{{$td->name}}</td>
 					<td class='m-1 p-1'>{{$td->stratdate}}</td>
 					<td class='m-1 p-1 text-right'>{{number_format($td->Tone_Given,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{number_format($td->tonkm,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{number_format($td->Tone,2)}}</td>
-				
+
 					<td class='m-1 p-1 text-right'>{{number_format($td->Tone_Given - $td->Tone,2)}}</td>
 					@if ($td->cargotype == 1)
 					<td class='m-1 p-1 text-center'>Relief</td>
@@ -83,7 +87,7 @@
 					<td class='m-1 p-1'>{{number_format($td->tariff * $td->tonkm ,2)}}</td>
 					<td class='m-1 p-1'>{{number_format($td->Tone/$td->Tone_Given ,2)*100}}%</td>
 					@if ($td->closed == 1)
-				<td class='m-1 p-1'> <label class='badge badge-success'>Active </label> || {{$td->enddate}} </td>
+					<td class='m-1 p-1'> <label class='badge badge-success'>Active </label> || {{$td->enddate}} </td>
 					@else
 					<td class='m-1 p-1'> <label class='badge badge-danger'>Finished </label> || {{$td->enddate}}</td>
 
@@ -92,7 +96,7 @@
 				</tr>
 
 				@endforeach
-				 @else
+				@else
 				<tr>
 					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
 				</tr>
@@ -105,7 +109,7 @@
 		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
 		</script>
 		<script>
-						$( document ).ready( function () {
+			$( document ).ready( function () {
 
 
 $( '#operation_performance' ).DataTable( {
@@ -115,6 +119,6 @@ $( '#operation_performance' ).DataTable( {
 	]
 } );
 } );
-</script>
+		</script>
 		</script>
 		@endsection

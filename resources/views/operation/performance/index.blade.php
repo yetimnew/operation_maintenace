@@ -18,7 +18,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="drivers">
+		<table class="table table-bordered table-sm table-striped" id="drivers">
 			<thead>
 				<tr>
 					<th>No</th>

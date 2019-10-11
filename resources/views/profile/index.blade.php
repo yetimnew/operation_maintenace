@@ -19,7 +19,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="customer">
+		<table class="table table-bordered table-sm table-striped" id="customer">
 			<thead>
 				<tr>
 					<th width="3%">Number</th>

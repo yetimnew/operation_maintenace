@@ -1,24 +1,25 @@
 @extends( 'master.app' )
 @section( 'title', 'TIMS | Region ' )
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item"><a href="#">Operations</a>
-		</li>
-		<li class="breadcrumb-item active">Operational Region</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item"><a href="#">Operations</a>
+	</li>
+	<li class="breadcrumb-item active">Operational Region</li>
+</ol>
 <div class="row col-12">
 	<div class="col-10">
 	</div>
 	<div class="col-2">
-		<a href="{{route('region.create')}}" class="btn btn-primary">Add Region</a> {{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('region', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
+		<a href="{{route('region.create')}}" class="btn btn-primary">Add Region</a>
+		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('region', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
 	</div>
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="region">
+		<table class="table table-bordered table-sm table-striped" id="region">
 			<thead>
 				<tr>
 					<th class="m-1 b-1">Number</th>
@@ -35,12 +36,14 @@
 					<td class='m-1 p-1'>{{$region->id}}</td>
 					<td class='m-1 p-1'>{{$region->name}}</td>
 					<td class='m-1 p-1'>{{$region->comment}}</td>
-					<td class='m-1 p-1'><a href="{{route('region.edit',['id'=> $region->id])}}" class="btn btn-info btn-xs"><i class="fas fa-edit"> </i></a>
+					<td class='m-1 p-1'><a href="{{route('region.edit',['id'=> $region->id])}}"
+							class="btn btn-info btn-xs"><i class="fas fa-edit"> </i></a>
 					</td>
 					<td class='m-1 p-1'>
 
 
-						<form action="{{route('region.destroy',['id'=> $region->id])}}" id="detach-form-{{$region->id}}" style="display: none">
+						<form action="{{route('region.destroy',['id'=> $region->id])}}" id="detach-form-{{$region->id}}"
+							style="display: none">
 							@csrf @method('DELETE')
 						</form>
 						<button type="submit" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to Delete this?')){
@@ -48,8 +51,10 @@
                             document.getElementById('detach-form-{{$region->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fas fa-trash"> </i></td>
-                        </button> {{-- <a href="{{route('region.destroy',['id'=> $region->id])}}" class="btn btn-danger btn-xs">Delete</a>
+                        }"> <i class="fas fa-trash"> </i>
+					</td>
+					</button> {{-- <a href="{{route('region.destroy',['id'=> $region->id])}}" class="btn btn-danger
+					btn-xs">Delete</a>
 					</td> --}}
 				</tr>
 

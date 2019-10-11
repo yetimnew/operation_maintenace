@@ -2,14 +2,14 @@
 @section( 'title', 'TIMS | Performance By Driver' )
 
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item"><a href="#">Report</a>
-		</li>
-		<li class="breadcrumb-item active">Performance By Driver</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item"><a href="#">Report</a>
+	</li>
+	<li class="breadcrumb-item active">Performance By Driver</li>
+</ol>
 
 <div class="row col-12">
 	<div class="col-12 mb-3">
@@ -17,9 +17,9 @@
 		<a href="{{route('performance_by_driver')}}" class="btn btn-primary pull-right">Back</a>
 	</div>
 	<div class="table-responsive text-nowrap">
-		<h2 class="text-center"> Report From  {{ $start}} To  {{ $end}}   For  @if($years > 0){{ $years }} Years @endif
-             @if($months > 0){{ $months }} Monthes @endif  {{ $days}} days </h2>
-		<table class="table table-bordered table-condensed table-striped" id="drivers">
+		<h2 class="text-center"> Report From {{ $start}} To {{ $end}} For @if($years > 0){{ $years }} Years @endif
+			@if($months > 0){{ $months }} Monthes @endif {{ $days}} days </h2>
+		<table class="table table-bordered table-sm table-striped" id="drivers">
 			<thead>
 				<tr>
 					<th>No</th>
@@ -55,7 +55,8 @@
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->other,2)}}</td>
 
 					{{--
-					<td class='m-1 p-1'><a href="{{route('performace.edit',['id'=> $td->id])}}" class="btn btn-info btn-xs"> <i class="fas fa-edit"></i> </a>
+					<td class='m-1 p-1'><a href="{{route('performace.edit',['id'=> $td->id])}}" class="btn btn-info btn-xs"> <i
+						class="fas fa-edit"></i> </a>
 					</td> --}}
 				</tr>
 

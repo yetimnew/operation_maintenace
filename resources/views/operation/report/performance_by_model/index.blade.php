@@ -1,13 +1,13 @@
 @extends( 'master.app' )
-@section( 'title', 'TIMS | Report  performance By model' )
+@section( 'title', 'TIMS | Report performance By model' )
 
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item active">Performance</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item active">Performance</li>
+</ol>
 
 <div class="row col-12">
 	<h3 class="text-center"> REPORT : Performance By Truck</h3>
@@ -21,11 +21,13 @@
 					<div class="form-row">
 						<div class="form-group col-md-5">
 							<label for="inputCity">Start Date</label>
-							<input id="startDate" name="startDate" type="date" placeholder="Start Date" class="form-control" required>
+							<input id="startDate" name="startDate" type="date" placeholder="Start Date"
+								class="form-control" required>
 						</div>
 						<div class="form-group col-md-5">
 							<label for="inputState">Start Date</label>
-							<input id="endDate" name="endDate" type="date" placeholder="End Date" class="form-control" required>
+							<input id="endDate" name="endDate" type="date" placeholder="End Date" class="form-control"
+								required>
 						</div>
 						<div class="form-group col-md-2">
 							<label for="inputZip"></label>
@@ -40,7 +42,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="drivers">
+		<table class="table table-bordered table-sm table-striped" id="drivers">
 			<thead>
 				<tr>
 					<th>S/No</th>

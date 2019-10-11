@@ -94,7 +94,8 @@
         <li><a href="#exampledropdownDropdown7" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"
                     aria-hidden="true"></i> Setting </a>
             <ul id="exampledropdownDropdown7" class="collapse list-unstyled ">
-
+                <li><a href="{{ route('backup')}}"><i class="fa fas-trash-restore-alt" aria-hidden="true"></i>Back
+                        Up</a> </li>
             </ul>
         </li>
         <li class=""><a href="{{route('register')}}"> <i class="fa fa-users" aria-hidden="true"></i> User Mangment </a>

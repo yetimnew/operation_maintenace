@@ -1,14 +1,14 @@
 @extends( 'master.app' )
 
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item "><a href="#">Truks</a>
-		</li>
-		<li class="breadcrumb-item active">Truks Model</li>
-	</ol>
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item "><a href="#">Truks</a>
+	</li>
+	<li class="breadcrumb-item active">Truks Model</li>
+</ol>
 <div class="row col-12">
 	<div class="col-10">
 	</div>
@@ -19,7 +19,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="vehecletypes">
+		<table class="table table-bordered table-sm table-striped" id="vehecletypes">
 			<thead>
 				<tr>
 					<th class="m-1 b-1">No</th>
@@ -39,11 +39,13 @@
 					<td class='m-1 p-1'>{{$vehecletype->company}}</td>
 					<td class='m-1 p-1'>{{$vehecletype->productiondate}}</td>
 					<td class='m-1 p-1'>{{$vehecletype->comment}}</td>
-					<td class='m-1 p-1'><a href="{{route('vehecletype.edit',['id'=> $vehecletype->id])}}" class="btn btn-sm btn-info ">Edit</a>
+					<td class='m-1 p-1'><a href="{{route('vehecletype.edit',['id'=> $vehecletype->id])}}"
+							class="btn btn-sm btn-info ">Edit</a>
 					</td>
 					<td class='m-1 p-1'>
 
-						<form action="{{route('vehecletype.destroy',['id'=> $vehecletype->id])}}" id="detach-form-{{$vehecletype->id}}" style="display: none">
+						<form action="{{route('vehecletype.destroy',['id'=> $vehecletype->id])}}"
+							id="detach-form-{{$vehecletype->id}}" style="display: none">
 							@csrf @method('DELETE')
 						</form>
 						<button type="submit" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure to Delete this?')){
@@ -51,8 +53,9 @@
                                 document.getElementById('detach-form-{{$vehecletype->id}}').submit();
                             }else{
                                 event.preventDefault();
-                            }"> <i class="fas fa-trash"> </i></td>
-                            </button>
+                            }"> <i class="fas fa-trash"> </i>
+					</td>
+					</button>
 
 
 				</tr>

@@ -1,15 +1,15 @@
 @extends( 'master.app' )
 @section( 'title', 'TIMS | Operation' )
 @section( 'styles' )
-	<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> 
-	@endsection
-	 @section('content')
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}">
+@endsection
+@section('content')
 
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item active">Operation</li>
-	</ol>
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item active">Operation</li>
+</ol>
 <div class="row col-12">
 	<div class="col-10">
 	</div>
@@ -20,7 +20,7 @@
 </div>
 <div class="row col-12">
 	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-condensed table-striped" id="operations">
+		<table class="table table-bordered table-sm table-striped" id="operations">
 			<thead>
 				<tr>
 					<th width="5%">no</th>
@@ -41,8 +41,8 @@
 			</thead>
 			<tbody>
 				<?php $no = 0 ?>
-				 @if ($operations->count()> 0)
-				  @foreach ($operations as $operation)
+				@if ($operations->count()> 0)
+				@foreach ($operations as $operation)
 				<tr>
 					<td class='m-1 p-1'>{{$operation->id}}</td>
 					<td class='m-1 p-1'>{{$operation->operationid}}</td>
@@ -58,35 +58,42 @@
 					<td class='m-1 p-1 text-right'>{{number_format($operation->km,0)}}</td>
 					<td class='m-1 p-1 text-right'>{{$operation->tariff}}</td>
 					@if ($operation->closed == 0)
-					<td class='m-1 p-1'><span class="badge badge-danger">closed  {{$operation->updated_at->diffForHumans()}}</span></td>
+					<td class='m-1 p-1'><span class="badge badge-danger">closed
+							{{$operation->updated_at->diffForHumans()}}</span></td>
 					@else
 					<td class='m-1 p-1'><span class="badge badge-info">Opened </span></td>
 					@endif
-					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a href="{{route('operation.edit',['id'=> $operation->id])}}" ><i class="fas fa-edit"></a></td>
-						<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
-							<form action="{{route('operation.destroy',['id'=> $operation->id])}}" id="detach-form-{{$operation->id}}" style="display: none">
-									@csrf @method('DELETE')
-								</form>
-								<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to Delete The operation?')){
+					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
+							href="{{route('operation.edit',['id'=> $operation->id])}}"><i class="fas fa-edit"></a></td>
+					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
+						<form action="{{route('operation.destroy',['id'=> $operation->id])}}"
+							id="detach-form-{{$operation->id}}" style="display: none">
+							@csrf @method('DELETE')
+						</form>
+						<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to Delete The operation?')){
 									event.preventDefault();
 									document.getElementById('detach-form-{{$operation->id}}').submit();
 								}else{
 									event.preventDefault();
-								}"> <i class="fas fa-trash red" ></i>
-												
-											</button>
-										</td>
-						@if ($operation->closed == 1)
-						<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Do you want to close?"><a href="{{route('operation.close',['id'=> $operation->id])}}"  class="btn btn-warning btn-sm"><i class="fas fa-close"> &nbsp;close</a></td>
-										
-						@else
-						<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Do you want to Open?"><a href="{{route('operation.open',['id'=> $operation->id])}}" class="btn btn-success btn-sm"> Open</a>
-						</td>
-						@endif
-				
-			</tr>
+								}"> <i class="fas fa-trash red"></i>
+
+						</button>
+					</td>
+					@if ($operation->closed == 1)
+					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top"
+						title="Do you want to close?"><a href="{{route('operation.close',['id'=> $operation->id])}}"
+							class="btn btn-warning btn-sm"><i class="fas fa-close"> &nbsp;close</a></td>
+
+					@else
+					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top"
+						title="Do you want to Open?"><a href="{{route('operation.open',['id'=> $operation->id])}}"
+							class="btn btn-success btn-sm"> Open</a>
+					</td>
+					@endif
+
+				</tr>
 				@endforeach
-				 @else
+				@else
 				<tr>
 					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
 				</tr>

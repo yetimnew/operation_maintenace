@@ -38,25 +38,25 @@
                                     </thead>
 
                                     <tbody>
-                                        < {{-- {{dd($backups)}} --}} @foreach ($backups as $key=> $backup)
-                                            <tr>
-                                                <td>{{ ++$key}}</td>
-                                                <td>{{ $backup['file_name']}}</td>
-                                                <td>{{$backup['file_size']}}</td>
-                                                <td> {{$backup['last_modified'] }}
-                                                </td>
-                                                <td class="text-right">
-                                                    <a class="btn btn-xs btn-default"
-                                                        href="{{ route('backupDownload', $backup['file_name'])}}"> <i
-                                                            class="fa fa-cloud-download"></i> Download</a>
-                                                    <a class="btn btn-xs btn-danger" data-button-type="delete"
-                                                        href="{{ route('deleteDownload', $backup['file_name'])}}"><i
-                                                            class="fa fa-trash-o"></i>
-                                                        Delete</a>
-                                                </td>
-                                            </tr>
 
-                                            @endforeach
+                                        @foreach ($backups as $key=> $backup)
+                                        <tr>
+                                            <td>{{ ++$key}}</td>
+                                            <td>{{ $backup['file_name']}}</td>
+                                            <td>{{$backup['file_size']}}</td>
+                                            <td> {{$backup['last_modified'] }}
+                                            </td>
+                                            <td class="text-right">
+                                                <a class="btn btn-xs btn-default"
+                                                    href="{{ route('backupDownload', $backup['file_name'])}}"> <i
+                                                        class="fa fa-cloud-download"></i> Download</a>
+                                                <a class="btn btn-xs btn-danger" data-button-type="delete"
+                                                    href="{{ route('deleteDownload', $backup['file_name'])}}"><i
+                                                        class="fa fa-trash-o"></i>Delete</a>
+                                            </td>
+                                        </tr>
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
