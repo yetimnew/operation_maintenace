@@ -16,22 +16,16 @@ class TruckController extends Controller
 
     public function index()
     {
-        // Role::create(['name'=>'admin']);
-        // Permission::create(['name'=>'create truck']);
-        // $role = Role::findById(1);
-        // $role->givePermissionTo($pr);
-        // return auth()->user()->givePermissionTo('create truck');
-        // auth()->user()->assignRole('super');
-    //    return auth()->user()->permissions;
-        //  $trucks = Truck::all();
-    //     $pr = 
-    //    $user=  User::role('statstician')->get();
-    //    dd($user);
-        $trucks = DB::table('trucks')
-        ->join('vehecletypes','vehecletypes.id','=','vehecletype_id')
-        ->select('trucks.*','vehecletypes.name as Name')
-        ->where('trucks.status','=',1)->latest()->get();
+        // $trucks = Truck::with('vehecletype')->get();
+        $trucks = Truck::all();
+
+        // $trucks = DB::table('trucks')
+        // ->join('vehecletypes','vehecletypes.id','=','vehecletype_id')
+        // ->select('trucks.*','vehecletypes.name as Name')
+        // ->where('trucks.status','=',1)->latest()->get();
         return view('operation.truck.index')->with('trucks',$trucks);
+
+
     }
 
     public function create()

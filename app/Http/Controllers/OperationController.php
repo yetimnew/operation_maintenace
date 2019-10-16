@@ -8,10 +8,14 @@ use App\Operation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+// use RealRashid\SweetAlert\Facades\Alert;
 
 class OperationController extends Controller
 {
+
     
+
     public function index()
     {
          $operations = Operation::where('status','=',1)->orderBy('created_at','DESC')->get();
@@ -25,12 +29,37 @@ class OperationController extends Controller
         $regions = Region::all();
         $customers = Customer::all();
         if($regions->count() == 0){
-           Session::flash('info', 'You must have some Region before attempting to create Operation' );
+            // alert()->warning('WarningAlert','You must have some Region before attempting to create Operation.')->width('250px');
+            // example:
+// alert()->question('Are you sure?','You won\'t be able to revert this!')->showCancelButton()->showConfirmButton()->focusConfirm(true);
+// alert('Info','You must have some Region before attempting to create Operation', 'info')->width('250px');
+            // alert()->success('Post Created', '<strong>Successfully</strong>')->toHtml();
+// alert()->question('Are you sure?','You won\'t be able to revert this!')
+// ->showConfirmButton('Yes! Delete it', '#3085d6')
+// ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+       
+// alert()->question('Are you sure?','You won\'t be able to revert this!')->showCancelButton('Cancel', '#aaa');
+
+// alert()->error('Delete','Are You shure want to delete.')->persistent(true,false);
+
+toast('You must have some Region before attempting to create Operation','info')->autoClose(5000)->position('top-end');
+            // example:
+// alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->persistent(false);
+
+            // toast('Info Toast','info');
+            // example:
+// alert()->info('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6');
+
+            // Alert::info('Info Title', 'Info Message');
+            // alert()->info('Title','Lorem Lorem Lorem');
+        //    Session::flash('info', 'You must have some Region before attempting to create Operation' );
             return redirect()->route('region.create');
         }
         
         if($customers->count() == 0){
-            Session::flash('info', 'You must have some Customer before attempting to create Operation' );
+toast('You must have some Customer before attempting to create Operation','info')->autoClose(5000)->position('top-end');
+
+            // Session::flash('info', 'You must have some Customer before attempting to create Operation' );
             return redirect()->route('customer.create');
         }
     
@@ -64,8 +93,9 @@ class OperationController extends Controller
         $operation->cargotype = $request->ctype;
         $operation->km = $request->tone;
         $operation->tariff = $request->tariff;
-         $operation->save();
-        Session::flash('success', 'operation  registerd successfuly' );
+        $operation->save();
+        alert()->success('SuccessAlert','operation  registerd successfuly.');
+        // Session::flash('success', 'operation  registerd successfuly' );
         return redirect()->route('operation');
     }
 
@@ -84,12 +114,14 @@ class OperationController extends Controller
         $customers = Customer::all();
         if($regions->count() == 0){
             return redirect()->route('region');
-            Session::flash('info', 'You must have some Region before attempting to create Truck' );
+            toast('You must have some Region before attempting to create Truck','info')->autoClose(5000)->position('top-end');
+            // Session::flash('info', 'You must have some Region before attempting to create Truck' );
         }
         
         if($customers->count() == 0){
             return redirect()->route('customer');
-            Session::flash('info', 'You must have some Customer before attempting to create Truck' );
+            toast('YYou must have some Customer before attempting to create Truck','info')->autoClose(5000)->position('top-end');
+            // Session::flash('info', 'You must have some Customer before attempting to create Truck' );
         }
     
         return view('operation.operation.edit')
@@ -123,33 +155,36 @@ class OperationController extends Controller
         $operation->km = $request->tone;
         $operation->tariff = $request->tariff;
         $operation->save();
-        Session::flash('success', 'operation updated successfuly' );
+        alert()->success('SuccessAlert','operation updated successfuly.');
+        // Session::flash('success', 'operation updated successfuly' );
         return redirect()->route('operation');
     }
-
-   
+    
+    
     public function destroy($id)
     {
       
         $operation = Operation::find($id);
         $operation->status = 0;
         $operation->save();
-        Session::flash('success', 'Operation deleted successfuly' );
+        alert()->success('SuccessAlert','Operation deleted successfuly.');
+        // Session::flash('success', 'Operation deleted successfuly' );
         return redirect()->back();
-
+        
     }
     public function close($id)
     {
         $operation = Operation::find($id);
         return view('operation.operation.close')->with('operation',$operation);
-
+        
     }
     public function open($id)
     {
         $operation = Operation::find($id);
         $operation->closed = 1;
         $operation->save();
-        Session::flash('success', 'Operation Opend successfuly' );
+        alert()->success('SuccessAlert','Operation Opend successfuly.');
+        // Session::flash('success', 'Operation Opend successfuly' );
         return redirect()->back();
 
     }
@@ -167,7 +202,9 @@ class OperationController extends Controller
         $operation->remark = $request->remark;
         $operation->closed = 0;
         $operation->save();
-        Session::flash('success', 'operation updated successfuly' );
+        alert()->success('SuccessAlert','Operation Updated successfuly.');
+
+        // Session::flash('success', 'operation updated successfuly' );
         return redirect()->route('operation');
     }
 }

@@ -16,9 +16,9 @@ class CreateVehecletypesTable extends Migration
         Schema::create('vehecletypes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('company');
-            $table->string('productiondate');
-            $table->text('comment');
+            $table->string('company')->nullable();
+            $table->string('productiondate')->nullable();
+            $table->text('comment')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

@@ -22,10 +22,9 @@
 	<div class="col-10">
 	</div>
 	<div class="col-2">
-		@can('create truck')
+
 		<a href="{{route('truck.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Truck</a>
-		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('trucks', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
-		@endcan
+
 	</div>
 </div>
 <div class="row col-12">
@@ -50,13 +49,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				{{-- {{dd($trucks-)}} --}}
+				{{-- {{dd($trucks)}} --}}
 				<?php $no = 0 ?>
-				@if ($trucks->count()> 0) @foreach ($trucks as $truck)
+				@if ($trucks->count()> 0)
+				@foreach ($trucks as $truck)
 				<tr>
 					<td class='p-1'>{{++$no }}</td>
 					<td class='p-1'>{{$truck->plate}}</td>
-					<td class='p-1'>{{$truck->Name}}</td>
+					<td class='p-1'>{{$truck->vehecletype->name}}</td>
 					<td class='p-1'>{{$truck->chasisNumber}}</td>
 					<td class='p-1'>{{$truck->engineNumber}}</td>
 					<td class='p-1'>{{$truck->tyreSyze}}</td>
@@ -64,15 +64,9 @@
 					<td class='p-1'>{{number_format($truck->purchasePrice, 2)}}</td>
 					<td class='p-1'>{{$truck->productionDate}}</td>
 					<td class='p-1'>{{$truck->serviceStartDate}}</td>
-					@can('update truck')
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 							href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fas fa-edit"> </i></a></td>
-					@endcan
-					{{-- <td>
-							<a><button class="btn btn-danger" onclick="deleteData({{ $post->id }})"
-					type="submit">Delete</button></a>
-					</td> --}}
-					@can('delete truck')
+
 					<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
 						<form action="{{route('truck.destroy',['id'=> $truck->id])}}" id="detach-form-{{$truck->id}}"
@@ -88,7 +82,7 @@
 						}"> <i class="fas fa-trash red"> </i>
 					</td>
 					</button>
-					@endcan
+
 				</tr>
 
 				@endforeach @else

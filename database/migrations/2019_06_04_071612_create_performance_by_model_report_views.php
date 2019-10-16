@@ -103,7 +103,7 @@ class CreatePerformanceByModelReportViews extends Migration
      */
     public function down()
     {
-        DB::statement('DROP VIEW IF EXISTs performance_by_model_report_views');
+        DB::statement('DROP VIEW IF EXISTS performance_by_model_report_views');
     
     }
 }

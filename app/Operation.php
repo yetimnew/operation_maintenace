@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
+    
     protected $gurded=[];
 
     public function customer()

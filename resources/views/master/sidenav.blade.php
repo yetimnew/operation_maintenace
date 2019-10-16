@@ -98,7 +98,10 @@
                         Up</a> </li>
             </ul>
         </li>
-        <li class=""><a href="{{route('register')}}"> <i class="fa fa-users" aria-hidden="true"></i> User Mangment </a>
+        @if (Auth::user()->admin)
+        <li class=""><a href="{{route('user')}}"> <i class="fa fa-users" aria-hidden="true"></i> User Mangment </a>
+
+            @endif
         </li>
 
     </ul>

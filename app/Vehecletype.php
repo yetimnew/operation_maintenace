@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehecletype extends Model
 {
-    protected $fillable = ['id', 'name', 'company', 'productiondate', 'comment', 'status'];
+    protected $fillable = ['id', 'name', 'company', 'productiondate', 'comment', 'status',''];
    
  
     public function trucks()

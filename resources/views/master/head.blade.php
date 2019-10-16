@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Yetimeshet Tadese yetimnew@gmail.com">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link rel="icon" href="{{asset('icon.ico')}}" type="image/x-icon" /> --}}
-    {{-- <link rel="icon" href="{{asset('/logo.png')}}" type="image/x-icon" /> --}}
-    {{-- <link rel="icon" href="{{asset('imges/favicon.ico')}}" type="image/ico"> --}}
-    <link rel="shortcut icon" href="{{ asset('imges/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
 
-    <title>@yield('title','TIMSsssss')</title>
+    <title>@yield('title','TIMS')</title>
 
     <!-- Font Awesome CSS-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

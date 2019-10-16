@@ -19,7 +19,7 @@ class Truck extends Model
         'engineNumber',
         'tyreSyze',
         'serviceIntervalKM',
-        'purchasePrice',
+        'purchasePrice', 
         'productionDate',
         'serviceStartDate',
         'status',

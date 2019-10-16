@@ -25,11 +25,4 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
-$factory->define(Truck::class, function (Faker $faker) {
-    return [
-        'plate' => $faker->name,
-        'user_id' => 0,
-        'production_date' => now()
-        
-    ];
-});
+

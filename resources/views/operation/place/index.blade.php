@@ -32,7 +32,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				@if ($places->count()> 0) @foreach ($places as $place)
+				@if ($places->count()> 0)
+				@foreach ($places as $place)
 				<tr>
 					<td class='m-1 p-1'>{{$place->id}}</td>
 					<td class='m-1 p-1'>{{$place->name}}</td>

@@ -1,40 +1,26 @@
 <?php
 Auth::routes();
 
-Route::group(['prefix'=>'admin','middleware' => 'auth','namespace'=>'admin'], function () {
-    Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
-});
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', 'DashbordController@index')->name('home');
+    //Dashbord
     Route::get('/', 'DashbordController@index');
-    //DAshbord
-    Route::get('backup', ['uses'=>'BackupController@index','as'=>'backup']);
-    Route::get('backup/create', 'BackupController@create');
-    Route::get('backup/download/{file_name}', 'BackupController@download');
-    Route::get('backup/download/{file_name}', ['uses'=>'BackupController@download','as'=>'backupDownload']);
-    Route::get('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
-    // Route::get('backup/delete/{file_name}', 'BackupController@delete');
+    Route::get('/home', 'DashbordController@index')->name('home');
+    
     Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
 // role and permission
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);
 //  user profile start here
     Route::get('/profile',                  ['uses'=>'profileController@index','as'=>'profile']);
-    Route::get('/profile/create',           ['uses'=>'profileController@create','as'=>'profile.create']);
-    Route::post('/profile/store',           ['uses'=>'profileController@store','as'=>'profile.store']);
-    Route::get('/profile/edit/{id}',        ['uses'=>'profileController@edit','as'=>'profile.edit']);
-    Route::post('/profile/update/{id}',     ['uses'=>'profileController@update','as'=>'profile.update']);
-    Route::get('/profile/destroy/{id}',     ['uses'=>'profileController@destroy','as'=>'profile.destroy']);
-    // Useras may register here gin yemisera neger ayimesilegnim 
+//    user route
+    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user'])->middleware('admin');
+    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create'])->middleware('admin');
+    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store'])->middleware('admin');
+    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit'])->middleware('admin');
+    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update'])->middleware('admin');
+    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy'])->middleware('admin');
 
-    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user']);
-    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create']);
-    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store']);
-    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit']);
-    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update']);
-    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy']);
-    // Truck 
     Route::get('/truck',                  ['uses'=>'TruckController@index','as'=>'truck']);
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
     Route::post('/truck/store',           ['uses'=>'TruckController@store','as'=>'truck.store']);
@@ -155,5 +141,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/performance_by_model',                     ['uses'=>'performanceByModelController@index','as'=>'performance_by_model']);
     Route::get('/performance_by_model/create',              ['uses'=>'performanceByModelController@create','as'=>'performance_by_model.create']);
     Route::post('/performance_by_model/store',              ['uses'=>'performanceByModelController@store','as'=>'performance_by_model.store']);
+
+    // role and permiision 
+    Route::get('backup', ['uses'=>'BackupController@index','as'=>'backup']);
+    Route::get('backup/create', 'BackupController@create');
+    Route::get('backup/download/{file_name}', 'BackupController@download');
+    Route::get('backup/download/{file_name}', ['uses'=>'BackupController@download','as'=>'backupDownload']);
+    Route::get('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
         
 });
