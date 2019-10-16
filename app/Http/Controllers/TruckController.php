@@ -16,7 +16,13 @@ class TruckController extends Controller
 
     public function index()
     {
-        // $trucks = Truck::with('vehecletype')->get();
+        function __construct(){
+            $this->middleware('permission:role-list');
+            $this->middleware('permission:role-create', ['only' => ['create','store']]);
+            $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+            $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+            }
+    
         $trucks = Truck::all();
 
         // $trucks = DB::table('trucks')

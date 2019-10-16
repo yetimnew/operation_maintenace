@@ -7,7 +7,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'DashbordController@index');
     Route::get('/home', 'DashbordController@index')->name('home');
     
-    Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
+    // Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
+    Route::resource('role','RoleController');
 // role and permission
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);

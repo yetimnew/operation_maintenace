@@ -10,15 +10,12 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    public function __construct() {
-        $this->middleware(['auth', 'isAdmin']);//isAdmin middleware lets only users with a //specific permission permission to access these resources
-    }
 
     public function index()
     {
         $roles = Role::all();//Get all roles
 
-        return view('roles.index')->with('roles', $roles);
+        return view('roles.roles.index')->with('roles', $roles);
     }
 
     /**
@@ -28,9 +25,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();//Get all permissions
+        $permission = Permission::get();
+return view('roles.roles.create',compact('permission'));
 
-        return view('roles.create', ['permissions'=>$permissions]);
+        // return view('roles.create', ['permissions'=>$permissions]);
     }
 
     /**
@@ -41,30 +39,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $this->validate($request, [
-            'name'=>'required|unique:roles|max:10',
-            'permissions' =>'required',
-            ]
-        );
-
-        $name = $request['name'];
-        $role = new Role();
-        $role->name = $name;
-
-        $permissions = $request['permissions'];
-
-        $role->save();
-    //Looping thru selected permissions
-        foreach ($permissions as $permission) {
-            $p = Permission::where('id', '=', $permission)->firstOrFail(); 
-         //Fetch the newly created role and assign permission
-            $role = Role::where('name', '=', $name)->first(); 
-            $role->givePermissionTo($p);
-        }
-
-        return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role'. $role->name.' added!'); 
+            'name' => 'required|unique:roles,name',
+            'permission' => 'required',
+            ]);
+            $role = Role::create(['name' => $request->input('name')]);
+            $role->syncPermissions($request->input('permission'));
+            return redirect()->route('roles.index')
+            ->with('success','Role created successfully');
     }
 
     /**
@@ -75,7 +58,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+        ->where("role_has_permissions.role_id",$id)
+        ->get();
+        return view('roles.show',compact('role','rolePermissions'));
     }
 
     /**
@@ -86,10 +73,12 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrFail($id);
-        $permissions = Permission::all();
-
-        return view('roles.edit', compact('role', 'permissions'));
+        $role = Role::find($id);
+        $permission = Permission::get();
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        ->all();
+        return view('roles.edit',compact('role','permission','rolePermissions'));
     }
 
     /**
@@ -101,46 +90,24 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);//Get role with the given id
-        //Validate name and permission fields
-            $this->validate($request, [
-                'name'=>'required|max:10|unique:roles,name,'.$id,
-                'permissions' =>'required',
+        $$this->validate($request, [
+            'name' => 'required',
+            'permission' => 'required',
             ]);
-    
-            $input = $request->except(['permissions']);
-            $permissions = $request['permissions'];
-            $role->fill($input)->save();
-    
-            $p_all = Permission::all();//Get all permissions
-    
-            foreach ($p_all as $p) {
-                $role->revokePermissionTo($p); //Remove all permissions associated with role
-            }
-    
-            foreach ($permissions as $permission) {
-                $p = Permission::where('id', '=', $permission)->firstOrFail(); //Get corresponding form //permission in db
-                $role->givePermissionTo($p);  //Assign permission to role
-            }
-    
+            $role = Role::find($id);
+            $role->name = $request->input('name');
+            $role->save();
+            $role->syncPermissions($request->input('permission'));
             return redirect()->route('roles.index')
-                ->with('flash_message',
-                 'Role'. $role->name.' updated!');
+            ->with('success','Role updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
-        $role->delete();
-
+        DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')
-            ->with('flash_message',
-             'Role deleted!');
+        ->with('success','Role deleted successfully');
+        
     }
 }
