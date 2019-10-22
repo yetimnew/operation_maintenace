@@ -11,8 +11,6 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        // dd(App\customer::find(2)->vehecletype->name);
-        
         $customers = Customer::active()->get();
         return view('operation.customer.index',compact('customers'));
     }
@@ -40,9 +38,9 @@ class CustomerController extends Controller
         return redirect()->route('customer');
     }
 
-    public function edit($id)
+    public function edit(Customer $id)
     {
-        $customer = Customer::find($id);
+        // $customer = Customer::find($id);
         return view('operation.customer.edit')
         ->with('customer',$customer);
     }

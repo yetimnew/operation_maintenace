@@ -85,7 +85,7 @@ class TruckController extends Controller
 
     public function edit($id)
     {
-        $truck = Truck::find($id);
+        $truck = Truck::findOrFail($id);
         $vehcletypes = Vehecletype::all();
         return view('operation.truck.edit')
         ->with('truck',$truck)

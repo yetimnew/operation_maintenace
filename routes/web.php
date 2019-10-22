@@ -8,8 +8,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'DashbordController@index')->name('home');
     
     // Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
-    Route::resource('role','RoleController');
-// role and permission
+    // Route::resource('role','RoleController');
+    Route::get('/role',                  ['uses'=>'RoleController@index','as'=>'role']);
+    Route::get('/role/create',           ['uses'=>'RoleController@create','as'=>'role.create']);
+    Route::post('/role/store',           ['uses'=>'RoleController@store','as'=>'role.store']);
+    Route::get('/role/edit/{id}',        ['uses'=>'RoleController@edit','as'=>'role.edit']);
+    Route::post('/role/update/{id}',     ['uses'=>'RoleController@update','as'=>'role.update']);
+    Route::get('/role/destroy/{id}',     ['uses'=>'RoleController@destroy','as'=>'role.destroy']);
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);
 //  user profile start here
@@ -115,6 +120,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/performance_by_driver/edit/{id}',           ['uses'=>'performanceByDriverController@edit','as'=>'performance_by_driver.edit']);
     Route::post('/performance_by_driver/update/{id}',        ['uses'=>'performanceByDriverController@update','as'=>'performance_by_driver.update']);
     Route::get('/performance_by_driver/destroy/{id}',        ['uses'=>'performanceByDriverController@destroy','as'=>'performance_by_driver.destroy']);
+
+
+    //performrmace of all drivers 
+    Route::get('/performance_of_all_driver',                     ['uses'=>'performanceOfAllDriverController@index','as'=>'performance_of_all_driver']);
+    Route::get('/performance_of_all_driver/create',              ['uses'=>'performanceOfAllDriverController@create','as'=>'performance_of_all_driver.create']);
+    Route::post('/performance_of_all_driver/store',              ['uses'=>'performanceOfAllDriverController@store','as'=>'performance_of_all_driver.store']);
+   
     //reports
     Route::get('/performance_by_truck',                     ['uses'=>'performanceByTruckController@index','as'=>'performance_by_truck']);
     Route::get('/performance_by_truck/create',              ['uses'=>'performanceByTruckController@create','as'=>'performance_by_truck.create']);

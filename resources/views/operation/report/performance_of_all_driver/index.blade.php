@@ -6,30 +6,20 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
 	</li>
-	<li class="breadcrumb-item active">Performance</li>
+	<li class="breadcrumb-item ">Report</li>
+	<li class="breadcrumb-item active">Performance Of All Drivers</li>
 </ol>
 
 <div class="row col-12">
-	<h3 class="text-center"> REPORT : Performance By Driver</h3>
+	<h3 class="text-center"> REPORT : Performance Of All Drivers</h3>
 	<div class="col-10">
-		<form method="post" action="{{route('performance_by_driver.store')}}" class="form-horizontal" id="truck_form">
+		<form method="post" action="{{route('performance_of_all_driver.store')}}" class="form-horizontal"
+			id="truck_form">
 			@csrf
 			<div class="row">
 
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="form-row">
-						<div class="form-group col-md-3">
-							<label class="control-label">Driver Name</label>
-							<select name="driver" class="form-control" id="driver" onfocusout="validateDestination()">
-								<option class="dropup" value=""> Select One</option>
-								{{-- <option class="dropup" value="*"> All</option>        --}}
-								@foreach ($drivers as $driver)
-								<option class="dropup" value="{{$driver->driverid}}"> {{$driver->name}} </option>
-								@endforeach
-							</select>
-
-						</div>
-
 						<div class="form-group col-md-3">
 							<label for="inputCity">Start Date</label>
 							<input id="startDate" name="startDate" type="date" placeholder="Start Date"

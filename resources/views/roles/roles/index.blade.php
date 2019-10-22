@@ -27,18 +27,18 @@
 					<tr>
 						<th width="3%">Number</th>
 						<th class="text-center">Customer Name</th>
-						<th class="text-center">Address</th>
+						<th class="text-center">Edit</th>
+						<th class="text-center">Delete</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					{{-- {{dd($roles)}} --}}
+					{{-- {{dd($role_has_permission)}} --}}
 					<?php $no = 0 ?> @if ($roles->count()> 0)
 					@foreach ($roles as $role)
 					<tr>
 						<td>{{++$no}}</td>
 						<td>{{$role->name}}</td>
-						<td>{{$role->address}}</td>
 
 						<td class='m-1 p-1 text-center'><a href="{{route('role.edit',['id'=> $role->id])}}">
 								<i class="fas fa-edit "></i> </a>

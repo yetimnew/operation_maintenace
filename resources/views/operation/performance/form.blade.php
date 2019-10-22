@@ -57,7 +57,7 @@
 
         </div>
         <div class="form-group required">
-            <label class="control-label">Truck Plate</label>
+            <label class="control-label">Driver and Truck</label>
             <select name="truck" class="form-control {{ $errors->has('truck') ? ' is-invalid' : '' }} select" id="truck"
                 onfocusout="validateTruck()">
                 <option class="dropup" value="" selected> Select One</option>
@@ -79,7 +79,7 @@
         <div class="form-group required">
             <label class="control-label">Date Dispach</label>
             <div class="input-group">
-                <input name="ddate" type="date" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
+                <input name="text" type="date" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
                     id="ddate" value="{{ old('ddate' ) ?? $performance->DateDispach}}" onfocusout="validateDdate()">
                 @if($errors->has('ddate'))
                 <span class="invalid-feedback" role="alert">
@@ -259,6 +259,13 @@
             </div>
 
             @section( 'javascript' )
+            <script>
+                $(function(){
+                $('#datepick').datetimepicker({
+                    local: 'ru'
+                });
+            });
+            </script>
             <script>
                 const chinet = document.getElementById( 'chinet' );
                 const fo = document.getElementById( 'fo' );

@@ -17,15 +17,18 @@ class PerformanceController extends Controller
     public function index()
     {
 
+    // $pr = Performance::returned()->get();
     $performances = Performance::active()->latest()->get();
         $statuslist= $this->statusList();
         $trucks = Truck::all();
         $drivers = Driver::all();
-        return view('operation.performance.index')
+        // dd( $pr);
+          return view('operation.performance.index')
         ->with('performances',$performances)
         ->with('trucks',$trucks)
         ->with('statuslist',$statuslist)
         ->with('drivers',$drivers);
+        
      }
   
  

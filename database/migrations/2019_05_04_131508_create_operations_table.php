@@ -16,9 +16,9 @@ class CreateOperationsTable extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('operationid');
-            $table->integer('customer_id');
+            $table->unsignedInteger('customer_id');
             $table->date('startdate');
-            $table->integer('region_id')->nullable();
+            $table->unsignedInteger('region_id')->nullable();
             $table->double('volume',12,4);
             $table->boolean('cargotype')->default(1);
             $table->double('km',12,4)->nullable();;

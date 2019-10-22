@@ -107,7 +107,7 @@ toast('You must have some Customer before attempting to create Operation','info'
     public function edit($id)
     {
 
-        $operation = Operation::find($id);
+        $operation = Operation::findorfail($id);
         // dd($operation);
 
         $regions = Region::all();
@@ -176,8 +176,8 @@ toast('You must have some Customer before attempting to create Operation','info'
     {
         $operation = Operation::find($id);
         return view('operation.operation.close')->with('operation',$operation);
-        
     }
+
     public function open($id)
     {
         $operation = Operation::find($id);
@@ -203,8 +203,7 @@ toast('You must have some Customer before attempting to create Operation','info'
         $operation->closed = 0;
         $operation->save();
         alert()->success('SuccessAlert','Operation Updated successfuly.');
-
-        // Session::flash('success', 'operation updated successfuly' );
+   // Session::flash('success', 'operation updated successfuly' );
         return redirect()->route('operation');
     }
 }

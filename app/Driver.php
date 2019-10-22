@@ -37,5 +37,9 @@ class Driver extends Model
     {
         return $this->hasMany('App\Performance');
     }
+    public function scopeActive($query)
+    {
+      return $query->where('status',1);
+    }
     
 }

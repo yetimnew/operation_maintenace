@@ -12,7 +12,8 @@
 	<h1><i class='fa fa-key'></i> Add Role</h1>
 	<hr>
 	<div class="row">
-		<div class="col-md-6">
+		{{-- {{dd($permissisons)}} --}}
+		<div class="col-md-12">
 			<form method="post" action="{{route('role.store')}}" id="truck_reg_form" novalidate>
 				@csrf
 				<div class="form-group required">
@@ -27,34 +28,42 @@
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 
-				<div class="form-group row">
-					<label for="remark">Role Description</label>
-					<textarea name="remark" rows="5"
-						class="form-control {{ $errors->has('remark') ? ' is-invalid' : '' }}"
-						id="remark">{{ old('remark') }}</textarea>
-					@if ($errors->has('remark'))
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $errors->first('remark') }}</strong>
-					</span>
-					@endif
-					<span class="invalid-feedback" role="alert"></span>
+				<div class="form-group required pb-0 ">
+					<label class="control-label">Permission Type</label>
+					<select class="custom-select" id="permission" name="permission[]" multiple
+						class="form-control {{ $errors->has('permission') ? ' is-invalid' : '' }}"
+						onfocusout="validateVehecle()">
+						{{-- <option class="dropup" value=""> Select One</option> --}}
+						@foreach ($permissisons as $pr)
+						<option class="dropup" value="{{$pr->id}}">
+							{{$pr->name}}
+						</option>
+						@endforeach
+
+					</select>
+
+
+
+
+					<div class="form-group required pull-right">
+						<button type="submit" class="btn btn-primary" name="save">Save</button>
+					</div>
+
 				</div>
-				<div class="form-group required pull-right">
-					<button type="submit" class="btn btn-primary" name="save">Save</button>
+				<div class="card-footer">
+					the footer
 				</div>
 
-		</div>
-		</form>
-		@endsection
-		<div class="card-footer">
-			the footer
-		</div>
+			</form>
+			</form>
 
-		</form>
+
+		</div>
 	</div>
-</div>
 
-@endsection
-@section( 'javascript' )
+	@endsection
+	@section( 'javascript' )
+	<script>
 
-@endsection
+	</script>
+	@endsection

@@ -1,16 +1,19 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Truck;
-use App\Driver;
-use App\Performance;
+
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class performanceByDriverController extends Controller
+class performanceOfAllDriverController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $drivers =DB::table('drivers')->orderBy('name','ASC')->get();
@@ -35,17 +38,31 @@ class performanceByDriverController extends Controller
        ->get();
 
 // dd($tds);
-        return view('operation.report.performance_by_driver.index')
+        return view('operation.report.performance_of_all_driver.index')
          ->with('tds',$tds)
          ->with('drivers',$drivers);
        
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
     $format = 'd-m-Y';
-    $driver = $request->input('driver');
     $start = $request->input('startDate');
     $end = $request->input('endDate');
 
@@ -76,15 +93,14 @@ class performanceByDriverController extends Controller
          )
         ->leftjoin('driver_truck','driver_truck.id','=','performances.driver_truck_id')
         ->leftjoin('drivers','drivers.driverid','=','driver_truck.driverid')
-        ->where('driver_truck.driverid','=',$driver)
+        // ->where('driver_truck.status','=',1)
         // ->orWhere('driver_truck.driverid','!=',"*")
         ->whereBetween('performances.DateDispach', [$first->toDateTimeString(), $second->toDateTimeString()])
         ->groupBy('driver_truck.id')
         ->orderBy('fo','DESC')
        ->get();
 
-
-        return view('operation.report.performance_by_driver.create')
+        return view('operation.report.performance_of_all_driver.create')
         ->with('tds',$tds)
         ->with('start',$start)
         ->with('end',$end)
@@ -100,5 +116,48 @@ class performanceByDriverController extends Controller
 
 }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

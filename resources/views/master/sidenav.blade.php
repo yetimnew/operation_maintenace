@@ -80,6 +80,10 @@
             <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
                 <li class="{{ Request::is('performance_by_driver') ? 'active' : ''}}"><a
                         href="{{ route('performance_by_driver')}}">Performance By Driver</a> </li>
+
+                <li class="{{ Request::is('performance_of_all_driver') ? 'active' : ''}}"><a
+                        href="{{ route('performance_of_all_driver')}}">Performance Of All Driver</a> </li>
+
                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                         href="{{ route('performance_by_truck')}}">Performance By Truck</a> </li>
                 <li class="{{ Request::is('performance_by_opration') ? 'active' : ''}}"><a

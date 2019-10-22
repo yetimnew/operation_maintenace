@@ -20,7 +20,7 @@ class CreatePerformancesTable extends Migration
             $table->integer('operation_id')->index();
             $table->integer('driver_truck_id')->index();
             // $table->integer('driver_id')->index();
-            $table->date('DateDispach');
+            $table->dateTime('DateDispach');
             $table->integer('orgion_id');
             $table->integer('destination_id');
             $table->double('DistanceWCargo',12,4);

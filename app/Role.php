@@ -10,6 +10,5 @@ class Role extends Model
 {
     // protected $fillable = ['id','name','guard_name'];
    
-    $role = Role::create(['name' => 'administrator']);
-    $permission = Permission::create(['name' => 'edit articles']);
+   
 }

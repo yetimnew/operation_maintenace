@@ -5,9 +5,9 @@ namespace App;
 use App\Truck;
 use App\Driver;
 use App\Operation;
+use Carbon\Carbon;
 use App\DriverTuck;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 // use Carbon\Carbon;
 
 class Performance extends Model
@@ -34,6 +34,8 @@ class Performance extends Model
         'satus',
 
     ];
+    protected $dates = ['DateDispach'];
+    // protected $append=['noOfDateItTakes'];
     public function operation()
     {
         return $this->belongsTo('App\Operation');
@@ -47,21 +49,11 @@ class Performance extends Model
     {
         return $this->belongsTo('App\Place');
     }
-    public function truck()
-    {
-        return $this->belongsTo('App\Truck');
-    }
-    public function driver()
-    {
-        return $this->belongsTo('App\Driver');
-    }
-    
+
     public function driver_truck()
     {
         return $this->belongsTo('App\DriverTuck');
     }
-
-    //scope 
 
     public function scopeReturned($query)
     {
@@ -77,15 +69,15 @@ class Performance extends Model
     }
     public function dateReturnded($query)
     {
+        $dt = Carbon::now();
+
         // return $query->whereBetween("performances.DateDispach", [$first->toDateTimeString(), $second->toDateTimeString()]).
     }
-//  public function getDispachAttribute()
-//  {
-//      $now = new Carbon;
-// //    $dt= new Carbon($this->created_at);  
-// //      return $dt->diffForHumans();
-// //  return $this->created_at->diffForHumans();
-//  return $now->diffForHumans();
-//  }
+
+ public function noOfDateItTakes()
+ {
+     $dt = Carbon::now();
+     return  $this->attribute['DisapchDate']->toDateString();
+ }
 
 }

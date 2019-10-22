@@ -15,7 +15,7 @@
 	<div class="col-12 mb-3">
 
 		{{-- <a href="{{route('performance_by_driver')}}" class="btn btn-primary pull-right">Back</a> --}}
-		<a href="{{route('performance_by_driver')}}" class="btn btn-primary pull-right">Back</a>
+		<a href="{{route('performance_of_all_driver')}}" class="btn btn-primary pull-right">Back</a>
 	</div>
 
 	<div class="table-responsive text-nowrap">

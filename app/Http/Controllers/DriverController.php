@@ -12,7 +12,7 @@ class DriverController extends Controller
     public function index()
     {
    
-        $drivers = Driver::where('status','=',1)->orderBy('created_at','DESC')->get();
+        $drivers = Driver::active()->orderBy('created_at','DESC')->get();
         return view('operation.driver.index')->with('drivers',$drivers);
     }
 
@@ -59,7 +59,7 @@ class DriverController extends Controller
 
     public function edit($id)
     {
-        $driver = Driver::find($id);
+        $driver = Driver::findOrFail($id);
         // return $driver;
         return view('operation.driver.edit')->with('driver',$driver);
     }
@@ -99,7 +99,7 @@ class DriverController extends Controller
         $driver = Driver::find($id);
         $driver->status= 0 ;
         $driver->save();
-        Session::flash('success', 'vehecle type deleted successfuly' );
+        Session::flash('success', 'Driver deleted successfuly' );
         return redirect()->back();
 
     }

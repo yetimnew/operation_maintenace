@@ -60,7 +60,7 @@ class PlaceController extends Controller
 
     public function edit($id)
     {
-        $place = Place::find($id);
+        $place = Place::findOeFail($id);
        $regions = Region::all();
         return view('operation.place.edit')->with('place',$place)->with('regions',$regions);
     }

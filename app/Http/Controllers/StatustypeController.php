@@ -47,7 +47,7 @@ class StatustypeController extends Controller
 
     public function edit($id)
     {
-        $statustype = Statustype::find($id);
+        $statustype = Statustype::findOrFail($id);
         // return $statustype;
         return view('operation.statustype.edit')->with('statustype',$statustype);
     }

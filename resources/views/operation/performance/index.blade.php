@@ -46,6 +46,8 @@
 			</thead>
 			<tbody>
 				<?php $no = 0 ?>
+
+				{{-- {{	dd($dr_tr->name)}} --}}
 				@if ($performances->count()> 0)
 				@foreach ($performances as $pr)
 				<tr>
@@ -59,8 +61,10 @@
 					<td class='m-1 p-1'>{{$pr->FOnumber}}</td>
 					<td class='m-1 p-1'>{{$pr->operation->operationid}}</td>
 					<td class='m-1 p-1'>{{$pr->driver_truck->plate}} - {{$pr->driver_truck->driverid}}</td>
-					<td class='m-1 p-1' data-toggle="tooltip" data-placement="top" title="{{$pr->DateDispach}}">
-						{{$pr->DateDispach}}</td>
+
+					<td class='m-1 p-1' data-toggle="tooltip" data-placement="top"
+						title="{{$pr->DateDispach->diffForHumans()}}">
+						{{$pr->DateDispach->format('d.m.Y')}}</td>
 					<td class='m-1 p-1'>{{$pr->orgion->name}}</td>
 					<td class='m-1 p-1'>{{$pr->destination->name}}</td>
 					<td class='m-1 p-1'>{{$pr->DistanceWCargo}}</td>

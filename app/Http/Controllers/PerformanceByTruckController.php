@@ -44,15 +44,6 @@ class PerformanceByTruckController extends Controller
        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-    }
 
     public function store(Request $request)
     {
@@ -91,7 +82,6 @@ class PerformanceByTruckController extends Controller
         ->groupBy('trucks.plate')
         ->orderBy('tonkm','DESC')
        ->get();
-
 
         return view('operation.report.performance_by_truck.create')
         ->with('tds',$tds)

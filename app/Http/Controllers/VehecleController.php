@@ -27,7 +27,7 @@ class VehecleController extends Controller
 
     public function store(Request $request)
     {
-             $this->validate($request, [
+        $this->validate($request, [
         'name' => 'required|unique:vehecletypes', 
         'company' => 'required', 
         // 'pdate' =>  'required',

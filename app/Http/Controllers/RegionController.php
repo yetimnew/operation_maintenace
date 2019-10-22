@@ -19,7 +19,7 @@ class RegionController extends Controller
 
     public function create()
     {
-        $region = new Region;
+    $region = new Region;
      return view('operation.region.create')->with('region',$region);
     }
 
@@ -50,7 +50,7 @@ class RegionController extends Controller
 
     public function edit($id)
     {
-        $region = Region::find($id);
+        $region = Region::findOrFail($id);
         // return $region;
         return view('operation.region.edit')->with('region',$region);
     }
