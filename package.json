@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.2.0",
+        "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "sweetalert2": "^8.11.1"
     }
 }

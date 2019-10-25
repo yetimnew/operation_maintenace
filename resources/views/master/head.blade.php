@@ -23,4 +23,7 @@
     <link rel="stylesheet" href="{{asset('/css/fontastic.css')}}">
     <link rel="stylesheet" href="{{asset('/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('/icons-reference/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/datatimepickers.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/bootstrap-datetimepicker.min.css')}}">
     @yield('styles')

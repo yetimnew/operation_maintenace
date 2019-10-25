@@ -38,6 +38,22 @@
 						@endif
 					</div>
 
+
+					<div class='form-group'>
+						<label for="roles">Role </label>
+						@foreach ($roles as $role)
+						<div class="form-check">
+
+							<label class="form-check-label">
+								<input type="checkbox" class="form-check-input" name="roles[]" id=""
+									value="{{$role->id}}">
+								{{$role->name}}
+							</label>
+
+						</div>
+						@endforeach
+					</div>
+
 					<div class="form-group required">
 						<label for="password"
 							class="control-label  col-form-label text-md-right">{{ __('Password') }}</label>

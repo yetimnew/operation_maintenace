@@ -38,7 +38,7 @@
         <div class="form-group required">
             <label class="control-label">Operation ID</label>
             <select name="operation" class="form-control {{ $errors->has('operation') ? ' is-invalid' : '' }} select"
-                id="operation" value="{{ old('operation')}} " onfocusout="validateOperation()">
+                id="operation" value="{{ old('operation') }} " onfocusout="validateOperation()">
                 <option class="dropup" value="" selected> Select One</option>
                 @foreach ($operations as $operation)
                 <option class="dropup" value="{{$operation->id}}"
@@ -79,7 +79,7 @@
         <div class="form-group required">
             <label class="control-label">Date Dispach</label>
             <div class="input-group">
-                <input name="text" type="date" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
+                <input name="ddate" type="date" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
                     id="ddate" value="{{ old('ddate' ) ?? $performance->DateDispach}}" onfocusout="validateDdate()">
                 @if($errors->has('ddate'))
                 <span class="invalid-feedback" role="alert">

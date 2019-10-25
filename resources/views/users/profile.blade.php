@@ -10,7 +10,7 @@
 
         <div class="col-6">
             <div class="card-body">
-                <form method="POST" action="{{ route('profile') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group required">
                         <label class="control-label">Full Name</label>
@@ -22,6 +22,7 @@
                         </span>
                         @endif
                     </div>
+
 
                     <div class="form-group required">
                         <label for="email"
@@ -44,7 +45,7 @@
 
                         <input id="password" type="password"
                             class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
-                            value="{{ old('password')?? $user->password }}" valuerequired>
+                            value="{{ old('password') }}" valuerequired>
                         @if ($errors->has('password'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('password') }}</strong>

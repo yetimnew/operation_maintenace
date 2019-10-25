@@ -19,6 +19,7 @@ class CreateStatustypesTable extends Migration
             $table->boolean('statusgroup')->default(0);
             $table->text('comment');
             $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

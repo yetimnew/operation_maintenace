@@ -24,6 +24,7 @@ class CreateTrucksTable extends Migration
             $table->date('productionDate')->nullable();
             $table->date('serviceStartDate')->nullable();
             $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

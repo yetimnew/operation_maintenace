@@ -36,6 +36,8 @@ class CreatePerformancesTable extends Migration
             $table->boolean('satus')->default(1);
             $table->boolean('is_returned')->default(0);
             $table->dateTime('returned_date')->nullable();
+            $table->bigInteger('user_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

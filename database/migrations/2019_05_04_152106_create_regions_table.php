@@ -18,6 +18,7 @@ class CreateRegionsTable extends Migration
             $table->string('name');
             $table->string('comment')->nullable();
             $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

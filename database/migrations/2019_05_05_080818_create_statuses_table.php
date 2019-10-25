@@ -19,6 +19,7 @@ class CreateStatusesTable extends Migration
             $table->integer('statustype_id')->nullable();
             $table->string('plate');
             $table->date('registerddate');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

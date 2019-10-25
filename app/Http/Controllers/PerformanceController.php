@@ -10,6 +10,7 @@ use App\DriverTuck;
 use App\Performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PerformanceController extends Controller
@@ -43,8 +44,8 @@ class PerformanceController extends Controller
         ->where('driver_truck.status',1)
         ->get();
 
-       if($place->count() == 0){
-           Session::flash('info', 'You must have some Place before attempting to create Performance' );
+       if($place->count() < 2){
+           Session::flash('info', 'You must have two or more Place before attempting to create Performance' );
            return redirect()->route('place.create');
        }
 
@@ -69,6 +70,7 @@ class PerformanceController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
        
          $this->validate($request, [
             'chinet' => 'required',
@@ -89,7 +91,6 @@ class PerformanceController extends Controller
             'comment' => '',
 
         ]);
-        //  dd($request->all());
 
          $performance = new Performance;
          $performance->LoadType = $request->chinet ;
@@ -109,6 +110,7 @@ class PerformanceController extends Controller
          $performance->workOnGoing = $request->wog ;
          $performance->other = $request->other ;
          $performance->comment = $request->comment ;
+         $performance->user_id = Auth::user()->id ;
 
         $performance->save();
         Session::flash('success', 'Performance  registerd successfuly' );

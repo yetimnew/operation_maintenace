@@ -15,7 +15,7 @@
 			<div class="col-10">
 			</div>
 			<div class="col-2">
-				<a href="{{route('role.create')}}" class="btn btn-primary"> <i class="fas fa-plus    "></i> Add
+				<a href="{{route('role.create')}}" class="btn btn-primary"> <i class="fas fa-plus "></i> Add
 					Roles</a>
 				{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('customer', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
 			</div>
@@ -26,7 +26,8 @@
 				<thead>
 					<tr>
 						<th width="3%">Number</th>
-						<th class="text-center">Customer Name</th>
+						<th>Role</th>
+						<th>Permissions</th>
 						<th class="text-center">Edit</th>
 						<th class="text-center">Delete</th>
 					</tr>
@@ -34,11 +35,16 @@
 
 				<tbody>
 					{{-- {{dd($role_has_permission)}} --}}
-					<?php $no = 0 ?> @if ($roles->count()> 0)
+					<?php $no = 0 ?>
+					@if ($roles->count()> 0)
 					@foreach ($roles as $role)
 					<tr>
 						<td>{{++$no}}</td>
 						<td>{{$role->name}}</td>
+
+
+						<td>{{ str_replace(array('[',']','"'),'', $role->permissions()->pluck('name')) }}</td>
+						{{-- Retrieve array of permissions associated to a role and convert to string --}}
 
 						<td class='m-1 p-1 text-center'><a href="{{route('role.edit',['id'=> $role->id])}}">
 								<i class="fas fa-edit "></i> </a>
@@ -50,11 +56,11 @@
 							</form>
 
 							<button type="submit" onclick="if(confirm('Are you sure to delete this?')){
-			   event.preventDefault();
-			   document.getElementById('delete-form-{{$role->id}}').submit();
-			 }else{
-			  event.preventDefault();
-			 }"> <i class="fas fa-trash red"></i>
+								event.preventDefault();
+								document.getElementById('delete-form-{{$role->id}}').submit();
+								}else{
+								event.preventDefault();
+								}"> <i class="fas fa-trash red"></i>
 						</td>
 						</button>
 

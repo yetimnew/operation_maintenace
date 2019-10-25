@@ -18,9 +18,11 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"> </script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"> </script>
 <script src="{{ asset('js/dataTables.buttons.min.js') }}"> </script>
+<script src="{{ asset('js/datetimepicker.js') }}"> </script>
 <script src="{{ asset('js/buttons.flash.min.js') }}"> </script>
 <script src="{{ asset('js/jszip.min.js') }}"> </script>
 <script src="{{ asset('js/pdfmake.min.js') }}"> </script>
@@ -31,6 +33,7 @@
 <script src="{{ asset('js/jquery.cookie.js') }}"> </script>
 <script src="{{ asset('js/sweetalert2@8.js') }}"> </script>
 <script src="{{ asset('js/custome_validation.js') }}"> </script>
+<script src="{{ asset('js/bootstrap-datetimepicker.min') }}"> </script>
 
 <script>
   @if (Session::has('success'))

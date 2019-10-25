@@ -32,12 +32,12 @@
 					<th>D with Cargo</th>
 					<th>D without cargo </th>
 					<th>VolumMT</th>
-					<th>fuel/Litter</th>
-					<th>fuel/Birr</th>
-					<th>perdiem</th>
-					<th>work On Going</th>
-					<th>other</th>
-					<th>Returned</th>
+					<th>fuel/Ltr</th>
+					<th>Fuel/Birr</th>
+					<th>Perdiem</th>
+					<th>Operating Expense</th>
+					<th>Others</th>
+					<th>Is returned</th>
 					<th class="text-center" width="4%">Edit</th>
 					<th class="text-center" width="4%">Delete</th>
 
@@ -106,7 +106,7 @@
 				@endforeach
 				@else
 				<tr>
-					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
+					<td class='m-1 p-1 text-center' colspan="17">No Data Avilable</td>
 				</tr>
 				@endif
 

@@ -25,6 +25,8 @@
 					<th class="text-center">Users Name</th>
 					<th class="text-center">Email</th>
 					<th width="5%">Status</th>
+					<th>Date/Time Added</th>
+					<th width="5%">Status</th>
 					<th width="5%">Is Admin</th>
 					<th width="5%">Edit</th>
 
@@ -38,12 +40,14 @@
 				<tr>
 					<td>{{++$no}}</td>
 
-					<td> <img src="{{asset($user->profile->image)}}" alt="" width="50" height="50"
-							class="rounded-circle" alt="Cinque Terre"></td>
+					{{-- <td> <img src="{{asset($user->profile->image)}}" alt="" width="50" height="50"
+					class="rounded-circle" alt="Cinque Terre"></td> --}}
 					{{-- <td>{{$user->profile->id}}</td> --}}
 					<td>{{$user->name}}</td>
 					<td>{{$user->email}}</td>
 					<td>{{$user->active}}</td>
+					<td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
+					<td>{{$user->roles()->pluck('name')->implode(' ')}}</td>
 					@if ($user->admin)
 					<td>Admin</td>
 					@else

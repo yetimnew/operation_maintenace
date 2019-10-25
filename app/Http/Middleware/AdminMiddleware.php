@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 
-class isAdmin
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +15,6 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
-        $user = User::all()->count();
-        if (!($user == 1)) {
-            if (!Auth::user()->hasPermissionTo('update truck')) //If user does //not have this permission
-        {
-                abort('401');
-            }
-        }
-
         return $next($request);
     }
 }

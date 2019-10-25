@@ -23,6 +23,20 @@ class TruckDriverController extends Controller
 
     public function create()
     {
+        $truckss = Truck::all();
+        $dr = Driver::all();
+
+        if ($truckss->count()== 0) {
+            Session::flash('info', 'You must have some Trukes  before attempting to create Truck' );
+            return redirect()->route('truck');
+        }
+
+        if ($dr->count()== 0) {
+            Session::flash('info', 'You must have some Driver  before attempting to create Truck' );
+            return redirect()->route('driver');
+        }
+  
+
 
             $trucks= DB::table('trucks')
             ->select('trucks.id','trucks.plate','driver_truck.driverid','trucks.status','driver_truck.status')

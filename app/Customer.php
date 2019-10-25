@@ -9,6 +9,7 @@ class Customer extends Model
 {
  
     protected $guarded =[];
+    protected $dates = ['deleted_at'];
     public function operations()
     {
         return $this->hasMany('App\Operation');

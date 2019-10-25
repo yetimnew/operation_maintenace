@@ -22,6 +22,7 @@ class Driver extends Model
         'hireddate',
         'status'
     ];
+    protected $dates = ['deleted_at'];
     public function getSexAttribute($attribute)
     {
         return [

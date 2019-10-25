@@ -26,6 +26,7 @@ class CreateDriversTable extends Migration
             $table->string('mobile')->nullable();
             $table->date('hireddate')->nullable();
             $table->boolean('status')->default(1);
+            $table->softDeletes();
              $table->timestamps();
         });
     }

@@ -28,28 +28,24 @@
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 
-				<div class="form-group required pb-0 ">
-					<label class="control-label">Permission Type</label>
-					<select class="custom-select" id="permission" name="permission[]" multiple
-						class="form-control {{ $errors->has('permission') ? ' is-invalid' : '' }}"
-						onfocusout="validateVehecle()">
-						{{-- <option class="dropup" value=""> Select One</option> --}}
-						@foreach ($permissisons as $pr)
-						<option class="dropup" value="{{$pr->id}}">
-							{{$pr->name}}
-						</option>
+				<div class='form-group'>
+
+					<div class="form-check ">
+						@foreach ($permissions as $permission)
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="permissions[]" id=""
+								value="{{$permission->id}}"> {{$permission->name}}
+						</label>
 						@endforeach
-
-					</select>
-
-
-
-
-					<div class="form-group required pull-right">
-						<button type="submit" class="btn btn-primary" name="save">Save</button>
 					</div>
-
 				</div>
+
+
+
+				<div class="form-group required pull-right">
+					<button type="submit" class="btn btn-primary" name="save">Save</button>
+				</div>
+
 				<div class="card-footer">
 					the footer
 				</div>
@@ -64,6 +60,8 @@
 	@endsection
 	@section( 'javascript' )
 	<script>
-
-	</script>
+		$(function () {
+		  $('#example1').datetimepicker();
+		});
+		</script
 	@endsection

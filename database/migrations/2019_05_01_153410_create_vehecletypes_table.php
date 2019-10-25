@@ -20,6 +20,7 @@ class CreateVehecletypesTable extends Migration
             $table->string('productiondate')->nullable();
             $table->text('comment')->nullable();
             $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

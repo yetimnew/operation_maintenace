@@ -10,30 +10,28 @@ use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+    }
+
+
     public function index()
     {
         
         $users = User::with('profile')->get();
-        // $users = User::all();
-
-      
+ 
         return view('users.index')->with('users',$users);
     }
 
  
     public function create()
     {
-        // dd("dddddddddddddddddd");
-        $user = new User;
-        return view('users.create')->with('user',$user);
+        $roles = Role::get();
+        return view('users.create')
+        ->with('roles',$roles);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         // dd($request->all());
@@ -43,51 +41,30 @@ class UserController extends Controller
             'email'=>'required|email|unique:users',
             'password'=>'required|min:6|confirmed'
         ]);
+        $user = User::create($request->only('email', 'name', 'password')); //Retrieving only the email and password data
+        $roles = $request['roles']; //Retrieving the roles field//Checking if a role was selected
+        if (isset($roles)) {
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password =  Hash::make($request->password);
-        $user->save();
+            foreach ($roles as $role) {
+            $role_r = Role::where('id', '=', $role)->firstOrFail();            
+            $user->assignRole($role_r); //Assigning role to user
+            }
+        }        
+            //Redirect to the users.index view and display message
+            return redirect()->route('user')
+            ->with('flash_message','User successfully added.');
+    }
+
+       
+
   
-        Profile::create([
-            'user_id'=> $user->id,
-            'image'=>'uploads/avatar.jpg'
-        ]);
-
-        return redirect()->route('user')
-            ->with('flash_message',
-             'User successfully added.');
-
-
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         // dd("dddddddddddddddddddddd");
-        $user = User::find($id);
-          return view('users.edit')
-        ->with('user',$user);
+        $user = User::findOrFail($id);
+          return view('user.edit')->with('user',$user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id); //Get role specified by id
@@ -102,23 +79,12 @@ class UserController extends Controller
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
 
-        if (isset($roles)) {        
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
-        }        
-        else {
-            $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
-        }
         return redirect()->route('users.index')
             ->with('flash_message',
              'User successfully edited.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         // dd("dddddddddddddddd");

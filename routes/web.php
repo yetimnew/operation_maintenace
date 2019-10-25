@@ -15,10 +15,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/role/edit/{id}',        ['uses'=>'RoleController@edit','as'=>'role.edit']);
     Route::post('/role/update/{id}',     ['uses'=>'RoleController@update','as'=>'role.update']);
     Route::get('/role/destroy/{id}',     ['uses'=>'RoleController@destroy','as'=>'role.destroy']);
+    // Rermission Controller
+    Route::get('/permission',                  ['uses'=>'PermissionController@index','as'=>'permission']);
+    Route::get('/permission/create',           ['uses'=>'PermissionController@create','as'=>'permission.create']);
+    Route::post('/permission/store',           ['uses'=>'PermissionController@store','as'=>'permission.store']);
+    Route::get('/permission/edit/{id}',        ['uses'=>'PermissionController@edit','as'=>'permission.edit']);
+    Route::post('/permission/update/{id}',     ['uses'=>'PermissionController@update','as'=>'permission.update']);
+    Route::get('/permission/destroy/{id}',     ['uses'=>'PermissionController@destroy','as'=>'permission.destroy']);
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);
 //  user profile start here
     Route::get('/profile',                  ['uses'=>'profileController@index','as'=>'profile']);
+    Route::post('/profile/update',          ['uses'=>'profileController@update','as'=>'profile.update']);
 //    user route
     Route::get('/user',                  ['uses'=>'userController@index','as'=>'user'])->middleware('admin');
     Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create'])->middleware('admin');

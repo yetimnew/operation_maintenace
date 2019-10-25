@@ -26,6 +26,7 @@ class Truck extends Model
         'created_at',
         'updated_at',
     ];
+    protected $dates =['productionDate','serviceStartDate','deleted_at'];
 
     public function performances()
     {

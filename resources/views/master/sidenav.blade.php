@@ -1,7 +1,8 @@
 <nav class="side-navbar">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src="{{ asset('img/avatar-1.jpg')}}" alt="User Name" class="img-fluid rounded-circle">
+        <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
+                class="img-fluid rounded-circle">
         </div>
         <div class="title">
             <h1 class="h4">{{Auth::user()->name}}</h1>
@@ -100,6 +101,16 @@
             <ul id="exampledropdownDropdown7" class="collapse list-unstyled ">
                 <li><a href="{{ route('backup')}}"><i class="fa fas-trash-restore-alt" aria-hidden="true"></i>Back
                         Up</a> </li>
+            </ul>
+        </li>
+
+        <li><a href="#exampledropdownDropdown8" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"
+                    aria-hidden="true"></i> Role and Permission </a>
+            <ul id="exampledropdownDropdown8" class="collapse list-unstyled ">
+                <li><a href="{{ route('role')}}"><i class="fa fas-trash-restore-alt" aria-hidden="true"></i>Role</a>
+                </li>
+                <li><a href="{{ route('permission')}}"><i class="fa fas-trash-restore-alt"
+                            aria-hidden="true"></i>Permission</a> </li>
             </ul>
         </li>
         @if (Auth::user()->admin)

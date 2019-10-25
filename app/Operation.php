@@ -11,7 +11,7 @@ class Operation extends Model
 {
     
     protected $gurded=[];
-
+    protected $dates = ['startdate','edndate','deleted_at'];
     public function customer()
     {
         return $this->belongsTo('App\Customer');

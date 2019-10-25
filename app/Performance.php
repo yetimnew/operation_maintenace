@@ -32,9 +32,10 @@ class Performance extends Model
         'comment',
         'DateRegistered',
         'satus',
+        'user_id'
 
     ];
-    protected $dates = ['DateDispach'];
+    protected $dates = ['DateDispach','deleted_at'];
     // protected $append=['noOfDateItTakes'];
     public function operation()
     {

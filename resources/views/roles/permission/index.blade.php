@@ -9,7 +9,7 @@
 <div class="col-lg-10 col-lg-offset-1">
 	<h1><i class="fa fa-key"></i>Available Permissions
 
-		<a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Roles</a></h1>
+		<a href="{{ route('permission.create') }}" class="btn btn-default pull-right">Roles</a></h1>
 	<hr>
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">
@@ -17,21 +17,29 @@
 			<thead>
 				<tr>
 					<th>Permissions</th>
-					<th>Operation</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach ($permissions as $permission)
 				<tr>
 					<td>{{ $permission->name }}</td>
-					<td>
-						<a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}" class="btn btn-info pull-left"
-							style="margin-right: 3px;">Edit</a>
+					<td class='m-1 p-1 text-center'><a href="{{route('permission.edit',['id'=> $permission->id])}}">
+							<i class="fas fa-edit "></i> </a>
+					</td>
+					<td class='m-1 p-1 text-center '>
+						<form action="{{route('permission.destroy',['id'=> $permission->id])}}"
+							id="delete-form-{{$permission->id}}" style="display: none">
+							@csrf @method('DELETE')
+						</form>
 
-						{!! Form::open(['method' => 'DELETE', 'route' => ['permissions.destroy', $permission->id] ]) !!}
-						{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-						{!! Form::close() !!}
-
+						<button type="submit" onclick="if(confirm('Are you sure to delete this?')){
+		   event.preventDefault();
+		   document.getElementById('delete-form-{{$permission->id}}').submit();
+		 }else{
+		  event.preventDefault();
+		 }"> <i class="fas fa-trash red"></i>
 					</td>
 				</tr>
 				@endforeach
@@ -39,7 +47,7 @@
 		</table>
 	</div>
 
-	<a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a>
+	{{-- <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a> --}}
 
 </div>
 

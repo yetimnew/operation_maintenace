@@ -23,6 +23,7 @@ class CreateDriverTruckTable extends Migration
             $table->date('date_detach')->nullable();
             $table->text('reason')->nullable();
             $table->boolean('status')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

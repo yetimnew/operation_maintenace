@@ -27,6 +27,7 @@ class CreateOperationsTable extends Migration
             $table->boolean('closed')->default(1);
             $table->date('enddate')->nullable();;
             $table->text('remark')->nullable();
+            $table->softDeletes();
 
             $table->timestamps();
         });

@@ -41,9 +41,12 @@
 					<td>{{$customer->officenumber}}</td>
 					<td>{{$customer->mobile}}</td>
 					<td>{{$customer->remark}}</td>
+					@can('edit_customer')
 					<td class='m-1 p-1 text-center'><a href="{{route('customer.edit',['id'=> $customer->id])}}">
 							<i class="fas fa-edit "></i> </a>
 					</td>
+					@endcan
+					@can('delete_customer')
 					<td class='m-1 p-1 text-center '>
 						<form action="{{route('customer.destroy',['id'=> $customer->id])}}"
 							id="delete-form-{{$customer->id}}" style="display: none">
@@ -51,13 +54,14 @@
 						</form>
 
 						<button type="submit" onclick="if(confirm('Are you sure to delete this?')){
-                event.preventDefault();
-                document.getElementById('delete-form-{{$customer->id}}').submit();
-              }else{
-               event.preventDefault();
-              }"> <i class="fas fa-trash red"></i>
+									event.preventDefault();
+									document.getElementById('delete-form-{{$customer->id}}').submit();
+								}else{
+								event.preventDefault();
+								}"> <i class="fas fa-trash red"></i>
+						</button>
 					</td>
-					</button>
+					@endcan
 
 				</tr>
 
