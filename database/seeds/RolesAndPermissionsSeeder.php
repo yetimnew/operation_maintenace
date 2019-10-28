@@ -5,11 +5,7 @@ use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
          // Reset cached roles and permissions
@@ -21,6 +17,7 @@ class RolesAndPermissionsSeeder extends Seeder
     $user = factory(\App\User::class)->create();
 
     $user->assignRole('user');
+    
     Role::create(['name' => 'admin']);
 
     /** @var \App\User $user */

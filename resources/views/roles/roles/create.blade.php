@@ -1,5 +1,5 @@
 @extends( 'master.app' )
-@section( 'title', 'TIMS | Customer Create' )
+@section( 'title', 'TIMS | Role Create' )
 
 @section( 'content' )
 <ol class="breadcrumb">
@@ -29,15 +29,15 @@
 				</div>
 
 				<div class='form-group'>
-
+					<label for="permissions"> Select Permissions</label>
+					@foreach ($permissions as $permission)
 					<div class="form-check ">
-						@foreach ($permissions as $permission)
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="permissions[]" id=""
+							<input class="form-check-input" type="checkbox" name="permissions[]" id="permissions"
 								value="{{$permission->id}}"> {{$permission->name}}
 						</label>
-						@endforeach
 					</div>
+					@endforeach
 				</div>
 
 

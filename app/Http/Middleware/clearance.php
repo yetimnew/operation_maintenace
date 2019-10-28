@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class clearance
+class clearance 
 {
     /**
      * Handle an incoming request.

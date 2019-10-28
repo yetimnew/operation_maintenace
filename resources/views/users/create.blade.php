@@ -1,5 +1,5 @@
 @extends( 'master.app' )
-@section( 'title', 'TIMS | Operation' )
+@section( 'title', 'TIMS | User Create' )
 
 @section('content')
 
@@ -38,8 +38,7 @@
 						@endif
 					</div>
 
-
-					<div class='form-group'>
+					<div class='form-group form-check form-check-inline'>
 						<label for="roles">Role </label>
 						@foreach ($roles as $role)
 						<div class="form-check">
@@ -53,6 +52,23 @@
 						</div>
 						@endforeach
 					</div>
+
+					<div class='form-group'>
+						<label for="permissions">Permission </label>
+						@foreach ($permissions as $permission)
+						<div class="form-check">
+
+							<label class="form-check-label">
+								<input type="checkbox" class="form-check-input" name="permissions[]" id=""
+									value="{{$permission->id}}">
+								{{$permission->name}}
+							</label>
+
+						</div>
+						@endforeach
+					</div>
+
+
 
 					<div class="form-group required">
 						<label for="password"

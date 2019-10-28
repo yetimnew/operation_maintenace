@@ -1,16 +1,16 @@
 <nav class="side-navbar">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
-                class="img-fluid rounded-circle">
-        </div>
-        <div class="title">
-            <h1 class="h4">{{Auth::user()->name}}</h1>
-            <p>{{Auth::user()->type}}</p>
-        </div>
-        <div class="">
-            <a href="{{route('profile')}}" alt="Edit Profile"> <i class="fa fa-cog" aria-hidden="true"></i></a>
-        </div>
+        {{-- <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
+        class="img-fluid rounded-circle">
+    </div> --}}
+    <div class="title">
+        <h1 class="h4">{{Auth::user()->name}}</h1>
+        <p>{{Auth::user()->type}}</p>
+    </div>
+    <div class="">
+        <a href="{{route('profile')}}" alt="Edit Profile"> <i class="fa fa-cog" aria-hidden="true"></i></a>
+    </div>
     </div>
 
     <!-- Sidebar Navidation Menus-->

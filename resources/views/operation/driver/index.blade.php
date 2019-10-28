@@ -12,7 +12,9 @@
 	<div class="col-10">
 	</div>
 	<div class="col-2">
+		{{-- @can('create driver') --}}
 		<a href="{{route('driver.create')}}" class="btn btn-primary">Add Driver</a>
+		{{-- @endcan --}}
 		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('drivers', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
 	</div>
 </div>
@@ -32,8 +34,15 @@
 					<th class="m-1 b-1">HouseNumber</th>
 					<th class="m-1 b-1">Telephone</th>
 					<th class="m-1 b-1">HireDate</th>
+					{{-- @can('edit driver') --}}
 					<th class="m-1 b-1" width="3%">Edit</th>
+					{{-- @endcan --}}
+					{{-- @can('delete driver') --}}
 					<th class="m-1 b-1" width="3%">Delete</th>
+					{{-- @endcan --}}
+
+
+
 
 				</tr>
 			</thead>
@@ -54,9 +63,12 @@
 					<td class='p-1 text-center'>{{$driver->housenumber}}</td>
 					<td class='p-1 text-center'>{{$driver->mobile}}</td>
 					<td class='p-1 text-center'>{{$driver->hireddate}}</td>
+					{{-- @can('edit driver') --}}
 					<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 							href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
 					</td>
+					{{-- @endcan
+					@can('delete driver') --}}
 					<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
 						<form action="{{route('driver.destroy',['id'=> $driver->id])}}" id="delete-form-{{$driver->id}}"
@@ -64,13 +76,14 @@
 							@csrf @method('DELETE')
 						</form>
 						<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
-                            event.preventDefault();
-                            document.getElementById('delete-form-{{$driver->id}}').submit();
-                        }else{
-                            event.preventDefault();
-                        }"> <i class="fa fa-trash red"></i>
+								event.preventDefault();
+								document.getElementById('delete-form-{{$driver->id}}').submit();
+							}else{
+								event.preventDefault();
+							}"> <i class="fa fa-trash red"></i>
+						</button>
 					</td>
-					</button>
+					{{-- @endcan --}}
 
 
 				</tr>

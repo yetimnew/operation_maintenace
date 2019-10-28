@@ -1,5 +1,5 @@
 @extends( 'master.app' )
-@section( 'title', 'TIMS | Customer Create' )
+@section( 'title', 'TIMS | Role Edit' )
 
 @section( 'content' )
 <ol class="breadcrumb">
@@ -28,23 +28,26 @@
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 
-				<div class="form-group required pb-0 ">
 
 
+				<div class='form-group'>
+					<label for="permissions"> Select Permissions</label>
 					@foreach ($permissions as $permission)
+					<div class="form-check ">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="permission[]" id="permissions"
+								value="{{$permission->id}}" @foreach ($role->permissions as $r)
+							@if($permission->id == $r->id)
+							checked
+							@endif
+							@endforeach
 
-					<input type="checkbox" class="form-check-input" id="permission" name="permission[]"
-						value="{{ $permission->id}}">
-					{{ $permission->name }}
-
+							> {{$permission->name}}
+						</label>
+					</div>
 					@endforeach
-
-
-
-
-
-
 				</div>
+
 
 				<div class="form-group required pull-right">
 					<button type="submit" class="btn btn-primary" name="save">Save</button>

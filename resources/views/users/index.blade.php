@@ -1,5 +1,5 @@
 @extends( 'master.app' )
-@section( 'title', 'TIMS | Customer' )
+@section( 'title', 'TIMS | Users' )
 @section( 'styles' )
 <link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
 <ol class="breadcrumb">
@@ -22,18 +22,19 @@
 				<tr>
 					<th width="3%">Number</th>
 					<th width="3%">Image</th>
-					<th class="text-center">Users Name</th>
+					{{-- <th class="text-center">Users Name</th> --}}
+					<th class="text-center">Namel</th>
 					<th class="text-center">Email</th>
-					<th width="5%">Status</th>
-					<th>Date/Time Added</th>
-					<th width="5%">Status</th>
+					<th width="5%">Role</th>
+					{{-- <th>Date/Time Added</th> --}}
+					<th width="5%">Is admin</th>
 					<th width="5%">Is Admin</th>
 					<th width="5%">Edit</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				{{-- {{ dd($users)}} --}}
+				{{-- {{ dd($permissions)}} --}}
 				<?php $no = 0 ?>
 				@if ($users->count()> 0)
 				@foreach ($users as $user)
@@ -46,16 +47,36 @@
 					<td>{{$user->name}}</td>
 					<td>{{$user->email}}</td>
 					<td>{{$user->active}}</td>
-					<td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
+					{{-- <td>{{ $user->created_at->format('F d, Y h:ia') }}</td> --}}
 					<td>{{$user->roles()->pluck('name')->implode(' ')}}</td>
-					@if ($user->admin)
+					<td>{{$user->permissions->pluck('name')->implode(' ')}}</td>
+					<td>
+
+
+
+						@if ($user->admin)
 					<td>Admin</td>
 					@else
 					<td>Not Admin</td>
 					@endif
 
-					<td class='m-1 p-1 text-center'><a href="{{route('user.edit',['id'=> $user->id])}}">
-							<i class="fas fa-edit "></i> </a>
+					<td class='m-1 p-1 text-center'><a href="{{route('user.edit',['id'=> $user->id])}}"><i
+								class="fas fa-edit "></i> </a>
+					</td>
+
+					<td class='m-1 p-1 text-center '>
+						<form action="{{route('role.destroy',['id'=> $user->id])}}" id="delete-form-{{$user->id}}"
+							style="display: none">
+							@csrf @method('DELETE')
+						</form>
+
+						<button type="submit" onclick="if(confirm('Are you sure to delete this?')){
+									event.preventDefault();
+									document.getElementById('delete-form-{{$user->id}}').submit();
+									}else{
+									event.preventDefault();
+									}"> <i class="fas fa-trash red"></i>
+						</button>
 					</td>
 
 				</tr>
