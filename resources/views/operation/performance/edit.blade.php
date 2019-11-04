@@ -7,17 +7,20 @@
 		</li>
 		<li class="breadcrumb-item active">Performance Update</li>
 	</ol>
-	<div class="row col-12">
-		<div class="col-10">
 
-		</div>
-		<div class="col-2">
-			<a href="{{route('performace')}}" class="btn btn-primary">Backe</a>
-		</div>
-	</div>
 	<div class="card text-left">
 		<div class="card-header">
-			<h2>Performance Update of FO <span class="text text-danger"> {{$performance->FOnumber}} </span></h2>
+
+			<div class="d-flex align-items-center">
+				<h2>Performance Update of FO <span class="text blue"> {{$performance->FOnumber}} </span></h2>
+				@can('performance create')
+				<div class="ml-auto">
+					<a href="{{route('performace')}}" class="btn btn-outline-primary">
+						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>Back</a>
+
+				</div>
+				@endcan
+			</div>
 		</div>
 		<div class="card-body">
 			<form method="POST" action="{{route('performace.update',['id'=>$performance->id])}}" class="form-horizontal"
@@ -25,7 +28,7 @@
 				@csrf
 				@include('operation.performance.form')
 
-				<h3> Is The Driver Retrned fill the form </h3>
+				<h3 class="font-weight-bold"> Is The Driver Retrned fill the form </h3>
 
 				<div class="form-group ">
 					<label class="control-label">Returned</label>
@@ -61,8 +64,10 @@
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 
-				<div class="form-group ">
-					<button type="submit" class="btn btn-primary" name="save">Save</button>
+				<div class="form-group float-right ">
+					<button type="submit" class="btn btn-outline-primary btn-lg" name="save">
+						<i class="fas fa-save    "></i>
+						Save</button>
 
 				</div>
 
@@ -72,7 +77,6 @@
 	</div>
 </div>
 <div class="card-footer">
-	the footer
 </div>
 
 </form>

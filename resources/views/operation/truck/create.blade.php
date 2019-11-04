@@ -12,25 +12,35 @@
 
 	<div class="card text-left">
 		<div class="card-header">
-			<h2>Truck Registration</h2>
+
+			<div class="d-flex align-items-center">
+				<h2>Truck Registration</h2>
+				@can('driver create')
+				<div class="ml-auto">
+					<a href="{{route('truck')}}" class="btn btn-outline-primary">
+						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>Back</a>
+
+				</div>
+				@endcan
+			</div>
+
 		</div>
 		<div class="card-body">
 			<form method="post" action="{{route('truck.store')}}" id="truck_reg_form" novalidate>
 				@csrf
 				@include('operation.truck.form')
 				<div class="form-group required pull-right">
-					<button type="submit" class="btn btn-primary" name="save">Save</button>
+					<button type="submit" class="btn btn-outline-primary btn-lg" name="save">
+						<i class="fas fa-save"></i>
+						Save</button>
 				</div>
+
+			</form>
+		</div>
+		<div class="card-footer">
 		</div>
 
 	</div>
-</div>
-<div class="card-footer">
-	the footer
-</div>
-
-</form>
-</div>
 </div>
 
 @endsection

@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
     Route::post('/truck/store',           ['uses'=>'TruckController@store','as'=>'truck.store']);
     Route::get('/truck/edit/{id}',        ['uses'=>'TruckController@edit','as'=>'truck.edit']);
+    Route::get('/truck/deactivate/{id}',        ['uses'=>'TruckController@deactivate','as'=>'truck.deactivate']);
     Route::post('/truck/update/{id}',     ['uses'=>'TruckController@update','as'=>'truck.update']);
     Route::get('/truck/destroy/{id}',     ['uses'=>'TruckController@destroy','as'=>'truck.destroy']);
         

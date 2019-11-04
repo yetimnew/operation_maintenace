@@ -101,12 +101,11 @@ class DriverController extends Controller
     public function destroy($id)
     {
         $driver = Driver::find($id);
-       
         $driver_id=  $driver->driverid;
         $td= DriverTuck::where('driverid', '=', $driver_id)->first();
         // dd($td->plate);
-        if($td->count() >=  1){
-            Session::flash('danger', 'Not deleted ! ' . $driver->name .' is attached to Plate '. $td->plate );
+        if($td){
+            Session::flash('error', 'Not deleted ! ' . $driver->name .' is attached to Plate '. $td->plate );
             return redirect()->back();
         }else{
             $driver->status= 0 ;

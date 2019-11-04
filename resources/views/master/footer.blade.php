@@ -48,8 +48,8 @@
       @if (Session::has('info'))
       toastr.info('{{ Session::get('info')}}');
       @endif
-      @if (Session::has('danger'))
-      toastr.info('{{ Session::get('danger')}}');
+      @if (Session::has('error'))
+      toastr.error('{{ Session::get('error')}}');
       @endif
 </script>
 @yield('javascript')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Truck;
+use App\DriverTuck;
 use App\Vehecletype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +18,9 @@ class TruckController extends Controller
     public function index()
     {
       
-        // Truck::chunk(200, function($trucka)
-        // {
-        //     foreach ($trucka as $user)
-        //     {
-        //       dd($user);
-        //     }
-        // });
 
-        $trucks = Truck::where('status','!=',0)->get();
+
+        $trucks = Truck::where('status','=',1)->get();
 
         return view('operation.truck.index')->with('trucks',$trucks);
 
@@ -124,10 +119,36 @@ class TruckController extends Controller
     public function destroy($id)
     {
         $truck = Truck::find($id);
-        $truck->status = 0;
-        $truck->save();
-        Session::flash('success', 'vehecle type deleted successfuly' );
-        return redirect()->back();
 
+        $plate=  $truck->plate;
+        $td= DriverTuck::where('plate', '=', $plate)->first();
+    //    dd($td->plate);
+        if($td){
+            Session::flash('error', 'Not deleted ! ' .$plate .' is attached to Plate '. $td->driverid );
+            return redirect()->back();
+        }else{
+            $truck->status = 0;
+            $truck->save();
+            Session::flash('success', 'vehecle type deleted successfuly' );
+            return redirect()->back();
+
+        }
+       
+
+
+
+ 
+
+    }
+    public function deactivate($id)
+    {
+        // dd("kkkkkkkkkkkkkkkkkkkkkkkk");
+        $truck = Truck::find($id);
+            $truck->status = 0 ;
+            $truck->save();
+            Session::flash('success', $truck->plate . ' Deactivate successfuly' );
+            return redirect()->back();
+
+       
     }
 }

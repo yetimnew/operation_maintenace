@@ -39,7 +39,7 @@
 							<th class="m-1 b-1">drivereID</th>
 							<th class="m-1 b-1"> Name</th>
 							<th class="m-1 b-1"> Sex</th>
-							<th class="m-1 b-1"> burthdate</th>
+							<th class="m-1 b-1"> birthdate</th>
 							<th class="m-1 b-1"> Zone</th>
 							<th class="m-1 b-1">Woreda</th>
 							<th class="m-1 b-1">Kebele</th>
@@ -47,8 +47,8 @@
 							<th class="m-1 b-1">Telephone</th>
 							<th class="m-1 b-1">HireDate</th>
 							<th class="m-1 b-1" width="3%">Edit</th>
-							<th class="m-1 b-1" width="3%">Deactivate</th>
 							<th class="m-1 b-1" width="3%">Delete</th>
+							<th class="m-1 b-1" width="3%">Deactivate</th>
 
 						</tr>
 					</thead>
@@ -73,12 +73,7 @@
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
 							</td>
-							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Deactivate">
-								<a href="{{route('driver.deactivate',['id'=> $driver->id])}}" onclick="if(confirm('Are you sure to delete this?')){
 
-										
-									}">deactivate</i></a>
-							</td>
 
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
@@ -94,13 +89,28 @@
 									}"> <i class="fa fa-trash red"></i>
 								</button>
 							</td>
+							<td class='p-1 text-center'>
+								<form action="{{route('driver.deactivate',['id'=> $driver->id])}}"
+									id="deactivate-form-{{$driver->id}}" style="display: none">
+									@csrf
+									{{-- @method('DELETE') --}}
+								</form>
+								<button class="btn btn-sm btn-outline-info" type="submit" onclick="if(confirm('Are you sure to deactivate this? if your answer is yes you don\'t insert any data by this dirive. ')){
+								event.preventDefault();
+								document.getElementById('deactivate-form-{{$driver->id}}').submit();
+									}else{
+										event.preventDefault();
+									}"> Deactivate
+
+								</button>
+							</td>
 
 						</tr>
 
 						@endforeach
 						@else
 						<tr>
-							<td class='m-1 p-1 text-center' colspan="14">No Data Avilable</td>
+							<td class='m-1 p-1 text-center' colspan="15">No Data Avilable</td>
 						</tr>
 						@endif
 
