@@ -28,12 +28,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile',                  ['uses'=>'profileController@index','as'=>'profile']);
     Route::post('/profile/update',          ['uses'=>'profileController@update','as'=>'profile.update']);
 //    user route
-    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user'])->middleware('admin');
-    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create'])->middleware('admin');
-    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store'])->middleware('admin');
-    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit'])->middleware('admin');
-    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update'])->middleware('admin');
-    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy'])->middleware('admin');
+    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user']);
+    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create']);
+    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store']);
+    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit']);
+    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update']);
+    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy']);
 
     Route::get('/truck',                  ['uses'=>'TruckController@index','as'=>'truck']);
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
@@ -51,11 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/vehecletype/destroy/{id}', ['uses'=>'VehecleController@destroy','as'=>'vehecletype.destroy']);
 // Driver 
     Route::get('/driver',                    ['uses'=>'DriverController@index','as'=>'driver']);
-    Route::get('/driver/create',             ['uses'=>'DriverController@create','as'=>'driver.create'])->middleware('role:admin|statstician');
-    Route::post('/driver/store',             ['uses'=>'DriverController@store','as'=>'driver.store'])->middleware('role:admin|statstician');
-    Route::get('/driver/edit/{id}',          ['uses'=>'DriverController@edit','as'=>'driver.edit'])->middleware('role:admin|statstician');
-    Route::post('/driver/update/{id}',       ['uses'=>'DriverController@update','as'=>'driver.update'])->middleware('role:admin|statstician');
-    Route::get('/driver/destroy/{id}',       ['uses'=>'DriverController@destroy','as'=>'driver.destroy'])->middleware('role:admin|statstician');
+    Route::get('/driver/create',             ['uses'=>'DriverController@create','as'=>'driver.create']);
+    Route::post('/driver/store',             ['uses'=>'DriverController@store','as'=>'driver.store']);
+    Route::get('/driver/edit/{id}',          ['uses'=>'DriverController@edit','as'=>'driver.edit']);
+    Route::get('/driver/deactivate/{id}',    ['uses'=>'DriverController@deactivate','as'=>'driver.deactivate']);
+    Route::post('/driver/update/{id}',       ['uses'=>'DriverController@update','as'=>'driver.update']);
+    Route::get('/driver/destroy/{id}',       ['uses'=>'DriverController@destroy','as'=>'driver.destroy']);
 // Operation
     Route::get('/operation',                ['uses'=>'OperationController@index','as'=>'operation']);
     Route::get('/operation/create',         ['uses'=>'OperationController@create','as'=>'operation.create']);

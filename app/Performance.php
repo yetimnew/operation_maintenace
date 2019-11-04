@@ -72,7 +72,6 @@ class Performance extends Model
     {
         $dt = Carbon::now();
 
-        // return $query->whereBetween("performances.DateDispach", [$first->toDateTimeString(), $second->toDateTimeString()]).
     }
 
  public function noOfDateItTakes()

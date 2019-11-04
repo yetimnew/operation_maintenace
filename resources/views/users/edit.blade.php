@@ -5,7 +5,7 @@
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
 	</li>
-	<li class="breadcrumb-item active">Customer Edit</li>
+	<li class="breadcrumb-item active">User Edit</li>
 </ol>
 
 <div class="col-md-12">
@@ -13,9 +13,8 @@
 	{{-- @include('master.success') --}}
 	<div class="card text-left">
 		<div class="card-header">
-			<h2>Customer Update</h2>
+			<h2>User Update</h2>
 		</div>
-		{{-- {{dd($user)}} --}}
 		<div class="card-body">
 			<form method="post" action="{{route('user.update',['id'=>$user->id])}}" class="form-horizontal"
 				id="user_reg">
@@ -68,21 +67,59 @@
 						required>
 				</div>
 
+				<div class='form-group'>
+					<label for="permissions"> Select Role</label>
+					@foreach ($roles as $role)
+					<div class="form-check ">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="role[]" id="role"
+								value="{{$role->id}}" @foreach ($user->roles as $r)
+							@if($role->id == $r->id)
+							checked
+							@endif
+							@endforeach
+							> {{$role->name}}
+						</label>
+					</div>
+					@endforeach
+				</div>
+
+
+
+				<div class='form-group'>
+					<label for="permissions"> Select Permissions</label>
+					@foreach ($permissions as $permission)
+					<div class="form-check ">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="permission[]" id="permissions"
+								value="{{$permission->id}}" @foreach ($user->permissions as $r)
+							@if($permission->id == $r->id)
+							checked
+							@endif
+							@endforeach
+
+							> {{$permission->name}}
+						</label>
+					</div>
+					@endforeach
+				</div>
+
+
 				<div class="form-group required pull-right">
 					<button type="submit" class="btn btn-primary" name="save">Save</button>
 
 
 				</div>
 		</div>
+
+		</form>
+		<div class="card-footer">
+			the footer
+		</div>
 	</div>
 </div>
-<div class="card-footer">
-	the footer
-</div>
 
-</form>
-</div>
-</div>
+
 
 @endsection
 @section( 'javascript' )

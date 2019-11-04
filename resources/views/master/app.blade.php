@@ -1,10 +1,11 @@
 @include('master.head')
+@section('styles')
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}">
+@endsection
+
 @include('master.topnav')
 <!-- Side Navbar -->
-@if (Auth::check())
 @include('master.sidenav')
-@endif
-
 <div class="content-inner">
 
     <section class="dashboard-counts no-padding-bottom">

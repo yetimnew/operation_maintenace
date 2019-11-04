@@ -79,8 +79,13 @@
         <div class="form-group required">
             <label class="control-label">Date Dispach</label>
             <div class="input-group">
-                <input name="ddate" type="date" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
+                <input name="ddate" type="text" class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}"
                     id="ddate" value="{{ old('ddate' ) ?? $performance->DateDispach}}" onfocusout="validateDdate()">
+                <div class="input-group-append">
+                    <button type="button" id="toggle" class="input-group-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </button>
+                </div>
                 @if($errors->has('ddate'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('ddate') }}</strong>
@@ -260,11 +265,36 @@
 
             @section( 'javascript' )
             <script>
-                $(function(){
-                $('#datepick').datetimepicker({
-                    local: 'ru'
-                });
+                jQuery.datetimepicker.setDateFormatter('moment');
+                 $("#ddate").datetimepicker({
+                timepicker:true,
+                datepicker:true,        
+                // format: "Y-M-d"
+                format: "YYYY-MM-DD H:mm:ss"
+                // autoclose: true,
+                // todayBtn: true,
+                // startDate: "2013-02-14 10:00",
+                // minuteStep: 10
+                // step: 30,
             });
+            $('#toggle').on('click', function(){
+                $("#ddate").datetimepicker('toggle');
+            })
+            jQuery.datetimepicker.setDateFormatter('moment');
+		 $("#r_date").datetimepicker({
+		timepicker:true,
+		datepicker:true,        
+		// format: "Y-M-d"
+		format: "YYYY-MM-DD H:mm:ss"
+		// autoclose: true,
+		// todayBtn: true,
+		// startDate: "2013-02-14 10:00",
+		// minuteStep: 10
+		// step: 30,
+	});
+	$('#toggle2').on('click', function(){
+		$("#r_date").datetimepicker('toggle');
+	})
             </script>
             <script>
                 const chinet = document.getElementById( 'chinet' );

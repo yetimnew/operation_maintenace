@@ -48,9 +48,14 @@
             <label class="control-label">Birth Date</label>
 
             <div class="input-group"> <span class="input-group-addon"></span>
-                <input name="bdate" type="date" id="bdate"
+                <input name="bdate" type="text" id="bdate"
                     class="form-control select {{ $errors->has('bdate') ? ' is-invalid' : '' }}"
                     value="{{old('bdate') ?? $driver->birthdate}}" onfocusout="validateBdate()">
+                <div class="input-group-append">
+                    <button type="button" id="toggle1" class="input-group-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </button>
+                </div>
                 @if ($errors->has('bdate'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('bdate') }}</strong>
@@ -142,102 +147,135 @@
                 @endif
                 <span class="invalid-feedback" role="alert"></span>
             </div>
-            <small class="form-text text-danger" id="error_mob"></small>
+            {{-- <small class="form-text text-danger" id="error_mob"></small> --}}
 
         </div>
         <div class="form-group required">
             <label class="control-label"> Hired Date</label>
-
-            <div class="input-group"> <span class="input-group-addon"></span>
-                <input name="hd" type="date" id="hd"
-                    class="form-control select {{ $errors->has('hd') ? ' is-invalid' : '' }}"
+            <div class="input-group ">
+                <input type="text" class="form-control form_datetime" name="hd" id="hd"
                     value="{{old('hd') ?? $driver->hireddate}}" onfocusout="validateHd()">
-
-                @if ($errors->has('hd'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('hd') }}</strong>
-                </span>
-                @endif
-                <span class="invalid-feedback" role="alert"></span> </div>
+                <div class="input-group-append">
+                    <button type="button" id="toggle" class="input-group-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <br>
+            @if ($errors->has('hd'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('hd') }}</strong>
+            </span>
+            @endif
+            <span class="invalid-feedback" role="alert"></span>
         </div>
+
+
         @section( 'javascript' )
+        <script type="text/javascript">
+            jQuery.datetimepicker.setDateFormatter('moment');
+                  $("#bdate").datetimepicker({
+                timepicker:false,
+                datepicker:true,        
+                format: "Y-M-d"
+                // format: "YYYY-MM-DD H:mm a"
+                // autoclose: true,
+                // todayBtn: true,
+                // startDate: "2013-02-14 10:00",
+                // minuteStep: 10
+                // Step: 30,
+            });
+            $('#toggle1').on('click', function(){
+                $("#bdate").datetimepicker('toggle');
+            })
+    $("#hd").datetimepicker({
+                timepicker:false,
+                datepicker:true,        
+                format: "Y-M-d"
+                // format: "YYYY-MM-DD H:mm a"
+         
+            });
+            $('#toggle').on('click', function(){
+                $("#hd").datetimepicker('toggle');
+            })
+        </script>
         <script>
             const did = document.getElementById( 'did' );
-                            const name = document.getElementById( 'name' );
-                            const bdate = document.getElementById( 'bdate' );
-                            const zone = document.getElementById( 'zone' );
-                            const woreda = document.getElementById( 'woreda' );
-                            const kebele = document.getElementById( 'kebele' );
-                            const hn = document.getElementById( 'hn' );
-                            const mob = document.getElementById( 'mob' );
-                            const hd = document.getElementById( 'hd' );
-                            // const bdate = document.getElementById( 'bdate' );
-                           
-                            const driver_reg = document.getElementById( 'driver_reg' );
-                    
-                            driver_reg.addEventListener( 'submit', function ( event ) {
-                                event.preventDefault();
-                                if ( 
-                                    validateDid() &&
-                                    validateName() &&
-                                    validateBdate() &&
-                                    validateMob() &&
-                                    validateHd()
-                                ) {
-                                    driver_reg.submit();
-                                } else {
-                                    return false;
-                                }
-                            } );
-                    
-                            
-                            function validateDid() {
-                                if ( checkIfEmpty( did ) ) {
-                                    return false;
-                                } else {
-                                    return true;
-                                }
-                            }
-                            function validateName() {
-                                if ( checkIfEmpty( name ) ) {
-                                    return false;
-                                } else {
-                                    return true;
-                                }
-                            }
-                    
-                            function validateBdate() {
-                                if ( checkIfEmpty( bdate ) ) {
-                                    return false;
-                                } else {
-                                    return true;
-                                }
-                            }
+        const name = document.getElementById( 'name' );
+        const bdate = document.getElementById( 'bdate' );
+        const zone = document.getElementById( 'zone' );
+        const woreda = document.getElementById( 'woreda' );
+        const kebele = document.getElementById( 'kebele' );
+        const hn = document.getElementById( 'hn' );
+        const mob = document.getElementById( 'mob' );
+        const hd = document.getElementById( 'hd' );
+        // const bdate = document.getElementById( 'bdate' );
 
-                            function validateMob() {
-                                if ( checkIfEmpty( mob ) ) {
-                                    return false;
-                                }
-                                if ( !meetLength( mob, 10, 11 ) ) {
-                                    return false;
-                                } else {
-                                    return true;
-                    
-                                }
-                            }
-                            function validateHd() {
-                                if ( checkIfEmpty( hd ) ) {
-                                    return false;
-                                }else {
-                                    return true;
-                    
-                                } 
-                            }
-                    
-                    //*******************************************************************
-                    // Validator functions
-                    //*******************************************************************
-                    
+        const driver_reg = document.getElementById( 'driver_reg' );
+
+        driver_reg.addEventListener( 'submit', function ( event ) {
+        event.preventDefault();
+        if (
+        validateDid() &&
+        validateName() &&
+        validateBdate() &&
+        validateMob() &&
+        validateHd()
+        ) {
+        driver_reg.submit();
+        } else {
+        return false;
+        }
+        } );
+
+
+        function validateDid() {
+        if ( checkIfEmpty( did ) ) {
+        return false;
+        } else {
+        return true;
+        }
+        }
+        function validateName() {
+        if ( checkIfEmpty( name ) ) {
+        return false;
+        } else {
+        return true;
+        }
+        }
+
+        function validateBdate() {
+        if ( checkIfEmpty( bdate ) ) {
+        return false;
+        } else {
+        return true;
+        }
+        }
+
+        function validateMob() {
+        if ( checkIfEmpty( mob ) ) {
+        return false;
+        }
+        if ( !meetLength( mob, 10, 11 ) ) {
+        return false;
+        } else {
+        return true;
+
+        }
+        }
+        function validateHd() {
+        if ( checkIfEmpty( hd ) ) {
+        return false;
+        }else {
+        return true;
+
+        }
+        }
+
+        //*******************************************************************
+        // Validator functions
+        //*******************************************************************
+
         </script>
 
         @endsection

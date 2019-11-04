@@ -2,113 +2,130 @@
 @section( 'title', 'TIMS | Driver' )
 
 @section( 'styles' )
-<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}">
+@endsection
+
+@section('content')
+
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
 	</li>
 	<li class="breadcrumb-item active">Driver</li>
 </ol>
-<div class="row col-12">
-	<div class="col-10">
-	</div>
-	<div class="col-2">
-		{{-- @can('create driver') --}}
-		<a href="{{route('driver.create')}}" class="btn btn-primary">Add Driver</a>
-		{{-- @endcan --}}
-		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('drivers', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
-	</div>
-</div>
-<div class="row col-12">
-	<div class="table-responsive text-nowrap">
-		<table class="table table-sm table-striped" id="drivers">
-			<thead>
-				<tr>
-					<th class="m-1 b-1" width="3%">No</th>
-					<th class="m-1 b-1">drivereID</th>
-					<th class="m-1 b-1"> Name</th>
-					<th class="m-1 b-1"> Sex</th>
-					<th class="m-1 b-1"> burthdate</th>
-					<th class="m-1 b-1"> Zone</th>
-					<th class="m-1 b-1">Woreda</th>
-					<th class="m-1 b-1">Kebele</th>
-					<th class="m-1 b-1">HouseNumber</th>
-					<th class="m-1 b-1">Telephone</th>
-					<th class="m-1 b-1">HireDate</th>
-					{{-- @can('edit driver') --}}
-					<th class="m-1 b-1" width="3%">Edit</th>
-					{{-- @endcan --}}
-					{{-- @can('delete driver') --}}
-					<th class="m-1 b-1" width="3%">Delete</th>
-					{{-- @endcan --}}
 
+<div class="col-md-12">
+	<div class="card text-left">
+		<div class="card-header">
+			<div class="d-flex align-items-center">
+				<h2>All Drivers </h2>
+				@can('customer create')
 
+				<div class="ml-auto">
+					<a href="{{route('driver.create')}}" class="btn btn-outline-primary"><i
+							class="fas fa-plus mr-1"></i>Add Driver</a>
 
+				</div>
+				@endcan
+			</div>
+		</div>
 
-				</tr>
-			</thead>
-			<tbody>
-				<?php $no = 0 ?>
-				@if ($drivers->count()> 0)
-				@foreach ($drivers as $driver)
-				<tr>
+		<div class="card-body">
+			<div class="table-responsive text-nowrap">
+				<table class="table table-sm table-striped" id="drivers">
+					<thead>
+						<tr>
+							<th class="m-1 b-1" width="3%">No</th>
+							<th class="m-1 b-1">drivereID</th>
+							<th class="m-1 b-1"> Name</th>
+							<th class="m-1 b-1"> Sex</th>
+							<th class="m-1 b-1"> burthdate</th>
+							<th class="m-1 b-1"> Zone</th>
+							<th class="m-1 b-1">Woreda</th>
+							<th class="m-1 b-1">Kebele</th>
+							<th class="m-1 b-1">HouseNumber</th>
+							<th class="m-1 b-1">Telephone</th>
+							<th class="m-1 b-1">HireDate</th>
+							<th class="m-1 b-1" width="3%">Edit</th>
+							<th class="m-1 b-1" width="3%">Deactivate</th>
+							<th class="m-1 b-1" width="3%">Delete</th>
 
-					<td class='p-1'>{{++$no}}</td>
-					<td class='p-1'>{{$driver->driverid}}</td>
-					<td class='p-1'>{{$driver->name}}</td>
-					<td class='p-1 text-center'>{{$driver->sex}}</td>
-					<td class='p-1 text-center'>{{$driver->birthdate}}</td>
-					<td class='p-1 text-center'>{{$driver->zone}}</td>
-					<td class='p-1 text-center'>{{$driver->woreda}}</td>
-					<td class='p-1 text-center'>{{$driver->kebele}}</td>
-					<td class='p-1 text-center'>{{$driver->housenumber}}</td>
-					<td class='p-1 text-center'>{{$driver->mobile}}</td>
-					<td class='p-1 text-center'>{{$driver->hireddate}}</td>
-					{{-- @can('edit driver') --}}
-					<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-							href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
-					</td>
-					{{-- @endcan
-					@can('delete driver') --}}
-					<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
+						</tr>
+					</thead>
+					<tbody>
+						<?php $no = 0 ?>
+						@if ($drivers->count()> 0)
+						@foreach ($drivers as $driver)
+						<tr>
 
-						<form action="{{route('driver.destroy',['id'=> $driver->id])}}" id="delete-form-{{$driver->id}}"
-							style="display: none">
-							@csrf @method('DELETE')
-						</form>
-						<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
+							<td class='p-1'>{{++$no}}</td>
+							<td class='p-1'>{{$driver->driverid}}</td>
+							<td class='p-1'>{{$driver->name}}</td>
+							<td class='p-1 text-center'>{{$driver->sex}}</td>
+							<td class='p-1 text-center'>{{$driver->birthdate}}</td>
+							<td class='p-1 text-center'>{{$driver->zone}}</td>
+							<td class='p-1 text-center'>{{$driver->woreda}}</td>
+							<td class='p-1 text-center'>{{$driver->kebele}}</td>
+							<td class='p-1 text-center'>{{$driver->housenumber}}</td>
+							<td class='p-1 text-center'>{{$driver->mobile}}</td>
+							<td class='p-1 text-center'>{{$driver->hireddate}}</td>
+							{{-- @can('edit driver') --}}
+							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
+									href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
+							</td>
+							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Deactivate">
+								<a href="{{route('driver.deactivate',['id'=> $driver->id])}}" onclick="if(confirm('Are you sure to delete this?')){
+
+										
+									}">deactivate</i></a>
+							</td>
+
+							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
+
+								<form action="{{route('driver.destroy',['id'=> $driver->id])}}"
+									id="delete-form-{{$driver->id}}" style="display: none">
+									@csrf @method('DELETE')
+								</form>
+								<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
 								event.preventDefault();
 								document.getElementById('delete-form-{{$driver->id}}').submit();
-							}else{
-								event.preventDefault();
-							}"> <i class="fa fa-trash red"></i>
-						</button>
-					</td>
-					{{-- @endcan --}}
+									}else{
+										event.preventDefault();
+									}"> <i class="fa fa-trash red"></i>
+								</button>
+							</td>
+
+						</tr>
+
+						@endforeach
+						@else
+						<tr>
+							<td class='m-1 p-1 text-center' colspan="14">No Data Avilable</td>
+						</tr>
+						@endif
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-footer">
+
+		</div>
+	</div>
 
 
-				</tr>
+	@endsection
+	@section('javascript')
 
-				@endforeach @else
-				<tr>
-					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
-				</tr>
-				@endif
-
-			</tbody>
-		</table>
-
-		@endsection @section('javascript')
-		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
-		</script>
-		<script>
-			$( document ).ready( function () {
+	<script>
+		$( document ).ready( function () {
 				$( '#drivers' ).DataTable( {
 
 				"pageLength": 25,
 				// "scrollY": 100,
 				'columnDefs': [ {
 
-				'targets': [11,12], /* column index */
+				'targets': [11,12,13], /* column index */
 
 				'orderable': false, /* true or false */
 
@@ -116,5 +133,5 @@
 				});
 				
 			} );
-		</script>
-		@endsection
+	</script>
+	@endsection

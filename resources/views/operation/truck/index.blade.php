@@ -80,8 +80,8 @@
                         }else{
                             event.preventDefault();
 						}"> <i class="fas fa-trash red"> </i>
+						</button>
 					</td>
-					</button>
 
 				</tr>
 

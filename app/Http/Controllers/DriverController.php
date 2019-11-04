@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Driver;
+use App\DriverTuck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class DriverController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth','admin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+    }
+
     public function index()
     {
    
@@ -18,7 +23,7 @@ class DriverController extends Controller
 
     public function create()
     {
-        $driver =new  Driver;
+        $driver = new  Driver;
            return view('operation.driver.create')->with('driver',$driver);
     }
 
@@ -35,20 +40,20 @@ class DriverController extends Controller
 
         ]);
 
-        $driver = new Driver;
+            $driver = new Driver;
 
-    $driver->driverid= $request->did;
-    $driver->name= $request->name;
-    $driver->sex= $request->sex;
-    $driver->birthdate= $request->bdate;
-    $driver->zone= $request->zone;
-    $driver->woreda= $request->woreda;
-    $driver->kebele= $request->kebele;
-    $driver->housenumber= $request->hn;
-    $driver->mobile= $request->mob;
-    $driver->hireddate= $request->hd;
-      $driver->save();
-        Session::flash('success', 'driver  registerd successfuly' );
+            $driver->driverid= $request->did;
+            $driver->name= $request->name;
+            $driver->sex= $request->sex;
+            $driver->birthdate= $request->bdate;
+            $driver->zone= $request->zone;
+            $driver->woreda= $request->woreda;
+            $driver->kebele= $request->kebele;
+            $driver->housenumber= $request->hn;
+            $driver->mobile= $request->mob;
+            $driver->hireddate= $request->hd;
+            $driver->save();
+        Session::flash('success',  $driver->name .  ' registerd successfuly' );
         return redirect()->route('driver');
     }
 
@@ -60,7 +65,6 @@ class DriverController extends Controller
     public function edit($id)
     {
         $driver = Driver::findOrFail($id);
-        // return $driver;
         return view('operation.driver.edit')->with('driver',$driver);
     }
 
@@ -89,7 +93,7 @@ class DriverController extends Controller
                 $driver->mobile= $request->mob ;
                 $driver->hireddate= $request->hd;
             $driver->save();
-            Session::flash('success', 'driver updated successfuly' );
+            Session::flash('success',  $driver->name . ' updated successfuly' );
             return redirect()->route('driver');
     }
 
@@ -97,10 +101,31 @@ class DriverController extends Controller
     public function destroy($id)
     {
         $driver = Driver::find($id);
-        $driver->status= 0 ;
-        $driver->save();
-        Session::flash('success', 'Driver deleted successfuly' );
-        return redirect()->back();
+       
+        $driver_id=  $driver->driverid;
+        $td= DriverTuck::where('driverid', '=', $driver_id)->first();
+        // dd($td->plate);
+        if($td->count() >=  1){
+            Session::flash('danger', 'Not deleted ! ' . $driver->name .' is attached to Plate '. $td->plate );
+            return redirect()->back();
+        }else{
+            $driver->status= 0 ;
+            $driver->save();
+            Session::flash('success', $driver->name . ' deleted successfuly' );
+            return redirect()->back();
 
+        }
+       
+    }
+    public function deactivate($id)
+    {
+            $driver = Driver::find($id);
+      
+            $driver->status= 0 ;
+            $driver->save();
+            Session::flash('success', $driver->name . ' Deactivate successfuly' );
+            return redirect()->back();
+
+       
     }
 }

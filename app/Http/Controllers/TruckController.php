@@ -16,19 +16,17 @@ class TruckController extends Controller
 
     public function index()
     {
-        function __construct(){
-            $this->middleware('permission:role-list');
-            $this->middleware('permission:role-create', ['only' => ['create','store']]);
-            $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-            $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-            }
-    
-        $trucks = Truck::all();
+      
+        // Truck::chunk(200, function($trucka)
+        // {
+        //     foreach ($trucka as $user)
+        //     {
+        //       dd($user);
+        //     }
+        // });
 
-        // $trucks = DB::table('trucks')
-        // ->join('vehecletypes','vehecletypes.id','=','vehecletype_id')
-        // ->select('trucks.*','vehecletypes.name as Name')
-        // ->where('trucks.status','=',1)->latest()->get();
+        $trucks = Truck::where('status','!=',0)->get();
+
         return view('operation.truck.index')->with('trucks',$trucks);
 
 

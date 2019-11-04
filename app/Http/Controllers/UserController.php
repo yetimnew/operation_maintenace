@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         
-        $users = User::with('profile')->get();
+        $users = User::all();
         $permissions = Permission::all();
  
         return view('users.index')->with('users',$users)->with('permissions',$permissions);
@@ -72,6 +73,13 @@ class UserController extends Controller
             $user->givePermissionTo($role_r); //Assigning role to user
             }
         }  
+
+        Profile::create([
+            'user_id' => $user->id,
+            'image'=>'uploads/avatar.jpg',
+            'about'=> 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+
+        ]);
            
             //Redirect to the users.index view and display message
             return redirect()->route('user')
@@ -85,36 +93,71 @@ class UserController extends Controller
     {
         // dd("dddddddddddddddddddddd");
         $user = User::findOrFail($id);
-          return view('user.edit')->with('user',$user);
+        $permissions = Permission::all();
+        $roles = Role::all();
+          return view('users.edit')
+          ->with('user',$user)
+          ->with('permissions',$permissions)
+          ->with('roles',$roles);
     }
 
     public function update(Request $request, $id)
     {
+        
         $user = User::findOrFail($id); //Get role specified by id
 
-    //Validate name, email and password fields    
         $this->validate($request, [
             'name'=>'required|max:120',
-            'email'=>'required|email|unique:users,email,'.$id,
+            'email'=>'required|email',
             'password'=>'required|min:6|confirmed'
         ]);
-        $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
-        $roles = $request['roles']; //Retreive all roles
-        $user->fill($input)->save();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password =  bcrypt($request->password);
+        $user->save();
+                
+        $roles = $request['role']; //Retrieving the roles field//Checking if a role was selected
+        $permissions = $request['permission']; //Retrieving the roles field//Checking if a role was selected
+       
+      
 
-        return redirect()->route('users.index')
-            ->with('flash_message',
-             'User successfully edited.');
+        if (isset($roles)) {
+            $roll_all = role::all();//Get all permissions
+
+            foreach ($roll_all as $p) {
+            $user->removeRole($p); //Remove all permissions associated with role
+            }
+
+            foreach ($roles as $role) {
+            $role_r = Role::where('id', '=', $role)->firstOrFail();    
+            $user->assignRole($role_r); //Assigning role to user
+            }
+        } 
+        if (isset($permissions)) {
+
+            foreach ($roll_all as $p) {
+            $user->revokePermissionTo($p); //Remove all permissions associated with role
+            }
+
+            foreach ($permissions as $permission) {
+            $role_r = Permission::where('id', '=', $permission)->firstOrFail();      
+            $user->givePermissionTo($role_r); //Assigning role to user
+            }
+        }  
+
+            Session::flash('success', 'User Updated successfuly' );
+            return redirect()->route('user');
+       
     }
-
 
     public function destroy($id)
     {
-        // dd("dddddddddddddddd");
         $user = User::findOrFail($id); 
+        // $user->active = 0;
         $user->delete();
-        return redirect()->route('user')
-            ->with('flash_message',
-             'User successfully deleted.');
+           Session::flash('success', 'User '. $user->name .' successfully deleted' );
+        return redirect()->back();
+
+      
     }
 }

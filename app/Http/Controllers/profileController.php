@@ -92,7 +92,7 @@ class profileController extends Controller
         }
 
        Session::flash('success','Account profile Updated');
-       return redirect()->route('profile');
+       return redirect()->route('home');
 
     }
 

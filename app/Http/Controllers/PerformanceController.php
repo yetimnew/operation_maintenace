@@ -41,7 +41,11 @@ class PerformanceController extends Controller
         $trucks =  DB::table('driver_truck')
         ->select('driver_truck.id','driver_truck.driverid', 'driver_truck.plate', 'driver_truck.date_recived', 'driver_truck.status','drivers.name')
         ->LEFTJOIN('drivers','drivers.driverid','=','driver_truck.driverid')
+        ->LEFTJOIN('trucks','trucks.plate','=','driver_truck.plate')
         ->where('driver_truck.status',1)
+        ->where('drivers.status',1)
+        ->where('trucks.status',1)
+        // ->where('driver.status',1)
         ->get();
 
        if($place->count() < 2){

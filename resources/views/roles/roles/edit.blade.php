@@ -28,8 +28,6 @@
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
 
-
-
 				<div class='form-group'>
 					<label for="permissions"> Select Permissions</label>
 					@foreach ($permissions as $permission)

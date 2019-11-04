@@ -7,6 +7,14 @@
 		</li>
 		<li class="breadcrumb-item active">Performance Update</li>
 	</ol>
+	<div class="row col-12">
+		<div class="col-10">
+
+		</div>
+		<div class="col-2">
+			<a href="{{route('performace')}}" class="btn btn-primary">Backe</a>
+		</div>
+	</div>
 	<div class="card text-left">
 		<div class="card-header">
 			<h2>Performance Update of FO <span class="text text-danger"> {{$performance->FOnumber}} </span></h2>
@@ -34,15 +42,21 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label"> Returnded Date</label>
-					<div class="input-group"> <span class="input-group-addon"></span>
-						<input name="r_date" type="date"
+					<div class="input-group">
+						<input name="r_date" type="text"
 							class="form-control {{ $errors->has('r_date') ? ' is-invalid' : '' }}" id="r_date"
 							value="{{ old('r_date') ?? $performance->returned_date}}">
-						@if ($errors->has('r_date'))
+						<div class="input-group-append">
+							<button type="button" id="toggle2" class="input-group-text">
+								<i class="fa fa-calendar" aria-hidden="true"></i>
+							</button>
+						</div>
+						@if($errors->has('ddate'))
 						<span class="invalid-feedback" role="alert">
-							<strong>{{ $errors->first('r_date') }}</strong>
+							<strong>{{ $errors->first('ddate') }}</strong>
 						</span>
 						@endif
+
 					</div>
 					<span class="invalid-feedback" role="alert"></span>
 				</div>
@@ -64,5 +78,11 @@
 </form>
 </div>
 </div>
+
+@endsection
+@section( 'javascript' )
+<script>
+
+</script>
 
 @endsection

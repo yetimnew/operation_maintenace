@@ -42,5 +42,9 @@ class Driver extends Model
     {
       return $query->where('status',1);
     }
+    public function getNameAttribute($value)
+    {
+        return  ucwords($value);
+    }
     
 }

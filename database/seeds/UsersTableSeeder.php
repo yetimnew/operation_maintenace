@@ -3,6 +3,8 @@
 use App\User;
 use App\Profile;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,6 +15,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {  
+   
+
         $user = User::create([
             'name'=>'Yetimesht Tadesse',
             'email'=>'yetimnew@gmail.com',
@@ -20,12 +24,24 @@ class UsersTableSeeder extends Seeder
             'active' => 1,
             'admin' => 1,
         ]);
+        $user->assignRole('admin');  
+         $permissions = Permission::all();
+
+        if ($permissions->count()> 0) {
+
+            foreach ($permissions as $permission) {
+            // $role_r = Permission::where('id', '=', $permission)->firstOrFail();            
+            $user->givePermissionTo($permission); //Assigning role to user
+            }
+        }  
+            
         Profile::create([
             'user_id' => $user->id,
             'image'=>'uploads/avatar.jpg',
             'about'=> 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
 
         ]);
+
       
     }
 }

@@ -115,7 +115,7 @@
 			$( document ).ready( function () {
 				$( '#drivers' ).DataTable();
 
-$('#startDate').datepicker()
+// $('#startDate').datepicker()
 			} );
 		</script>
 		@endsection
