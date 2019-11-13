@@ -17,7 +17,7 @@ class CreateOperationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('operationid');
             $table->unsignedInteger('customer_id');
-            $table->date('startdate');
+            $table->dateTime('startdate');
             $table->unsignedInteger('region_id')->nullable();
             $table->double('volume',12,4);
             $table->boolean('cargotype')->default(1);

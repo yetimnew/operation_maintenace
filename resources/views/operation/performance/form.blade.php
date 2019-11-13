@@ -223,7 +223,7 @@
         </div>
 
         <div class="form-group required">
-            <label class="control-label"> Work On Going</label>
+            <label class="control-label">Operational Expense</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="wog" type="number" class="form-control {{ $errors->has('wog') ? ' is-invalid' : '' }}"
                     id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" onfocusout="validateWog()">
@@ -262,10 +262,11 @@
                 @endif
                 <span class="invalid-feedback" role="alert"></span>
             </div>
+        </fieldset>
 
-            @section( 'javascript' )
-            <script>
-                jQuery.datetimepicker.setDateFormatter('moment');
+        @section( 'javascript' )
+        <script>
+            jQuery.datetimepicker.setDateFormatter('moment');
                  $("#ddate").datetimepicker({
                 timepicker:true,
                 datepicker:true,        
@@ -295,9 +296,9 @@
 	$('#toggle2').on('click', function(){
 		$("#r_date").datetimepicker('toggle');
 	})
-            </script>
-            <script>
-                const chinet = document.getElementById( 'chinet' );
+        </script>
+        <script>
+            const chinet = document.getElementById( 'chinet' );
                 const fo = document.getElementById( 'fo' );
                 const operation = document.getElementById( 'operation' );
                 const truck = document.getElementById( 'truck' );
@@ -508,6 +509,6 @@
 	}
 
 
-            </script>
+        </script>
 
-            @endsection
+        @endsection

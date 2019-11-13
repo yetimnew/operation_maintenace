@@ -10,9 +10,23 @@
 <div class="col-md-12">
 	{{-- @include('master.error') --}} {{-- @include('master.success') --}}
 	<div class="card text-left">
+
 		<div class="card-header">
-			<h2>Customer Registration</h2>
+
+			<div class="d-flex align-items-center">
+				<h2>Customer Registration <strong class="blue">{{$customer->name}}</strong></h2>
+				@can('customer create')
+				<div class="ml-auto">
+					<a href="{{route('customer')}}" class="btn btn-outline-primary">
+						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>
+						Back</a>
+
+				</div>
+				@endcan
+			</div>
+
 		</div>
+
 		<div class="card-body">
 			<form method="post" action="{{route('customer.store')}}" class="form-horizontal" id="customer_reg">
 				@csrf
@@ -32,5 +46,7 @@
 </form>
 </div>
 </div>
+
+{{-- the modal part  --}}
 
 @endsection

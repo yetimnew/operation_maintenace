@@ -10,7 +10,7 @@ class RolesTableSeedeer extends Seeder
     public function run()
     {
         $role = Role::create(['name' => 'admin']);
-// $role->givePermissionTo(Permission::all('admin')); 
+        // $role->givePermissionTo(Permission::all('admin')); 
         $role = Role::create(['name' => 'user']);
         // $role->givePermissionTo('truck_view');
     }

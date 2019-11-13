@@ -42,7 +42,7 @@ class OperationController extends Controller
 
 // alert()->error('Delete','Are You shure want to delete.')->persistent(true,false);
 
-toast('You must have some Region before attempting to create Operation','info')->autoClose(5000)->position('top-end');
+// toast('You must have some Region before attempting to create Operation','info')->autoClose(5000)->position('top-end');
             // example:
 // alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->persistent(false);
 
@@ -52,14 +52,14 @@ toast('You must have some Region before attempting to create Operation','info')-
 
             // Alert::info('Info Title', 'Info Message');
             // alert()->info('Title','Lorem Lorem Lorem');
-        //    Session::flash('info', 'You must have some Region before attempting to create Operation' );
+           Session::flash('info', 'You must have some Region before attempting to create Operation' );
             return redirect()->route('region.create');
         }
         
         if($customers->count() == 0){
-toast('You must have some Customer before attempting to create Operation','info')->autoClose(5000)->position('top-end');
+// toast('You must have some Customer before attempting to create Operation','info')->autoClose(5000)->position('top-end');
 
-            // Session::flash('info', 'You must have some Customer before attempting to create Operation' );
+            Session::flash('info', 'You must have some Customer before attempting to create Operation' );
             return redirect()->route('customer.create');
         }
     
@@ -94,8 +94,8 @@ toast('You must have some Customer before attempting to create Operation','info'
         $operation->km = $request->tone;
         $operation->tariff = $request->tariff;
         $operation->save();
-        alert()->success('SuccessAlert','operation  registerd successfuly.');
-        // Session::flash('success', 'operation  registerd successfuly' );
+        // alert()->success('SuccessAlert','operation  registerd successfuly.');
+        Session::flash('success', 'operation  registerd successfuly' );
         return redirect()->route('operation');
     }
 
@@ -114,14 +114,14 @@ toast('You must have some Customer before attempting to create Operation','info'
         $customers = Customer::all();
         if($regions->count() == 0){
             return redirect()->route('region');
-            toast('You must have some Region before attempting to create Truck','info')->autoClose(5000)->position('top-end');
-            // Session::flash('info', 'You must have some Region before attempting to create Truck' );
+            // toast('You must have some Region before attempting to create Truck','info')->autoClose(5000)->position('top-end');
+            Session::flash('info', 'You must have some Region before attempting to create Truck' );
         }
         
         if($customers->count() == 0){
             return redirect()->route('customer');
-            toast('YYou must have some Customer before attempting to create Truck','info')->autoClose(5000)->position('top-end');
-            // Session::flash('info', 'You must have some Customer before attempting to create Truck' );
+            // toast('YYou must have some Customer before attempting to create Truck','info')->autoClose(5000)->position('top-end');
+            Session::flash('info', 'You must have some Customer before attempting to create Truck' );
         }
     
         return view('operation.operation.edit')

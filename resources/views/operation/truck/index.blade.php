@@ -121,11 +121,13 @@
 
 		</div>
 	</div>
+</div>
 
-	@endsection @section('javascript')
+@endsection
+@section('javascript')
 
-	<script>
-		$( document ).ready( function () {
+<script>
+	$( document ).ready( function () {
 				$( '#trucks' ).DataTable( {
 
 					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -140,12 +142,5 @@
 }]
 				} );
 			} );
-	</script>
-	<script>
-		document.querySelector("#first").addEventListener('click', function(){
-  swal("Our First Alert", "With some body text and success icon!", "success");
-});
-		  });
-	</script>
-
-	@endsection
+</script>
+@endsection

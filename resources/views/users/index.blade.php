@@ -57,7 +57,8 @@
 				{{-- <td>{{ $user->created_at->format('F d, Y h:ia') }}</td> --}}
 				<td>{{$user->roles()->pluck('name')->implode(' ')}}</td>
 
-				<td>{{$user->permissions->pluck('name')->implode(' , ')}}</td>
+				<td>{{$user->permissions()->pluck('name')->implode(' , ')}}</td>
+
 				<td class='m-1 p-1 text-center'><a href="{{route('user.edit',['id'=> $user->id])}}"><i
 							class="fas fa-edit "></i> </a>
 				</td>

@@ -1,138 +1,151 @@
 <div class="row">
-        <div class="col-md-6">
+    <div class="col-md-6">
 
-            <div class="form-group required pb-0">
-                <label class="control-label">Plate Number</label>
-                <div class="input-group">
-                    <input type="text" name="plate" id="plate" class="form-control {{ $errors->has('plate') ? ' is-invalid' : '' }} " 
-                     value="{{old('plate') ?? $truck->plate}}" onfocusout="validatePlate()">
+        <div class="form-group required pb-0">
+            <label class="control-label">Plate Number</label>
+            <div class="input-group">
+                <input type="text" name="plate" id="plate"
+                    class="form-control {{ $errors->has('plate') ? ' is-invalid' : '' }} "
+                    value="{{old('plate') ?? $truck->plate}}" onfocusout="validatePlate()">
                 @if ($errors->has('plate'))
                 <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('plate') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('plate') }}</strong>
+                </span>
                 @endif
                 <span class="invalid-feedback" role="alert"></span>
             </div>
-            </div>
-            
-            <div class="form-group required pb-0 ">
-                <label class="control-label">Vehecle Type</label>
-                <select name="vehecle" id="vehecle" class="form-control {{ $errors->has('vehecle') ? ' is-invalid' : '' }}"   onfocusout="validateVehecle()">
-                    <option class="dropup" value=""> Select One</option>
-                    @foreach ($vehcletypes as $vehecletype)
-                  <option class="dropup" value="{{$vehecletype->id}}" {{$vehecletype->id == $truck->vehecletype_id ? 'selected' : '' }} >{{$vehecletype->name}}</option>
-                   @endforeach
-                    
-                </select>
-                @if ($errors->has('vehecle'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('vehecle') }}</strong>
-                        </span>
-                    @endif
-                <span class="invalid-feedback" role="alert"></span>
-            </div>
-            <div class="form-group pb-0">
-                <label class="control-label">Chassis Number</label>
-                <div class="input-group"> <span class="input-group-addon"></span>
-                    <input name="chan" type="text" id="chan" class="form-control {{ $errors->has('chan') ? ' is-invalid' : '' }}" value="{{old('chan') ?? $truck->chasisNumber}}"  onfocusout="validateChan()">
-            
-                    @if ($errors->has('chan'))
+        </div>
+
+        <div class="form-group required pb-0 ">
+            <label class="control-label">Vehecle Type</label>
+            <select name="vehecle" id="vehecle" class="form-control {{ $errors->has('vehecle') ? ' is-invalid' : '' }}"
+                onfocusout="validateVehecle()">
+                <option class="dropup" value=""> Select One</option>
+                @foreach ($vehcletypes as $vehecletype)
+                <option class="dropup" value="{{$vehecletype->id}}"
+                    {{$vehecletype->id == $truck->vehecletype_id ? 'selected' : '' }}>{{$vehecletype->name}}</option>
+                @endforeach
+
+            </select>
+            @if ($errors->has('vehecle'))
             <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('vehecle') }}</strong>
+            </span>
+            @endif
+            <span class="invalid-feedback" role="alert"></span>
+        </div>
+        <div class="form-group pb-0">
+            <label class="control-label">Chassis Number</label>
+            <div class="input-group"> <span class="input-group-addon"></span>
+                <input name="chan" type="text" id="chan"
+                    class="form-control {{ $errors->has('chan') ? ' is-invalid' : '' }}"
+                    value="{{old('chan') ?? $truck->chasisNumber}}" onfocusout="validateChan()">
+
+                @if ($errors->has('chan'))
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('chan') }}</strong>
                 </span>
-            @endif
-            <span class="invalid-feedback" role="alert"></span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
-            <div class="form-group pb-0">
-                <label class="control-label">Engine Number</label>
-                <div class="input-group"> <span class="input-group-addon"></span>
-                    <input name="engin" type="text" class="form-control" id="engin"  class="form-control {{ $errors->has('engin') ? ' is-invalid' : '' }}" value="{{old('engin') ?? $truck->engineNumber}}" onfocusout="validateEngin()">
-                    
-                    @if ($errors->has('engin'))
-            <span class="invalid-feedback" role="alert">
+        <div class="form-group pb-0">
+            <label class="control-label">Engine Number</label>
+            <div class="input-group"> <span class="input-group-addon"></span>
+                <input name="engin" type="text" class="form-control" id="engin"
+                    class="form-control {{ $errors->has('engin') ? ' is-invalid' : '' }}"
+                    value="{{old('engin') ?? $truck->engineNumber}}" onfocusout="validateEngin()">
+
+                @if ($errors->has('engin'))
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('engin') }}</strong>
                 </span>
-            @endif
-            <span class="invalid-feedback" role="alert"></span>
-                </div>
-            </div>
-            <div class="form-group pb-0">
-                <label class="control-label">Tyre Size</label>
-
-                <div class="input-group"> <span class="input-group-addon"></span>
-                    <input name="tyre" type="number" class="form-control {{ $errors->has('tyre') ? ' is-invalid' : '' }}" id="tyre" value="{{old('tyre') ?? $truck->tyreSyze}}" onfocusout="validateTyre()">
-                    @if ($errors->has('tyre'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('tyre') }}</strong>
-                        </span>
-                    @endif
-                    <span class="invalid-feedback" role="alert"></span>
-                </div>
-            
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
+        <div class="form-group pb-0">
+            <label class="control-label">Tyre Size</label>
 
-        <div class="col-md-6">
-            <div class="form-group pb-0">
-                <label class="control-label"> Service In KM</label>
-                <div class="input-group">
-                    <span class="input-group-addon"></span>
-                    <input name="sik" type="number" step="any"  class="form-control {{ $errors->has('sik') ? ' is-invalid' : '' }}" id="sik" value="{{old('sik') ?? $truck->serviceIntervalKM}}"  onfocusout="validateSik()">
-                    @if ($errors->has('sik'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('sik') }}</strong>
-                        </span>
-                    @endif
-                    <span class="invalid-feedback" role="alert"></span>
-                </div>
+            <div class="input-group"> <span class="input-group-addon"></span>
+                <input name="tyre" type="number" class="form-control {{ $errors->has('tyre') ? ' is-invalid' : '' }}"
+                    id="tyre" value="{{old('tyre') ?? $truck->tyreSyze}}" onfocusout="validateTyre()">
+                @if ($errors->has('tyre'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('tyre') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
             </div>
-            <div class="form-group pb-0">
-                <label class="control-label"> Purchase Price</label>
-                <div class="input-group">
-                    <span class="input-group-addon"></span>
-                         <input name="price" type="text"  class="form-control {{ $errors->has('price') ? ' is-invalid' : '' }}" id="price" value="{{old('price') ?? $truck->purchasePrice}}" onfocusout="validatePrice()">
-                    @if ($errors->has('price'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                    @endif
-                    <span class="invalid-feedback" role="alert"></span>
-                </div>
 
-            </div>
-            <div class="form-group pb-0">
-                <label class="control-label">Poduction Date</label>
+        </div>
+    </div>
 
-                <div class="input-group">
-                    <span class="input-group-addon"></span>
-                    <input name="pdate" type="date" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}" id="pdate" value="{{old('pdate') ?? $truck->productionDate}}" onfocusout="validatePdate()">
-                    @if ($errors->has('pdate'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('pdate') }}</strong>
-                        </span>
-                    @endif
-                    <span class="invalid-feedback" role="alert"></span>
-                </div>
+    <div class="col-md-6">
+        <div class="form-group pb-0">
+            <label class="control-label"> Service In KM</label>
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input name="sik" type="number" step="any"
+                    class="form-control {{ $errors->has('sik') ? ' is-invalid' : '' }}" id="sik"
+                    value="{{old('sik') ?? $truck->serviceIntervalKM}}" onfocusout="validateSik()">
+                @if ($errors->has('sik'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('sik') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
             </div>
-            <div class="form-group pb-0">
-                <label class="control-label"> Servie Start Date</label>
-                <div class="input-group">
-                    <span class="input-group-addon"></span>
-                    <input name="ssdate" type="date" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}" id="ssdate" value="{{old('ssdate') ?? $truck->serviceStartDate}}" onfocusout="validateSsdate()">
-                    @if ($errors->has('ssdate'))
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('ssdate') }}</strong>
-                        </span>
-                    @endif
-                    <span class="invalid-feedback" role="alert"></span>
-                </div>
+        </div>
+        <div class="form-group pb-0">
+            <label class="control-label"> Purchase Price</label>
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input name="price" type="text" class="form-control {{ $errors->has('price') ? ' is-invalid' : '' }}"
+                    id="price" value="{{old('price') ?? $truck->purchasePrice}}" onfocusout="validatePrice()">
+                @if ($errors->has('price'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('price') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
+            </div>
 
+        </div>
+        <div class="form-group pb-0">
+            <label class="control-label">Poduction Date</label>
+
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input name="pdate" type="date" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}"
+                    id="pdate" value="{{old('pdate') ?? $truck->productionDate}}" onfocusout="validatePdate()">
+                @if ($errors->has('pdate'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('pdate') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
             </div>
-            
-@section( 'javascript' )
-<script>
-    const plate = document.getElementById( 'plate' );
+        </div>
+        <div class="form-group pb-0">
+            <label class="control-label"> Servie Start Date</label>
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input name="ssdate" type="text" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}"
+                    id="ssdate" value="{{old('ssdate') ?? $truck->serviceStartDate}}" onfocusout="validateSsdate()">
+                @if ($errors->has('ssdate'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('ssdate') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
+            </div>
+
+        </div>
+
+        @section( 'javascript' )
+        <script>
+            const plate = document.getElementById( 'plate' );
     const vehecle = document.getElementById( 'vehecle' );
     const chan = document.getElementById( 'chan' );
     const engin = document.getElementById( 'engin' );
@@ -219,6 +232,6 @@
     }
     
 
-</script>
+        </script>
 
-@endsection
+        @endsection

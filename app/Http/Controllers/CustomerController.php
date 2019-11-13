@@ -40,9 +40,9 @@ class CustomerController extends Controller
         return redirect()->route('customer');
     }
 
-    public function edit(Customer $id)
+    public function edit( $id)
     {
-        // $customer = Customer::find($id);
+        $customer = Customer::find($id);
         return view('operation.customer.edit')
         ->with('customer',$customer);
     }

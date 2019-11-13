@@ -125,17 +125,18 @@
 
 				</table>
 			</div>
-			<div class="card-footer">
-
-			</div>
 		</div>
-	</div>
+		<div class="card-footer">
 
-	@endsection @section('javascript')
-	<script src="{{ asset('js/jquery.dataTables.min.js') }}">
-	</script>
-	<script>
-		$( document ).ready( function () {
+		</div>
+
+	</div>
+</div>
+@endsection @section('javascript')
+<script src="{{ asset('js/jquery.dataTables.min.js') }}">
+</script>
+<script>
+	$( document ).ready( function () {
 				$( '#drivers' ).DataTable({
 					
 					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -152,5 +153,5 @@
 				}]
 				});
 			} );
-	</script>
-	@endsection
+</script>
+@endsection

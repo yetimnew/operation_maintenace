@@ -16,7 +16,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {  
    
-
         $user = User::create([
             'name'=>'Yetimesht Tadesse',
             'email'=>'yetimnew@gmail.com',
@@ -27,19 +26,18 @@ class UsersTableSeeder extends Seeder
         $user->assignRole('admin');  
          $permissions = Permission::all();
 
-        if ($permissions->count()> 0) {
+        if ($permissions->count() > 0) {
 
             foreach ($permissions as $permission) {
-            // $role_r = Permission::where('id', '=', $permission)->firstOrFail();            
             $user->givePermissionTo($permission); //Assigning role to user
             }
         }  
+        // how is how
             
         Profile::create([
             'user_id' => $user->id,
             'image'=>'uploads/avatar.jpg',
             'about'=> 'fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-
         ]);
 
       

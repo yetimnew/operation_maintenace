@@ -7,12 +7,12 @@
     <meta name="author" content="Yetimeshet Tadese yetimnew@gmail.com">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link rel="icon" href="{{asset('icon.ico')}}" type="image/x-icon" /> --}}
-    <link rel="icon" href="{{asset('/logo.png')}}" type="image/x-icon" />
+    <link rel="icon" href="{{asset('images/logo.png')}}" type="image/x-icon" />
 
     <title>@yield('title','TIMS')</title>
 
     <!-- Font Awesome CSS-->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.default.css')}}">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('/css/custom.css')}}">

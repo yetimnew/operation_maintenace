@@ -83,7 +83,7 @@
 					</div>
 					<div class="text">
 						<strong id="totalTone">{{number_format($totalTone,2)}}</strong><br>
-						<lead>Avilable Tone</lead>
+						Avilable Tone
 					</div>
 				</div>
 				<div class="statistic d-flex align-items-center bg-white has-shadow">
@@ -91,7 +91,7 @@
 					</div>
 					<div class="text">
 						<strong id="totalTone">{{number_format($upliftedTone,2)}}</strong><br>
-						<lead>Uplifted Tone</lead>
+						Uplifted Tone
 					</div>
 				</div>
 				<div class="statistic d-flex align-items-center bg-white has-shadow">
@@ -100,7 +100,7 @@
 
 					<div class="text">
 						<strong id="totalTone">{{number_format($totalTone - $upliftedTone,2)}}</strong><br>
-						<lead>Remaining Tone</lead>
+						Remaining Tone
 					</div>
 				</div>
 			</div>

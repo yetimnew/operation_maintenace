@@ -92,10 +92,11 @@
 		</div>
 
 		<div class="card-footer">
-			the footer
 		</div>
 	</div>
 </div>
+
+
 @endsection
 
 @section('javascript')

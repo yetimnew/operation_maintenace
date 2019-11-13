@@ -35,10 +35,10 @@
 						Save</button>
 				</div>
 
-			</form>
 		</div>
 		<div class="card-footer">
 		</div>
+		</form>
 
 	</div>
 </div>

@@ -29,7 +29,7 @@ class VehecleController extends Controller
     {
         $this->validate($request, [
         'name' => 'required|unique:vehecletypes', 
-        'company' => 'required', 
+        // 'company' => 'required', 
         // 'pdate' =>  'required',
         // 'comment' =>  'required',
   

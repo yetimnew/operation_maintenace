@@ -40,19 +40,14 @@
 					</div>
 
 				</div>
-
-
-
 		</div>
 
+		<div class="card-footer">
+
+		</div>
+		</form>
 	</div>
 </div>
-<div class="card-footer">
 
-</div>
-
-</form>
-</div>
-</div>
 
 @endsection

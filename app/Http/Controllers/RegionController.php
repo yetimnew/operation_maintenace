@@ -29,7 +29,7 @@ class RegionController extends Controller
         $this->validate($request, [
 
             'name' => 'required', 
-            'comment' => 'required'
+            // 'comment' => 'required'
 
         ]);
 
@@ -59,7 +59,7 @@ class RegionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'comment' => 'required'
+            // 'comment' => 'required'
             
             ]);
     

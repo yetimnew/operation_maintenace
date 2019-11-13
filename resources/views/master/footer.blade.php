@@ -18,8 +18,8 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-{{-- <script src="{{asset('js/custom.js') }}"> </script> --}}
-<script src="{{ asset('js/toastr.min.js') }}"> </script>
+{{-- <script src="{{asset('js/jquery.min.js') }}"> </script> --}}
+
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"> </script>
 <script src="{{ asset('js/dataTables.buttons.min.js') }}"> </script>
 <script src="{{ asset('js/buttons.flash.min.js') }}"> </script>
@@ -28,7 +28,7 @@
 <script src="{{ asset('js/vfs_fonts.js') }}"> </script>
 <script src="{{ asset('js/buttons.html5.min.js') }}"> </script>
 <script src="{{ asset('js/buttons.print.min.js') }}"> </script>
-{{-- <script src="{{ asset('js/vue.js') }}" > </script> --}}
+<script src="{{ asset('js/toastr.min.js') }}"> </script>
 <script src="{{ asset('js/front.js') }}"> </script>
 {{-- <script src="{{ asset('js/charts-home.js') }}" > </script>
 {{-- <script src="{{ asset('js/charts-custom.js') }}" > </script> --}}
@@ -51,6 +51,7 @@
       @if (Session::has('error'))
       toastr.error('{{ Session::get('error')}}');
       @endif
+      @include('sweetalert::alert');
 </script>
 @yield('javascript')
 </body>
