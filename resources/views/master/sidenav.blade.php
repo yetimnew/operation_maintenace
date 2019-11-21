@@ -33,9 +33,10 @@
                                 </li>
                         </ul>
                 </li>
+
                 <li class="{{ Request::is('driver') ? 'active' : ''}}"><a href="{{route('driver')}}"> <i
-                                        class="fa fa-user green"></i>Driver </a>
-                </li>
+                                        class="fa fa-user green"></i>Driver </a></li>
+
                 <li class="{{ Request::is('operation*') ? 'active' : ''}}"><a href="#exampledropdownDropdown2"
                                 aria-expanded="false" data-toggle="collapse"> <i class="fa fa-tasks blue"
                                         aria-hidden="true"></i>Operations </a>
@@ -71,6 +72,7 @@
 
                         </ul>
                 </li>
+
                 <li class="{{ Request::is('drivertruck') ? 'active' : ''}}"><a href="{{route('drivertruck')}}"> <i
                                         class="fa fa-suitcase" aria-hidden="true"></i>Truck Driver Assign </a>
                 </li>
@@ -97,6 +99,9 @@
                                                 href="{{ route('performance_by_status')}}">Status By Date</a> </li>
                                 <li class="{{ Request::is('performance_by_model') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_model')}}">Performance By Model</a> </li>
+                                <li class="{{ Request::is('performance_by_model') ? 'active' : ''}}"><a
+                                                href="{{ route('performance_by_model')}}">Detached Driver&Truck</a>
+                                </li>
 
                         </ul>
 

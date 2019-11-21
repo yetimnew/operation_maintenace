@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('region_id')->index();
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

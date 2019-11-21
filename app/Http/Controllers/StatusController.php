@@ -22,7 +22,7 @@ class StatusController extends Controller
         $truck = Truck::all();
         $statustype = Statustype::all();
         if ($statustype->count()== 0) {
-            Session::flash('info', 'You must have some Truck before attempting to create Truck' );
+            Session::flash('info', 'You must have some Status Type before attempting to create Truck' );
             return redirect()->route('statustype');
         }
         if ($truck->count()== 0) {
@@ -35,18 +35,20 @@ class StatusController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
+            'today' => 'required|date',
             'status' => 'required',
                  ]);
 
         $plate =  $request->plate;
         $status =  $request->status;
         $autoid=  Status::max('autoid');
-        $status_date=  Status::where('autoid',$autoid)->first();
         $date =   $request->today;
+        $status_date=  Status::where('registerddate',$date)->first();
+       
         $count  = count($plate);
-if( $date !=  $status_date){
-
+   if(!$status_date){
     for($i = 0; $i < $count; $i++){
         $data = array(
             'autoid'=> $autoid+1,  
@@ -61,10 +63,10 @@ if( $date !=  $status_date){
     }
     Status::insert($insertData);
 
-
-    Session::flash('success', 'Status group registerd successfuly' );
+   Session::flash('success', 'Daily  Status registerd successfuly' );
     return redirect()->route('status');
 }else{
+    Session::flash('error', 'Daily  Status  not registerd check the date' );
     return redirect()->route('status.create');
 }
     }
@@ -91,18 +93,19 @@ if( $date !=  $status_date){
 
     public function update(Request $request, $id)
     {
+       
         $this->validate($request, [
             'name' => 'required', 
-            'type' => 'required'
+            // 'type' => 'required'
             
             ]);
     
             $status = Status::find($id);
-            $status->name = $request->name;
-            $status->statusgroup = $request->type;
-            $status->comment = $request->comment;
+            $status->statustype_id = $request->name;
+           
             $status->save();
-            Session::flash('success', 'Status group updated successfuly' );
+           
+            Session::flash('success', 'Status updated successfuly' );
             return redirect()->route('status');
     }
 

@@ -9,7 +9,8 @@
 </ol>
 
 <div class="col-md-12">
-	@include('master.error') {{-- @include('master.success') --}}
+	@include('master.error')
+	{{-- @include('master.success') --}}
 	<div class="card text-left">
 		<div class="card-header">
 			<div class="row">

@@ -112,13 +112,18 @@
             </div>
 
         </div>
-        <div class="form-group pb-0">
-            <label class="control-label">Poduction Date</label>
 
+        <div class="form-group ">
+            <label class="control-label">Poduction Date</label>
             <div class="input-group">
-                <span class="input-group-addon"></span>
-                <input name="pdate" type="date" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}"
+                <input name="pdate" type="text" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}"
                     id="pdate" value="{{old('pdate') ?? $truck->productionDate}}" onfocusout="validatePdate()">
+
+                <div class="input-group-append">
+                    <button type="button" id="toggle" class="input-group-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </button>
+                </div>
                 @if ($errors->has('pdate'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('pdate') }}</strong>
@@ -127,12 +132,19 @@
                 <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
-        <div class="form-group pb-0">
+
+        <div class="form-group ">
             <label class="control-label"> Servie Start Date</label>
+
             <div class="input-group">
-                <span class="input-group-addon"></span>
                 <input name="ssdate" type="text" class="form-control {{ $errors->has('pdate') ? ' is-invalid' : '' }}"
                     id="ssdate" value="{{old('ssdate') ?? $truck->serviceStartDate}}" onfocusout="validateSsdate()">
+
+                <div class="input-group-append">
+                    <button type="button" id="toggle1" class="input-group-text">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </button>
+                </div>
                 @if ($errors->has('ssdate'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('ssdate') }}</strong>
@@ -140,10 +152,45 @@
                 @endif
                 <span class="invalid-feedback" role="alert"></span>
             </div>
-
         </div>
 
+
+
+
         @section( 'javascript' )
+        <script>
+            jQuery.datetimepicker.setDateFormatter('moment');
+                 $("#pdate").datetimepicker({
+                timepicker:false,
+                datepicker:true,        
+                // format: "Y-M-d"
+                format: "YYYY-MM-DD"
+                // autoclose: true,
+                // todayBtn: true,
+                // startDate: "2013-02-14 10:00",
+                // minuteStep: 10
+                // step: 30,
+            });
+            $('#toggle').on('click', function(){
+                $("#pdate").datetimepicker('toggle');
+            })
+
+            jQuery.datetimepicker.setDateFormatter('moment');
+                 $("#ssdate").datetimepicker({
+                timepicker:false,
+                datepicker:true,        
+                // format: "Y-M-d"
+                format: "YYYY-MM-DD"
+                // autoclose: true,
+                // todayBtn: true,
+                // startDate: "2013-02-14 10:00",
+                // minuteStep: 10
+                // step: 30,
+            });
+            $('#toggle1').on('click', function(){
+                $("#ssdate").datetimepicker('toggle1');
+            })
+        </script>
         <script>
             const plate = document.getElementById( 'plate' );
     const vehecle = document.getElementById( 'vehecle' );

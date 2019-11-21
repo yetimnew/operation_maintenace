@@ -17,10 +17,8 @@ class TruckController extends Controller
 
     public function index()
     {
-      
 
-
-        $trucks = Truck::where('status','=',1)->get();
+        $trucks = Truck::where('status','=',1)->orderBy('created_at','DESC')->get();
 
         return view('operation.truck.index')->with('trucks',$trucks);
 
@@ -134,12 +132,7 @@ class TruckController extends Controller
 
         }
        
-
-
-
- 
-
-    }
+   }
     public function deactivate($id)
     {
         // dd("kkkkkkkkkkkkkkkkkkkkkkkk");

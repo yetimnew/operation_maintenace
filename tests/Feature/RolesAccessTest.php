@@ -5,80 +5,80 @@ namespace Tests\Feature;
 use App\User;
 use Tests\TestCase;
 
-class RolesAccessTest extends TestCase
-{
-    /** @test */
-    public function user_must_login_to_access_to_admin_dashboard()
-    {
-        $this->get(route('admin.dashboard'))
-             ->assertRedirect('login');
-    }
+// class RolesAccessTest extends TestCase
+// {
+//     /** @test */
+//     public function user_must_login_to_access_to_admin_dashboard()
+//     {
+//         $this->get(route('admin.dashboard'))
+//              ->assertRedirect('login');
+//     }
+
+//     /** @test */
+//     public function admin_can_access_to_admin_dashboard()
+//     {
+//         //Having
+//         $adminUser = factory(User::class)->create();
+
+//         $adminUser->assignRole('admin');
+
+//         $this->actingAs($adminUser);
+
+//         //When
+//         $response = $this->get(route('admin.dashboard'));
+
+//         //Then
+//         $response->assertOk();
+//     }
 
     /** @test */
-    public function admin_can_access_to_admin_dashboard()
-    {
-        //Having
-        $adminUser = factory(User::class)->create();
+    // public function users_cannot_access_to_admin_dashboard()
+    // {
+    //     //Having
+    //     $user = factory(User::class)->create();
 
-        $adminUser->assignRole('admin');
+    //     $user->assignRole('user');
 
-        $this->actingAs($adminUser);
+    //     $this->actingAs($user);
 
-        //When
-        $response = $this->get(route('admin.dashboard'));
+    //     //When
+    //     $response = $this->get(route('admin.dashboard'));
 
-        //Then
-        $response->assertOk();
-    }
+    //     //Then
+    //     $response->assertForbidden();
+    // }
 
-    /** @test */
-    public function users_cannot_access_to_admin_dashboard()
-    {
-        //Having
-        $user = factory(User::class)->create();
+    // /** @test */
+    // public function user_can_access_to_home()
+    // {
+    //     //Having
+    //     $user = factory(User::class)->create();
 
-        $user->assignRole('user');
+    //     $user->assignRole('user');
 
-        $this->actingAs($user);
+    //     $this->actingAs($user);
 
-        //When
-        $response = $this->get(route('admin.dashboard'));
+    //     //When
+    //     $response = $this->get(route('home'));
 
-        //Then
-        $response->assertForbidden();
-    }
+    //     //Then
+    //     $response->assertOk();
+    // }
 
-    /** @test */
-    public function user_can_access_to_home()
-    {
-        //Having
-        $user = factory(User::class)->create();
+    // /** @test */
+    // public function admin_can_access_to_home()
+    // {
+    //     //Having
+    //     $adminUser = factory(User::class)->create();
 
-        $user->assignRole('user');
+    //     $adminUser->assignRole('admin');
 
-        $this->actingAs($user);
+    //     $this->actingAs($adminUser);
 
-        //When
-        $response = $this->get(route('home'));
+    //     //When
+    //     $response = $this->get(route('home'));
 
-        //Then
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function admin_can_access_to_home()
-    {
-        //Having
-        $adminUser = factory(User::class)->create();
-
-        $adminUser->assignRole('admin');
-
-        $this->actingAs($adminUser);
-
-        //When
-        $response = $this->get(route('home'));
-
-        //Then
-        $response->assertOk();
-    }
-}
+    //     //Then
+    //     $response->assertOk();
+    // }
+// }

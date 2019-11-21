@@ -19,7 +19,7 @@
 
 
 <div class="row col-12">
-	<div class="card text-left">
+	<div class="card text-left col-md-12">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Trucks </h2>
@@ -35,7 +35,7 @@
 		</div>
 		<div class="card-body">
 			<div class="table table-responsive text-nowrap">
-				<table class=".table-sm table table-bordered table-sm table-striped" id="trucks">
+				<table class="table-sm table table-bordered table-sm table-striped" id="trucks">
 					<thead>
 						<tr>
 							<th class="m-1 b-1" width="2%">No</th>
@@ -48,9 +48,15 @@
 							<th class="m-1 b-1">Purchase Price</th>
 							<th class="m-1 b-1">Production Date</th>
 							<th class="m-1 b-1">Start Date</th>
+							@can('truck edit')
 							<th class="m-1 b-1 text-center" width="3%">Edit</th>
+							@endcan
+							@can('truck delete')
 							<th class="m-1 b-1 text-center" width="3%">Delete</th>
+							@endcan
+							@can('truck deactivate')
 							<th class="m-1 b-1 text-center" width="3%">Deactivate</th>
+							@endcan
 						</tr>
 					</thead>
 					<tbody>
@@ -69,10 +75,12 @@
 							<td class='p-1'>{{number_format($truck->purchasePrice, 2)}}</td>
 							<td class='p-1'>{{date('d-m-Y',strtotime($truck->productionDate))}}</td>
 							<td class='p-1'>{{date('d-m-Y',strtotime($truck->serviceStartDate))}}</td>
+							@can('truck edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fas fa-edit"> </i></a>
 							</td>
-
+							@endcan
+							@can('truck delete')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
 								<form action="{{route('truck.destroy',['id'=> $truck->id])}}"
@@ -88,6 +96,8 @@
 						}"> <i class="fas fa-trash red"> </i>
 								</button>
 							</td>
+							@endcan
+							@can('truck deactivate')
 							<td class='p-1 text-center'>
 								<form action="{{route('truck.deactivate',['id'=> $truck->id])}}"
 									id="deactivate-form-{{$truck->id}}" style="display: none">
@@ -104,6 +114,7 @@
 								</button>
 							</td>
 
+							@endcan
 						</tr>
 
 						@endforeach @else
@@ -135,7 +146,7 @@
 					// "scrollY": 100,
 					'columnDefs': [ {
 
-					'targets': [10,11], /* column index */
+					// 'targets': [10,11], /* column index */
 
 					'orderable': false, /* true or false */
 

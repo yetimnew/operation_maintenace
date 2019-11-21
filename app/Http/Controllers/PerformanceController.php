@@ -43,6 +43,7 @@ class PerformanceController extends Controller
         ->LEFTJOIN('drivers','drivers.driverid','=','driver_truck.driverid')
         ->LEFTJOIN('trucks','trucks.plate','=','driver_truck.plate')
         ->where('driver_truck.status',1)
+        ->where('driver_truck.is_attached',1)
         ->where('drivers.status',1)
         ->where('trucks.status',1)
         // ->where('driver.status',1)

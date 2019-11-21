@@ -34,7 +34,7 @@ class performanceByDriverController extends Controller
         ->orderBy('fo','DESC')
        ->get();
 
-// dd($tds);
+dd($tds);
         return view('operation.report.performance_by_driver.index')
          ->with('tds',$tds)
          ->with('drivers',$drivers);

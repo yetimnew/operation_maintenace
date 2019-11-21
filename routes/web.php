@@ -9,31 +9,31 @@ Route::group(['middleware' => ['auth']], function () {
     
     // Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
     // Route::resource('role','RoleController');
-    Route::get('/role',                  ['uses'=>'RoleController@index','as'=>'role']);
-    Route::get('/role/create',           ['uses'=>'RoleController@create','as'=>'role.create']);
-    Route::post('/role/store',           ['uses'=>'RoleController@store','as'=>'role.store']);
-    Route::get('/role/edit/{id}',        ['uses'=>'RoleController@edit','as'=>'role.edit']);
-    Route::post('/role/update/{id}',     ['uses'=>'RoleController@update','as'=>'role.update']);
-    Route::get('/role/destroy/{id}',     ['uses'=>'RoleController@destroy','as'=>'role.destroy']);
+    Route::get('/role',                  ['uses'=>'RoleController@index','as'=>'role'])->middleware('admin');
+    Route::get('/role/create',           ['uses'=>'RoleController@create','as'=>'role.create'])->middleware('admin');
+    Route::post('/role/store',           ['uses'=>'RoleController@store','as'=>'role.store'])->middleware('admin');
+    Route::get('/role/edit/{id}',        ['uses'=>'RoleController@edit','as'=>'role.edit'])->middleware('admin');
+    Route::post('/role/update/{id}',     ['uses'=>'RoleController@update','as'=>'role.update'])->middleware('admin');
+    Route::get('/role/destroy/{id}',     ['uses'=>'RoleController@destroy','as'=>'role.destroy'])->middleware('admin');
     // Rermission Controller
-    Route::get('/permission',                  ['uses'=>'PermissionController@index','as'=>'permission']);
-    Route::get('/permission/create',           ['uses'=>'PermissionController@create','as'=>'permission.create']);
-    Route::post('/permission/store',           ['uses'=>'PermissionController@store','as'=>'permission.store']);
-    Route::get('/permission/edit/{id}',        ['uses'=>'PermissionController@edit','as'=>'permission.edit']);
-    Route::post('/permission/update/{id}',     ['uses'=>'PermissionController@update','as'=>'permission.update']);
-    Route::get('/permission/destroy/{id}',     ['uses'=>'PermissionController@destroy','as'=>'permission.destroy']);
+    Route::get('/permission',                  ['uses'=>'PermissionController@index','as'=>'permission'])->middleware('admin');
+    Route::get('/permission/create',           ['uses'=>'PermissionController@create','as'=>'permission.create'])->middleware('admin');
+    Route::post('/permission/store',           ['uses'=>'PermissionController@store','as'=>'permission.store'])->middleware('admin');
+    Route::get('/permission/edit/{id}',        ['uses'=>'PermissionController@edit','as'=>'permission.edit'])->middleware('admin');
+    Route::post('/permission/update/{id}',     ['uses'=>'PermissionController@update','as'=>'permission.update'])->middleware('admin');
+    Route::get('/permission/destroy/{id}',     ['uses'=>'PermissionController@destroy','as'=>'permission.destroy'])->middleware('admin');
      
     Route::get('/dasboard',               ['uses'=>'DashbordController@index','as'=>'dasboard']);
 //  user profile start here
     Route::get('/profile',                  ['uses'=>'profileController@index','as'=>'profile']);
     Route::post('/profile/update',          ['uses'=>'profileController@update','as'=>'profile.update']);
 //    user route
-    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user']);
-    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create']);
-    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store']);
-    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit']);
-    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update']);
-    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy']);
+    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user'])->middleware('admin');
+    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create'])->middleware('admin');
+    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store'])->middleware('admin');
+    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit'])->middleware('admin');
+    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update'])->middleware('admin');
+    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy'])->middleware('admin');
 
     Route::get('/truck',                  ['uses'=>'TruckController@index','as'=>'truck']);
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/operation/open/{id}',      ['uses'=>'OperationController@open','as'=>'operation.open']);
 // Customer
     Route::get('/customer',                 ['uses'=>'CustomerController@index','as'=>'customer']);
-    Route::get('/customer/create',          ['uses'=>'CustomerController@create','as'=>'customer.create']);
+    Route::get('/customer/create',          ['uses'=>'CustomerController@create','as'=>'customer.create'])->middleware('permission:customer create');
     Route::post('/customer/store',          ['uses'=>'CustomerController@store','as'=>'customer.store']);
     Route::get('/customer/edit/{id}',       ['uses'=>'CustomerController@edit','as'=>'customer.edit']);
     Route::post('/customer/update/{id}',    ['uses'=>'CustomerController@update','as'=>'customer.update']);

@@ -40,7 +40,6 @@
 							<th width="5%">Edit</th>
 							@endcan
 							@can('customer delete')
-
 							<th width="5%">Delete</th>
 							@endcan
 

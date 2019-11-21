@@ -77,16 +77,16 @@
 
                                         </div>
 
-                                        <div class="form-group  mb-0">
-                                            <button type="submit" class="btn btn-primary btn-lg">
+                                        <div class="form-group  mb-0 ">
+                                            <button type="submit" class="btn btn-primary btn-lg mx-auto">
                                                 {{ __('Login') }}
                                             </button>
 
-                                            @if (Route::has('password.request'))
+                                            {{-- @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                            {{ __('Forgot Your Password?') }}
                                             </a>
-                                            @endif
+                                            @endif --}}
                                         </div>
 
                                     </form>

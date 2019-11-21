@@ -43,6 +43,8 @@ class TruckDriverController extends Controller
             ->leftjoin('driver_truck','driver_truck.plate','=','trucks.plate')
             ->whereNull('driver_truck.status')
             ->orwhere('driver_truck.status','=',0) 
+            ->whereNull('driver_truck.is_attached')
+            ->orwhere('driver_truck.is_attached','=',0) 
             ->where('trucks.status','=',1) 
             ->groupBy('trucks.plate')
             ->orderBy('trucks.plate','asc')
@@ -52,24 +54,18 @@ class TruckDriverController extends Controller
             $drivers= DB::table('drivers')
             ->select('drivers.id','drivers.driverid as driverID','drivers.name','driver_truck.driverid as DTID','drivers.status','driver_truck.status')
             ->leftjoin('driver_truck','driver_truck.driverid','=','drivers.driverid')
+           
             ->whereNull('driver_truck.status')
-            ->orwhere('driver_truck.status','=',0) 
+             ->orwhere('driver_truck.status','=',0) 
+            ->whereNull('driver_truck.is_attached')
+            ->orwhere('driver_truck.is_attached','=',0) 
             ->where('drivers.status','=',1) 
             // ->where('driver_truck.status','<>',0) 
             ->groupBy('drivers.name')
             ->orderBy('drivers.name','asc')
             ->get();
             
-            // $drivers= DB::table('drivers')
-            // ->select('drivers.id','drivers.driverid as driverID','drivers.name','driver_truck.driverid as DTID','drivers.status','driver_truck.status')
-            // ->leftjoin('driver_truck','driver_truck.driverid','=','drivers.driverid')
-            // ->whereNull('driver_truck.status')
-            // ->orwhere('driver_truck.status','=',0) 
-            // ->orwhere('drivers.status','=',1) 
-            // // ->where('driver_truck.status','<>',0) 
-            // ->groupBy('drivers.name')
-            // ->orderBy('drivers.name','asc')
-            // ->get();
+   
 
         return view('operation.drivertruck.create')
             ->with('drivers',$drivers)
@@ -90,8 +86,10 @@ class TruckDriverController extends Controller
         $drivers= DB::table('driver_truck')
         ->select('driver_truck.driverid','driver_truck.status','driver_truck.plate')
         ->where('driver_truck.plate','=',$plate)
+        ->orwhere('driver_truck.driverid','=',$driverId)
         // ->where('driver_truck.driverid','=',$driverId)
         ->where('driver_truck.status','=',1)
+        ->where('driver_truck.is_attached','=',1)
         ->get();
             
     if($drivers->count() > 0){
@@ -171,7 +169,7 @@ class TruckDriverController extends Controller
         $vehecletype = DriverTuck::find($id);
         $vehecletype->status = 0;
         $vehecletype->save();
-        Session::flash('success', 'vehecle Model  deleted successfuly' );
+        Session::flash('success', 'Vehecle and Driver deleted successfuly' );
 
         return redirect()->back();
 
@@ -190,7 +188,8 @@ class TruckDriverController extends Controller
     public function update_dt(Request $request, $id)
     {
         $this->validate($request, [
-            'dname' => 'required'
+            'dname' => 'required',
+            'ddate' => 'required|date'
               ]);
     
             $dt = DriverTuck::find($id);
@@ -199,7 +198,8 @@ class TruckDriverController extends Controller
             $dt->date_recived = $request->rdate;
             $dt->date_detach = $request->ddate;
             $dt->reason = $request->comment;
-            $dt->status = 0;
+            // $dt->status = 0;
+            $dt->is_attached = 0;
             $dt->save();
             Session::flash('success', 'Truck and Driver Detached successfuly' );
            return redirect()->route('drivertruck');

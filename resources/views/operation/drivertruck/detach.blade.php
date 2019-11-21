@@ -2,19 +2,37 @@
 @section( 'title', 'TIMS | Driver Truck Edit ' )
 
 @section( 'content' )
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
-		</li>
-		<li class="breadcrumb-item active">Driver And Truck Edit</li>
-	</ol>
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	</li>
+	<li class="breadcrumb-item active">Driver And Truck Edit</li>
+</ol>
 <div class="col-md-12">
-	@include('master.error') {{-- @include('master.success') --}}
+	{{-- @include('master.error') --}}
+	{{-- @include('master.success') --}}
 	<div class="card text-left">
 		<div class="card-header">
-			<h2>Driver Truck Edit</h2>
+
 		</div>
+
+
+		<div class="card-header">
+
+			<div class="d-flex align-items-center">
+				<h2>Driver Truck Dettach</h2>
+				<div class="ml-auto">
+					<a href="{{route('drivertruck')}}" class="btn btn-outline-primary">
+						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>Back</a>
+
+
+				</div>
+			</div>
+		</div>
+
+
 		<div class="card-body">
-			<form method="post" action="{{route('drivertruck.update_dt',['id'=>$dts->id])}}" class="form-horizontal" id="truck_form">
+			<form method="post" action="{{route('drivertruck.update_dt',['id'=>$dts->id])}}" class="form-horizontal"
+				id="truck_form">
 				@csrf
 				<div class="row">
 					<div class="col-md-6">
@@ -22,20 +40,20 @@
 							<label class="control-label">Driver Name</label>
 
 							<select name="dname" class="form-control select" id="dname" readonly>
-                                       <option class="dropup" value="{{$dts->driverid}} " > {{$dts->NAME}}</option>  
-                                                                                 
-                                    </select>
-						
+								<option class="dropup" value="{{$dts->driverid}} "> {{$dts->NAME}}</option>
+
+							</select>
+
 
 							<small class="form-text text-danger" id="error_region"></small>
 						</div>
 						<div class="form-group ">
 							<label class="control-label">Plate Number</label>
 							<select name="plate" class="form-control select" id="plate" readonly>
-                                            <option class="dropup" value="{{$dts->plate}}" > {{$dts->plate}}</option>  
-                                                                                
-                                    </select>
-						
+								<option class="dropup" value="{{$dts->plate}}"> {{$dts->plate}}</option>
+
+							</select>
+
 							<small class="form-text text-danger" id="error_region"></small>
 						</div>
 
@@ -44,22 +62,38 @@
 							<label class="control-label">Recived Date</label>
 
 							<div class="input-group"> <span class="input-group-addon"></span>
-								<input name="rdate" type="date" class="form-control" id="rdate" value="{{$dts->date_recived }}" readonly>
+								<input name="rdate" type="date" class="form-control" id="rdate"
+									value="{{$dts->date_recived }}" readonly>
 							</div>
 
 						</div>
+
+
 						<div class="form-group required">
-							<label class="control-label">Detach Date</label>
-
-							<div class="input-group"> <span class="input-group-addon"></span>
-								<input name="ddate" type="date" required class="form-control" id="ddate" required>
+							<label class="control-label">Dettach Date</label>
+							<div class="input-group">
+								<input name="ddate" type="text"
+									class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}" id="ddate"
+									value="{{ old('ddate' ) }}">
+								<div class="input-group-append">
+									<button type="button" id="toggle" class="input-group-text">
+										<i class="fa fa-calendar" aria-hidden="true"></i>
+									</button>
+								</div>
+								@if($errors->has('ddate'))
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $errors->first('ddate') }}</strong>
+								</span>
+								@endif
+								<span class="invalid-feedback" role="alert"></span>
 							</div>
-
 						</div>
+
 						<div class="form-group required">
 							<label class="control-label">Reson for Detach</label>
 							<div class="">
-								<textarea name="comment" rows="5" class="form-control" id="comment" required>{{ old('comment')}}</textarea>
+								<textarea name="comment" rows="5" class="form-control" id="comment"
+									required>{{ old('comment')}}</textarea>
 
 							</div>
 						</div>
@@ -82,4 +116,25 @@
 	</div>
 </div>
 
+@endsection
+
+@section( 'javascript' )
+<script type="text/javascript">
+	jQuery.datetimepicker.setDateFormatter('moment');
+		  $("#ddate").datetimepicker({
+		timepicker:false,
+		datepicker:true,        
+		format: "Y-M-D"
+		// format: "YYYY-MM-DD H:mm a"
+		// autoclose: true,
+		// todayBtn: true,
+		// startDate: "2013-02-14 10:00",
+		// minuteStep: 10
+		// Step: 30,
+	});
+	$('#toggle').on('click', function(){
+		$("#ddate").datetimepicker('toggle');
+	})
+
+</script>
 @endsection

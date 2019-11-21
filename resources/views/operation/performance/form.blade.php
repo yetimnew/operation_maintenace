@@ -452,7 +452,7 @@
 		if ( checkIfEmpty( fuell ) ) {
 			return false;
 		}
-		if ( !minmax( fuell, 10, 150 ) ) {
+		if ( !minmax( fuell, 10, 800 ) ) {
 			return false;
 		} else {
 			return true;

@@ -11,8 +11,9 @@
 		<li class="breadcrumb-item active">Truks Model</li>
 	</ol>
 </div>
-<div class="row col-12">
-	<div class="card text-left">
+
+<div class="row col-md-12">
+	<div class="card col-md-12">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Truck Models </h2>
@@ -27,7 +28,7 @@
 			</div>
 		</div>
 		<div class="card-body">
-			<div class="table">
+			<div class="table table-responsive text-nowrap">
 				<table class="table table-bordered table-sm table-striped" id="vehecletypes">
 					<thead>
 						<tr>

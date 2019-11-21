@@ -17,7 +17,7 @@ class CreateStatustypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->boolean('statusgroup')->default(0);
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->boolean('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

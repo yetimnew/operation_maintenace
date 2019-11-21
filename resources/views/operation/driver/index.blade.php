@@ -15,7 +15,7 @@
 </ol>
 
 <div class="col-md-12">
-	<div class="card text-left">
+	<div class="card text-left col-md-12">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Drivers </h2>
@@ -32,7 +32,7 @@
 
 		<div class="card-body">
 			<div class="table-responsive text-nowrap">
-				<table class="table table-sm table-striped" id="drivers">
+				<table class="table-sm table table-bordered table-sm table-striped" id="drivers">
 					<thead>
 						<tr>
 							<th class="m-1 b-1" width="3%">No</th>
@@ -46,9 +46,15 @@
 							<th class="m-1 b-1">HouseNumber</th>
 							<th class="m-1 b-1">Telephone</th>
 							<th class="m-1 b-1">HireDate</th>
+							@can('driver edit')
 							<th class="m-1 b-1" width="3%">Edit</th>
+							@endcan
+							@can('driver delete')
 							<th class="m-1 b-1" width="3%">Delete</th>
+							@endcan
+							@can('driver deactivate')
 							<th class="m-1 b-1" width="3%">Deactivate</th>
+							@endcan
 
 						</tr>
 					</thead>
@@ -69,11 +75,12 @@
 							<td class='p-1 text-center'>{{$driver->housenumber}}</td>
 							<td class='p-1 text-center'>{{$driver->mobile}}</td>
 							<td class='p-1 text-center'>{{$driver->hireddate}}</td>
-							{{-- @can('edit driver') --}}
+							@can('driver edit')
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
 							</td>
-
+							@endcan
+							@can('driver delete')
 
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
@@ -89,6 +96,8 @@
 									}"> <i class="fa fa-trash red"></i>
 								</button>
 							</td>
+							@endcan
+							@can('driver deactivate')
 							<td class='p-1 text-center'>
 								<form action="{{route('driver.deactivate',['id'=> $driver->id])}}"
 									id="deactivate-form-{{$driver->id}}" style="display: none">
@@ -106,7 +115,7 @@
 							</td>
 
 						</tr>
-
+						@endcan
 						@endforeach
 						@else
 						<tr>
@@ -135,7 +144,7 @@
 				// "scrollY": 100,
 				'columnDefs': [ {
 
-				'targets': [11,12,13], /* column index */
+				// 'targets': [11,12,13], /* column index */
 
 				'orderable': false, /* true or false */
 

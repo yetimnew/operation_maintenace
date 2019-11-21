@@ -109,11 +109,11 @@ class UserController extends Controller
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email',
-            'password'=>'required|min:6|confirmed'
+            // 'password'=>'required|min:6|confirmed'
         ]);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password =  bcrypt($request->password);
+        // $user->password =  bcrypt($request->password);
         $user->save();
                 
         $roles = $request['role']; //Retrieving the roles field//Checking if a role was selected
@@ -122,7 +122,7 @@ class UserController extends Controller
       
 
         if (isset($roles)) {
-            $roll_all = role::all();//Get all permissions
+            $roll_all = role::all();//Get all role
 
             foreach ($roll_all as $p) {
             $user->removeRole($p); //Remove all permissions associated with role
@@ -135,13 +135,15 @@ class UserController extends Controller
         } 
         if (isset($permissions)) {
 
-            foreach ($roll_all as $p) {
+            $per_all = Permission::all();//Get all role
+            foreach ($per_all as $p) {
+                
             $user->revokePermissionTo($p); //Remove all permissions associated with role
             }
 
             foreach ($permissions as $permission) {
-            $role_r = Permission::where('id', '=', $permission)->firstOrFail();      
-            $user->givePermissionTo($role_r); //Assigning role to user
+            $permission_r = Permission::where('id', '=', $permission)->firstOrFail();      
+            $user->givePermissionTo($permission_r); //Assigning role to user
             }
         }  
 

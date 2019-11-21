@@ -14,6 +14,7 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = [
             //Truck
+            'truck deactivate',
             'truck create',
             'truck edit',
             'truck delete',
@@ -28,8 +29,11 @@ class PermissionTableSeeder extends Seeder
             'driver edit',
             'driver delete',
             'driver view',
+            'driver deactivate',
             //OPERATION
             'operation create',
+            'operation close',
+            'operation open',
             'operation edit',
             'operation delete',
             'operation view',
@@ -69,6 +73,7 @@ class PermissionTableSeeder extends Seeder
             'truck_driver edit',
             'truck_driver delete',
             'truck_driver view',
+            'truck_driver detach',
 
 
             ];

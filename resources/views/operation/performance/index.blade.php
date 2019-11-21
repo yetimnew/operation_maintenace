@@ -15,7 +15,7 @@
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Performances </h2>
-				@can('customer create')
+				@can('performance create')
 
 				<div class="ml-auto">
 					<a href="{{route('performace.create')}}" class="btn btn-outline-primary"><i
@@ -49,8 +49,13 @@
 							<th>Operating Expense</th>
 							<th>Others</th>
 							<th>Is returned</th>
+							@can('performance edit')
 							<th class="text-center" width="4%">Edit</th>
+							@endcan
+
+							@can('performance delete')
 							<th class="text-center" width="4%">Delete</th>
+							@endcan
 
 
 						</tr>
@@ -94,10 +99,13 @@
 							</td>
 							@endif
 
+							@can('performance edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('performace.edit',['id'=> $pr->id])}}"> <i class="fas fa-edit "></i>
 								</a>
 							</td>
+							@endcan
+							@can('performance delete')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
 								<form action="{{route('performace.destroy',['id'=> $pr->id])}}"
@@ -113,11 +121,12 @@
 								</button>
 							</td>
 						</tr>
+						@endcan
 
 						@endforeach
 						@else
 						<tr>
-							<td class='m-1 p-1 text-center' colspan="17">No Data Avilable</td>
+							<td class='m-1 p-1 text-center' colspan="19">No Data Avilable</td>
 						</tr>
 						@endif
 

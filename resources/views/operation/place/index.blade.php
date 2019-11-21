@@ -9,74 +9,91 @@
 	</li>
 	<li class="breadcrumb-item active">Operation Place</li>
 </ol>
-<div class="row col-12">
-	<div class="col-10">
-	</div>
-	<div class="col-2">
-		<a href="{{route('place.create')}}" class="btn btn-primary">Add Place</a>
-
-	</div>
-</div>
-<div class="row col-12">
-	<div class="table-responsive text-nowrap">
-		<table class="table table-bordered table-sm table-striped" id="place">
-			<thead>
-				<tr>
-					<th>no</th>
-					<th>Place Name</th>
-					<th>Region Name</th>
-					<th>Comment</th>
-					<th>Edit</th>
-					<th>Delete</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				@if ($places->count()> 0)
-				@foreach ($places as $place)
-				<tr>
-					<td class='m-1 p-1'>{{$place->id}}</td>
-					<td class='m-1 p-1'>{{$place->name}}</td>
-					<td class='m-1 p-1'>{{$place->region->name}}</td>
-					<td class='m-1 p-1'>{{$place->comment}}</td>
-					<td class='m-1 p-1'><a href="{{route('place.edit',['id'=> $place->id])}}"
-							class="btn btn-info btn-sm"><i class="fas fa-edit"> </i></a>
-					</td>
-					<td class='m-1 p-1'>
 
 
-						<form action="{{route('place.destroy',['id'=> $place->id])}}" id="detach-form-{{$place->id}}"
-							style="display: none">
-							@csrf @method('DELETE')
-						</form>
-						<button type="submit" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure to Delete this?')){
+<div class="row col-md-12">
+	<div class="card col-md-12">
+		<div class="card-header">
+			<div class="d-flex align-items-center">
+				<h2>All Places </h2>
+				@can('operation_place create')
+				<div class="ml-auto">
+					<a href="{{route('place.create')}}" class="btn btn-outline-primary"><i
+							class="fas fa-plus mr-1"></i>Add Place</a>
+
+				</div>
+				@endcan
+			</div>
+		</div>
+
+		<div class="card-body">
+			<div class="table-responsive text-nowrap">
+				<table class="table table-bordered table-sm table-striped" id="place">
+					<thead>
+						<tr>
+							<th>no</th>
+							<th>Place Name</th>
+							<th>Region Name</th>
+							<th>Comment</th>
+							<th>Edit</th>
+							<th>Delete</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						@if ($places->count()> 0)
+						@foreach ($places as $place)
+						<tr>
+							<td class='m-1 p-1'>{{$place->id}}</td>
+							<td class='m-1 p-1'>{{$place->name}}</td>
+							<td class='m-1 p-1'>{{$place->region->name}}</td>
+							<td class='m-1 p-1'>{{$place->comment}}</td>
+							<td class='m-1 p-1'><a href="{{route('place.edit',['id'=> $place->id])}}"
+									class="btn btn-info btn-sm"><i class="fas fa-edit"> </i></a>
+							</td>
+							<td class='m-1 p-1'>
+
+
+								<form action="{{route('place.destroy',['id'=> $place->id])}}"
+									id="detach-form-{{$place->id}}" style="display: none">
+									@csrf @method('DELETE')
+								</form>
+								<button type="submit" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure to Delete this?')){
                             event.preventDefault();
                             document.getElementById('detach-form-{{$place->id}}').submit();
                         }else{
                             event.preventDefault();
                         }"> <i class="fas fa-trash"> </i>
-					</td>
-					</button>
+							</td>
+							</button>
 
 
 
-				</tr>
+						</tr>
 
-				@endforeach @else
-				<tr>
-					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
-				</tr>
-				@endif
+						@endforeach @else
+						<tr>
+							<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
+						</tr>
+						@endif
 
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+				<div class="card-footer">
 
-		@endsection @section('javascript')
-		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
-		</script>
-		<script>
-			$( document ).ready( function () {
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@endsection
+@section('javascript')
+<script src="{{ asset('js/jquery.dataTables.min.js') }}">
+</script>
+<script>
+	$( document ).ready( function () {
 				$( '#place' ).DataTable();
 			} );
-		</script>
-		@endsection
+</script>
+@endsection
