@@ -28,12 +28,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile',                  ['uses'=>'profileController@index','as'=>'profile']);
     Route::post('/profile/update',          ['uses'=>'profileController@update','as'=>'profile.update']);
 //    user route
-    Route::get('/user',                  ['uses'=>'userController@index','as'=>'user'])->middleware('admin');
-    Route::get('/user/create',           ['uses'=>'userController@create','as'=>'user.create'])->middleware('admin');
-    Route::post('/user/store',           ['uses'=>'userController@store','as'=>'user.store'])->middleware('admin');
-    Route::get('/user/edit/{id}',        ['uses'=>'userController@edit','as'=>'user.edit'])->middleware('admin');
-    Route::post('/user/update/{id}',     ['uses'=>'userController@update','as'=>'user.update'])->middleware('admin');
-    Route::get('/user/destroy/{id}',     ['uses'=>'userController@destroy','as'=>'user.destroy'])->middleware('admin');
+    Route::get('/user',                  ['uses'=>'UserController@index','as'=>'user'])->middleware('admin');
+    Route::get('/user/create',           ['uses'=>'UserController@create','as'=>'user.create'])->middleware('admin');
+    Route::post('/user/store',           ['uses'=>'UserController@store','as'=>'user.store'])->middleware('admin');
+    Route::get('/user/edit/{id}',        ['uses'=>'UserController@edit','as'=>'user.edit'])->middleware('admin');
+    Route::post('/user/update/{id}',     ['uses'=>'UserController@update','as'=>'user.update'])->middleware('admin');
+    Route::get('/user/destroy/{id}',     ['uses'=>'UserController@destroy','as'=>'user.destroy'])->middleware('admin');
 
     Route::get('/truck',                  ['uses'=>'TruckController@index','as'=>'truck']);
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
@@ -138,12 +138,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/performance_of_all_driver/store',              ['uses'=>'performanceOfAllDriverController@store','as'=>'performance_of_all_driver.store']);
    
     //reports
-    Route::get('/performance_by_truck',                     ['uses'=>'performanceByTruckController@index','as'=>'performance_by_truck']);
-    Route::get('/performance_by_truck/create',              ['uses'=>'performanceByTruckController@create','as'=>'performance_by_truck.create']);
-    Route::post('/performance_by_truck/store',              ['uses'=>'performanceByTruckController@store','as'=>'performance_by_truck.store']);
-    Route::get('/performance_by_truck/edit/{id}',           ['uses'=>'performanceByTruckController@edit','as'=>'performance_by_truck.edit']);
-    Route::post('/performance_by_truck/update/{id}',        ['uses'=>'performanceByTruckController@update','as'=>'performance_by_truck.update']);
-    Route::get('/performance_by_truck/destroy/{id}',        ['uses'=>'performanceByTruckController@destroy','as'=>'performance_by_truck.destroy']);
+    Route::get('/performance_by_truck',                     ['uses'=>'PerformanceByTruckController@index','as'=>'performance_by_truck']);
+    Route::get('/performance_by_truck/create',              ['uses'=>'PerformanceByTruckController@create','as'=>'performance_by_truck.create']);
+    Route::post('/performance_by_truck/store',              ['uses'=>'PerformanceByTruckController@store','as'=>'performance_by_truck.store']);
+    Route::get('/performance_by_truck/edit/{id}',           ['uses'=>'PerformanceByTruckController@edit','as'=>'performance_by_truck.edit']);
+    Route::post('/performance_by_truck/update/{id}',        ['uses'=>'PerformanceByTruckController@update','as'=>'performance_by_truck.update']);
+    Route::get('/performance_by_truck/destroy/{id}',        ['uses'=>'PerformanceByTruckController@destroy','as'=>'performance_by_truck.destroy']);
     //report of the Operations and therir stattus
     Route::get('/performance_by_opration',                     ['uses'=>'performanceByOprationController@index','as'=>'performance_by_opration']);
     Route::post('/performance_by_opration/store',              ['uses'=>'performanceByOprationController@store','as'=>'performance_by_opration.store']);

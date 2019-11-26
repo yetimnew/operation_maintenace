@@ -22,7 +22,7 @@ class DashbordController extends Controller
 
 
         $tds = DB::table('statuses')
-        ->select('statustypes.name','statustypes.statusgroup','statuses.registerddate'
+        ->select('statustypes.name as name','statustypes.statusgroup as statusgroup','statuses.registerddate as registerddate'
         ,DB::raw('COUNT(statuses.statustype_id) as Number'))
         ->join('statustypes','statustypes.id','=','statuses.statustype_id')
         ->where('statuses.autoid','=',$maxStatus)
@@ -56,6 +56,7 @@ class DashbordController extends Controller
        ->with('totalTone',$totalTone)
        ->with('upliftedTone',$upliftedTone)
        ->with('maxDate',$maxDate)
+       ->with('maxStatus',$maxStatus)
        ->with('tds',$tds)
        ->with('operationsReport',$operationsReport)
        ->with('statuses',$statuses);

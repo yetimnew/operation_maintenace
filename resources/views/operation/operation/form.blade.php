@@ -61,12 +61,14 @@
         <div class="form-group required">
             <label class="control-label">Region Name</label>
             <div class="input-group">
+
                 <select name="region" id="region" class="form-control {{ $errors->has('region') ? ' is-invalid' : '' }}"
                     onfocusout="validateRegion()">
                     <option class="dropup" value="" selected> Select One</option>
                     @foreach ($regions as $region)
                     <option class="dropup" value="{{$region->id}}"
-                        {{ $region->id == $operation->region_id ? 'selected' : '' }}> {{$region->name}} </option>
+                        {{ $region->id == $operation->region_id ? 'selected' : '' }}> {{$region->name}}
+                    </option>
                     @endforeach
 
                 </select>

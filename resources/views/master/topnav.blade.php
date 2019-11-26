@@ -24,8 +24,22 @@
             </div>
             <!-- Navbar Menu -->
             <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+              <li>
+                <div class="btn-group" role="group" aria-label="">
+                  <button type="button" class="btn btn-secondary">d</button>
+                  <button type="button" class="btn btn-secondary">d</button>
+                  <div class="btn-group" role="group">
+                    <button id="dropdownId" type="button" class="btn btn-secondary dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-              <!-- Logout    -->
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                      <a class="dropdown-item" href="#">ddddddddd</a>
+                      <a class="dropdown-item" href="#">ddddddddd</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
               <li class="nav-item"><a class="nav-link logout" href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();"> <span class="d-none d-sm-inline">{{ __('Logout') }}
                   </span> <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
@@ -34,6 +48,8 @@
               </form>
 
             </ul>
+
+
           </div>
         </div>
       </nav>

@@ -14,10 +14,10 @@ class performanceByStatusController extends Controller
 {
     public function index()
     {
-        $average= DB::table('statuses')->select('statustype_id')->get();
-        return collect($average->map(function($value,$key){
-        return [$value];
-        }));
+        // $average= DB::table('statuses')->select('statustype_id')->get();
+        // return collect($average->map(function($value,$key){
+        // return [$value];
+        // }));
 
 
         $maxDate= DB::table('statuses')->MAX('registerddate');

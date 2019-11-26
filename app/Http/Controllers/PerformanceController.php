@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\PerformanceCreated;
 
 class PerformanceController extends Controller
 { 
@@ -35,6 +36,7 @@ class PerformanceController extends Controller
  
     public function create()
     {
+        auth()->user()->notify( new PerformanceCreated);
         $performance =new  Performance;
         $operations=  DB::table('operations')->where('status','=',1)->where('closed','=',1)->get();
         $place = Place::all();

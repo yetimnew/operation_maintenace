@@ -122,17 +122,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php $no = 0 ?> @if ($tds->count()> 0) @foreach ($tds as $td)
+								<?php $no = 0 ?>
+								@if ($tds->count()> 0)
+								{{-- {{dd($tds)}} --}}
+								@foreach ($tds as $td)
 								<tr>
 									<td class='m-1 p-1'>{{++$no}}</td>
 									<td class='m-1 p-1'>{{$td->name}}</td>
 									<td class='m-1 p-1'>{{$td->Number}}</td>
 									<td class='m-1 p-1'>{{number_format((($td->Number/$number_of_trucks) * 100),2)}}%
 									</td>
-
 								</tr>
-
-								@endforeach @else
+								@endforeach
+								@else
 								<tr>
 									<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>
 								</tr>
