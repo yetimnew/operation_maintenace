@@ -56,12 +56,13 @@
 					<th>Trip</th>
 					<th>Tonage</th>
 					<th>Tone K/m</th>
-					<th>D without cargo </th>
-					<th>VolumMT</th>
+					<th>DWC </th>
+					<th>DWOC</th>
 					<th>fuel/Litter</th>
 					<th>fuel/Birr</th>
 					<th>perdiem</th>
-					<th>work On Going</th>
+					<th>Oprating Exp.</th>
+					<th>Other Exp.</th>
 					{{--
 					<th>Detail</th> --}}
 
@@ -80,6 +81,7 @@
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->tonkm,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWC,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWOC,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->fl,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->fB,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->perdiem,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->workOnGoing,2)}}</td>

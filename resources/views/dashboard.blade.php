@@ -9,11 +9,11 @@
 			<!-- Item -->
 			<div class="col-xl-3 col-sm-6">
 				<div class="item d-flex align-items-center">
-					<div class="icon bg-violet"><i class="icon-user"></i>
+					<div class="icon bg-violet"><i class="fa fa-trucks"></i>
 					</div>
 					<div class="title"><span>Avilable<br>Trucks</span>
 						<div class="progress">
-							<div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25"
+							<div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="25"
 								aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
 						</div>
 					</div>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="title"><span>Number of<br>Drivers</span>
 						<div class="progress">
-							<div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70"
+							<div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="70"
 								aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
 						</div>
 					</div>
@@ -46,7 +46,7 @@
 					</div>
 					<div class="title"><span>Active<br>Operation</span>
 						<div class="progress">
-							<div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40"
+							<div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="40"
 								aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 					</div>
 					<div class="title"><span>Total<br>Tonage</span>
 						<div class="progress">
-							<div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50"
+							<div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="50"
 								aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
 						</div>
 					</div>

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\operation\Reports;
 
 use App\Truck;
 use App\Driver;
 use App\Performance;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
 
 class performanceByOprationController extends Controller
 {
@@ -99,8 +100,4 @@ class performanceByOprationController extends Controller
     }
 
 }
-
- 
-
-
 }

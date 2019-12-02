@@ -8,7 +8,7 @@
 	</li>
 	<li class="breadcrumb-item"><a href="#">Report</a>
 	</li>
-	<li class="breadcrumb-item active">Performance By Driver</li>
+	<li class="breadcrumb-item active">Performance Of All Driver</li>
 </ol>
 
 <div class="row col-12">
@@ -30,14 +30,13 @@
 					<th>Trip</th>
 					<th>Tonage</th>
 					<th>Tone K/m</th>
-					<th>D without cargo </th>
-					<th>VolumMT</th>
+					<th>DWC </th>
+					<th>DWOC</th>
 					<th>fuel/Litter</th>
 					<th>fuel/Birr</th>
 					<th>perdiem</th>
-					<th>work On Going</th>
-					{{--
-					<th>Detail</th> --}}
+					<th>Oprating Exp.</th>
+					<th>Other Exp.</th>
 
 				</tr>
 			</thead>
@@ -48,23 +47,20 @@
 				@foreach ($tds as $td)
 				<tr>
 					<td class='m-1 p-1 text-center'>{{++$no}}</td>
-					<td class='m-1 p-1 text-center'>{{$td->name}}</td>
-					<td class='m-1 p-1 text-center'>{{$td->plate}}</td>
-					<td class='m-1 p-1 text-center'>{{$td->fo}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->CargoVolumMT,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->tonkm,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->TDWC,2)}}</td>
+					<td class='m-1 p-1'>{{$td->name}}</td>
+					<td class='m-1 p-1'>{{$td->plate}}</td>
+					<td class='m-1 p-1 text-right'>{{$td->fo}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->CargoVolumMT,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->tonkm,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWC,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWOC,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->fl,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->fB,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->perdiem,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->workOnGoing,2)}}</td>
+					<td class='m-1 p-1 text-right'>{{ number_format( $td->other,2)}}</td>
 
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->TDWOC,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->fB,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->perdiem,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->workOnGoing,2)}}</td>
-					<td class='m-1 p-1 text-center'>{{ number_format( $td->other,2)}}</td>
 
-					{{--
-					<td class='m-1 p-1'><a href="{{route('performace.edit',['id'=> $td->id])}}" class="btn btn-info btn-xs"> <i
-						class="fas fa-edit"></i> </a>
-					</td> --}}
 				</tr>
 
 				@endforeach

@@ -15,8 +15,8 @@ class TruckDriverController extends Controller
     {
         $dts= DB::table('driver_truck')
         ->join('drivers','drivers.driverid','=','driver_truck.driverid')
-        ->join('trucks','trucks.plate','=','driver_truck.plate')
-        ->select('driver_truck.*','drivers.name as Name','trucks.plate as plate')
+        // ->leftjoin('trucks','trucks.plate','=','driver_truck.plate')
+        ->select('driver_truck.*','drivers.name as Name')
         ->where('driver_truck.status','=',1)->get();
         return view('operation.drivertruck.index')->with('dts',$dts);
     }
@@ -121,25 +121,32 @@ class TruckDriverController extends Controller
         ->first();
         //  dd($dts);
 
-        $trucks= DB::table('trucks')
+        $trucks=    $trucks= DB::table('trucks')
         ->select('trucks.id','trucks.plate','driver_truck.driverid','trucks.status','driver_truck.status')
         ->leftjoin('driver_truck','driver_truck.plate','=','trucks.plate')
         ->whereNull('driver_truck.status')
         ->orwhere('driver_truck.status','=',0) 
-        ->orwhere('trucks.status','=',1) 
+        ->whereNull('driver_truck.is_attached')
+        ->orwhere('driver_truck.is_attached','=',0) 
+        ->where('trucks.status','=',1) 
+        ->groupBy('trucks.plate')
         ->orderBy('trucks.plate','asc')
+        // ->tosql();
         ->get();
         // dd($trucks);
 
-        $drivers= DB::table('drivers')
-        ->select('drivers.id','drivers.driverid','drivers.name','driver_truck.driverid as DTID','drivers.status','driver_truck.status')
+        $drivers=  DB::table('drivers')
+        ->select('drivers.id','drivers.driverid as driverID','drivers.name','driver_truck.driverid as DTID','drivers.status','driver_truck.status')
         ->leftjoin('driver_truck','driver_truck.driverid','=','drivers.driverid')
+       
         ->whereNull('driver_truck.status')
-        ->orwhere('driver_truck.status','=',0) 
-        ->orwhere('drivers.status','=',1) 
+         ->orwhere('driver_truck.status','=',0) 
+        ->whereNull('driver_truck.is_attached')
+        ->orwhere('driver_truck.is_attached','=',0) 
+        ->where('drivers.status','=',1) 
         // ->where('driver_truck.status','<>',0) 
-        ->orderBy('drivers.name','asc')
         ->groupBy('drivers.name')
+        ->orderBy('drivers.name','asc')
         ->get();
 
         return view('operation.drivertruck.edit')->with('dts',$dts)->with('trucks',$trucks)->with('drivers', $drivers);

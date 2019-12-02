@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\operation\Reports;
 
 use Carbon\Carbon;
 use App\PerformanceByModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class performanceByModelController extends Controller
@@ -14,8 +15,7 @@ class performanceByModelController extends Controller
     {
         
         $operationsReport = PerformanceByModel::all();
-    //   dd($operationsReport);
-       return view('operation.report.performance_by_model.index')
+        return view('operation.report.performance_by_model.index')
        ->with('operationsReport',$operationsReport);
 
     }

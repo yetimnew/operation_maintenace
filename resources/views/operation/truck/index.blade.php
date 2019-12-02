@@ -146,8 +146,6 @@
 					// "scrollY": 100,
 					'columnDefs': [ {
 
-					// 'targets': [10,11], /* column index */
-
 					'orderable': false, /* true or false */
 
 }]

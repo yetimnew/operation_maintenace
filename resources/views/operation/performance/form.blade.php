@@ -135,7 +135,8 @@
             <label class="control-label">Distance with cargo</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="diswc" type="number" class="form-control {{ $errors->has('diswc') ? ' is-invalid' : '' }}"
-                    id="diswc" value="{{ old('diswc') ?? $performance->DistanceWCargo}}" onfocusout="validateDisw()">
+                    id="diswc" value="{{ old('diswc') ?? $performance->DistanceWCargo}}" min="1"
+                    onfocusout="validateDisw()">
                 @if ($errors->has('diswc'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('diswc') }}</strong>
@@ -150,7 +151,7 @@
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="diswoc" type="number"
                     class="form-control {{ $errors->has('diswoc') ? ' is-invalid' : '' }}" id="diswoc"
-                    value="{{ old('diswoc') ?? $performance->DistanceWOCargo}}" onfocusout="validateDiswoc()">
+                    value="{{ old('diswoc') ?? $performance->DistanceWOCargo}}" min="1" onfocusout="validateDiswoc()">
                 @if($errors->has('diswoc'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('diswoc') }}</strong>
@@ -166,7 +167,7 @@
 
                 <input name="cargovol" type="number"
                     class="form-control {{ $errors->has('cargovol') ? ' is-invalid' : '' }}" id="cargovol"
-                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" onfocusout="validateCargovol()">
+                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" min="1" onfocusout="validateCargovol()">
                 @if($errors->has('cargovol'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('cargovol') }}</strong>
@@ -183,7 +184,8 @@
             <label class="control-label"> Fuel In Litter</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="fuell" type="number" class="form-control {{ $errors->has('fuell') ? ' is-invalid' : '' }}"
-                    id="fuell" value="{{ old('fuell') ?? $performance->fuelInLitter}}" onfocusout="validateFuell()">
+                    id="fuell" value="{{ old('fuell') ?? $performance->fuelInLitter}}" min="1"
+                    onfocusout="validateFuell()">
                 @if($errors->has('fuell'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('fuell') }}</strong>
@@ -197,7 +199,8 @@
             <label class="control-label"> Fuel In Birr</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="fuelb" type="number" class="form-control{{ $errors->has('fuelb') ? ' is-invalid' : '' }}"
-                    id="fuelb" value="{{ old('fuelb') ?? $performance->fuelInBirr}}" onfocusout="validateFuelb()">
+                    id="fuelb" value="{{ old('fuelb') ?? $performance->fuelInBirr}}" min="1"
+                    onfocusout="validateFuelb()">
                 @if($errors->has('fuelb'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('fuelb') }}</strong>
@@ -212,7 +215,7 @@
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="perdiem" type="number"
                     class="form-control {{ $errors->has('perdiem') ? ' is-invalid' : '' }}" id="perdiem"
-                    value="{{ old('perdiem') ?? $performance->perdiem}}" onfocusout="validatePerdiem()">
+                    value="{{ old('perdiem') ?? $performance->perdiem}}" min="1" onfocusout="validatePerdiem()">
                 @if($errors->has('perdiem'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('perdiem') }}</strong>
@@ -226,7 +229,7 @@
             <label class="control-label">Operational Expense</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="wog" type="number" class="form-control {{ $errors->has('wog') ? ' is-invalid' : '' }}"
-                    id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" onfocusout="validateWog()">
+                    id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" min="1" onfocusout="validateWog()">
                 @if($errors->has('wog'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('wog') }}</strong>
@@ -237,10 +240,10 @@
         </div>
 
         <div class="form-group required">
-            <label class="control-label"> Other</label>
+            <label class="control-label"> Other Expences</label>
             <div class="input-group"> <span class="input-group-addon"></span>
                 <input name="other" type="number" class="form-control {{ $errors->has('other') ? ' is-invalid' : '' }}"
-                    id="other" value="{{ old('other') ?? $performance->other}}" onfocusout="validatOther()">
+                    id="other" value="{{ old('other') ?? $performance->other}}" min="1" onfocusout="validatOther()">
                 @if($errors->has('other'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('other') }}</strong>

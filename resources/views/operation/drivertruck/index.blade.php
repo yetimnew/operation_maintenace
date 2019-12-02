@@ -45,6 +45,7 @@
 				</thead>
 				<tbody>
 					@if ($dts->count()> 0)
+					{{-- {{dd($dts)}} --}}
 					<?php $no = 0;?>
 					@foreach ($dts as $dt)
 					<tr>
@@ -76,6 +77,7 @@
 						<td class='m-1 p-1'><span class="badge badge-info">Note Editable</span>
 							</a>
 						</td>
+
 						<td class='m-1 p-1'><span class="badge badge-info">Aleady Detached</span>
 						</td>
 						@endif
@@ -120,8 +122,8 @@
 <script>
 	$( document ).ready( function () {
 				$( '#truck_driver' ).DataTable({
-
-				"pageLength": 20,
+					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"pageLength": 25,
 				// "scrollY": 100,
 				'columnDefs': [ {
 

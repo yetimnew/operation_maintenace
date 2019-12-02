@@ -2,7 +2,7 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
                 <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
-                                class="img-fluid rounded-circle">
+                                class="img-fluid rounded-circle" width="150" height="150">
                 </div>
                 <div class="title">
                         <h1 class="h4">{{Auth::user()->name}}</h1>
@@ -67,8 +67,7 @@
                                                 href="{{route('status')}}">Status </a> </li>
 
                                 <li class="{{ Request::is('statustype*') ? 'active' : ''}}"><a
-                                                href="{{route('statustype')}}">Status
-                                                Type</a></li>
+                                                href="{{route('statustype')}}">Status Group</a></li>
 
                         </ul>
                 </li>
@@ -90,6 +89,9 @@
                                                 href="{{ route('performance_of_all_driver')}}">Performance Of All
                                                 Driver</a> </li>
 
+                                <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
+                                                href="{{ route('performance_by_truck')}}">Performance Of All Truck</a>
+                                </li>
                                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_truck')}}">Performance By Truck</a> </li>
                                 <li class="{{ Request::is('performance_by_opration') ? 'active' : ''}}"><a

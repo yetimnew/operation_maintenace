@@ -67,8 +67,8 @@
 				@foreach ($operationsReport as $td)
 				<tr>
 					<td class='m-1 p-1'>{{++$no}}</td>
-					<td class='m-1 p-1'>{{$td->operationid}} <span class="pull-right"><a
-								href="{{ route('performance_by_opration.details',['id'=> $td->id])}}">Details</a></span>
+					<td class='m-1 p-1'>{{$td->operationid}} <span class="pull-right"><a href="#"> <i
+									class="fa fa-info-circle" aria-hidden="true"></i></a></span>
 					</td>
 					<td class='m-1 p-1'>{{$td->name}}</td>
 					<td class='m-1 p-1'>{{$td->stratdate}}</td>

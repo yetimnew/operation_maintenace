@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\operation\Reports;
 
 use App\Truck;
 use App\Status;
@@ -8,6 +8,7 @@ use App\Statustype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class performanceByStatusController extends Controller
