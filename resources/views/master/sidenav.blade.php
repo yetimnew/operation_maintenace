@@ -50,6 +50,10 @@
                                 <li class="{{ Request::is('region') ? 'active' : ''}}"><a
                                                 href="{{route('region')}}">Operations
                                                 Region</a></li>
+                                <li class="{{ Request::is('distance') ? 'active' : ''}}"><a
+                                                href="{{route('distance')}}">Distance
+
+                                        </a></li>
                         </ul>
                 </li>
                 <li class="{{ Request::is('customer') ? 'active' : ''}}"><a href="{{route('customer')}}">
@@ -91,7 +95,8 @@
 
                                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_truck')}}">Performance Of All Truck</a>
-                                </li>
+                                </li>pe
+                                
                                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_truck')}}">Performance By Truck</a> </li>
                                 <li class="{{ Request::is('performance_by_opration') ? 'active' : ''}}"><a

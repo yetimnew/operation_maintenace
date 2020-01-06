@@ -2,11 +2,11 @@
 
 namespace Spatie\DbDumper;
 
-use Symfony\Component\Process\Process;
-use Spatie\DbDumper\Exceptions\DumpFailed;
 use Spatie\DbDumper\Compressors\Compressor;
 use Spatie\DbDumper\Compressors\GzipCompressor;
 use Spatie\DbDumper\Exceptions\CannotSetParameter;
+use Spatie\DbDumper\Exceptions\DumpFailed;
+use Symfony\Component\Process\Process;
 
 abstract class DbDumper
 {
@@ -262,17 +262,14 @@ abstract class DbDumper
         if ($this->compressor) {
             $compressCommand = $this->compressor->useCommand();
 
-            return <<<BASH
-            if output=\$({$command});
-            then
-              echo "\$output" | $compressCommand > $dumpFile
-            else
-              echo "Dump was not succesful." >&2
-              exit 1
-            fi
-            BASH;
+            return "(((({$command}; echo \$? >&3) | {$compressCommand} > {$dumpFile}) 3>&1) | (read x; exit \$x))";
         }
 
         return $command.' > '.$dumpFile;
+    }
+
+    protected function determineQuote(): string
+    {
+        return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? '"' : "'";
     }
 }

@@ -21,7 +21,7 @@
 
 				<div class="ml-auto">
 					<a href="{{route('vehecletype.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add vehecle Model</a>
+							class="fafa-plus mr-1"></i>Add vehecle Model</a>
 
 				</div>
 				@endcan
@@ -51,7 +51,7 @@
 							<td class='m-1 p-1'>{{$vehecletype->comment}}</td>
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('vehecletype.edit',['id'=> $vehecletype->id])}}"><i
-										class="fas fa-edit"> </i></a>
+										class="fafa-edit"> </i></a>
 							</td>
 
 							<td class='m-1 p-1 text-center'>
@@ -65,7 +65,7 @@
                                 document.getElementById('detach-form-{{$vehecletype->id}}').submit();
                             }else{
                                 event.preventDefault();
-                            }"> <i class="fas fa-trash red"></i>
+                            }"> <i class="fafa-trash red"></i>
 							</td>
 							</button>
 

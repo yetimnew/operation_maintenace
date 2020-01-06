@@ -19,7 +19,7 @@
 				@can('operation_place create')
 				<div class="ml-auto">
 					<a href="{{route('place.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Place</a>
+							class="fafa-plus mr-1"></i>Add Place</a>
 
 				</div>
 				@endcan
@@ -49,7 +49,7 @@
 							<td class='m-1 p-1'>{{$place->region->name}}</td>
 							<td class='m-1 p-1'>{{$place->comment}}</td>
 							<td class='m-1 p-1'><a href="{{route('place.edit',['id'=> $place->id])}}"
-									class="btn btn-info btn-sm"><i class="fas fa-edit"> </i></a>
+									class="btn btn-info btn-sm"><i class="fa fa-edit"> </i></a>
 							</td>
 							<td class='m-1 p-1'>
 
@@ -63,7 +63,7 @@
                             document.getElementById('detach-form-{{$place->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fas fa-trash"> </i>
+                        }"> <i class="fa fa-trash"> </i>
 							</td>
 							</button>
 

@@ -15,7 +15,7 @@
 		<div class="col-10">
 		</div>
 		<div class="col-2">
-			<a href="{{route('role.create')}}" class="btn btn-primary"> <i class="fas fa-plus "></i> Add
+			<a href="{{route('role.create')}}" class="btn btn-primary"> <i class="fafa-plus "></i> Add
 				Roles</a>
 			{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('customer', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
 		</div>
@@ -46,7 +46,7 @@
 					<td>{{ str_replace(array('[',']','"'),'', $role->permissions()->pluck('name')) }}</td>
 
 					<td class='m-1 p-1 text-center'><a href="{{route('role.edit',['id'=> $role->id])}}">
-							<i class="fas fa-edit "></i> </a>
+							<i class="fafa-edit "></i> </a>
 					</td>
 					<td class='m-1 p-1 text-center '>
 						<form action="{{route('role.destroy',['id'=> $role->id])}}" id="delete-form-{{$role->id}}"
@@ -59,7 +59,7 @@
 								document.getElementById('delete-form-{{$role->id}}').submit();
 								}else{
 								event.preventDefault();
-								}"> <i class="fas fa-trash red"></i>
+								}"> <i class="fafa-trash red"></i>
 						</button>
 					</td>
 

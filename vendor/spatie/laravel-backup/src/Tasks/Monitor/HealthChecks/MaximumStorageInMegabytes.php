@@ -2,9 +2,9 @@
 
 namespace Spatie\Backup\Tasks\Monitor\HealthChecks;
 
+use Spatie\Backup\BackupDestination\BackupDestination;
 use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\Tasks\Monitor\HealthCheck;
-use Spatie\Backup\BackupDestination\BackupDestination;
 
 class MaximumStorageInMegabytes extends HealthCheck
 {
@@ -29,7 +29,7 @@ class MaximumStorageInMegabytes extends HealthCheck
         );
     }
 
-    protected function exceedsAllowance(int $usageInBytes): bool
+    protected function exceedsAllowance(float $usageInBytes): bool
     {
         return $usageInBytes > $this->bytes($this->maximumSizeInMegaBytes);
     }
@@ -39,7 +39,7 @@ class MaximumStorageInMegabytes extends HealthCheck
         return $megaBytes * 1024 * 1024;
     }
 
-    protected function humanReadableSize(int $sizeInBytes): string
+    protected function humanReadableSize(float $sizeInBytes): string
     {
         return Format::humanReadableSize($sizeInBytes);
     }

@@ -14,7 +14,7 @@
 			@can('truck_driver create')
 			<div class="ml-auto">
 				<a href="{{route('drivertruck.create')}}" class="btn btn-outline-primary"><i
-						class="fas fa-plus mr-1"></i>Assign Drivers to Truck</a>
+						class="fafa-plus mr-1"></i>Assign Drivers to Truck</a>
 
 			</div>
 			@endcan
@@ -94,7 +94,7 @@
                             document.getElementById('delete-form-{{$dt->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fas fa-trash red"></i>
+                        }"> <i class="fa fa-trash red"></i>
 							</button>
 						</td>
 						@endcan

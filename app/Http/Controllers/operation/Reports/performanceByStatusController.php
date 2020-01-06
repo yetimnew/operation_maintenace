@@ -160,5 +160,23 @@ class performanceByStatusController extends Controller
 }
 
 
+public function show(Request $request)
+
+{
+        $status_date =DB::table('statuses')->select('plate','statustype_id')->get();
+
+//         }
+        foreach ($status_date as  $value) {
+             $internal=    DB::table('statuses')->select('plate','statustype_id')->count('statustype_id')
+                ->groupBy('plate')
+                ->get();
+                // echo $value->plate;
+                dd($internal);
+        }
+
+        return view('operation.report.status_by_date.show');
+
+    
+}
     
 }

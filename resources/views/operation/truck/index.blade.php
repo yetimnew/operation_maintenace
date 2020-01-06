@@ -9,7 +9,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<ul class="breadcrumb breadcrumb-style ">
 
-			<li class="breadcrumb-item"><a href="{{route('dasboard')}}"><i class="fas fa-home"></i>Home</a></li>
+			<li class="breadcrumb-item"><a href="{{route('dasboard')}}"><i class="fa fa-home"></i>Home</a></li>
 			<li class="breadcrumb-item"><a href="#">Statuses</a></li>
 			<li class="breadcrumb-item active">Status Type</li>
 		</ul>
@@ -27,7 +27,7 @@
 
 				<div class="ml-auto">
 					<a href="{{route('truck.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Truck</a>
+							class="fa fa-plus mr-1"></i>Add Truck</a>
 
 				</div>
 				@endcan
@@ -77,7 +77,7 @@
 							<td class='p-1'>{{date('d-m-Y',strtotime($truck->serviceStartDate))}}</td>
 							@can('truck edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-									href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fas fa-edit"> </i></a>
+									href="{{route('truck.edit',['id'=> $truck->id])}}"><i class="fa fa-edit"> </i></a>
 							</td>
 							@endcan
 							@can('truck delete')
@@ -93,7 +93,7 @@
                             document.getElementById('detach-form-{{$truck->id}}').submit();
                         }else{
                             event.preventDefault();
-						}"> <i class="fas fa-trash red"> </i>
+						}"> <i class="fa fa-trash red"> </i>
 								</button>
 							</td>
 							@endcan

@@ -37,7 +37,7 @@
 					<td class='m-1 p-1'>{{$region->name}}</td>
 					<td class='m-1 p-1'>{{$region->comment}}</td>
 					<td class='m-1 p-1'><a href="{{route('region.edit',['id'=> $region->id])}}"
-							class="btn btn-info btn-xs"><i class="fas fa-edit"> </i></a>
+							class="btn btn-info btn-xs"><i class="fa fa-edit"> </i></a>
 					</td>
 					<td class='m-1 p-1'>
 
@@ -51,7 +51,7 @@
                             document.getElementById('detach-form-{{$region->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fas fa-trash"> </i>
+                        }"> <i class="fa fa-trash"> </i>
 					</td>
 					</button> {{-- <a href="{{route('region.destroy',['id'=> $region->id])}}" class="btn btn-danger
 					btn-xs">Delete</a>

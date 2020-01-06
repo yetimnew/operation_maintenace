@@ -56,7 +56,7 @@
 
 					{{--
 					<td class='m-1 p-1'><a href="{{route('performace.edit',['id'=> $td->id])}}" class="btn btn-info btn-xs"> <i
-						class="fas fa-edit"></i> </a>
+						class="fafa-edit"></i> </a>
 					</td> --}}
 				</tr>
 

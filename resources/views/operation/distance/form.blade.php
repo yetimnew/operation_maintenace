@@ -5,10 +5,10 @@
             <div class="input-group">
                 <select name="origin" id="origin" class="form-control {{ $errors->has('origin') ? ' is-invalid' : '' }}"
                     onfocusout="validateCustomer()">
-                    <option class="dropup" value="" selected> Select One</option>
-
                     @foreach ($places as $place)
-                    <option class="dropup" value="{{$place->id}}"> {{$place->name}} </option>
+                    <option class="dropup" value="{{$place->id}}"
+                        {{ $place->id == $distance->origin_id ? 'selected' : '' }}>
+                        {{$place->name}} </option>
                     @endforeach
 
                 </select>
@@ -22,14 +22,16 @@
         </div>
 
         <div class="form-group mb-2 required">
-            <label class="control-label" for="customer">Origin Place</label>
+            <label class="control-label" for="customer">Destination Place</label>
             <div class="input-group">
                 <select name="destination" id="destination"
                     class="form-control {{ $errors->has('destination') ? ' is-invalid' : '' }}"
                     onfocusout="validateCustomer()">
-                    <option class="dropup" value="" selected> Select One</option>
+
                     @foreach ($places as $place)
-                    <option class="dropup" value="{{$place->id}}"> {{$place->name}} </option>
+                    <option class="dropup" value="{{$place->id}}"
+                        {{ $place->id == $distance->destination_id ? 'selected' : '' }}>
+                        {{$place->name}} </option>
                     @endforeach
 
                 </select>
@@ -49,7 +51,7 @@
             <div class="input-group">
                 <input name="km" type="text" id="km"
                     class="form-control select {{ $errors->has('km') ? ' is-invalid' : '' }}"
-                    value="{{old('km') ?? $place->km}}" onfocusout="validateZone()">
+                    value="{{old('km') ?? $distance->km}}" onfocusout="validateZone()">
                 @if ($errors->has('km'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('km') }}</strong>

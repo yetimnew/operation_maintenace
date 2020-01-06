@@ -161,7 +161,8 @@ Route::group(['middleware' => ['auth']], function () {
   
     Route::get('/performance_by_status',                     ['uses'=>'operation\Reports\performanceByStatusController@index','as'=>'performance_by_status']);
     Route::get('/performance_by_status/create',              ['uses'=>'operation\Reports\performanceByStatusController@create','as'=>'performance_by_status.create']);
-    Route::post('/performance_by_status/view',              ['uses'=>'operation\Reports\performanceByStatusController@view','as'=>'performance_by_status.view']);
+    Route::get('/performance_by_status/view',              ['uses'=>'operation\Reports\performanceByStatusController@view','as'=>'performance_by_status.view']);
+    Route::get('/performance_by_status/show',              ['uses'=>'operation\Reports\performanceByStatusController@show','as'=>'performance_by_status.show']);
     Route::post('/performance_by_status/store',              ['uses'=>'operation\Reports\performanceByStatusController@store','as'=>'performance_by_status.store']);
     Route::get('/performance_by_status/edit/{id}',           ['uses'=>'operation\Reports\performanceByStatusController@edit','as'=>'performance_by_status.edit']);
     Route::post('/performance_by_status/update/{id}',        ['uses'=>'operation\Reports\performanceByStatusController@update','as'=>'performance_by_status.update']);

@@ -25,4 +25,5 @@
     <link rel="stylesheet" href="{{asset('/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('/icons-reference/styles.css')}}">
     <link rel="stylesheet" href="{{asset('/css/jquery.datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}">
     @yield('styles')

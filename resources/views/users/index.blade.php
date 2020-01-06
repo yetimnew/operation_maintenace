@@ -15,7 +15,7 @@
 	<div class="col-10">
 	</div>
 	<div class="col-2">
-		<a href="{{route('user.create')}}" class="btn btn-primary"> <i class="fas fa-plus    "></i> Add User</a>
+		<a href="{{route('user.create')}}" class="btn btn-primary"> <i class="fafa-plus    "></i> Add User</a>
 		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('user', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
 	</div>
 </div>
@@ -60,7 +60,7 @@
 				<td>{{$user->permissions()->pluck('name')->implode(' , ')}}</td>
 
 				<td class='m-1 p-1 text-center'><a href="{{route('user.edit',['id'=> $user->id])}}"><i
-							class="fas fa-edit "></i> </a>
+							class="fafa-edit "></i> </a>
 				</td>
 
 				<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
@@ -75,7 +75,7 @@
 						document.getElementById('detach-form-{{$user->id}}').submit();
 					}else{
 						event.preventDefault();
-					}"> <i class="fas fa-trash red"> </i>
+					}"> <i class="fafa-trash red"> </i>
 					</button>
 				</td>
 

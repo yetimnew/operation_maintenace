@@ -25,7 +25,7 @@
                     class="form-control {{ $errors->has('customer') ? ' is-invalid' : '' }}"
                     onfocusout="validateCustomer()">
                     <option class="dropup" value="" selected> Select One</option>
-
+ 
                     @foreach ($customers as $customer)
                     <option class="dropup" value="{{$customer->id}}"
                         {{$customer->id == $operation->customer_id ? 'selected' : '' }}> {{$customer->name}} </option>

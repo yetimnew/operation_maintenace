@@ -66,7 +66,7 @@
 
 				<div class="form-group float-right ">
 					<button type="submit" class="btn btn-outline-primary btn-lg" name="save">
-						<i class="fas fa-save    "></i>
+						<i class="fafa-save    "></i>
 						Save</button>
 
 				</div>

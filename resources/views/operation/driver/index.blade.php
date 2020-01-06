@@ -23,7 +23,7 @@
 
 				<div class="ml-auto">
 					<a href="{{route('driver.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Driver</a>
+							class="fafa-plus mr-1"></i>Add Driver</a>
 
 				</div>
 				@endcan

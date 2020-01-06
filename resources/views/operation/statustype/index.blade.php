@@ -47,7 +47,7 @@
 					@endif
 					<td class='m-1 p-1'>{{$statustype->comment}}</td>
 					<td class='m-1 p-1'><a href="{{route('statustype.edit',['id'=> $statustype->id])}}"
-							class="btn btn-info btn-xs"><i class="fas fa-edit"> </i></a>
+							class="btn btn-info btn-xs"><i class="fafa-edit"> </i></a>
 					</td>
 					<td class='m-1 p-1'>
 
@@ -60,7 +60,7 @@
                             document.getElementById('detach-form-{{$statustype->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fas fa-trash"> </i>
+                        }"> <i class="fafa-trash"> </i>
 					</td>
 					</button>
 

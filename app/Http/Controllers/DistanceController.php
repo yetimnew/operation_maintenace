@@ -18,18 +18,13 @@ class DistanceController extends Controller
     public function index()
     {
 
-        $place =  DB::table('places')
-        ->select('places.*')
-        ->LEFTJOIN('distances','origin_id','=','places.id')
-               ->where('places.status',1)
-        
-        // ->where('driver.status',1)
+        $distances =  Distance::where('status', 1)
+     
         ->get();
 
-        $distances = Distance::all();
         return view('operation.distance.index')
-        ->with('distances',$distances)
-        ->with('place',$place);
+        ->with('distances',$distances);
+        // ->with('place',$place);
     }
 
     /**
@@ -83,6 +78,7 @@ class DistanceController extends Controller
                 $distance->destination_id=  $destination;
                 $distance->destination_name=   $destination_arr[0];
                 $distance->km= $request->km;
+                $distance->status= 1;
                   
                 $distance->save();
             Session::flash('success',  ' Distance registerd successfuly' );
@@ -110,9 +106,15 @@ class DistanceController extends Controller
      * @param  \App\Distance  $distance
      * @return \Illuminate\Http\Response
      */
-    public function edit(Distance $distance)
+    public function edit($id)
     {
-        //
+        $distances = Distance::all();
+        $places = Place::all();
+        $distance = Distance::findOrFail($id);
+        return view('operation.distance.edit')
+        ->with('distance',$distance)
+        ->with('places',$places)
+        ->with('distances',$distances);
     }
 
     /**
@@ -122,9 +124,25 @@ class DistanceController extends Controller
      * @param  \App\Distance  $distance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Distance $distance)
+    public function update(Request $request,$id)
     {
-        //
+        $this->validate($request, [
+            'origin' => 'required', 
+            'destination' => 'required|different:origin',
+            'km' => 'required',
+           
+
+        ]);
+
+        $distance = Distance::findOrFail($id);
+         $distance->km= $request->km;
+        // $distance->status= 1;
+              
+            $distance->save();
+        Session::flash('success',  ' Distance registerd successfuly' );
+        return redirect()->route('distance');
+
+       
     }
 
     /**
@@ -133,8 +151,14 @@ class DistanceController extends Controller
      * @param  \App\Distance  $distance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Distance $distance)
+    public function destroy($id)
     {
-        //
+        $distance = Distance::findOrFail($id);
+   
+            $distance->delete();
+            Session::flash('info','The distance b/n'. $distance->origin_name . ' and '.$distance->destination_name.' deleted successfuly' );
+            return redirect()->back();
+
+        
     }
 }

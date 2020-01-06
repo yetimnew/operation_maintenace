@@ -17,12 +17,12 @@
 	<div class="card text-left col-md-12">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
-				<h2>All Drivers </h2>
+				<h2>City and There distance </h2>
 				{{-- @can('distance create') --}}
 
 				<div class="ml-auto">
 					<a href="{{route('distance.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Distance</a>
+							class="fafa-plus mr-1"></i>Add Distance</a>
 
 				</div>
 				{{-- @endcan --}}
@@ -77,7 +77,8 @@
 
 								<form action="{{route('distance.destroy',['id'=> $distance->id])}}"
 									id="delete-form-{{$distance->id}}" style="display: none">
-									@csrf @method('DELETE')
+									@csrf
+									@method('DELETE')
 								</form>
 								<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
 								event.preventDefault();

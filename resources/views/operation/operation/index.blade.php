@@ -20,7 +20,7 @@
 
 				<div class="ml-auto">
 					<a href="{{route('operation.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Operation</a>
+							class="fafa-plus mr-1"></i>Add Operation</a>
 
 				</div>
 				@endcan
@@ -80,7 +80,7 @@
 							@can('operation edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit">
 								<a href="{{route('operation.edit',['id'=> $operation->id])}}"> <i
-										class="fas fa-edit    "></i>
+										class="fa fa-edit    "></i>
 							</td>
 							@endcan
 							@can('operation delete')
@@ -94,7 +94,7 @@
 												document.getElementById('detach-form-{{$operation->id}}').submit();
 											}else{
 												event.preventDefault();
-											}"> <i class="fas fa-trash red"></i>
+											}"> <i class="fa fa-trash red"></i>
 
 								</button>
 							</td>

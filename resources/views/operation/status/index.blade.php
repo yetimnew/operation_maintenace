@@ -16,7 +16,7 @@
 			<h2>All Status </h2>
 			@can('status create')
 			<div class="ml-auto">
-				<a href="{{route('status.create')}}" class="btn btn-outline-primary"><i class="fas fa-plus mr-1"></i>Add
+				<a href="{{route('status.create')}}" class="btn btn-outline-primary"><i class="fafa-plus mr-1"></i>Add
 					Stauts</a>
 
 			</div>

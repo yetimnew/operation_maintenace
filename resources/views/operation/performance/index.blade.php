@@ -19,7 +19,7 @@
 
 				<div class="ml-auto">
 					<a href="{{route('performace.create')}}" class="btn btn-outline-primary"><i
-							class="fas fa-plus mr-1"></i>Add Performance</a>
+							class="fafa-plus mr-1"></i>Add Performance</a>
 
 				</div>
 				@endcan
@@ -62,7 +62,6 @@
 					</thead>
 					<tbody>
 						<?php $no = 0 ?>
-
 						{{-- {{	dd($dr_tr->name)}} --}}
 						@if ($performances->count()> 0)
 						@foreach ($performances as $pr)
@@ -101,7 +100,7 @@
 
 							@can('performance edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-									href="{{route('performace.edit',['id'=> $pr->id])}}"> <i class="fas fa-edit "></i>
+									href="{{route('performace.edit',['id'=> $pr->id])}}"> <i class="fa fa-edit "></i>
 								</a>
 							</td>
 							@endcan
@@ -110,14 +109,15 @@
 
 								<form action="{{route('performace.destroy',['id'=> $pr->id])}}"
 									id="delete-form-{{$pr->id}}" style="display: none">
-									@csrf @method('DELETE')
+									@csrf 
+									@method('DELETE')
 								</form>
 								<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to delete this?')){
                                       event.preventDefault();
                                       document.getElementById('delete-form-{{$pr->id}}').submit();
                                     }else{
                                      event.preventDefault();
-                                    }"> <i class="fas fa-trash red"></i>
+                                    }"> <i class="fa fa-trash red"></i>
 								</button>
 							</td>
 						</tr>
@@ -147,17 +147,11 @@
 <script>
 	$( document ).ready( function () {
 				$( '#drivers' ).DataTable({
-					
 					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"pageLength": 25,
-
-				// "pageLength": 20,
-				// "scrollY": 100,
-				'columnDefs': [ {
-
-				'targets': [16,17,18], /* column index */
-
-				'orderable': false, /* true or false */
+					'columnDefs': [ {
+						'targets': [16,17,18], /* column index */
+						'orderable': false, /* true or false */
 
 				}]
 				});

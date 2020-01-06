@@ -33,7 +33,6 @@ class PerformanceController extends Controller
         
      }
   
- 
     public function create()
     {
         auth()->user()->notify( new PerformanceCreated);
@@ -48,7 +47,6 @@ class PerformanceController extends Controller
         ->where('driver_truck.is_attached',1)
         ->where('drivers.status',1)
         ->where('trucks.status',1)
-        // ->where('driver.status',1)
         ->get();
 
        if($place->count() < 2){

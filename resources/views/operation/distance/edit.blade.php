@@ -14,8 +14,8 @@
 	<div class="card text-left">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
-				<h2>Driver Update <strong class="blue">{{$driver->name}}</strong></h2>
-				@can('driver edit')
+				<h2>Driver Update <strong class="blue">{{$distance->name}}</strong></h2>
+				@can('distance edit')
 				<div class="ml-auto">
 					<a href="{{route('driver')}}" class="btn btn-outline-primary">
 						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>
@@ -27,10 +27,10 @@
 
 		</div>
 		<div class="card-body">
-			<form method="post" action="{{route('driver.update',['id'=>$driver->id])}}" class="form-horizontal"
-				id="driver_reg" novalidate>
+			<form method="post" action="{{route('distance.update',['id'=>$distance->id])}}" class="form-horizontal"
+				id="distance_reg" novalidate>
 				@csrf
-				@include('operation.driver.form')
+				@include('operation.distance.form')
 
 				<div class="form-group d-flex  required">
 

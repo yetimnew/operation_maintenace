@@ -19,7 +19,7 @@
 				@can('customer create')
 
 				<div class="ml-auto">
-					<a href="{{route('customer.create')}}" class="btn btn-outline-primary"> <i class="fas fa-plus"></i>
+					<a href="{{route('customer.create')}}" class="btn btn-outline-primary"> <i class="fafa-plus"></i>
 						Add
 						Customer</a>
 
@@ -60,7 +60,7 @@
 							<td>{{$customer->remark}}</td>
 							@can('customer edit')
 							<td class='m-1 p-1 text-center'><a href="{{route('customer.edit',['id'=> $customer->id])}}">
-									<i class="fas fa-edit "></i> </a>
+									<i class="fa fa-edit "></i> </a>
 							</td>
 							@endcan
 							@can('customer delete')
@@ -75,7 +75,7 @@
 									document.getElementById('delete-form-{{$customer->id}}').submit();
 								}else{
 								event.preventDefault();
-								}"> <i class="fas fa-trash red"></i>
+								}"> <i class="fa fa-trash red"></i>
 								</button>
 							</td>
 							@endcan

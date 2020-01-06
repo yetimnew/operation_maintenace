@@ -2,9 +2,22 @@
 
 All notable changes to `db-dumper` will be documented in this file
 
+## 2.15.0 - 2019-11-11
+
+- add `doNotCreateTables` to Postgres driver (#116)
+
+## 2.14.3 - 2019-08-21
+
+- fix memory leak (issue #109)
+
+## 2.14.2 - 2019-06-28
+
+- Determine quotes for windows for MongoDB and PostgreSql dumps (#107)
+
 ## 2.14.1 - 2019-05-10
 
 - wrap the dump command in an `if` statement when using compression (#100)
+- drop support for PHP 7.2 and lower
 
 ## 2.14.0 - 2019-04-17
 
