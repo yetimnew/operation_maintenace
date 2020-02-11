@@ -51,7 +51,7 @@
 							<td class='m-1 p-1'>{{$vehecletype->comment}}</td>
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('vehecletype.edit',['id'=> $vehecletype->id])}}"><i
-										class="fafa-edit"> </i></a>
+										class="fa fa-edit"> </i></a>
 							</td>
 
 							<td class='m-1 p-1 text-center'>
@@ -65,7 +65,7 @@
                                 document.getElementById('detach-form-{{$vehecletype->id}}').submit();
                             }else{
                                 event.preventDefault();
-                            }"> <i class="fafa-trash red"></i>
+                            }"> <i class="fa fa-trash red"></i>
 							</td>
 							</button>
 

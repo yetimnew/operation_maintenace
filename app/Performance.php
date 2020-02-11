@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Truck;
 use App\Driver;
 use App\Operation;
@@ -42,6 +43,11 @@ class Performance extends Model
         return $this->belongsTo('App\Operation');
     }
       
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+      
     public function orgion()
     {
         return $this->belongsTo('App\Place');
@@ -68,10 +74,22 @@ class Performance extends Model
     {
         return $query->where("satus", "=",1);
     }
+
+    public function scopeMaintrip($query)
+    {
+        return $query->where("trip", "=",1);
+    }
+    public function scopeMaintrip_returned($query)
+    {
+        return $query->where("trip", "=",1)->where("is_returned", "=",1)->where("satus", "=",1);
+    }
+    public function scopeMaintrip_notreturned($query)
+    {
+        return $query->where("trip", "=",1)->where("is_returned", "=",0)->where("satus", "=",1);
+    }
     public function dateReturnded($query)
     {
         $dt = Carbon::now();
-
     }
 
  public function noOfDateItTakes()

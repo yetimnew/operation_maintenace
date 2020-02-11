@@ -23,7 +23,7 @@
 			</div>
 		</div>
 
-
+{{-- {{dd($trucks)}} --}}
 		<div class="card-body">
 			<form method="post" action="{{route('drivertruck.store')}}" class="form-horizontal"
 				id="driver_truck_create">

@@ -1,28 +1,56 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group required">
-            <label class="control-label">Load Type</label>
-            <select name="chinet" class="form-control select  {{ $errors->has('chinet') ? ' is-invalid' : '' }}"
-                id="chinet" onfocusout="validateChinet()">
-                @if ($performance->LoadType == 0)
-                <option class="dropup" value="0" selected> Return Load </option>
-                <option class="dropup" value="1"> Main Load</option>
-                @endif
-                @if ($performance->LoadType == 1)
-                <option class="dropup" value="1" selected> Main Load</option>
-                <option class="dropup" value="0">Return Load</option>
-                @endif
-            </select>
-            @if ($errors->has('chinet'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('chinet') }}</strong>
-            </span>
+   <div class="row">
+    <div class="col-md-6 m-0 p-0">
+    <div class="form-group required">
+        <label class="control-label">Is that  A trip?</label>
+        <select name="trip" class="form-control select  {{ $errors->has('trip') ? ' is-invalid' : '' }}"
+            id="trip" onfocusout="validateTrip()">
+            @if ($performance->trip == 0)
+            <option class="dropup" value="0" selected> No, I is not </option>
+            <option class="dropup" value="1">Yes, Trip  </option>
             @endif
-            <span class="invalid-feedback" role="alert"></span>
-        </div>
+            @if ($performance->trip == 1)
+            <option class="dropup" value="0" > No, I is not </option>
+            <option class="dropup" value="1" selected>Yes, Trip  </option>
+            @endif
+        </select>
+        @if ($errors->has('trip'))
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('trip') }}</strong>
+        </span>
+        @endif
+        <span class="invalid-feedback" role="alert"></span>
+    </div>
+    </div>
+    <div class="col-md-6 m-0">
+    <div class="form-group required">
+        <label class="control-label">Load Type</label>
+        <select name="chinet" class="form-control select  {{ $errors->has('chinet') ? ' is-invalid' : '' }}"
+            id="chinet" onfocusout="validateChinet()">
+            @if ($performance->LoadType == 0)
+            <option class="dropup" value="0" selected> Return Load </option>
+            <option class="dropup" value="1"> Main Load</option>
+            @endif
+            @if ($performance->LoadType == 1)
+            <option class="dropup" value="1" selected> Main Load</option>
+            <option class="dropup" value="0">Return Load</option>
+            @endif
+        </select>
+        @if ($errors->has('chinet'))
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('chinet') }}</strong>
+        </span>
+        @endif
+        <span class="invalid-feedback" role="alert"></span>
+    </div>
+    </div>
+    
+   </div>
+       
         <div class="form-group required">
             <label class="control-label">FO Number</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="fo" type="text" required class="form-control {{ $errors->has('fo') ? ' is-invalid' : '' }}"
                     id="fo" placeholder="Fright order number" value="{{ old('fo') ?? $performance->FOnumber }}"
                     onfocusout="validateFo()">
@@ -38,12 +66,13 @@
         <div class="form-group required">
             <label class="control-label">Operation ID</label>
             <select name="operation" class="form-control {{ $errors->has('operation') ? ' is-invalid' : '' }} select"
-                id="operation" value="{{ old('operation') }} " onfocusout="validateOperation()">
-                <option class="dropup" value="" selected> Select One</option>
+                id="operation" value="" onfocusout="validateOperation()">
+                <option class="dropup" value="" > Select One</option>
                 @foreach ($operations as $operation)
-                <option class="dropup" value="{{$operation->id}}"
-                    {{ $operation->id == $performance->operation_id ? 'selected' : '' }}> {{$operation->operationid}}
+                   <option class="dropup" value="{{$operation->id}}"
+                    {{ $operation->id == $performance->operation_id ? 'selected' : '' }}> {{ $operation->operationid}}
                 </option>
+                            
                 @endforeach
             </select>
             @if ($errors->has('operation'))
@@ -51,7 +80,6 @@
                 <strong>{{ $errors->first('operation') }}</strong>
             </span>
             @endif
-
             <span class="invalid-feedback" role="alert"></span>
 
 
@@ -60,10 +88,10 @@
             <label class="control-label">Driver and Truck</label>
             <select name="truck" class="form-control {{ $errors->has('truck') ? ' is-invalid' : '' }} select" id="truck"
                 onfocusout="validateTruck()">
-                <option class="dropup" value="" selected> Select One</option>
+                <option class="dropup" value="" > Select One</option>
                 @foreach ($trucks as $truck)
-                <option class="dropup" value="{{$truck->id}}"
-                    {{$truck->id == $performance->driver_truck_id ? 'selected' : '' }}>
+                <option class="dropup" value="{{ $truck->id}}"
+                     {{$truck->id == $performance->driver_truck_id ? 'selected' : '' }}>
                     {{$truck->plate}}-{{$truck->name}}</option>
                 @endforeach
             </select>
@@ -95,13 +123,28 @@
             </div>
         </div>
         <div class="form-group required">
+            <label class="control-label">Cargo Volume In Tone</label>
+            <div class="input-group"> 
+
+                <input name="cargovol" type="number"
+                    class="form-control {{ $errors->has('cargovol') ? ' is-invalid' : '' }}" id="cargovol"
+                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" min="1" onfocusout="validateCargovol()">
+                @if($errors->has('cargovol'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('cargovol') }}</strong>
+                </span>
+                @endif
+                <span class="invalid-feedback" role="alert"></span>
+            </div>
+        </div>
+        <div class="form-group required">
             <label class="control-label">Origion Place</label>
             <select name="origion" class="form-control{{ $errors->has('origion') ? ' is-invalid' : '' }} select"
                 id="origion" onfocusout="validateOrigion()">
-                <option class="dropup" value="" selected> Select One</option>
+                <option class="dropup" value="" > Select One</option>
                 @foreach ($place as $operation)
-                <option class="dropup" value="{{$operation->id}}"
-                    {{$operation->id == $performance->orgion_id ? 'selected' : '' }}> {{$operation->name}} </option>
+                <option class="dropup" value="{{ $operation->id}}  @if(old('origion') == $operation->id) {{ 'selected' }} @endif"
+                    {{$operation->id == $performance->orgion_id ? 'selected' : '' }}> {{ $operation->name}} </option>
                 @endforeach
             </select>
             @if ($errors->has('origion'))
@@ -116,7 +159,7 @@
             <select name="destination"
                 class="form-control {{ $errors->has('destination') ? ' is-invalid' : '' }} select" id="destination"
                 onfocusout="validateDestination()">
-                <option class="dropup" value="" selected> Select One</option>
+                <option class="dropup" value="" > Select One</option>
                 @foreach ($place as $operation)
                 <option class="dropup" value="{{$operation->id}}"
                     {{$operation->id == $performance->destination_id ? 'selected' : '' }}> {{$operation->name}}
@@ -130,10 +173,12 @@
             @endif
             <span class="invalid-feedback" role="alert"></span>
         </div>
+        {{-- {{dd($distance)}} --}}
+    {{-- <distance :distance_id="{{$distance->id}}"></distance> --}}
 
         <div class="form-group required">
             <label class="control-label">Distance with cargo</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="diswc" type="number" class="form-control {{ $errors->has('diswc') ? ' is-invalid' : '' }}"
                     id="diswc" value="{{ old('diswc') ?? $performance->DistanceWCargo}}" min="1"
                     onfocusout="validateDisw()">
@@ -145,10 +190,9 @@
                 <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
-
         <div class="form-group required">
             <label class="control-label">Distance without cargo</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="diswoc" type="number"
                     class="form-control {{ $errors->has('diswoc') ? ' is-invalid' : '' }}" id="diswoc"
                     value="{{ old('diswoc') ?? $performance->DistanceWOCargo}}" min="1" onfocusout="validateDiswoc()">
@@ -160,29 +204,14 @@
                 <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
-
-        <div class="form-group required">
-            <label class="control-label">Cargo Volume In Tone</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
-
-                <input name="cargovol" type="number"
-                    class="form-control {{ $errors->has('cargovol') ? ' is-invalid' : '' }}" id="cargovol"
-                    value="{{ old('cargovol') ?? $performance->CargoVolumMT}}" min="1" onfocusout="validateCargovol()">
-                @if($errors->has('cargovol'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('cargovol') }}</strong>
-                </span>
-                @endif
-                <span class="invalid-feedback" role="alert"></span>
-            </div>
-        </div>
+  
     </div>
 
     <div class="col-md-6">
         <legend> Expenses</legend>
         <div class="form-group">
             <label class="control-label"> Fuel In Litter</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="fuell" type="number" class="form-control {{ $errors->has('fuell') ? ' is-invalid' : '' }}"
                     id="fuell" value="{{ old('fuell') ?? $performance->fuelInLitter}}" min="1"
                     onfocusout="validateFuell()">
@@ -195,9 +224,9 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group ">
             <label class="control-label"> Fuel In Birr</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="fuelb" type="number" class="form-control{{ $errors->has('fuelb') ? ' is-invalid' : '' }}"
                     id="fuelb" value="{{ old('fuelb') ?? $performance->fuelInBirr}}" min="1"
                     onfocusout="validateFuelb()">
@@ -210,9 +239,9 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group ">
             <label class="control-label"> Perdiem</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="perdiem" type="number"
                     class="form-control {{ $errors->has('perdiem') ? ' is-invalid' : '' }}" id="perdiem"
                     value="{{ old('perdiem') ?? $performance->perdiem}}" min="1" onfocusout="validatePerdiem()">
@@ -225,9 +254,9 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group ">
             <label class="control-label">Operational Expense</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="wog" type="number" class="form-control {{ $errors->has('wog') ? ' is-invalid' : '' }}"
                     id="wog" value="{{ old('wog') ?? $performance->workOnGoing}}" min="1" onfocusout="validateWog()">
                 @if($errors->has('wog'))
@@ -239,9 +268,9 @@
             </div>
         </div>
 
-        <div class="form-group required">
+        <div class="form-group ">
             <label class="control-label"> Other Expences</label>
-            <div class="input-group"> <span class="input-group-addon"></span>
+            <div class="input-group"> 
                 <input name="other" type="number" class="form-control {{ $errors->has('other') ? ' is-invalid' : '' }}"
                     id="other" value="{{ old('other') ?? $performance->other}}" min="1" onfocusout="validatOther()">
                 @if($errors->has('other'))
@@ -301,7 +330,8 @@
 	})
         </script>
         <script>
-            const chinet = document.getElementById( 'chinet' );
+                const chinet = document.getElementById( 'chinet' );
+                const trip = document.getElementById( 'trip' );
                 const fo = document.getElementById( 'fo' );
                 const operation = document.getElementById( 'operation' );
                 const truck = document.getElementById( 'truck' );
@@ -321,7 +351,8 @@
 
 	performance_edit_form.addEventListener( 'submit', function ( event ) {
 		event.preventDefault();
-		if ( validateChinet() &&
+		if ( validateTrip() &&
+		    validateChinet() &&
 			validateFo() &&
 			validateOperation() &&
 			validateTruck() &&
@@ -343,6 +374,13 @@
 		}
 	} );
 	// Validator functions
+	function validateTrip() {
+		if ( checkIfEmpty( trip ) ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 	function validateChinet() {
 		if ( checkIfEmpty( chinet ) ) {
 			return false;
@@ -413,10 +451,8 @@
 	}
 
 	function validateDisw() {
-		if ( checkIfEmpty( diswc ) ) {
-			return false;
-		}
-		if ( !minmax( diswc, 10, 1500 ) ) {
+	
+		if ( !minmax( diswc, 0, 3000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -426,10 +462,8 @@
 	}
 
 	function validateDiswoc() {
-		if ( checkIfEmpty( diswoc ) ) {
-			return false;
-		}
-		if ( !minmax( diswoc, 10, 1500 ) ) {
+	
+		if ( !minmax( diswoc, 0, 3000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -439,10 +473,8 @@
 	}
 
 	function validateCargovol() {
-		if ( checkIfEmpty( cargovol ) ) {
-			return false;
-		}
-		if ( !minmax( cargovol, 5, 60 ) ) {
+	
+		if ( !minmax( cargovol, 0, 80 ) ) {
 			return false;
 		} else {
 			return true;
@@ -452,10 +484,8 @@
 
 
 	function validateFuell() {
-		if ( checkIfEmpty( fuell ) ) {
-			return false;
-		}
-		if ( !minmax( fuell, 10, 800 ) ) {
+	
+		if ( !minmax( fuell, 0, 2000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -464,10 +494,8 @@
 	}
 
 	function validateFuelb() {
-		if ( checkIfEmpty( fuelb ) ) {
-			return false;
-		}
-		if ( !minmax( fuelb, 100, 10000 ) ) {
+	
+		if ( !minmax( fuelb, 0, 50000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -476,10 +504,8 @@
 	}
 
 	function validatePerdiem() {
-		if ( checkIfEmpty( perdiem ) ) {
-			return false;
-		}
-		if ( !minmax( perdiem, 10, 10000 ) ) {
+
+		if ( !minmax( perdiem, 0, 10000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -488,10 +514,8 @@
 	}
 
 	function validateWog() {
-		if ( checkIfEmpty( wog ) ) {
-			return false;
-		}
-		if ( !minmax( wog, 10, 10000 ) ) {
+	
+		if ( !minmax( wog, 0, 10000 ) ) {
 			return false;
 		} else {
 			return true;
@@ -500,10 +524,8 @@
 	}
 
 	function validatOther() {
-		if ( checkIfEmpty( other ) ) {
-			return false;
-		}
-		if ( !minmax( other, 10, 10000 ) ) {
+
+		if ( !minmax( other, 0, 10000 ) ) {
 			return false;
 		} else {
 			return true;

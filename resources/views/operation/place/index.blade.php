@@ -48,22 +48,20 @@
 							<td class='m-1 p-1'>{{$place->name}}</td>
 							<td class='m-1 p-1'>{{$place->region->name}}</td>
 							<td class='m-1 p-1'>{{$place->comment}}</td>
-							<td class='m-1 p-1'><a href="{{route('place.edit',['id'=> $place->id])}}"
-									class="btn btn-info btn-sm"><i class="fa fa-edit"> </i></a>
+							<td class='m-1 p-1 text-center'><a href="{{route('place.edit',['id'=> $place->id])}}"
+									><i class="fa fa-edit"> </i></a>
 							</td>
-							<td class='m-1 p-1'>
-
-
+							<td class='m-1 p-1 text-center'>
 								<form action="{{route('place.destroy',['id'=> $place->id])}}"
 									id="detach-form-{{$place->id}}" style="display: none">
 									@csrf @method('DELETE')
 								</form>
-								<button type="submit" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure to Delete this?')){
+								<button type="submit"  onclick="if(confirm('Are you sure to Delete this?')){
                             event.preventDefault();
                             document.getElementById('detach-form-{{$place->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fa fa-trash"> </i>
+                        }"> <i class="fa fa-trash red"> </i>
 							</td>
 							</button>
 

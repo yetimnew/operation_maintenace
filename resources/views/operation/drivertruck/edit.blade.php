@@ -21,6 +21,7 @@
 				</div>
 			</div>
 		</div>
+{{-- {{dd($dts)}} --}}
 		<div class="card-body">
 			<form method="post" action="{{route('drivertruck.update',['id'=>$dts->id])}}" class="form-horizontal"
 				id="truck_form">
@@ -40,29 +41,20 @@
 
 								@endif
 
-
 								@endforeach
 
 							</select>
-
 							<small class="form-text text-danger" id="error_region"></small>
 						</div>
-						{{-- {{dd($drivers)}} --}}
+						{{-- {{dd($driver)}} --}}
 						<div class="form-group required">
 							<label class="control-label">Driver Name</label>
-
 							<select name="dname" class="form-control select" id="dname" required>
 								<option class="dropup" value="{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
 								@foreach ($drivers as $driver)
-								@if( old('dname') == $driver->driverid)
-								<option class="dropup" value="{{$driver->driverid}}" selected> {{$driver->name}}
-								</option>
-								@else
-								<option class="dropup" value="{{$driver->driverid}}"> {{$driver->name}} </option>
-
-								@endif
-
-
+								<option class="dropup" value="{{ $driver->id}} 
+									 @if(old('dname') == $driver->id) {{ 'selected' }} @endif"
+									{{$driver->id == $dts->driverid ? 'selected' : '' }}> {{ $driver->name}} </option>
 								@endforeach
 							</select>
 
@@ -78,8 +70,29 @@
 							</div>
 
 						</div>
+						@if ($dts->is_attached == 0)
 						<div class="form-group required">
-							<button type="submit" class="btn btn-primary" name="save">Save</button>
+							<label class="control-label">Detach Date</label>
+
+							<div class="input-group"> <span class="input-group-addon"></span>
+								<input name="rdate" type="date" required class="form-control" id="rdate"
+									value="{{ $dts->date_detach }}">
+							</div>
+
+						</div>
+						<div class="form-group required">
+							<label class="control-label">Reson for detach</label>
+
+							
+							<textarea name="comment" rows="5"
+							class="form-control {{ $errors->has('comment') ? ' is-invalid' : '' }}"
+							id="comment">{{ $dts->reason}}</textarea>
+
+						</div>
+						@endif
+
+						<div class="form-group required">
+							<button type="submit" class="btn btn-primary" name="save">Update</button>
 
 						</div>
 

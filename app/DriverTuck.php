@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Truck;
+use App\Driver;
 use App\Performance;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,17 +14,27 @@ class DriverTuck extends Model
     
     protected $fillable = [
         'id',
-        'driver_id',
-        'truck_id',
+        'driverid',
+        'plate',
         'date_recived',
         'date_detach',
-        'reson',
-        'status'
+        'reason',
+        'is_attached',
+        'deleted_at',
+        'status' 
     ];
 
     public function performances()
     {
         return $this->belongsToMany('App\Performance');
+    }
+    public function drivers()
+    {
+        return $this->belongsToMany('App\Driver');
+    }
+    public function trucks()
+    {
+        return $this->belongsToMany('App\Truck');
     }
 
 }

@@ -22,7 +22,6 @@
 							<label class="control-label">Driver Name</label>
 							<select name="driver" class="form-control" id="driver" onfocusout="validateDestination()">
 								<option class="dropup" value=""> Select One</option>
-								{{-- <option class="dropup" value="*"> All</option>        --}}
 								@foreach ($drivers as $driver)
 								<option class="dropup" value="{{$driver->driverid}}"> {{$driver->name}} </option>
 								@endforeach
@@ -68,7 +67,6 @@
 					<th>Tone K/m</th>
 					<th>DWC </th>
 					<th>DWOC</th>
-					<th>fuel/Litter</th>
 					<th>fuel/Birr</th>
 					<th>perdiem</th>
 					<th>Oprating Exp.</th>
@@ -92,7 +90,6 @@
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->tonkm,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWC,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->TDWOC,2)}}</td>
-					<td class='m-1 p-1 text-right'>{{ number_format( $td->fl,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->fB,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->perdiem,2)}}</td>
 					<td class='m-1 p-1 text-right'>{{ number_format( $td->workOnGoing,2)}}</td>

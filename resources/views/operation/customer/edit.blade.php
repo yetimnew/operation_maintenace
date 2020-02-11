@@ -29,9 +29,10 @@
 		</div>
 
 		<div class="card-body">
-			<form method="post" action="{{route('customer.update',['id'=>$customer->id])}}" class="form-horizontal"
+			<form method="POST" action="{{route('customer.update',['id'=>$customer->id])}}" class="form-horizontal"
 				id="customer_reg">
 				@csrf
+				@method('PATCH')
 				@include('operation.customer.form')
 				<div class="form-group required pull-right">
 					<button type="submit" class="btn btn-primary" name="save">Save</button>

@@ -52,10 +52,8 @@
                         }else{
                             event.preventDefault();
                         }"> <i class="fa fa-trash"> </i>
+					</button> 
 					</td>
-					</button> {{-- <a href="{{route('region.destroy',['id'=> $region->id])}}" class="btn btn-danger
-					btn-xs">Delete</a>
-					</td> --}}
 				</tr>
 
 				@endforeach @else
@@ -67,7 +65,8 @@
 			</tbody>
 		</table>
 
-		@endsection @section('javascript')
+		@endsection
+		 @section('javascript')
 		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
 		</script>
 		<script>

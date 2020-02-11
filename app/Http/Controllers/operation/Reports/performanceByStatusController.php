@@ -15,12 +15,7 @@ class performanceByStatusController extends Controller
 {
     public function index()
     {
-        // $average= DB::table('statuses')->select('statustype_id')->get();
-        // return collect($average->map(function($value,$key){
-        // return [$value];
-        // }));
-
-
+      
         $maxDate= DB::table('statuses')->MAX('registerddate');
         $newDate = Carbon::parse($maxDate)->diffForHumans();
         $maxautoid= DB::table('statuses')->MAX('autoid');
@@ -118,7 +113,7 @@ class performanceByStatusController extends Controller
   
     public function view(Request $request)
     {
-          
+        
         $plate = $request->input('plate');
         $start = $request->input('startdate');
         $end = $request->input('enddate');
@@ -163,9 +158,9 @@ class performanceByStatusController extends Controller
 public function show(Request $request)
 
 {
+        dd($request->all());
         $status_date =DB::table('statuses')->select('plate','statustype_id')->get();
 
-//         }
         foreach ($status_date as  $value) {
              $internal=    DB::table('statuses')->select('plate','statustype_id')->count('statustype_id')
                 ->groupBy('plate')
@@ -177,6 +172,17 @@ public function show(Request $request)
         return view('operation.report.status_by_date.show');
 
     
+}
+public function mukera()
+{
+ $summery = array();      
+ $status = Status::all(); 
+//  dd($status);
+ foreach ($status as $st ) {
+// echo $st->plate;
+         array_push($summery, Statustype::find($st->id));
+         return $summery;
+ }
 }
     
 }

@@ -151,7 +151,9 @@
                         <div class="bar-chart has-shadow bg-white">
                             <div class="title"><strong class="text-violet">95%</strong><br><small>Current Server Uptime</small>
                             </div>
-                            <canvas id="barChartHome"></canvas>
+                            <canvas id="barChartHome">
+                                
+                            </canvas>
                         </div>
                         <!-- Numbers-->
                         <div class="statistic d-flex align-items-center bg-white has-shadow">

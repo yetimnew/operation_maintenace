@@ -14,18 +14,17 @@
 
 <div class="row col-12">
 	<div class="row">
-	<a class="btn btn-primary" href="{{route('performance_by_status')}}">Back</a>
+		<a class="btn btn-primary" href="{{route('performance_by_status')}}">Back</a>
 	</div>
 
-	<?php $no = 0 ?> @if ($tds->count()> 0)
-	
+	<?php $no = 0 ?>
+	 @if ($tds->count()> 0)
 	@foreach ($tds as $td)
 		<div class="col-lg-2 col-md-3 col-sm-4  p-2">
 			<button class='btn btn-outline-success btn-sm btn-block' type='button'> <span class='badge badge-danger float-right'>{{$td->number}}</span> 
 		<span class='lead'> {{$td->name}}</span></button>
 
 		</div>
-
 	@endforeach
 	<div class="row">
 	

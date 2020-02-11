@@ -13,10 +13,19 @@
 </ol>
 
 <div class="row col-12">
-	<div class="col-12 mb-3">
 
-		<a href="{{route('performance_by_status')}}" class="btn btn-primary pull-right">Back</a>
+	<div class="d-flex align-items-center">
+		<h2>All Performances </h2>
+		@can('performance create')
+
+		<div class="ml-auto">
+			<a href="{{route('performance_by_status')}}" class="btn btn-outline-primary"><i
+					class="fafa-plus mr-1"></i>back</a>
+
+		</div>
+		@endcan
 	</div>
+
 	<div class="table-responsive text-nowrap">
 		<table class="table table-bordered table-sm table-striped" id="drivers">
 			<thead>
@@ -25,13 +34,10 @@
 					<th>Plate</th>
 					<th>Status Name</th>
 					<th>Registed Date</th>
-
-
 				</tr>
 			</thead>
 			<tbody>
 				<?php $no = 0 ?>
-				{{-- {{ dd($status_date) }} --}}
 				@if ($status_summery->count()> 0)
 				@foreach ($status_summery as $td)
 				<tr>
@@ -80,11 +86,8 @@
 			</div>
 		</div>
 
-
 		@endsection
 		@section( 'javascript' ) {
-		{
-		--
 		<script src="{{ asset('js/jquery.dataTables.min.js') }}">
 		</script>
 		<script>
@@ -92,7 +95,7 @@
 					$( '#drivers' ).DataTable();
 
 				} );
-		</script>--
-		}
+		</script>
+		
 		}
 		@endsection

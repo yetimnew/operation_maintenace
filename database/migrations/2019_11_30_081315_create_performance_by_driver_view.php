@@ -23,7 +23,7 @@ class CreatePerformanceByDriverView extends Migration
             `tims_laravel`.`driver_truck`.`plate` AS `plate`,
             `tims_laravel`.`performances`.`DateDispach` AS `DateDispach`,
             COUNT(
-                `tims_laravel`.`performances`.`FOnumber`
+                `tims_laravel`.`performances`.`trip`
             ) AS `fo`,
             SUM(
                 `tims_laravel`.`performances`.`CargoVolumMT`

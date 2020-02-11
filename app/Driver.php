@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Truck;
+use App\DriverTuck;
 use App\Performance;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +35,7 @@ class Driver extends Model
     {
         return $this->belongsToMany('App\Truck');
     }
+
     public function performances()
     {
         return $this->hasMany('App\Performance');

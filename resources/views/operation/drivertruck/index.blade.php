@@ -31,15 +31,10 @@
 						<th class="m-1 b-1">Driver Name</th>
 						<th class="m-1 b-1">Recived Date</th>
 						<th class="m-1 b-1">Status</th>
-						@can('truck_driver edit')
-						<th class="m-1 b-1">Edit</th>
+						@can('truck_driver view')
+						<th class="m-1 b-1">Show</th>
 						@endcan
-						@can('truck_driver detach')
-						<th class="m-1 b-1">Detach</th>
-						@endcan
-						@can('truck_driver delete')
-						<th class="m-1 b-1">Delete</th>
-						@endcan
+						
 
 					</tr>
 				</thead>
@@ -55,51 +50,17 @@
 						<td class='m-1 p-1'>{{$dt->Name}}</td>
 						<td class='m-1 p-1'>{{$dt->date_recived}}</td>
 						@if ($dt->is_attached == 1)
-						<td class='m-1 p-1'><span class="badge badge-primary">Attached</span>
-						</td>
-						@can('truck_driver edit')
-						<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-								href="{{route('drivertruck.edit',['id'=> $dt->id])}}"><i class="fa fa-edit"></i></a>
-						</td>
-						@endcan
-
-						@can('truck_driver detach')
-						<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Dettach"><a
-								class="btn btn-sm btn-outline-info"
-								href="{{route('drivertruck.detach',['id'=> $dt->id])}}"
-								id="detach-form-{{$dt->id}}">Dettach</a>
-						</td>
-						@endcan
-
-						@else
-						<td class='m-1 p-1'><span class="badge badge-danger">Passive</span><span class="pull-right">
-								Detached {{$dt->date_detach}} </span> </td>
-						<td class='m-1 p-1'><span class="badge badge-info">Note Editable</span>
-							</a>
-						</td>
-
-						<td class='m-1 p-1'><span class="badge badge-info">Aleady Detached</span>
-						</td>
+						<td class='m-1 p-1'><span class="badge badge-primary">Attached</span></td>
+							@else
+						<td class='m-1 p-1' ><span class="badge badge-danger">Detached</span><span class="pull-right">
+								</span> </td>
 						@endif
-
-						@can('truck_driver delete')
-						<td class='m-1 p-1 text-center'>
-
-							<form action="{{route('drivertruck.destroy',['id'=> $dt->id])}}"
-								id="delete-form-{{$dt->id}}" style="display: none">
-								@csrf @method('DELETE')
-							</form>
-							<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to delete this?')){
-                            event.preventDefault();
-                            document.getElementById('delete-form-{{$dt->id}}').submit();
-                        }else{
-                            event.preventDefault();
-                        }"> <i class="fa fa-trash red"></i>
-							</button>
+						@can('truck_driver edit')
+						<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="show"><a
+								href="{{route('drivertruck.show',['id'=> $dt->id])}}"><i class="fa fa-edit"></i></a>
 						</td>
 						@endcan
-
-					</tr>
+						</tr>
 
 					@endforeach
 					@else

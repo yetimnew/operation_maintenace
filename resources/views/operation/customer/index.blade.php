@@ -49,7 +49,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php $no = 0 ?> @if ($customers->count()> 0)
+						<?php $no = 0 ?>
+						 @if ($customers->count()> 0)
 						@foreach ($customers as $customer)
 						<tr>
 							<td>{{++$no}}</td>

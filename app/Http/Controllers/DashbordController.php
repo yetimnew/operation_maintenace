@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Truck;
+use App\Performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,6 +49,7 @@ class DashbordController extends Controller
         ->where('operations.closed','=',1)
         ->groupBy('operations.id')
        ->get();
+       $statuslist= $this->statusList();
 
        return view('dashboard')
        ->with('number_of_trucks',$number_of_trucks)
@@ -59,7 +61,17 @@ class DashbordController extends Controller
        ->with('maxStatus',$maxStatus)
        ->with('tds',$tds)
        ->with('operationsReport',$operationsReport)
-       ->with('statuses',$statuses);
+       ->with('statuses',$statuses)
+       ->with('statuslist',$statuslist);
     }
+    public function statusList()
+    {
+        return [
+            'all' => Performance::active()->count(),
+            'returned' => Performance::returned()->count(),
+            'notreturned' => Performance::notreturned()->count(),
+        ];
+    }
+  
 
 }

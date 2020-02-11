@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Truck;
+use App\Driver;
 use App\DriverTuck;
 use App\Vehecletype;
 use Illuminate\Http\Request;
@@ -71,7 +72,8 @@ class TruckController extends Controller
 
     public function show($id)
     {
-        //
+        $truck = Truck::findOrFail($id);
+       return view('operation.truck.show')->with('truck',$truck );
     }
 
     public function edit($id)
@@ -117,12 +119,15 @@ class TruckController extends Controller
     public function destroy($id)
     {
         $truck = Truck::find($id);
-
         $plate=  $truck->plate;
-        $td= DriverTuck::where('plate', '=', $plate)->first();
-    //    dd($td->plate);
-        if($td){
-            Session::flash('error', 'Not deleted ! ' .$plate .' is attached to Plate '. $td->driverid );
+        $td= DriverTuck::where('plate', '=', $plate)
+        ->where('status', '=', 1)
+        ->where('is_attached', '=', 1)
+        ->first();
+// dd($td);
+           if($td){
+            $driver = Driver::where('driverid', '=', $td->driverid)->first();
+            Session::flash('error', 'Not deleted ! ' .$plate .' is attached to driver '. $driver->name );
             return redirect()->back();
         }else{
             $truck->status = 0;

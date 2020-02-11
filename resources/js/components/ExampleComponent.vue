@@ -1,17 +1,18 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div>The distance comes here</div>
 </template>
 
-<i class="fa fa-subscript" aria-hidden="true"></i>
+<script>
+export default {
+  mounted() {
+    this.$http.get("/check/" + this.distance_id).then(resp => {
+      console.log(resp);
+    });
+  },
+  props: ["distance_id"]
+};
+</script>
+
+<style>
+</style>
+

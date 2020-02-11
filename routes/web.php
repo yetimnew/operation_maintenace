@@ -39,9 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create']);
     Route::post('/truck/store',           ['uses'=>'TruckController@store','as'=>'truck.store']);
     Route::get('/truck/edit/{id}',        ['uses'=>'TruckController@edit','as'=>'truck.edit']);
-    Route::get('/truck/deactivate/{id}',        ['uses'=>'TruckController@deactivate','as'=>'truck.deactivate']);
+    Route::get('/truck/show/{id}',        ['uses'=>'TruckController@show','as'=>'truck.show']);
+    Route::get('/truck/deactivate/{id}',  ['uses'=>'TruckController@deactivate','as'=>'truck.deactivate']);
     Route::post('/truck/update/{id}',     ['uses'=>'TruckController@update','as'=>'truck.update']);
-    Route::get('/truck/destroy/{id}',     ['uses'=>'TruckController@destroy','as'=>'truck.destroy']);
+    Route::delete('/truck/destroy/{id}',  ['uses'=>'TruckController@destroy','as'=>'truck.destroy']);
         
 // Truck 
     Route::get('/vehecletype',              ['uses'=>'VehecleController@index','as'=>'vehecletype']);
@@ -73,7 +74,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/customer/create',          ['uses'=>'CustomerController@create','as'=>'customer.create'])->middleware('permission:customer create');
     Route::post('/customer/store',          ['uses'=>'CustomerController@store','as'=>'customer.store']);
     Route::get('/customer/edit/{id}',       ['uses'=>'CustomerController@edit','as'=>'customer.edit']);
-    Route::post('/customer/update/{id}',    ['uses'=>'CustomerController@update','as'=>'customer.update']);
+    Route::patch('/customer/update/{id}',    ['uses'=>'CustomerController@update','as'=>'customer.update']);
     Route::get('/customer/destroy/{id}',    ['uses'=>'CustomerController@destroy','as'=>'customer.destroy']);
 // Region
     Route::get('/region',                   ['uses'=>'RegionController@index','as'=>'region']);
@@ -103,14 +104,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/performace/create',       ['uses'=>'PerformanceController@create','as'=>'performace.create']);
     Route::post('/performace/store',       ['uses'=>'PerformanceController@store','as'=>'performace.store']);
     Route::get('/performace/edit/{id}',    ['uses'=>'PerformanceController@edit','as'=>'performace.edit']);
+    Route::get('/performace/show/{id}',    ['uses'=>'PerformanceController@show','as'=>'performace.show']);
     Route::post('/performace/update/{id}', ['uses'=>'PerformanceController@update','as'=>'performace.update']);
-    Route::get('/performace/destroy/{id}', ['uses'=>'PerformanceController@destroy','as'=>'performace.destroy']);
+    Route::delete('/performace/destroy/{id}', ['uses'=>'PerformanceController@destroy','as'=>'performace.destroy']);
     
 // statusType
     Route::get('/drivertruck',                              ['uses'=>'TruckDriverController@index','as'=>'drivertruck']);
     Route::get('/drivertruck/create',                       ['uses'=>'TruckDriverController@create','as'=>'drivertruck.create']);
     Route::post('/drivertruck/store',                       ['uses'=>'TruckDriverController@store','as'=>'drivertruck.store']);
     Route::get('/drivertruck/edit/{id}',                    ['uses'=>'TruckDriverController@edit','as'=>'drivertruck.edit']);
+    Route::get('/drivertruck/show/{id}',                    ['uses'=>'TruckDriverController@show','as'=>'drivertruck.show']);
     Route::get('/drivertruck/detach/{id}',                  ['uses'=>'TruckDriverController@detach','as'=>'drivertruck.detach']);
     Route::post('/drivertruck/update/{id}',                 ['uses'=>'TruckDriverController@update','as'=>'drivertruck.update']);
     Route::post('/drivertruck/update_dt/{id}',              ['uses'=>'TruckDriverController@update_dt','as'=>'drivertruck.update_dt']);
@@ -130,6 +133,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/distance/edit/{id}',                          ['uses'=>'DistanceController@edit','as'=>'distance.edit']);
     Route::post('/distance/update/{id}',                       ['uses'=>'DistanceController@update','as'=>'distance.update']);
     Route::get('/distance/destroy/{id}',                       ['uses'=>'DistanceController@destroy','as'=>'distance.destroy']);
+   
+    Route::get('/check_distance/{id}',                         ['uses'=>'CheckDistanceController@check','as'=>'check']);
+    // Route::get('/check_distance/{id}'                           , function($id){ return \App\Distance::find($id);});
     //reports
     Route::get('/performance_by_driver',                     ['uses'=>'operation\Reports\performanceByDriverController@index','as'=>'performance_by_driver']);
     Route::get('/performance_by_driver/create',              ['uses'=>'operation\Reports\performanceByDriverController@create','as'=>'performance_by_driver.create']);
@@ -161,7 +167,8 @@ Route::group(['middleware' => ['auth']], function () {
   
     Route::get('/performance_by_status',                     ['uses'=>'operation\Reports\performanceByStatusController@index','as'=>'performance_by_status']);
     Route::get('/performance_by_status/create',              ['uses'=>'operation\Reports\performanceByStatusController@create','as'=>'performance_by_status.create']);
-    Route::get('/performance_by_status/view',              ['uses'=>'operation\Reports\performanceByStatusController@view','as'=>'performance_by_status.view']);
+    // Route::get('/performance_by_status/mukera',              ['uses'=>'operation\Reports\performanceByStatusController@mukera','as'=>'performance_by_status.mukera']);
+    Route::post('/performance_by_status/view',              ['uses'=>'operation\Reports\performanceByStatusController@view','as'=>'performance_by_status.view']);
     Route::get('/performance_by_status/show',              ['uses'=>'operation\Reports\performanceByStatusController@show','as'=>'performance_by_status.show']);
     Route::post('/performance_by_status/store',              ['uses'=>'operation\Reports\performanceByStatusController@store','as'=>'performance_by_status.store']);
     Route::get('/performance_by_status/edit/{id}',           ['uses'=>'operation\Reports\performanceByStatusController@edit','as'=>'performance_by_status.edit']);

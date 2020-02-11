@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Place;
 use App\Truck;
 use App\Driver;
 use App\Operation;
+use Carbon\Carbon;
 use App\DriverTuck;
 use App\Performance;
 use Illuminate\Http\Request;
@@ -18,13 +18,12 @@ class PerformanceController extends Controller
 { 
     public function index()
     {
-
-    // $pr = Performance::returned()->get();
-    $performances = Performance::active()->latest()->get();
+        $performances = Performance::active()->latest()->maintrip()->get();
         $statuslist= $this->statusList();
         $trucks = Truck::all();
         $drivers = Driver::all();
-        // dd( $pr);
+        
+    
           return view('operation.performance.index')
         ->with('performances',$performances)
         ->with('trucks',$trucks)
@@ -36,7 +35,7 @@ class PerformanceController extends Controller
     public function create()
     {
         auth()->user()->notify( new PerformanceCreated);
-        $performance =new  Performance;
+        $performance = new  Performance;
         $operations=  DB::table('operations')->where('status','=',1)->where('closed','=',1)->get();
         $place = Place::all();
         $trucks =  DB::table('driver_truck')
@@ -68,7 +67,6 @@ class PerformanceController extends Controller
      return view('operation.performance.create')
      ->with('operations',$operations)
      ->with('trucks',$trucks)
-    //  ->with('drivers',$drivers)
      ->with('performance',$performance)
      ->with('place',$place);
     }
@@ -78,26 +76,28 @@ class PerformanceController extends Controller
         // dd($request->all());
        
          $this->validate($request, [
+            'trip' => 'required',
             'chinet' => 'required',
             'fo' => 'required|unique:performances,FOnumber',
             'operation' => 'required',
             'truck' => 'required',
             'ddate' => 'required|date',
-            'origion' => 'required',
-            'destination' => 'required',
-            'diswc' => 'required|numeric',
-            'diswoc' => 'required|numeric',
+            'origion' => 'nullable',
+            'destination' => 'different:origion',
+            'diswc' => 'nullable|numeric',
+            'diswoc' => 'nullable|numeric',
             'cargovol' => 'required|numeric',
-            'fuell' => 'required|numeric',
-            'fuelb' => 'required|numeric',
-            'perdiem' => 'required|numeric',
-            'wog' => 'required|numeric',
-            'other' => 'required|numeric',
+            'fuell' => 'nullable|numeric',
+            'fuelb' => 'nullable|numeric',
+            'perdiem' => 'nullable|numeric',
+            'wog' => 'nullable|numeric',
+            'other' => 'nullable|numeric',
             'comment' => '',
 
         ]);
 
          $performance = new Performance;
+         $performance->trip = $request->trip ;
          $performance->LoadType = $request->chinet ;
          $performance->FOnumber = $request->fo;
          $performance->operation_id = $request->operation ;
@@ -125,7 +125,27 @@ class PerformanceController extends Controller
 
     public function show($id)
     {
-        //
+        $performance = Performance::findOrFail($id);
+        $start =  Carbon::parse($performance->DateDispach);
+        $end  =  Carbon::parse($performance->returned_date);
+        $difinday = $end->diffInDays($start);
+        $diffinhour = $end->diffInHours($start);
+
+
+        $operations = Operation::all();     
+    
+        $driver_detail =  DB::table('driver_truck')
+        ->select('driver_truck.id','driver_truck.driverid', 'driver_truck.plate', 
+        'driver_truck.date_recived', 'driver_truck.status','drivers.name')
+        ->LEFTJOIN('drivers','drivers.driverid','=','driver_truck.driverid')
+       ->where('driver_truck.id', '=', $performance->driver_truck_id )
+        ->get();
+        return view('operation.performance.show')
+        ->with('performance',$performance)
+        ->with('operations',$operations)
+        ->with('difinday',$difinday)
+        ->with('diffinhour',$diffinhour)
+        ->with('driver_detail',$driver_detail);
     }
 
     public function edit($id)
@@ -134,14 +154,7 @@ class PerformanceController extends Controller
         $performance = Performance::findOrFail($id);
         $operations = Operation::all();
         $place = Place::all();
-        // $trucks = Truck::all();
-        $trucks =  DB::table('driver_truck')
-        ->select('driver_truck.id','driver_truck.driverid', 'driver_truck.plate', 'driver_truck.date_recived', 'driver_truck.status','drivers.name')
-        ->LEFTJOIN('drivers','drivers.driverid','=','driver_truck.driverid')
-        // ->where('driver_truck.status',1)
-        ->get();
-        // $drivers = Driver::all();
-
+        $trucks =  $this->driver_truck();
         return view('operation.performance.edit')
         ->with('performance',$performance)
         ->with('operations',$operations)
@@ -153,29 +166,31 @@ class PerformanceController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd( $id);
+        // dd($request->all());
         $this->validate($request, [
+            'trip' => 'required',
             'chinet' => 'required',
             'fo' => 'required',
             'operation' => 'required',
             'truck' => 'required',
             'ddate' => 'required|date',
-            'origion' => 'required',
-            'destination' => 'required',
-            'diswc' => 'required|numeric',
-            'diswoc' => 'required|numeric',
+            'origion' => 'nullable',
+            'destination' => 'different:origion',
+            'diswc' => 'nullable|numeric',
+            'diswoc' => 'nullable|numeric',
             'cargovol' => 'required|numeric',
-            'fuell' => 'required|numeric',
-            'fuelb' => 'required|numeric',
-            'perdiem' => 'required|numeric',
-            'wog' => 'required|numeric',
-            'other' => 'required|numeric',
+            'fuell' => 'nullable|numeric',
+            'fuelb' => 'nullable|numeric',
+            'perdiem' => 'nullable|numeric',
+            'wog' => 'nullable|numeric',
+            'other' => 'nullable|numeric',
             'returned' => '',
             'r_date' => 'nullable|date|after:ddate',
 
         ]);
   
             $performance = Performance::find($id);
+            $performance->trip = $request->trip ;
             $performance->LoadType = $request->chinet ;
             $performance->FOnumber = $request->fo;
             $performance->operation_id = $request->operation ;
@@ -195,17 +210,17 @@ class PerformanceController extends Controller
             $performance->is_returned = $request->returned ;
             $performance->returned_date = $request->r_date ;
             $performance->save();
-            Session::flash('success', 'Performance  updated successfuly' );
-            return redirect()->route('performace');
+            Session::flash('success', 'Fo  Number '.$performance->FOnumber . ' updated successfuly' );
+            return redirect()->route('performace.show',['id'=>$performance->id]);
     }
 
     public function destroy($id)
     {
+        // dd($id);
         $performance = Performance::find($id);
-        $performance->satus = 0;
-        $performance->save();
+        $performance->delete();
         Session::flash('success', 'Performance deleted successfuly' );
-        return redirect()->back();
+        return redirect()->route('performace');
 
     }
     public function statusList()
@@ -216,11 +231,14 @@ class PerformanceController extends Controller
             'notreturned' => Performance::notreturned()->count(),
         ];
     }
-    // public function returnedWith()
-    // {
-        
-    //       return  Carbon::parse($value)->diffForHumans();
-    //     # code...
-    // }
+    public function driver_truck()
+    {
+        $trucks =  DB::table('driver_truck')
+        ->select('driver_truck.id','driver_truck.driverid', 'driver_truck.plate', 'driver_truck.date_recived', 'driver_truck.status','drivers.name')
+        ->LEFTJOIN('drivers','drivers.driverid','=','driver_truck.driverid')
+        ->get();
+        return $trucks;
+    }
+
 
 }

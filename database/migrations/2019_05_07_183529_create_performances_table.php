@@ -15,6 +15,7 @@ class CreatePerformancesTable extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->boolean('trip')->default(0);
             $table->boolean('LoadType');
             $table->string('FOnumber');
             $table->integer('operation_id')->index();
@@ -37,6 +38,7 @@ class CreatePerformancesTable extends Migration
             $table->boolean('is_returned')->default(0);
             $table->dateTime('returned_date')->nullable();
             $table->bigInteger('user_id')->nullable();
+           
             $table->softDeletes();
             $table->timestamps();
         });

@@ -6,16 +6,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTrucksTable extends Migration
 {
-
     public function up()
     {
         Schema::create('trucks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('plate')->index();
-
             $table->integer('vehecletype_id')->unsigned()->index();
             // $table->foreign('vehecletype_id')->references('id')->on('vehecletypes') ->onDelete('cascade');
-
             $table->string('chasisNumber')->nullable();
             $table->string('engineNumber')->nullable();
             $table->integer('tyreSyze')->nullable();

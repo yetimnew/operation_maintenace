@@ -11,7 +11,7 @@
 	<div class="card text-left">
 		<div class="card-header">
 			<div class="d-flex">
-				<h2>Performance Registration</h2>
+			<h2>Performance Registration</h2>
 				<div class="ml-auto">
 					<a href="{{route('performace')}}" class="btn btn-outline-primary"> <i class="fa fa-backward mr-1"
 							aria-hidden="true"> Back</i> </a>
@@ -19,6 +19,7 @@
 			</div>
 		</div>
 		<div class="card-body">
+
 			<form method="post" action="{{route('performace.store')}}" id="performance_edit_form" novalidate>
 				@csrf
 				@include('operation.performance.form')
@@ -42,3 +43,4 @@
 </div>
 
 @endsection
+

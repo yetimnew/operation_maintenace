@@ -54,7 +54,6 @@
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->CargoVolumMT,2)}}</td>
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->tonkm,2)}}</td>
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->TDWC,2)}}</td>
-
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->TDWOC,2)}}</td>
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->fB,2)}}</td>
 					<td class='m-1 p-1 text-center'>{{ number_format( $td->perdiem,2)}}</td>

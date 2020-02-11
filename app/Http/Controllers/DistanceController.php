@@ -117,27 +117,17 @@ class DistanceController extends Controller
         ->with('distances',$distances);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Distance  $distance
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,$id)
     {
         $this->validate($request, [
             'origin' => 'required', 
             'destination' => 'required|different:origin',
             'km' => 'required',
-           
-
         ]);
 
         $distance = Distance::findOrFail($id);
          $distance->km= $request->km;
-        // $distance->status= 1;
-              
+          
             $distance->save();
         Session::flash('success',  ' Distance registerd successfuly' );
         return redirect()->route('distance');
@@ -145,12 +135,6 @@ class DistanceController extends Controller
        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Distance  $distance
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $distance = Distance::findOrFail($id);
@@ -161,4 +145,5 @@ class DistanceController extends Controller
 
         
     }
+
 }
