@@ -150,22 +150,16 @@
 			<div class="chart col-lg-3 col-12">
 				<!-- Bar Chart   -->
 				<div class="bar-chart has-shadow bg-white">
-					<div class="title"><strong class="text-violet">Truck and their Current state</strong>
+					<div class="title"><strong class="text-violet">Truck current Status</strong>
 					</div>
 				
-				
-						
 								<div class="p-3">
 
 									@foreach ($statuslist as $key => $value )
 									<p>  {{$key}}<span class="pull-right"> {{$value}}</span></p>
-									
-									
 									@endforeach
 								</div>
 								
-				
-
 				</div>
 				<!-- Numbers-->
 				<div class="statistic d-flex align-items-center bg-white has-shadow">

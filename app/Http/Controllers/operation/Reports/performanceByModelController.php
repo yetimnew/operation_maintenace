@@ -28,7 +28,7 @@ class performanceByModelController extends Controller
         
         $first = Carbon::createFromDate($request->input('startDate'));
         $second = Carbon::createFromDate($request->input('endDate'));
-    $date_diff = ( strtotime( $start ) - strtotime( $end ) );
+        $date_diff = ( strtotime( $start ) - strtotime( $end ) );
         $diff = abs( strtotime( $end ) - strtotime( $start ) );
 
     $years = floor( $diff / ( 365 * 60 * 60 * 24 ) );
@@ -38,8 +38,8 @@ class performanceByModelController extends Controller
     if ( $end > $start) {
 
         $tds = DB::table('performance_by_model_report_views')
-        ->select('vehecletype_id', 'name', 'no', 'Trip', 'dwc', 'dwoc', 'Tone', 'KM', 'Tonek', 'fl', 'fib', 'Perdium', 'other', 'totla', 'at')
-        ->whereBetween('performance_by_model_report_views.at', [$first->toDateTimeString(), $second->toDateTimeString()])
+        ->select('vehecletype_id', 'name', 'no', 'Trip', 'dwc', 'dwoc', 'Tone', 'KM', 'Tonek', 'fl', 'fib', 'Perdium', 'other', 'totla')
+      //  ->whereBetween('performance_by_model_report_views.at', [$first->toDateTimeString(), $second->toDateTimeString()])
          ->get();
 
 

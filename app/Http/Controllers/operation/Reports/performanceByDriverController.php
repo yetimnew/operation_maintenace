@@ -23,7 +23,6 @@ class performanceByDriverController extends Controller
        
     }
 
-
     public function store(Request $request)
     {
     $format = 'd-m-Y';

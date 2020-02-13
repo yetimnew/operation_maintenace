@@ -38,7 +38,7 @@
 					<td class='m-1 p-1 text-center'>{{++$no}}</td>
 					<td class='m-1 p-1'>{{$td->plate}}</td>
 					<td class='m-1 p-1 text-right'>{{$td->name}}</td>
-					<td class='m-1 p-1 text-right'>{{ $td->registerddate}}</td>
+					<td class='m-1 p-1 text-right'>{{ $td->registerddate->diffForHumans()}}</td>
 
 				</tr>
 				@endforeach

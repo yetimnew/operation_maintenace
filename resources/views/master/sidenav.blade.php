@@ -28,8 +28,7 @@
                                                 href="{{route('truck')}}">Truck</a>
                                 </li>
                                 <li class="{{ Request::is('vehecletype') ? 'active' : ''}}"><a
-                                                href="{{route('vehecletype')}}">Truck
-                                                Model</a>
+                                    href="{{route('vehecletype')}}">Truck Model</a>
                                 </li>
                         </ul>
                 </li>
@@ -81,8 +80,7 @@
                 </li>
 
                 <li class="{{ Request::is('performance_*') ? 'active' : ''}}"><a href="#exampledropdownDropdown6"
-                                aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bar-chart orange"
-                                        aria-hidden="true"></i>
+                                aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bar-chart orange"  aria-hidden="true"></i>
                                 Report </a>
                         <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
                                 <li class="{{ Request::is('performance_by_driver') ? 'active' : ''}}"><a
@@ -90,13 +88,11 @@
                                 </li>
 
                                 <li class="{{ Request::is('performance_of_all_driver') ? 'active' : ''}}"><a
-                                                href="{{ route('performance_of_all_driver')}}">Performance Of All
-                                                Driver</a> </li>
+                                                href="{{ route('performance_of_all_driver')}}">Performance Of All     Driver</a> </li>
 
                                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_truck')}}">Performance Of All Truck</a>
-                                </li>pe
-                                
+                                </li>                               
                                 <li class="{{ Request::is('performance_by_truck') ? 'active' : ''}}"><a
                                                 href="{{ route('performance_by_truck')}}">Performance By Truck</a> </li>
                                 <li class="{{ Request::is('performance_by_opration') ? 'active' : ''}}"><a

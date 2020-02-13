@@ -64,15 +64,15 @@ class Performance extends Model
 
     public function scopeReturned($query)
     {
-        return $query->where("is_returned", "=",0)->where("satus", "=",1);
+        return $query->where("is_returned", "=",1)->where("satus", "=",1)->where("trip", "=",1);
     }
     public function scopeNotReturned($query)
     {
-        return $query->where("is_returned", "=",1)->where("satus", "=",1);
+        return $query->where("is_returned", "=",0)->where("satus", "=",1)->where("trip", "=",1);
     }
     public function scopeActive($query)
     {
-        return $query->where("satus", "=",1);
+        return $query->where("satus", "=",1)->where("trip", "=",1);;
     }
 
     public function scopeMaintrip($query)

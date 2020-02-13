@@ -64,12 +64,13 @@ class DashbordController extends Controller
        ->with('statuses',$statuses)
        ->with('statuslist',$statuslist);
     }
+
     public function statusList()
     {
         return [
-            'all' => Performance::active()->count(),
-            'returned' => Performance::returned()->count(),
-            'notreturned' => Performance::notreturned()->count(),
+            'Returned' => Performance::returned()->take(30)->count(),
+            'Not returned' => Performance::notreturned()->take(30)->count(),
+            'All' => Performance::where('trip','=',1)->active()->take(30)->count(),
         ];
     }
   

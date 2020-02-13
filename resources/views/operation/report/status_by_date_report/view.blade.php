@@ -13,7 +13,6 @@
 </ol>
 
 <div class="row col-12">
-
 	<div class="d-flex align-items-center">
 		<h2>All Performances </h2>
 		@can('performance create')
@@ -45,10 +44,8 @@
 					<td class='m-1 p-1'>{{$td->plate}}</td>
 					<td class='m-1 p-1 text-right'>{{$td->name}}</td>
 					<td class='m-1 p-1 text-right'>{{ $td->registerddate}}</td>
-
 				</tr>
 				@endforeach
-
 				@else
 				<tr>
 					<td class='m-1 p-1 text-center' colspan="12">No Data Avilable</td>

@@ -22,7 +22,6 @@ class PerformanceController extends Controller
         $statuslist= $this->statusList();
         $trucks = Truck::all();
         $drivers = Driver::all();
-        
     
           return view('operation.performance.index')
         ->with('performances',$performances)
@@ -86,6 +85,7 @@ class PerformanceController extends Controller
             'destination' => 'different:origion',
             'diswc' => 'nullable|numeric',
             'diswoc' => 'nullable|numeric',
+            'tonkm' => 'required|numeric',
             'cargovol' => 'required|numeric',
             'fuell' => 'nullable|numeric',
             'fuelb' => 'nullable|numeric',
@@ -107,8 +107,9 @@ class PerformanceController extends Controller
          $performance->destination_id = $request->destination ;
          $performance->DistanceWCargo = $request->diswc;
          $performance->DistanceWOCargo = $request->diswoc ;
+         $performance->tonkm = $request->tonkm ;
          $performance->CargoVolumMT = $request->cargovol ;
-         $performance->tonkm = (($request->diswc ) * ($request->cargovol)) ;
+        //  $performance->tonkm = (($request->diswc ) * ($request->cargovol)) ;
          $performance->fuelInLitter = $request->fuell ;
          $performance->fuelInBirr = $request->fuelb ;
          $performance->perdiem = $request->perdiem ;
@@ -178,6 +179,7 @@ class PerformanceController extends Controller
             'destination' => 'different:origion',
             'diswc' => 'nullable|numeric',
             'diswoc' => 'nullable|numeric',
+            'tonkm' => 'required|numeric',
             'cargovol' => 'required|numeric',
             'fuell' => 'nullable|numeric',
             'fuelb' => 'nullable|numeric',
@@ -200,6 +202,7 @@ class PerformanceController extends Controller
             $performance->destination_id = $request->destination ;
             $performance->DistanceWCargo = $request->diswc;
             $performance->DistanceWOCargo = $request->diswoc ;
+            $performance->tonkm = $request->tonkm ;
             $performance->CargoVolumMT = $request->cargovol ;
             $performance->fuelInLitter = $request->fuell ;
             $performance->fuelInBirr = $request->fuelb ;
@@ -226,9 +229,9 @@ class PerformanceController extends Controller
     public function statusList()
     {
         return [
-            'all' => Performance::active()->count(),
-            'returned' => Performance::returned()->count(),
-            'notreturned' => Performance::notreturned()->count(),
+            'All' => Performance::active()->count(),
+            'Returned' => Performance::returned()->count(),
+            'Not returned' => Performance::notreturned()->count(),
         ];
     }
     public function driver_truck()

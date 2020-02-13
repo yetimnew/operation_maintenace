@@ -14,7 +14,7 @@
 	<div class="card text-left">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
-				<h2>Performances of {{$performance->FOnumber}} </h2><div class="ml-auto">
+				<h2>Details of FO Number {{$performance->FOnumber}} </h2><div class="ml-auto">
 					<a href="{{route('performace')}}" class="btn btn-outline-primary"> <i class="fa fa-backward mr-1"
 							aria-hidden="true"> Back</i> </a>
 				</div>
@@ -100,7 +100,7 @@
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4 m-0">Distance with Cargo</label>
 						<div class="col-lg-8 m-0">
-							<h4 class="col-form-label m-0 ">{{number_format($performance->DistanceWOCargo,2)}}</h4>
+							<h4 class="col-form-label m-0 ">{{number_format($performance->DistanceWCargo,2)}}</h4>
 						</div>
 					</div>
 					<div class="form-group row m-0">
@@ -109,9 +109,6 @@
 							<h4 class="col-form-label m-0 ">{{number_format($performance->DistanceWOCargo,2)}}</h4>
 						</div>
 					</div>
-		
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4 m-0">Load by Tone</label>
 						<div class="col-lg-8 m-0">
@@ -124,6 +121,9 @@
 							<h4 class="col-form-label m-0 ">{{number_format($performance->tonkm,2)}}</h4>
 						</div>
 					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+			
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4 m-0">Fuel by Litter</label>
 						<div class="col-lg-8 m-0">
@@ -168,14 +168,26 @@
 							
 						</div>
 					</div>
-					@endif
-					@if ($performance->is_returned == 1)
+			
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4">Returned After</label>
 						<div class="col-lg-8">
 							<h4 class="col-form-label m-0 ">{{$difinday}} days or <span>{{$diffinhour}} hours </span> </h4>
 						
 						</h4>
+						</div>
+					</div>
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4 m-0">Total KM</label>
+						<div class="col-lg-8 m-0">
+						<h4 class="col-form-label m-0 ">{{number_format(($performance->DistanceWOCargo + $performance->DistanceWCargo),2) }}
+						</h4>
+						</div>
+					</div>
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4 m-0">KM/Day</label>
+						<div class="col-lg-8 m-0">
+						<h4 class="col-form-label m-0 "> {{number_format(($performance->DistanceWOCargo + $performance->DistanceWCargo )/$difinday,2)}} KM</h4>
 						</div>
 					</div>
 					@endif

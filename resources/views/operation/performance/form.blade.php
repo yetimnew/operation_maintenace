@@ -204,7 +204,22 @@
                 <span class="invalid-feedback" role="alert"></span>
             </div>
         </div>
-  
+        <div class="form-group required">
+            <label class="control-label">Tone KM</label>
+            <div class="input-group"> 
+                <input name="tonkm" type="number"
+                    class="form-control {{ $errors->has('tonkm') ? ' is-invalid' : '' }}" id="tonkm"
+                    value="{{ old('tonkm') ?? $performance->tonkm}}" min="1" onfocusout="calculatedTonkm()">
+                @if($errors->has('tonkm'))
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('tonkm') }}</strong>
+                </span>
+                @endif'
+                <span class="invalid-feedback" role="alert"></span>
+                <span id="tone_calc" on> </span>
+            </div>
+            <small id="helpId" class="text-muted">Help text</small>
+        </div>
     </div>
 
     <div class="col-md-6">
@@ -347,7 +362,9 @@
                 const wog = document.getElementById( 'wog' );
                 const other = document.getElementById( 'other' );
                 const comment = document.getElementById( 'comment' );
+                const tonkm = document.getElementById( 'tonkm' );
                 const performance_edit_form = document.getElementById( 'performance_edit_form' );
+
 
 	performance_edit_form.addEventListener( 'submit', function ( event ) {
 		event.preventDefault();
@@ -372,10 +389,26 @@
 		} else {
 			return false;
 		}
-	} );
+    } );
+    
+
 	// Validator functions
+	function newTonkm() {
+    
+  let loadedkm =  diswc.value;
+  let toneage=   tonkm.cargovol;
+  let totla = loadedkm  * toneage;
+  console.log(loadedkm)
+	}
 	function validateTrip() {
 		if ( checkIfEmpty( trip ) ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function calculatedTonkm() {
+		if ( checkIfEmpty( tonkm ) ) {
 			return false;
 		} else {
 			return true;

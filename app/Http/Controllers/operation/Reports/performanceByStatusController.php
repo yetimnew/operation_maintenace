@@ -108,7 +108,6 @@ class performanceByStatusController extends Controller
         ->with('status_date',$status_date)
         ->with('tdss',$tdss);
 
-
 }
   
     public function view(Request $request)
