@@ -10,9 +10,9 @@ class CreateTrucksTable extends Migration
     {
         Schema::create('trucks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('plate')->index();
+            $table->string('plate')->unique()->index();
             $table->integer('vehecletype_id')->unsigned()->index();
-            // $table->foreign('vehecletype_id')->references('id')->on('vehecletypes') ->onDelete('cascade');
+            $table->foreign('vehecletype_id')->references('id')->on('vehecletypes')->onDelete('restrict');
             $table->string('chasisNumber')->nullable();
             $table->string('engineNumber')->nullable();
             $table->integer('tyreSyze')->nullable();

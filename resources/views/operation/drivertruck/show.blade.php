@@ -8,7 +8,8 @@
 	<li class="breadcrumb-item active">Driver And Truck </li>
 </ol>
 <div class="col-md-12">
-	@include('master.error') {{-- @include('master.success') --}}
+    @include('master.error')
+     {{-- @include('master.success') --}}
 	<div class="card text-left">
 		<div class="card-header">
 
@@ -23,10 +24,9 @@
 			</div>
 		</div>
 
-{{-- {{dd($driver)}} --}}
-{{-- {{dd($driver_detail)}} --}}
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
+                      {{-- {{  dd($td)}} --}}
                         <div class="form-group row m-0">
                             <label class="col-form-label col-lg-4">Plate Number</label>
                             <div class="col-lg-8">
@@ -48,7 +48,7 @@
                         <div class="form-group row m-0">
                             <label class="col-form-label col-lg-4">Date Recived</label>
                             <div class="col-lg-8">
-                                <h4 class="col-form-label ">{{$td->date_recived}} || {{$td->updated_at->diffForHumans()}}</h4>
+                                <h4 class="col-form-label ">{{$td->date_recived}} || {{$td->date_recived->diffForHumans()}}</h4>
                             </div>
                         </div>
                         @if ($td->is_attached == 0)
@@ -88,13 +88,15 @@
 
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-
-                            </div>
+               
+                           
+                    </div>
                     @can('truck_driver edit')
                     <div class='m-1 p-1'><a href="{{route('drivertruck.edit',['id'=> $td->id])}}"
                         class="btn btn-info btn-xs"><i class="fa fa-edit"> </i>Edit </a>
                     </div>
                     @endcan
+
                     @if ($td->is_attached == 1)
                     @can('truck_driver detach')
                     <div class='m-1 p-1'>
@@ -133,12 +135,12 @@
 			  <div class="modal-body">
 				  @csrf
 				@method('DELETE')
-			  <p class="text-center">Are You Sure Want To Delete ?  Fo Number <span class="font-weight-bold"> </span> </p>
+			  <p class="text-center">Are You Sure Want To Delete ?  <span class="font-weight-bold"> </span> </p>
 			  </div>
 			  <div class="modal-footer">
 				  <center>
 					  <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-					  <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Yes, Delete</button>
+					  <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmitdelete()">Yes, Delete</button>
 				  </center>
 			  </div>
 		  </div>
@@ -163,10 +165,10 @@
 			  <p class="text-center">Are You Sure To detach ?<br> <span class="font-weight-bold"> {{$driver->name}} </span> from plate <span class="font-weight-bold"> {{$td->plate}} </span> </p>
 			  </div>
 			  <div class="modal-footer">
-				  <center>
+			
 					  <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
 					  <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Yes, Detach</button>
-				  </center>
+				  
 			  </div>
 		  </div>
 	  </form>
@@ -184,7 +186,7 @@
          $("#deleteForm").attr('action', url);
      }
 
-     function formSubmit()
+     function formSubmitdelete()
      {
          $("#deleteForm").submit();
      }

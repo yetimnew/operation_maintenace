@@ -42,7 +42,7 @@ class CustomerController extends Controller
 
     public function edit( $id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::findOrFail($id);
         return view('operation.customer.edit')
         ->with('customer',$customer);
     }
@@ -53,7 +53,7 @@ class CustomerController extends Controller
             'type' => 'required'
             
             ]);
-            $customer = Customer::find($id);
+            $customer = Customer::findOrFail($id);
             $customer->name = $request->type;
             $customer->address = $request->prodate;
             $customer->officenumber = $request->producer;
@@ -67,7 +67,7 @@ class CustomerController extends Controller
    
     public function destroy($id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::findOrFail($id);
         $customer->status = 0;
         $customer->save();
         Session::flash('success', 'Customer deleted successfuly' );

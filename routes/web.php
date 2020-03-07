@@ -6,6 +6,12 @@ Route::group(['middleware' => ['auth']], function () {
     //Dashbord
     Route::get('/', 'DashbordController@index');
     Route::get('/home', 'DashbordController@index')->name('home');
+    Route::get('/get-post-chart-data', 'DashbordController@getMonthlyPostData')->name('dashboard.show');
+    // Route::get('/mukera', 'DashbordController@monthlyperformance')->name('mukera');
+    Route::get('/markasread', function(){
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('read');
     
     // Route::get('role', ['uses'=>'roleController@index','as'=>'role']);
     // Route::resource('role','RoleController');
@@ -107,6 +113,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/performace/show/{id}',    ['uses'=>'PerformanceController@show','as'=>'performace.show']);
     Route::post('/performace/update/{id}', ['uses'=>'PerformanceController@update','as'=>'performace.update']);
     Route::delete('/performace/destroy/{id}', ['uses'=>'PerformanceController@destroy','as'=>'performace.destroy']);
+    // performance ajax request and response
+    Route::get('ajaxRequest', 'PerformanceController@ajaxRequest')->name('performace.distance');
+    Route::post('ajaxRequest', 'PerformanceController@ajaxRequestPost')->name('performace.distance');
     
 // statusType
     Route::get('/drivertruck',                              ['uses'=>'TruckDriverController@index','as'=>'drivertruck']);
@@ -117,7 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/drivertruck/detach/{id}',                  ['uses'=>'TruckDriverController@detach','as'=>'drivertruck.detach']);
     Route::post('/drivertruck/update/{id}',                 ['uses'=>'TruckDriverController@update','as'=>'drivertruck.update']);
     Route::post('/drivertruck/update_dt/{id}',              ['uses'=>'TruckDriverController@update_dt','as'=>'drivertruck.update_dt']);
-    Route::get('/drivertruck/destroy/{id}',                 ['uses'=>'TruckDriverController@destroy','as'=>'drivertruck.destroy']);
+    Route::delete('/drivertruck/destroy/{id}',              ['uses'=>'TruckDriverController@destroy','as'=>'drivertruck.destroy']);
         
 // statusType
     Route::get('/place',                                    ['uses'=>'PlaceController@index','as'=>'place']);

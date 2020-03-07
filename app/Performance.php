@@ -72,10 +72,10 @@ class Performance extends Model
     }
     public function scopeActive($query)
     {
-        return $query->where("satus", "=",1)->where("trip", "=",1);;
+        return $query->where("satus", "=",1);
     }
 
-    public function scopeMaintrip($query)
+    public function scopeMainTrip($query)
     {
         return $query->where("trip", "=",1);
     }
@@ -87,14 +87,12 @@ class Performance extends Model
     {
         return $query->where("trip", "=",1)->where("is_returned", "=",0)->where("satus", "=",1);
     }
-    public function dateReturnded($query)
-    {
-        $dt = Carbon::now();
-    }
+
+
 
  public function noOfDateItTakes()
  {
-     $dt = Carbon::now();
+     
      return  $this->attribute['DisapchDate']->toDateString();
  }
 

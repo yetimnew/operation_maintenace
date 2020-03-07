@@ -89,10 +89,10 @@
             <select name="truck" class="form-control {{ $errors->has('truck') ? ' is-invalid' : '' }} select" id="truck"
                 onfocusout="validateTruck()">
                 <option class="dropup" value="" > Select One</option>
-                @foreach ($trucks as $truck)
-                <option class="dropup" value="{{ $truck->id}}"
-                     {{$truck->id == $performance->driver_truck_id ? 'selected' : '' }}>
-                    {{$truck->plate}}-{{$truck->name}}</option>
+                @foreach ($driver_truck as $dt)
+                <option class="dropup" value="{{$dt->id}}" {{$dt->id == $performance->driver_truck_id ? 'selected' : '' }}>
+                    {{$dt->plate}}-{{$dt->name}}
+                    </option>
                 @endforeach
             </select>
             @if ($errors->has('truck'))
@@ -173,9 +173,8 @@
             @endif
             <span class="invalid-feedback" role="alert"></span>
         </div>
-        {{-- {{dd($distance)}} --}}
-    {{-- <distance :distance_id="{{$distance->id}}"></distance> --}}
 
+<button  type="button" id="viewDistance">Calculate Distance</button> <span class="badge badge-dark" id="something"></span>
         <div class="form-group required">
             <label class="control-label">Distance with cargo</label>
             <div class="input-group"> 
@@ -205,7 +204,7 @@
             </div>
         </div>
         <div class="form-group required">
-            <label class="control-label">Tone KM</label>
+            <label class="control-label">Tone KM </label>
             <div class="input-group"> 
                 <input name="tonkm" type="number"
                     class="form-control {{ $errors->has('tonkm') ? ' is-invalid' : '' }}" id="tonkm"
@@ -216,10 +215,9 @@
                 </span>
                 @endif'
                 <span class="invalid-feedback" role="alert"></span>
-                <span id="tone_calc" on> </span>
             </div>
-            <small id="helpId" class="text-muted">Help text</small>
         </div>
+        <button type="button" id="calculateTonkm" class="btn btn-outline-dark btn-sm">calculate</button>
     </div>
 
     <div class="col-md-6">
@@ -352,7 +350,11 @@
                 const truck = document.getElementById( 'truck' );
                 const ddate = document.getElementById( 'ddate' );
                 const origion = document.getElementById( 'origion' );
+                // const orgionIndex = origion.options[origion.selectedIndex].value;
+
                 const destination = document.getElementById( 'destination' );
+                // const destinationIndex = destination.options[destination.selectedIndex].value;
+
                 const diswc = document.getElementById( 'diswc' );
                 const diswoc = document.getElementById( 'diswoc' );
                 const cargovol = document.getElementById( 'cargovol' );
@@ -568,5 +570,65 @@
 
 
         </script>
+        <script>
+            $.ajaxSetup({
+            
+                headers: {
+            
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            
+                }
+            
+            });
+            
+            
+            
+            $("#viewDistance").click(function(e){
+            
+                // const origionval = document.getElementById('origion').value;
+                const destinationval = document.getElementById( 'destination').value;
+                const origionval = document.getElementById('origion').value;
+                // console.log(origionval )
+
+                var urlPath = '{{ route("performace.distance") }}';
+            // console.log(urlPath)
+                e.preventDefault();
+
+            
+            
+                $.ajax({
+                   type:'POST',
+                   url: urlPath,
+                   data:{
+                    origion: origionval,
+                    destination: destinationval
+                    },
+            // console.log(data)
+                   success:function(data){
+                    $('#diswc').val(data);
+                    $('#diswoc').val(data);
+                    // return data;
+                    // console.log(data)
+            
+                   },
+                   error: function() {
+            alert('Error occured');
+        },
+        dataType:'text'
+                });
+            
+            
+            
+            });
+            $("#calculateTonkm").click(function(e){ 
+                const diswccal = document.getElementById( 'diswc' ).value;
+                // console.log(diswccal)
+                const toncal = document.getElementById( 'cargovol' ).value;
+                const tonkmcal = diswccal * toncal;
+                $('#tonkm').val(tonkmcal);
+
+            });
+            
+            </script>
 
         @endsection

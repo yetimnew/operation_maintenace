@@ -34,9 +34,9 @@
 						<th class="m-1 p-1">plateNumber</th>
 						<th class="m-1 p-1">status</th>
 						<th class="m-1 p-1">Registed Date</th>
+						@can('status edit')
 						<th class="m-1 p-1">Edit</th>
-
-
+						@endcan
 
 					</tr>
 				</thead>
@@ -50,9 +50,10 @@
 						<td class='m-0 p-0'>{{$status->plate}}</td>
 						<td class='m-0 p-0'>{{$status->statustype->name}} </td>
 						<td class='m-0 p-0'>{{$status->registerddate}}</td>
-						<td class='m-0 p-0'><a href="{{route('status.edit',['id'=> $status->id])}}"
-								class="btn btn-info btn-sm">Edit</a>
+						@can('status edit')
+						<td class='m-0 p-0'><a href="{{route('status.edit',['id'=> $status->id])}}" class="btn btn-info btn-sm">Edit</a>
 						</td>
+						@endcan
 					</tr>
 
 					@endforeach
@@ -84,7 +85,7 @@
 				// "scrollY": 100,
 				'columnDefs': [ {
 
-				'targets': [5], /* column index */
+				// 'targets': [5], /* column index */
 
 				'orderable': false, /* true or false */
 

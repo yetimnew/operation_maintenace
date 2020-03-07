@@ -14,12 +14,17 @@ class CreateDriverTruckTable extends Migration
     public function up()
     {
         Schema::create('driver_truck', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
+            $table->unsignedInteger('driver_id');
+            $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('restrict');
+
+            $table->unsignedInteger('truck_id');
+            $table->foreign('truck_id')->references('id')->on('trucks')->onDelete('restrict');
+           
             $table->string('driverid');
-            $table->foreign('driverid')->references('driverid')->on('drivers')->onDelete('cascade');
+            $table->foreign('driverid')->references('driverid')->on('drivers')->onDelete('restrict');
             $table->string('plate');
-            $table->foreign('plate')->references('plate')->on('trucks') ->onDelete('cascade');
+            $table->foreign('plate')->references('plate')->on('trucks') ->onDelete('restrict');
             $table->date('date_recived');
             $table->date('date_detach')->nullable();
             $table->text('reason')->nullable();
@@ -30,11 +35,6 @@ class CreateDriverTruckTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('driver_truck');

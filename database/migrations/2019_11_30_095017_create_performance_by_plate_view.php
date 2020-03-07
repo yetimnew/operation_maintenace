@@ -19,8 +19,8 @@ class CreatePerformanceByPlateView extends Migration
             SELECT
     `trucks`.`id`,
     `trucks`.`plate`,
-    `driver_truck`.`driverid`,
-    `driver_truck`.`plate` AS `dtplate`,
+    `driver_truck`.`id`  AS `dt_id`,
+    `driver_truck`.`id` AS `dtplate`,
     `drivers`.`name`,
     `performances`.`DateDispach` AS `DateDispach`,
     COUNT(performances.FOnumber) AS fo,
@@ -33,8 +33,9 @@ class CreatePerformanceByPlateView extends Migration
 FROM
     `performances`
 LEFT JOIN `driver_truck` ON `driver_truck`.`id` = `performances`.`driver_truck_id`
-LEFT JOIN `drivers` ON `drivers`.`driverid` = `driver_truck`.`driverid`
+LEFT JOIN `drivers` ON `drivers`.`id` = `driver_truck`.`id`
 LEFT JOIN `trucks` ON `trucks`.`id` = `performances`.`driver_truck_id`
+WHERE( `tims_laravel`.`performances`.`trip` = 1)
 GROUP BY
     `trucks`.`plate`
 ORDER BY

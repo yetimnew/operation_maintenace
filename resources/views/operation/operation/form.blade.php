@@ -224,7 +224,7 @@
                         if ( checkIfEmpty( tone ) ) {
                             return false;
                         }
-                        if ( !minmax( tone, 100, 1000000 ) ) {
+                        if ( !minmax( tone, 100, 10000000 ) ) {
                             return false;
                         } else {
                             return true;

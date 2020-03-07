@@ -24,8 +24,7 @@ class DistanceController extends Controller
 
         return view('operation.distance.index')
         ->with('distances',$distances);
-        // ->with('place',$place);
-    }
+         }
 
     /**
      * Show the form for creating a new resource.
@@ -65,7 +64,6 @@ class DistanceController extends Controller
             $orginName_arr =  DB::table('places')->where('id','=', $origin )->pluck('name')->toArray();
             $destination_arr =  DB::table('places')->where('id','=', $destination )->pluck('name')->toArray();
             $distance_count = $distances->count();
-        // dd($distance_count);
             if( $distance_count >= 1){
  
              Session::flash('error', $orginName_arr[0].' and '.$destination_arr[0]. ' alredy registerd!' );

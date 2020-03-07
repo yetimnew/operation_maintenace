@@ -38,7 +38,8 @@
 								onfocusout="validatePlate()">
 								<option class="dropup" value=""> Select One</option>
 								@foreach ($trucks as $truck)
-								<option class="dropup" value="{{$truck->plate}}"> {{$truck->plate}} </option>
+								<option class="dropup" value="{{$truck->id}}|{{$truck->plate}}"> {{$truck->plate}} </option>
+							
 								@endforeach
 
 							</select>
@@ -57,8 +58,8 @@
 							<select name="dname" class="form-control {{ $errors->has('dname') ? ' is-invalid' : '' }}"
 								id="dname" onfocusout="validateDname()">
 								<option class="dropup" value=""> Select One</option>
-								@foreach ($drivers as $driver) {{-- {{ dd($driver->name)}} --}}
-								<option class="dropup" value="{{$driver->driverID}}"> {{$driver->name}} </option>
+								@foreach ($drivers as $dr) 
+							<option class="dropup" value="{{$dr->id}}|{{$dr->driverID}}"> {{$dr->name}} </option>
 								@endforeach
 
 							</select>
@@ -132,7 +133,7 @@
 
 </script>
 <script>
-	const plate = document.getElementById( 'plate' );
+const plate = document.getElementById( 'plate' );
 const dname = document.getElementById( 'dname' );
 const rdate = document.getElementById( 'rdate' );
 

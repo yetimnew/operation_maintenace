@@ -24,7 +24,6 @@
 			<div class="d-flex align-items-center">
 				<h2>All Trucks </h2>
 				@can('driver create')
-
 				<div class="ml-auto">
 					<a href="{{route('truck.create')}}" class="btn btn-outline-primary"><i
 							class="fa fa-plus mr-1"></i>Add Truck</a>

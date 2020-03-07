@@ -55,7 +55,7 @@ class TruckDriverController extends Controller
     public function edit($id)
     {
         $statustypes = Performance::all();
-        $performance = Status::find($id);
+        $performance = Status::findOrFail($id);
         // return $performance;
         return view('operation.performance.edit')->with('performance',$performance)->with('statustypes',$statustypes);
     }
@@ -68,7 +68,7 @@ class TruckDriverController extends Controller
             
             ]);
     
-            $performance = Status::find($id);
+            $performance = Status::findOrFail($id);
             $performance->name = $request->name;
         $performance->statusgroup = $request->type;
         $performance->comment = $request->comment;
@@ -80,7 +80,7 @@ class TruckDriverController extends Controller
    
     public function destroy($id)
     {
-        $performance = Status::find($id);
+        $performance = Status::findOrFail($id);
         $performance->delete();
         Session::flash('success', 'Status group deleted successfuly' );
         return redirect()->back();

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Truck;
+use App\Driver;
+use App\Operation;
+use Carbon\Carbon;
 use App\Performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,14 +16,27 @@ class DashbordController extends Controller
  
     public function index()
     {
-        $number_of_trucks = DB::table('trucks')->where('status','!=',0)->count();
-        $number_of_drivers = DB::table('drivers')->where('status','!=',0)->count();
-        $operations= DB::table('operations')->where('closed','=',1)->count();
-        $totalTone = DB::table('operations')->where('status','=',1)->sum('volume');
+        $number_of_trucks = Truck::active()->count();
+        $number_of_drivers = Driver::active()->count();
+        $operations= Operation::active()->count();
+        $totalTone= Operation::active()->sum('volume');
         $upliftedTone = DB::table('performances')->where('satus','=',1)->sum('CargoVolumMT');
         $maxStatus= DB::table('statuses')->MAX('autoid');
         $maxDate= DB::table('statuses')->MAX('registerddate');
+        $today=  Carbon::today()->toDateTimeString();
+        $now =  Carbon::now()->toDateTimeString();
+      
+        $daylyupliftedtonage = DB::table('performances')
+        ->select(
+        DB::raw('SUM(performances.CargoVolumMT) as ton')
+        ,DB::raw('COUNT(performances.trip) as trip')
+        ,DB::raw('SUM(performances.tonkm) as tonkm')
+        )
+        ->whereBetween('created_at',[$today, $now])
+        // ->groupBy('operations.id')
+       ->get();
 
+   
 
 
         $tds = DB::table('statuses')
@@ -62,6 +79,7 @@ class DashbordController extends Controller
        ->with('tds',$tds)
        ->with('operationsReport',$operationsReport)
        ->with('statuses',$statuses)
+       ->with('daylyupliftedtonage',$daylyupliftedtonage)
        ->with('statuslist',$statuslist);
     }
 
@@ -73,6 +91,77 @@ class DashbordController extends Controller
             'All' => Performance::where('trip','=',1)->active()->take(30)->count(),
         ];
     }
-  
+
+    function getAllMonths(){
+        $now = Carbon::now();
+        $current_year =  $now->year;
+		$month_array = array();
+        $posts_dates = Performance::orderBy('DateDispach', 'ASC' )
+        ->whereYear('DateDispach',$current_year)
+        ->pluck('DateDispach');
+		$posts_dates = json_decode( $posts_dates );
+        // dd( $posts_dates);
+
+		if ( ! empty( $posts_dates ) ) {
+			foreach ( $posts_dates as $unformatted_date ) {
+				$date = new \DateTime( $unformatted_date );
+				$month_no = $date->format( 'm' );
+				$month_name = $date->format( 'M' );
+				$month_array[ $month_no ] = $month_name;
+			}
+		}
+		return $month_array;
+	}
+
+	function getMonthlyPostCount( $month ) {
+        $now = Carbon::now();
+        $current_year =  $now->year;
+        $monthly_post_count = Performance::whereMonth('DateDispach', $month )
+        ->whereYear('DateDispach',$current_year )
+        ->get()
+        ->sum('tonkm');
+		return $monthly_post_count;
+	}
+
+	function getMonthlyPostData() {
+
+		$monthly_post_count_array = array();
+		$month_array = $this->getAllMonths();
+		$month_name_array = array();
+		if ( ! empty( $month_array ) ) {
+			foreach ( $month_array as $month_no => $month_name ){
+				$monthly_post_count = $this->getMonthlyPostCount( $month_no );
+				array_push( $monthly_post_count_array, $monthly_post_count );
+				array_push( $month_name_array, $month_name );
+			}
+		}
+
+        $max_no = max( $monthly_post_count_array );
+        // dd($max_no);
+		$max = round(( $max_no + 10/2 ) / 10 ) * 10;
+        // dd($max);
+		$monthly_post_data_array = array(
+			'months' => $month_name_array,
+			'post_count_data' => $monthly_post_count_array,
+			'max' => $max,
+		);
+// dd($monthly_post_data_array);
+		return $monthly_post_data_array;
+
+    }
+
+  public function monthlyperformance()
+  {
+    // $now = Carbon::now();
+    // $current_year =  $now->year;
+    // $current_mont =  $now->month;
+    // $daylyPerformance = DB::table('performances')
+    // ->whereMonth('DateDispach', $current_mont)
+    // ->groupBy('DateDispach')
+    // ->sum('tonkm');
+    // return $daylyPerformance;
+    dd($daylyPerformance);
+  }
+ 
 
 }

@@ -15,11 +15,12 @@ class CreateDistancesTable extends Migration
     {
         Schema::create('distances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('origin_id')->index();
+            $table->unsignedBigInteger('origin_id')->index();
+            $table->foreign('origin_id')->references('id')->on('places')->onDelete('restrict');
             $table->string('origin_name');
-            // $table->foreign('driverid')->references('driverid')->on('drivers') ->onDelete('restrict');
-            $table->bigInteger('destination_id')->index();
+            $table->unsignedBigInteger('destination_id')->index();
             $table->string('destination_name');
+            $table->foreign('destination_id')->references('id')->on('places')->onDelete('restrict');
             $table->bigInteger('km');
             $table->tinyInteger('status');
             $table->timestamps();

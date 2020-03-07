@@ -86,7 +86,7 @@ class StatusController extends Controller
     public function edit($id)
     {
         $statustypes = Statustype::all();
-        $status = Status::find($id);
+        $status = Status::findOrFail($id);
         // return $status;
         return view('operation.status.edit')->with('status',$status)->with('statustypes',$statustypes);
     }
@@ -100,7 +100,7 @@ class StatusController extends Controller
             
             ]);
     
-            $status = Status::find($id);
+            $status = Status::findOrFail($id);
             $status->statustype_id = $request->name;
            
             $status->save();
@@ -112,7 +112,7 @@ class StatusController extends Controller
    
     public function destroy($id)
     {
-        $status = Status::find($id);
+        $status = Status::findOrFail($id);
         $status->delete();
         Session::flash('success', 'Status group deleted successfuly' );
         return redirect()->back();

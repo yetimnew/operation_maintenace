@@ -29,34 +29,31 @@
 			</div>
 		</div>
 
-
 		<div class="card-body">
 			<form method="post" action="{{route('drivertruck.update_dt',['id'=>$dts->id])}}" class="form-horizontal"
-				id="truck_form">
+				id="driver_truck_create">
 				@csrf
 				<div class="row">
 					<div class="col-md-6">
+
+						<div class="form-group ">
+							<label class="control-label">Plate Number</label>
+							<select name="plate" class="form-control select" id="plate" readonly>
+								<option class="dropup" value="{{$dts->truck_id}}|{{$dts->plate}}" selected> {{$dts->plate}} </option>
+							</select>
+
+							<small class="form-text text-danger" id="error_region"></small>
+						</div>
 						<div class="form-group ">
 							<label class="control-label">Driver Name</label>
 
 							<select name="dname" class="form-control select" id="dname" readonly>
-								<option class="dropup" value="{{$dts->driverid}} "> {{$dts->NAME}}</option>
-
-							</select>
-
-
-							<small class="form-text text-danger" id="error_region"></small>
-						</div>
-						<div class="form-group ">
-							<label class="control-label">Plate Number</label>
-							<select name="plate" class="form-control select" id="plate" readonly>
-								<option class="dropup" value="{{$dts->plate}}"> {{$dts->plate}}</option>
+								<option class="dropup" value="{{$dts->id}}|{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
 
 							</select>
 
 							<small class="form-text text-danger" id="error_region"></small>
 						</div>
-
 
 						<div class="form-group ">
 							<label class="control-label">Recived Date</label>
@@ -74,7 +71,7 @@
 							<div class="input-group">
 								<input name="ddate" type="text"
 									class="form-control {{ $errors->has('ddate') ? ' is-invalid' : '' }}" id="ddate"
-									value="{{ old('ddate' ) }}">
+									value="{{ old('ddate' ) }}" onfocusout="validateDdate()" required>
 								<div class="input-group-append">
 									<button type="button" id="toggle" class="input-group-text">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -92,8 +89,7 @@
 						<div class="form-group required">
 							<label class="control-label">Reson for Detach</label>
 							<div class="">
-								<textarea name="comment" rows="5" class="form-control" id="comment"
-									required>{{ old('comment')}}</textarea>
+								<textarea name="comment" rows="5" class="form-control" id="comment" onfocusout="validateComment()" required> {{ old('comment')}}</textarea>
 
 							</div>
 						</div>
@@ -137,4 +133,6 @@
 	})
 
 </script>
-@endsection
+
+	
+	@endsection

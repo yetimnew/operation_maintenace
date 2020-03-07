@@ -145,7 +145,7 @@ class OperationController extends Controller
                      
             ]);
     
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         $operation->operationid = $request->oid;
         $operation->customer_id = $request->customer;
         $operation->startdate = $request->sdate;
@@ -164,7 +164,7 @@ class OperationController extends Controller
     public function destroy($id)
     {
       
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         $operation->status = 0;
         $operation->save();
         alert()->success('SuccessAlert','Operation deleted successfuly.');
@@ -174,13 +174,13 @@ class OperationController extends Controller
     }
     public function close($id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         return view('operation.operation.close')->with('operation',$operation);
     }
 
     public function open($id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
         $operation->closed = 1;
         $operation->save();
         alert()->success('SuccessAlert','Operation Opend successfuly.');
@@ -196,7 +196,7 @@ class OperationController extends Controller
             'remark' => '',
              ]);
     
-        $operation = Operation::find($id);
+        $operation = Operation::findOrFail($id);
    
         $operation->enddate = $request->edate;
         $operation->remark = $request->remark;

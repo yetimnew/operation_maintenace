@@ -10,7 +10,8 @@
 		<li class="breadcrumb-item active">Operational Update</li>
 	</ol>
 <div class="col-md-12">
-	@include('master.error') {{-- @include('master.success') --}}
+	@include('master.error')
+	 {{-- @include('master.success') --}}
 	<div class="card text-left">
 		<div class="card-header">
 			<h2>Truck Registration</h2>

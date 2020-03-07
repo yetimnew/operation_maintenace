@@ -24,7 +24,7 @@
 			<button class='btn btn-outline-success btn-sm btn-block' type='button'> <span class='badge badge-danger float-right'>{{$td->number}}</span> 
 		<span class='lead'> {{$td->name}}</span></button>
 
-		</div>
+		</div>dash
 
 	@endforeach
 	<div class="row">
@@ -51,23 +51,17 @@
 </div>
 
 
-
-
-
-
-
 @endsection
 @section( 'javascript' ) {
 	{
-		--
-			<script src="{{ asset('js/jquery.dataTables.min.js') }}">
+				<script src="{{ asset('js/jquery.dataTables.min.js') }}">
 			</script>
 			<script>
 				$( document ).ready( function () {
 					$( '#drivers' ).DataTable();
 
 				} );
-			</script>--
+			</script>
 	}
 }
 @endsection

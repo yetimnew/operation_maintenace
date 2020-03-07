@@ -58,6 +58,12 @@
 							<h4 class="col-form-label ">{{$performance->operation->operationid}}</h4>
 						</div>
 					</div>
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4">Customer Name</label>
+						<div class="col-lg-8">
+							<h4 class="col-form-label ">{{$performance->operation->customer->name}}</h4>
+						</div>
+					</div>
 					@foreach ($driver_detail as $d)
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4">Driver Id</label>
@@ -81,7 +87,7 @@
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4">Date Dispatch</label>
 						<div class="col-lg-8">
-							<h4 class="col-form-label ">{{$performance->DateDispach}} || {{$performance->created_at->diffForHumans()}}</h4>
+							<h4 class="col-form-label ">{{$performance->DateDispach}} || {{$performance->DateDispach->diffForHumans()}}</h4>
 						</div>
 					</div>
 					<div class="form-group row m-0">
@@ -148,6 +154,25 @@
 							<h4 class="col-form-label m-0 ">{{number_format($performance->workOnGoing,2)}}</h4>
 						</div>
 					</div>
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4 m-0">Other Exp.</label>
+						<div class="col-lg-8 m-0">
+							<h4 class="col-form-label m-0 ">{{number_format($performance->other,2)}}</h4>
+						</div>
+					</div>
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4 m-0">Total Exp.</label>
+						<div class="col-lg-8 m-0">
+							<h4 class="col-form-label m-0 ">{{number_format(($performance->workOnGoing + $performance->perdiem + $performance->fuelInBirr+ $performance->other ), 2)}}</h4>
+						</div>
+					</div>
+					
+					<div class="form-group row m-0">
+						<label class="col-form-label col-lg-4 m-0">Revenue</label>
+						<div class="col-lg-8 m-0">
+							<h4 class="col-form-label m-0 ">{{number_format(($performance->operation->tariff * $performance->tonkm ), 2)}}</h4>
+						</div>
+					</div>
 					
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4">Current Status</label>
@@ -172,7 +197,11 @@
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4">Returned After</label>
 						<div class="col-lg-8">
-							<h4 class="col-form-label m-0 ">{{$difinday}} days or <span>{{$diffinhour}} hours </span> </h4>
+						@if ($difinday < 1)
+						<h4 class="col-form-label m-0 ">less than a day or <span>{{$diffinhour}} hours </span> </h4>
+						@else
+						<h4 class="col-form-label m-0 ">{{$difinday}} days or <span>{{$diffinhour}} hours </span> </h4>
+						@endif
 						
 						</h4>
 						</div>
@@ -187,7 +216,11 @@
 					<div class="form-group row m-0">
 						<label class="col-form-label col-lg-4 m-0">KM/Day</label>
 						<div class="col-lg-8 m-0">
-						<h4 class="col-form-label m-0 "> {{number_format(($performance->DistanceWOCargo + $performance->DistanceWCargo )/$difinday,2)}} KM</h4>
+							@if ($difinday < 1)
+							<h4 class="col-form-label m-0 "> Returned Less than a day </h4>
+							@else
+							<h4 class="col-form-label m-0 "> {{number_format(($performance->DistanceWOCargo + $performance->DistanceWCargo )/$difinday,2)}} KM</h4>
+							@endif
 						</div>
 					</div>
 					@endif
@@ -216,13 +249,20 @@
 						</div>
 					</div>
 				</div>
-				<div class='m-1 p-1'><a href="{{route('performace.edit',['id'=> $performance->id])}}"
-					class="btn btn-info btn-xs"><i class="fa fa-edit"> </i>Edit </a>
+				@can('performance edit')
+				<div class='ml-1 p-1'>
+					<a href="{{route('performace.edit',['id'=> $performance->id])}}" class="btn btn-info" > <i class="fa fa-edit"></i> Edit </a>
 				</div>
+
+				@endcan
+
+
+				@can('performance delete')
 			<div class='m-1 p-1'>
 			<a href="javascript:;" data-toggle="modal" onclick="deleteData({{$performance->id}})" 
-				data-target="#DeleteModal" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>
+				data-target="#DeleteModal" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
 			</div>
+			@endcan
 		</div>
 		</div>	
 	</div>

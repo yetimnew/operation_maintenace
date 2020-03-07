@@ -14,6 +14,7 @@ class PlaceController extends Controller
     {
         // dd(App\place::find(2)->vehecletype->name);
         $places = Place::where('status',1)->get();
+        // dd($places);
         // $places =  DB::table('places')->join('regions','regions.id','=','region_id')
         // ->select('places.*','regions.name as rname')->get();
         return view('operation.place.index')->with('places',$places);
@@ -60,7 +61,7 @@ class PlaceController extends Controller
 
     public function edit($id)
     {
-        $place = Place::findOeFail($id);
+        $place = Place::findOrFail($id);
        $regions = Region::all();
         return view('operation.place.edit')->with('place',$place)->with('regions',$regions);
     }
@@ -74,7 +75,7 @@ class PlaceController extends Controller
             
             ]);
     
-            $place = Place::find($id);
+            $place = Place::findOrFail($id);
             $place->name = $request->name;
             $place->region_id = $request->region;
             $place->comment = $request->comment;
@@ -87,7 +88,7 @@ class PlaceController extends Controller
    
     public function destroy($id)
     {
-        $place = Place::find($id);
+        $place = Place::findOrFail($id);
         $place->status =0;
         $place->save();
         Session::flash('success', 'Region deleted successfuly' );

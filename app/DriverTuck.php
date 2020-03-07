@@ -14,7 +14,9 @@ class DriverTuck extends Model
     
     protected $fillable = [
         'id',
+        'driver_id',
         'driverid',
+        'truck_id',
         'plate',
         'date_recived',
         'date_detach',
@@ -24,17 +26,20 @@ class DriverTuck extends Model
         'status' 
     ];
 
+
+    public function scopeActive($query)
+    {
+        return $query->where("status", "=",1);
+    }
+    public function scopeIsattached($query)
+    {
+        return $query->where("is_attached", "=",1);
+    }
+
     public function performances()
     {
         return $this->belongsToMany('App\Performance');
     }
-    public function drivers()
-    {
-        return $this->belongsToMany('App\Driver');
-    }
-    public function trucks()
-    {
-        return $this->belongsToMany('App\Truck');
-    }
+   
 
 }

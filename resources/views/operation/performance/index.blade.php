@@ -38,48 +38,44 @@
 							<th>Driver_truck</th>
 							<th>Date Dispach</th>
 							<th>Origion </th>
-							<th>Destination</th>
+							<th>Ton KM</th>
 							<th>VolumMT</th>
 							<th>Is Returned?</th>
 							<th>Type of Trip</th>
+							@can('performance view')
 							<th class="text-center" width="4%">Details</th>
-						
+						@endcan
 						</tr>
 					</thead>
 					<tbody>
 						<?php $no = 0 ?>
 						@if ($performances->count()> 0)
-
 						@foreach ($performances as $pr)
 					
 						<tr>
 							<td class='m-1 p-1'>{{++$no}}</td>
 							<td class='m-1 p-1'>{{$pr->FOnumber}}</td>
-							<td class='m-1 p-1'>{{$pr->driver_truck->plate}} - {{$pr->driver_truck->driverid}}</td>
-							<td class='m-1 p-1' data-toggle="tooltip" data-placement="top"
-								title="{{$pr->DateDispach->diffForHumans()}}">{{$pr->DateDispach->format('d/m/Y')}}</td>
-							<td class='m-1 p-1'>{{$pr->orgion->name}}</td>
-							<td class='m-1 p-1'>{{$pr->destination->name}}</td>
+							<td class='m-1 p-1'>{{$pr->plate}} - {{$pr->dname}}</td>
+						<td class='m-1 p-1' data-toggle="tooltip" data-placement="top" title="">{{$pr->DateDispach}}</td>
+							<td class='m-1 p-1'>{{$pr->orgion}}</td>
+							<td class='m-1 p-1'>{{$pr->tonkm}}</td>
 							<td class='m-1 p-1'>{{number_format($pr->CargoVolumMT,2)}}</td>
 							@if($pr->is_returned == 0)
-							<td class='m-1 p-1'><span class="badge badge-danger">Not Returned</span>
-							</td>
+							<td class='m-1 p-1'><span class="badge badge-danger">Not Returned</span></td>
 							@else
-							<td class='m-1 p-1'> <span class="badge badge-primary"> Returned</span>
-							</td>
+							<td class='m-1 p-1'> <span class="badge badge-primary"> Returned</span></td>
 							@endif
 							@if($pr->trip == 1)
-							<td class='m-1 p-1'><span class="badge badge-info">Main Trip</span>
-							</td>
+							<td class='m-1 p-1'><span class="badge badge-info">Main Trip</span></td>
 							@else
-							<td class='m-1 p-1'> <span class="badge badge-info"> Part of Trip</span>
-							</td>
+							<td class='m-1 p-1'> <span class="badge badge-default"> Part of Trip</span></td>
 							@endif
-						
+							@can('performance view')
 							<td class='m-1 p-1 text-center' ><a
 									href="{{route('performace.show',['id'=> $pr->id])}}"> <i class="fa fa-edit "></i>
 								</a>
 							</td>
+							@endcan
 						</tr>
 							@endforeach
 						@else
@@ -99,7 +95,8 @@
 
 	</div>
 </div>
-@endsection @section('javascript')
+@endsection 
+@section('javascript')
 <script src="{{ asset('js/jquery.dataTables.min.js') }}">
 </script>
 <script>
@@ -115,4 +112,5 @@
 				});
 			} );
 </script>
+
 @endsection

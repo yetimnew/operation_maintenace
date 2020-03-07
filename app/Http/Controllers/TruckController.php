@@ -18,11 +18,8 @@ class TruckController extends Controller
 
     public function index()
     {
-
         $trucks = Truck::where('status','=',1)->orderBy('created_at','DESC')->get();
-
         return view('operation.truck.index')->with('trucks',$trucks);
-
 
     }
 
@@ -42,7 +39,6 @@ class TruckController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request, [
         'plate' => 'required|unique:trucks,plate|max:20', 
         'vehecle' => 'required', 
@@ -97,10 +93,9 @@ class TruckController extends Controller
             'price' => 'nullable|integer',
             'pdate' =>  'nullable|date',
             'ssdate' =>  'nullable|date'
-                      
             ]);
     
-            $truck = Truck::find($id);
+            $truck = Truck::findOrFail($id);
             $truck->plate = $request->plate;
             $truck->vehecletype_id = $request->vehecle;
             $truck->chasisNumber = $request->chan;
@@ -118,13 +113,12 @@ class TruckController extends Controller
    
     public function destroy($id)
     {
-        $truck = Truck::find($id);
+        $truck = Truck::findOrFail($id);
         $plate=  $truck->plate;
         $td= DriverTuck::where('plate', '=', $plate)
         ->where('status', '=', 1)
         ->where('is_attached', '=', 1)
         ->first();
-// dd($td);
            if($td){
             $driver = Driver::where('driverid', '=', $td->driverid)->first();
             Session::flash('error', 'Not deleted ! ' .$plate .' is attached to driver '. $driver->name );
@@ -132,16 +126,14 @@ class TruckController extends Controller
         }else{
             $truck->status = 0;
             $truck->save();
-            Session::flash('success', 'vehecle type deleted successfuly' );
-            return redirect()->back();
-
+            Session::flash('success', 'vehecle  deleted successfuly' );
+            return redirect()->route('truck');
         }
        
    }
     public function deactivate($id)
     {
-        // dd("kkkkkkkkkkkkkkkkkkkkkkkk");
-        $truck = Truck::find($id);
+        $truck = Truck::findOrFail($id);
             $truck->status = 0 ;
             $truck->save();
             Session::flash('success', $truck->plate . ' Deactivate successfuly' );

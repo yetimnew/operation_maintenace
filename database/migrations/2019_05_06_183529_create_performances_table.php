@@ -18,12 +18,19 @@ class CreatePerformancesTable extends Migration
             $table->boolean('trip')->default(0);
             $table->boolean('LoadType');
             $table->string('FOnumber');
-            $table->integer('operation_id')->index();
-            $table->integer('driver_truck_id')->index();
-            // $table->integer('driver_id')->index();
+            $table->unsignedBigInteger('operation_id');
+            $table->foreign('operation_id')->references('id')->on('operations')->onDelete('restrict');
+            
+            $table->unsignedBigInteger('driver_truck_id');
+            $table->foreign('driver_truck_id')->references('id')->on('driver_truck')->onDelete('restrict');
+            
             $table->dateTime('DateDispach');
-            $table->integer('orgion_id');
-            $table->integer('destination_id');
+            $table->unsignedBigInteger('orgion_id');
+            $table->foreign('orgion_id')->references('id')->on('places')->onDelete('restrict');
+            
+            $table->unsignedBigInteger('destination_id');
+            $table->foreign('destination_id')->references('id')->on('places')->onDelete('restrict');
+
             $table->double('DistanceWCargo',12,4);
             $table->double('tonkm',20,4)->default(0.00);
             $table->double('DistanceWOCargo',12,4)->nullable();

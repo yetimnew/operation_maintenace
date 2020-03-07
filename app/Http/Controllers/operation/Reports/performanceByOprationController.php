@@ -22,7 +22,7 @@ class performanceByOprationController extends Controller
         ,DB::raw('SUM(performances.CargoVolumMT)as Tone'))
         ->join('customers','operations.customer_id','=','customers.id')
         ->leftjoin('performances','performances.operation_id','=','operations.id')
-        ->where('operations.status','=',1)
+        // ->where('operations.status','=',1)
         ->groupBy('operations.id')
        ->get();
        return view('operation.report.performance_by_operation.index')

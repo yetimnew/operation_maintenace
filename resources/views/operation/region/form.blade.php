@@ -46,9 +46,7 @@
                     if ( checkIfEmpty( name ) ) {
                         return false;
                     }
-                     if(!alllatters( name)){
-                        return false;
-                    }
+                  
                     if(!meetLength( name, 3, 255 )){
                         return false;
                     }

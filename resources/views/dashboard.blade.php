@@ -163,10 +163,9 @@
 				</div>
 				<!-- Numbers-->
 				<div class="statistic d-flex align-items-center bg-white has-shadow">
-					<div class="icon bg-green"><i class="fa fa-line-chart"></i>
-					</div>
-					<div class="text"><strong>99.9%</strong><br><small>Success Rate</small>
-					</div>
+					<strong>Today Status</strong>
+				{{-- {{dd($daylyupliftedtonage)}} --}}
+				
 				</div>
 			</div>
 		</div>
@@ -278,4 +277,148 @@
 		</div>
 
 	</section>
+	<section class="client no-padding-top">
+		<div class="container-fluid">
+		  <div class="row">
+			<!-- Work Amount  -->
+			<div class="col-lg-4">
+			  <div class="work-amount card">
+				<div class="card-close">
+				  <div class="dropdown">
+					<button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+					<div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+				  </div>
+				</div>
+				<div class="card-body">
+				  <h3>Todays Status</h3><small></small>
+					@foreach ($daylyupliftedtonage as $today)
+					<div class="text">
+					 <strong> 1.  Uplifted Ton: {{number_format($today->ton,2)}}</strong>
+					</div>
+					<div class="text">
+					 <strong> 2.   Number Of Trips: {{number_format($today->trip,2)}}</strong>
+					</div>
+					 <div class="text">
+					 <strong> 3.   Ton KMe: {{number_format($today->tonkm,2)}}</strong>
+					</div>
+					@endforeach
+			
+				</div>
+			  </div>
+			</div>
+	
+			<!-- Total Overdue             -->
+			<div class="col-lg-8">
+			  <div class="overdue card">
+				<div class="card-close">
+				  <div class="dropdown">
+					<button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+					<div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+				  </div>
+				</div>
+				<div class="card-body">
+					<h3>Monthly Performance Of the Company</h3>
+					<br>
+					<canvas id="myChart" height="150"></canvas>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </section>
+	@endsection
+	@section('javascript')
+	<script src="{{ asset('js/Chart.bundle.js') }}"></script>
+	<script src="{{ asset('js/Chart.min.js') }}"></script>
+	{{-- <script src="{{ asset('js/create-charts.js') }}"></script> --}}
+	<script>
+(function ($) {
+
+var charts = {
+	init: function () {
+		// -- Set new default font family and font color to mimic Bootstrap's default styling
+		Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+		Chart.defaults.global.defaultFontColor = '#292b2c';
+
+		this.ajaxGetPostMonthlyData();
+
+	},
+
+	ajaxGetPostMonthlyData: function () {
+		var urlPath = '{{ route("dashboard.show") }}';
+		// var urlPath = 'http://' + window.location.hostname + '/get-post-chart-data';
+		// console.log(urlPath)
+		var request = $.ajax({
+			method: 'GET',
+			url: urlPath
+		});
+
+		request.done(function (response) {
+			// console.log(response);
+			charts.createCompletedJobsChart(response);
+		});
+	},
+
+	/**
+	 * Created the Completed Jobs Chart
+	 */
+	createCompletedJobsChart: function (response) {
+
+		var ctx = document.getElementById("myChart");
+		var myLineChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: response.months, // The response got from the ajax request containing all month names in the database
+				datasets: [{
+					label: "Performance",
+					lineTension: 0.3,
+					backgroundColor: "rgba(2,117,216,0.2)",
+					borderColor: "rgba(2,117,216,1)",
+					pointRadius: 5,
+					pointBackgroundColor: "rgba(2,117,216,1)",
+					pointBorderColor: "rgba(255,255,255,0.8)",
+					pointHoverRadius: 5,
+					pointHoverBackgroundColor: "rgba(2,117,216,1)",
+					pointHitRadius: 20,
+					pointBorderWidth: 2,
+					data: response.post_count_data, // The response got from the ajax request containing data for the completed jobs in the corresponding months
+					// data: [20, 80, 32] // The response got from the ajax request containing data for the completed jobs in the corresponding months
+				}],
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						time: {
+							unit: 'date'
+						},
+						gridLines: {
+							display: false
+						},
+						ticks: {
+							maxTicksLimit: 7
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							min: 0,
+							max: response.max, // The response got from the ajax request containing max limit for y axis
+							maxTicksLimit: 5
+						},
+						gridLines: {
+							color: "rgba(0, 0, 0, .125)",
+						}
+					}],
+				},
+				legend: {
+					display: true
+				}
+			}
+		});
+	}
+};
+
+charts.init();
+
+})(jQuery);
+		</script>
 	@endsection

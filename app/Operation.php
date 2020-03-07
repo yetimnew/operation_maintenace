@@ -12,6 +12,15 @@ class Operation extends Model
     
     protected $gurded=[];
     protected $dates = ['startdate','edndate','deleted_at'];
+
+    public function scopeActive($query)
+    {
+        return $query->where("status", "=",1);
+    }
+    public function scopeClosed($query)
+    {
+        return $query->where("closed", "=",1);
+    }
     public function customer()
     {
         return $this->belongsTo('App\Customer');

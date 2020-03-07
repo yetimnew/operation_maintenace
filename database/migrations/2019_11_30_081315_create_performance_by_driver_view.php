@@ -63,9 +63,10 @@ class CreatePerformanceByDriverView extends Migration
                 )
             LEFT JOIN `tims_laravel`.`drivers` ON
                 (
-                    `tims_laravel`.`drivers`.`driverid` = `tims_laravel`.`driver_truck`.`driverid`
+                    `tims_laravel`.`drivers`.`id` = `tims_laravel`.`driver_truck`.`driver_id`
                 )
             )
+            WHERE( `tims_laravel`.`performances`.`trip` = 1)
         GROUP BY
             `tims_laravel`.`driver_truck`.`id`
         ORDER BY

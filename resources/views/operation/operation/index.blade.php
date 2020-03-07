@@ -16,7 +16,7 @@
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Oprations </h2>
-				@can('customer create')
+				@can('operation create')
 
 				<div class="ml-auto">
 					<a href="{{route('operation.create')}}" class="btn btn-outline-primary"><i

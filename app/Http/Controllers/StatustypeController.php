@@ -60,7 +60,7 @@ class StatustypeController extends Controller
             
             ]);
     
-        $statustype = Statustype::find($id);
+        $statustype = Statustype::findOrFail($id);
         $statustype->name = $request->name;
         $statustype->statusgroup = $request->type;
         $statustype->comment = $request->comment;
@@ -72,7 +72,7 @@ class StatustypeController extends Controller
    
     public function destroy($id)
     {
-        $statustype = Statustype::find($id);
+        $statustype = Statustype::findOrFail($id);
         $statustype->status = 0;
         $statustype->save();
         Session::flash('success', 'Status group deleted successfuly' );

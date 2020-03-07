@@ -10,15 +10,22 @@
 	</li>
 	<li class="breadcrumb-item active">Status Type</li>
 </ol>
-<div class="row col-12">
-	<div class="col-10">
-	</div>
-	<div class="col-2">
-		<a href="{{route('statustype.create')}}" class="btn btn-primary">Add Status Group</a>
-		{{-- <button class="btn btn-default pull-right" onclick="exportTableToExcel('operations', 'members-data')"><img src="../img/xls.png" width="24" class="mr-2">Export To Excel</button> --}}
+<div class="col-md-12">
+	<div class="card text-left">
+<div class="card-header">
+	<div class="d-flex align-items-center">
+		<h2>All Status Groups </h2>
+		@can('status_type create')
+
+		<div class="ml-auto">
+			<a href="{{route('statustype.create')}}" class="btn btn-outline-primary"><i
+					class="fafa-plus mr-1"></i> Add Status Group </a>
+
+		</div>
+		@endcan
 	</div>
 </div>
-<div class="row col-12">
+<div class="card-body">
 	<div class="table-responsive text-nowrap">
 		<table class="table table-bordered table-sm table-striped" id="operations">
 			<thead>
@@ -27,8 +34,12 @@
 					<th>Name</th>
 					<th>statusGroup</th>
 					<th>Comment</th>
+					@can('status_type edit')
 					<th>Edit</th>
+					@endcan
+					@can('status_type delete')
 					<th>Delete</th>
+					@endcan
 
 
 				</tr>
@@ -46,23 +57,27 @@
 					<td class='m-1 p-1'>Garage</td>
 					@endif
 					<td class='m-1 p-1'>{{$statustype->comment}}</td>
-					<td class='m-1 p-1'><a href="{{route('statustype.edit',['id'=> $statustype->id])}}"
-							class="btn btn-info btn-xs"><i class="fafa-edit"> </i></a>
+					@can('status_type edit')
+					<td class='m-1 p-1 text-center'><a href="{{route('statustype.edit',['id'=> $statustype->id])}}"
+						><i class="fa fa-edit"> </i></a>
 					</td>
-					<td class='m-1 p-1'>
+					@endcan
+					@can('status_type delete')
+					<td class='m-1 p-1 text-center'>
 
 						<form action="{{route('statustype.destroy',['id'=> $statustype->id])}}"
 							id="detach-form-{{$statustype->id}}" style="display: none">
 							@csrf @method('DELETE')
 						</form>
-						<button type="submit" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to Delete this?')){
+						<button type="submit"  onclick="if(confirm('Are you sure to Delete this?')){
                             event.preventDefault();
                             document.getElementById('detach-form-{{$statustype->id}}').submit();
                         }else{
                             event.preventDefault();
-                        }"> <i class="fafa-trash"> </i>
-					</td>
+                        }"> <i class="fa fa-trash red"> </i>
 					</button>
+					</td>
+					@endcan
 
 				</tr>
 

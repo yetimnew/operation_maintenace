@@ -33,8 +33,9 @@ class Driver extends Model
     }
     public function trucks()
     {
-        return $this->belongsToMany('App\Truck');
+        return $this->belongsToMany('App\Truck','driver_truck','driver_id', 'truck_id');
     }
+    
 
     public function performances()
     {

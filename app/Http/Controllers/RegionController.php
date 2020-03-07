@@ -11,7 +11,6 @@ class RegionController extends Controller
 {
     public function index()
     {
- 
         
         $regions = Region::where('status','=',1)->get();
         return view('operation.region.index')->with('regions',$regions);
@@ -59,11 +58,10 @@ class RegionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            // 'comment' => 'required'
             
             ]);
     
-            $region = Region::find($id);
+            $region = Region::findorFail($id);
             $region->name = $request->name;
             $region->comment = $request->comment;
         
@@ -72,10 +70,9 @@ class RegionController extends Controller
             return redirect()->route('region');
     }
 
-   
     public function destroy($id)
     {
-        $region = Region::find($id);
+        $region = Region::findOrFail($id);
         $region->status = 0;
         $region->save();
         Session::flash('success', 'Region deleted successfuly' );

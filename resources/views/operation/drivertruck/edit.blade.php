@@ -21,7 +21,6 @@
 				</div>
 			</div>
 		</div>
-{{-- {{dd($dts)}} --}}
 		<div class="card-body">
 			<form method="post" action="{{route('drivertruck.update',['id'=>$dts->id])}}" class="form-horizontal"
 				id="truck_form">
@@ -32,29 +31,22 @@
 						<div class="form-group required">
 							<label class="control-label">Plate Number</label>
 							<select name="plate" class="form-control select" id="plate" required>
-								<option class="dropup" value="{{$dts->plate}}" selected> {{$dts->plate}} </option>
+							<option class="dropup" value="{{$dts->truck_id}}|{{$dts->plate}}" selected> {{$dts->plate}} </option>
 								@foreach ($trucks as $truck)
-								@if( old('plate') == $truck->plate)
-								<option class="dropup" value="{{$truck->plate}}" selected> {{$truck->plate}} </option>
-								@else
-								<option class="dropup" value="{{$truck->plate}}"> {{$truck->plate}} </option>
-
-								@endif
-
+										<option class="dropup" value="{{$truck->id}}|{{$truck->plate}}"> {{$truck->plate}} </option>
 								@endforeach
 
 							</select>
 							<small class="form-text text-danger" id="error_region"></small>
 						</div>
-						{{-- {{dd($driver)}} --}}
-						<div class="form-group required">
+							<div class="form-group required">
 							<label class="control-label">Driver Name</label>
 							<select name="dname" class="form-control select" id="dname" required>
-								<option class="dropup" value="{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
+								<option class="dropup" value="{{$dts->id}}|{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
+								{{-- {{dd($drivers)}} --}}
 								@foreach ($drivers as $driver)
-								<option class="dropup" value="{{ $driver->id}} 
-									 @if(old('dname') == $driver->id) {{ 'selected' }} @endif"
-									{{$driver->id == $dts->driverid ? 'selected' : '' }}> {{ $driver->name}} </option>
+										<option class="dropup" value="{{$driver->id}}|{{$driver->driverID}}" >{{ $driver->name}}
+																		</option>
 								@endforeach
 							</select>
 
@@ -82,8 +74,6 @@
 						</div>
 						<div class="form-group required">
 							<label class="control-label">Reson for detach</label>
-
-							
 							<textarea name="comment" rows="5"
 							class="form-control {{ $errors->has('comment') ? ' is-invalid' : '' }}"
 							id="comment">{{ $dts->reason}}</textarea>

@@ -49,25 +49,23 @@
 				<td>{{++$no}}</td>
 
 				<td> <img src="{{asset($user->profile->image)}}" alt="" width="50" height="50" class="rounded-circle"
-						alt="Cinque Terre"></td>
+						alt="{{$user->name}}"></td>
 				{{-- <td>{{$user->profile->id}}</td> --}}
 				<td>{{$user->name}}</td>
 				<td>{{$user->email}}</td>
 				<td>{{$user->active}}</td>
-				{{-- <td>{{ $user->created_at->format('F d, Y h:ia') }}</td> --}}
 				<td>{{$user->roles()->pluck('name')->implode(' ')}}</td>
-
 				<td>{{$user->permissions()->pluck('name')->implode(' , ')}}</td>
-
 				<td class='m-1 p-1 text-center'><a href="{{route('user.edit',['id'=> $user->id])}}"><i
-							class="fafa-edit "></i> </a>
+							class="fa fa-edit "></i> </a>
 				</td>
 
 				<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
 					<form action="{{route('user.destroy',['id'=> $user->id])}}" id="detach-form-{{$user->id}}"
 						style="display: none">
-						@csrf @method('DELETE')
+						@csrf 
+						@method('DELETE')
 					</form>
 
 					<button type="submit" class="btn btn-sm" id="first" onclick="if(confirm('Are you sure to Delete this?')){
@@ -75,7 +73,7 @@
 						document.getElementById('detach-form-{{$user->id}}').submit();
 					}else{
 						event.preventDefault();
-					}"> <i class="fafa-trash red"> </i>
+					}"> <i class="fa fa-trash red"> </i>
 					</button>
 				</td>
 

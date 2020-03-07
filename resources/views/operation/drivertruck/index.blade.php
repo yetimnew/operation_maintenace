@@ -1,6 +1,8 @@
 @extends( 'master.app' )
 @section( 'styles' )
-<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}"> @endsection @section('content')
+<link rel="stylesheet" href="{{asset('/css/jquery.dataTables.min.css')}}">
+ @endsection 
+ @section('content')
 <ol class="breadcrumb">
 	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
 	</li>
@@ -35,18 +37,17 @@
 						<th class="m-1 b-1">Show</th>
 						@endcan
 						
-
 					</tr>
 				</thead>
 				<tbody>
-					@if ($dts->count()> 0)
+					@if ($driver_truck->count()> 0)
 					{{-- {{dd($dts)}} --}}
 					<?php $no = 0;?>
-					@foreach ($dts as $dt)
+					@foreach ($driver_truck as $dt)
 					<tr>
 						<td class='m-1 p-1'>{{++$no}}</td>
-						<td class='m-1 p-1'>{{$dt->plate}}</td>
-						<td class='m-1 p-1'>{{$dt->driverid}}</td>
+						<td class='m-1 p-1'>{{$dt->Plate}}</td>
+						<td class='m-1 p-1'>{{$dt->DriverId}}</td>
 						<td class='m-1 p-1'>{{$dt->Name}}</td>
 						<td class='m-1 p-1'>{{$dt->date_recived}}</td>
 						@if ($dt->is_attached == 1)
@@ -55,7 +56,7 @@
 						<td class='m-1 p-1' ><span class="badge badge-danger">Detached</span><span class="pull-right">
 								</span> </td>
 						@endif
-						@can('truck_driver edit')
+						@can('truck_driver view')
 						<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="show"><a
 								href="{{route('drivertruck.show',['id'=> $dt->id])}}"><i class="fa fa-edit"></i></a>
 						</td>

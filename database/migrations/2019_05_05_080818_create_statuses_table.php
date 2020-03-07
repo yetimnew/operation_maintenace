@@ -16,7 +16,8 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('autoid')->default(1);
-            $table->integer('statustype_id')->nullable();
+            $table->unsignedBigInteger('statustype_id')->nullable();
+            $table->foreign('statustype_id')->references('id')->on('statustypes')->onDelete('restrict');
             $table->string('plate');
             $table->date('registerddate');
             $table->softDeletes();

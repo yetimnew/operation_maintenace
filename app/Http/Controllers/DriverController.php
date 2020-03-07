@@ -77,7 +77,7 @@ class DriverController extends Controller
             
             ]);
     
-            $driver = Driver::find($id);
+            $driver = Driver::findOrFail($id);
            
                 $driver->driverid= $request->did ;
                 $driver->name= $request->name;
@@ -97,7 +97,7 @@ class DriverController extends Controller
    
     public function destroy($id)
     {
-        $driver = Driver::find($id);
+        $driver = Driver::findOrFail($id);
         $driver_id=  $driver->driverid;
         $td= DriverTuck::where('driverid', '=', $driver_id)->first();
         // dd($td->plate);
@@ -115,7 +115,7 @@ class DriverController extends Controller
     }
     public function deactivate($id)
     {
-            $driver = Driver::find($id);
+            $driver = Driver::findOrFail($id);
       
             $driver->status= 0 ;
             $driver->save();

@@ -18,4 +18,8 @@ class Place extends Model
     {
         return $this->belongsTo('App\Region');
     }
+    public function scopeActive($query)
+    {
+      return $query->where('status',1);
+    }
 }

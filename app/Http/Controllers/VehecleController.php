@@ -53,7 +53,7 @@ class VehecleController extends Controller
 
     public function edit($id)
     {
-        $vehecletype = vehecletype::find($id);
+        $vehecletype = vehecletype::findOrFail($id);
         // return $vehecletype;
         return view('operation.vehecletype.edit')->with('vehecletype',$vehecletype);
     }
@@ -65,7 +65,7 @@ class VehecleController extends Controller
             
             ]);
     
-            $vehecletype = vehecletype::find($id);
+            $vehecletype = vehecletype::findOrFail($id);
             $vehecletype->name = $request->name;
             $vehecletype->company = $request->company;
             $vehecletype->productiondate = $request->pdate;
@@ -79,7 +79,7 @@ class VehecleController extends Controller
    
     public function destroy($id)
     {
-        $vehecletype = vehecletype::find($id);
+        $vehecletype = vehecletype::findOrFail($id);
         $vehecletype->delete();
         Session::flash('success', 'vehecle Model  deleted successfuly' );
 
