@@ -47,7 +47,7 @@ class PerformanceController extends Controller
     public function create()
     {
         $performance = new  Performance;
-        $operations=  Operation::active()->get();
+        $operations=  Operation::active()->where('closed','=',1)->get();
         $place = Place::active()->get();
         $trucks = Truck::active()->get();
 

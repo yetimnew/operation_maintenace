@@ -17,7 +17,7 @@
 		<div class="card-header">
 			<div class="d-flex align-items-center">
 				<h2>All Truck Models </h2>
-				@can('customer create')
+				@can('truck_model create')
 
 				<div class="ml-auto">
 					<a href="{{route('vehecletype.create')}}" class="btn btn-outline-primary"><i
@@ -37,8 +37,12 @@
 							<th class="m-1 b-1">Company</th>
 							<th class="m-1 b-1">Production Date </th>
 							<th class="m-1 b-1">Comment</th>
+							@can('truck_model edit')
 							<th class="m-1 b-1">Edit</th>
+							@endcan
+							@can('truck_model delete')
 							<th class="m-1 b-1">Delete</th>
+							@endcan
 						</tr>
 					</thead>
 					<tbody>
@@ -49,11 +53,13 @@
 							<td class='m-1 p-1'>{{$vehecletype->company}}</td>
 							<td class='m-1 p-1'>{{$vehecletype->productiondate}}</td>
 							<td class='m-1 p-1'>{{$vehecletype->comment}}</td>
+								@can('truck_model edit')
 							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
 									href="{{route('vehecletype.edit',['id'=> $vehecletype->id])}}"><i
 										class="fa fa-edit"> </i></a>
 							</td>
-
+							@endcan
+							@can('truck_model delete')
 							<td class='m-1 p-1 text-center'>
 
 								<form action="{{route('vehecletype.destroy',['id'=> $vehecletype->id])}}"
@@ -66,8 +72,9 @@
                             }else{
                                 event.preventDefault();
                             }"> <i class="fa fa-trash red"></i>
+						</button>
 							</td>
-							</button>
+							@endcan
 
 
 						</tr>
@@ -99,11 +106,9 @@
 					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"pageLength": 25,
 
-				// "pageLength": 20,
-				// "scrollY": 100,
 				'columnDefs': [ {
 
-				'targets': [5,6], /* column index */
+				// 'targets': [5,6], /* column index */
 
 				'orderable': false, /* true or false */
 				

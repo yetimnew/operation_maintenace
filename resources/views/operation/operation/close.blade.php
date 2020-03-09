@@ -38,7 +38,7 @@
 							<label class="control-label">Starting Date</label>
 
 							<div class="input-group">
-                                <input type="date" id="sdate" name="sdate" class="form-control" required value="{{$operation->startdate}}" disabled>
+                                <input type="datetime" id="sdate" name="sdate" class="form-control" required value="{{$operation->startdate}}" disabled>
                              </div>
 							<small class="form-text text-danger" id="error_sdate"></small>
 						</div>

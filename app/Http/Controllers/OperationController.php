@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Region;
 use App\Customer;
 use App\Operation;
+use App\Performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 // use RealRashid\SweetAlert\Facades\Alert;
@@ -18,7 +20,7 @@ class OperationController extends Controller
 
     public function index()
     {
-         $operations = Operation::where('status','=',1)->orderBy('created_at','DESC')->get();
+         $operations = Operation::active()->orderBy('created_at','DESC')->get();
         return view('operation.operation.index')->with('operations',$operations);
     }
 
@@ -93,6 +95,7 @@ class OperationController extends Controller
         $operation->cargotype = $request->ctype;
         $operation->km = $request->tone;
         $operation->tariff = $request->tariff;
+        $operation->user_id = Auth::user()->id ;
         $operation->save();
         // alert()->success('SuccessAlert','operation  registerd successfuly.');
         Session::flash('success', 'operation  registerd successfuly' );
@@ -101,7 +104,29 @@ class OperationController extends Controller
 
     public function show($id)
     {
-        //
+
+        $operation = Operation::where('id','=',$id)->first();
+         $performance =  DB::table('performances')
+        ->select('performances.trip'
+        ,DB::raw('count(performances.trip) as trip')
+        ,DB::raw('SUM(performances.CargoVolumMT) as mt')
+        ,DB::raw('SUM(performances.tonkm) as tonekm')
+        ,DB::raw('SUM(performances.DistanceWCargo) as dwc')
+        ,DB::raw('SUM(performances.DistanceWOCargo) as dwoc')
+        ,DB::raw('SUM(performances.fuelInBirr) as fuel')
+        ,DB::raw('SUM(performances.perdiem) as per')
+        ,DB::raw('SUM(performances.workOnGoing) as wog')
+        ,DB::raw('SUM(performances.other) as other')
+              )
+        ->LEFTJOIN('operations','operations.id','=','performances.operation_id')
+        ->where('performances.operation_id', $operation->id)
+        ->first();
+     
+// dd( $performance);
+
+        return view('operation.operation.show')
+        ->with('performance',$performance)
+        ->with('operation',$operation);
     }
 
     public function edit($id)
@@ -154,6 +179,7 @@ class OperationController extends Controller
         $operation->cargotype = $request->ctype;
         $operation->km = $request->tone;
         $operation->tariff = $request->tariff;
+        $operation->user_id = Auth::user()->id ;
         $operation->save();
         alert()->success('SuccessAlert','operation updated successfuly.');
         // Session::flash('success', 'operation updated successfuly' );
@@ -163,17 +189,24 @@ class OperationController extends Controller
     
     public function destroy($id)
     {
-      
         $operation = Operation::findOrFail($id);
-        $operation->status = 0;
-        $operation->save();
-        alert()->success('SuccessAlert','Operation deleted successfuly.');
-        // Session::flash('success', 'Operation deleted successfuly' );
-        return redirect()->back();
+        $performance= Performance::where('operation_id','=', $operation->id)->first();
+        if(isset( $performance)){
+            Session::flash('error', 'NOT DELETED ! There are records by this operation id' );
+            return redirect()->back();
+        }
+        else{
+            $operation->delete();
+            Session::flash('success', 'Operation deleted successfuly' );
+            return redirect()->route('operation');
+        }
+      
+       
         
     }
     public function close($id)
     {
+        // dd($id);
         $operation = Operation::findOrFail($id);
         return view('operation.operation.close')->with('operation',$operation);
     }

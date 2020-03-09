@@ -46,7 +46,7 @@
 					<td>{{ str_replace(array('[',']','"'),'', $role->permissions()->pluck('name')) }}</td>
 
 					<td class='m-1 p-1 text-center'><a href="{{route('role.edit',['id'=> $role->id])}}">
-							<i class="fafa-edit "></i> </a>
+							<i class="fa fa-edit "></i> </a>
 					</td>
 					<td class='m-1 p-1 text-center '>
 						<form action="{{route('role.destroy',['id'=> $role->id])}}" id="delete-form-{{$role->id}}"
@@ -59,7 +59,7 @@
 								document.getElementById('delete-form-{{$role->id}}').submit();
 								}else{
 								event.preventDefault();
-								}"> <i class="fafa-trash red"></i>
+								}"> <i class="fa fa-trash red"></i>
 						</button>
 					</td>
 

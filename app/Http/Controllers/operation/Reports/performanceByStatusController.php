@@ -69,11 +69,6 @@ class performanceByStatusController extends Controller
     $days = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
 
 
-
-//        if(isset($start)){
-     
-
-
         $status_date = DB::table('statuses')
                 ->select('statuses.statustype_id','statuses.plate','statuses.registerddate','statustypes.name'
                 ,DB::raw('COUNT(statuses.statustype_id) as number')
@@ -126,7 +121,17 @@ class performanceByStatusController extends Controller
         $years = floor( $diff / ( 365 * 60 * 60 * 24 ) );
         $months = floor( ( $diff - $years * 365 * 60 * 60 * 24 ) / ( 30 * 60 * 60 * 24 ) );
         $days = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
-
+        $truck_id = Truck::active()->get()->pluck('id');
+        $arr = array();
+        foreach( $truck_id as $id){
+                DB::table('statuses')
+                ->select('statuses.statustype_id','statuses.plate','statuses.registerddate','statustypes.name')
+                               ->where('statuses.plate','=',$id)
+                ->whereBetween('statuses.registerddate', [$first->toDateTimeString(), $second->toDateTimeString()])
+                       ->tosql();
+// dd();
+               
+        }
 
         $status_date = DB::table('statuses')
                 ->select('statuses.statustype_id','statuses.plate','statuses.registerddate','statustypes.name'

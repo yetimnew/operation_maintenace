@@ -18,7 +18,7 @@ class TruckController extends Controller
 
     public function index()
     {
-        $trucks = Truck::where('status','=',1)->orderBy('created_at','DESC')->get();
+        $trucks = Truck::active()->orderBy('updated_at','DESC')->get();
         return view('operation.truck.index')->with('trucks',$trucks);
 
     }

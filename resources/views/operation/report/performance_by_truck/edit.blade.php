@@ -41,7 +41,7 @@
 						</div>
 
 					</div>
-					<!--                                          the right side begins here-->
+					<!--                                        
 				</div>
 
 

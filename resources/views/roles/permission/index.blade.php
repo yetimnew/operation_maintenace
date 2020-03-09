@@ -26,7 +26,7 @@
 				<tr>
 					<td>{{ $permission->name }}</td>
 					<td class='m-1 p-1 text-center'><a href="{{route('permission.edit',['id'=> $permission->id])}}">
-							<i class="fafa-edit "></i> </a>
+							<i class="fa fa-edit "></i> </a>
 					</td>
 					<td class='m-1 p-1 text-center '>
 						<form action="{{route('permission.destroy',['id'=> $permission->id])}}"
@@ -39,7 +39,7 @@
 		   document.getElementById('delete-form-{{$permission->id}}').submit();
 		 }else{
 		  event.preventDefault();
-		 }"> <i class="fafa-trash red"></i>
+		 }"> <i class="fa fa-trash red"></i>
 					</td>
 				</tr>
 				@endforeach

@@ -29,6 +29,8 @@ class CreateOperationsTable extends Migration
             $table->boolean('closed')->default(1);
             $table->date('enddate')->nullable();;
             $table->text('remark')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->softDeletes();
 
             $table->timestamps();

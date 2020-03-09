@@ -74,6 +74,10 @@ class Performance extends Model
     {
         return $query->where("satus", "=",1);
     }
+    public function scopeOpen($query)
+    {
+        return $query->where("closed", "=",1);
+    }
 
     public function scopeMainTrip($query)
     {

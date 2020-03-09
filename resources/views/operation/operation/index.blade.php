@@ -41,15 +41,10 @@
 							<th width="10%">TonKM</th>
 							<th width="10%">Tarif</th>
 							<th width="10%">Status</th>
-							@can('operation edit')
-							<th width="3%">Edit</th>
+							@can('operation view')
+							<th width="3%">Details</th>
 							@endcan
-							@can('operation delete')
-							<th width="3%">Delete</th>
-							@endcan
-							@can('operation close')
-							<th width="3%">Close | Open</th>
-							@endcan
+						
 
 						</tr>
 					</thead>
@@ -73,53 +68,18 @@
 							<td class='m-1 p-1 text-right'>{{$operation->tariff}}</td>
 							@if ($operation->closed == 0)
 							<td class='m-1 p-1'><span class="badge badge-danger">closed
-									{{$operation->updated_at->diffForHumans()}}</span></td>
+									{{$operation->enddate->diffForHumans()}}</span></td>
 							@else
 							<td class='m-1 p-1'><span class="badge badge-info">Opened </span></td>
 							@endif
-							@can('operation edit')
-							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit">
-								<a href="{{route('operation.edit',['id'=> $operation->id])}}"> <i
+							@can('operation view')
+							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="show">
+								<a href="{{route('operation.show',['id'=> $operation->id])}}"> <i
 										class="fa fa-edit    "></i>
 							</td>
 							@endcan
-							@can('operation delete')
-							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
-								<form action="{{route('operation.destroy',['id'=> $operation->id])}}"
-									id="detach-form-{{$operation->id}}" style="display: none">
-									@csrf @method('DELETE')
-								</form>
-								<button type="submit" class="btn btn-sm" onclick="if(confirm('Are you sure to Delete The operation?')){
-												event.preventDefault();
-												document.getElementById('detach-form-{{$operation->id}}').submit();
-											}else{
-												event.preventDefault();
-											}"> <i class="fa fa-trash red"></i>
-
-								</button>
-							</td>
-							@endcan
-							@if ($operation->closed == 1)
-							@can('operation close')
-							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top"
-								title="Do you want to close?"><a
-									href="{{route('operation.close',['id'=> $operation->id])}}"
-									class="btn btn-warning btn-sm">
-									<i class="fa fa-window-close" aria-hidden="true">close</i>
-
-								</a>
-							</td>
-							@endcan
-							@else
-							@can('operation open')
-							<td class='m-1 p-1 text-center' data-toggle="tooltip" data-placement="top"
-								title="Do you want to Open?"><a
-									href="{{route('operation.open',['id'=> $operation->id])}}"
-									class="btn btn-success btn-sm"> Open</a>
-							</td>
-							@endcan
-							@endif
-
+						
+						
 						</tr>
 						@endforeach
 						@else

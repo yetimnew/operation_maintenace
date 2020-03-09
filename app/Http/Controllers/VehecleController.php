@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Truck;
 use App\Vehecletype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -80,10 +81,16 @@ class VehecleController extends Controller
     public function destroy($id)
     {
         $vehecletype = vehecletype::findOrFail($id);
-        $vehecletype->delete();
-        Session::flash('success', 'vehecle Model  deleted successfuly' );
-
-        return redirect()->back();
+        $truck= Truck::where('vehecletype_id','=', $vehecletype->id)->first();
+        if( isset($truck)){
+            Session::flash('error', 'unable to delete vehecle Model Assigned to Plate  '. $truck->plate);
+            return redirect()->back();
+        }else{
+            $vehecletype->delete();
+            Session::flash('success', 'vehecle Model  deleted successfuly' );
+            return redirect()->back();
+        }
+        
 
     }
 }

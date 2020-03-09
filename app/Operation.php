@@ -11,7 +11,7 @@ class Operation extends Model
 {
     
     protected $gurded=[];
-    protected $dates = ['startdate','edndate','deleted_at'];
+    protected $dates = ['startdate','enddate','deleted_at'];
 
     public function scopeActive($query)
     {
@@ -21,9 +21,14 @@ class Operation extends Model
     {
         return $query->where("closed", "=",1);
     }
+    
     public function customer()
     {
         return $this->belongsTo('App\Customer');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
     public function region()

@@ -27,6 +27,7 @@ class Truck extends Model
         'updated_at',
     ];
     protected $dates =['productionDate','serviceStartDate','deleted_at'];
+   
     public function drivers()
     
     {
@@ -49,5 +50,7 @@ class Truck extends Model
     }
 
 
+
+    
 
 }

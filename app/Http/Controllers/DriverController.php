@@ -116,7 +116,6 @@ class DriverController extends Controller
     public function deactivate($id)
     {
             $driver = Driver::findOrFail($id);
-      
             $driver->status= 0 ;
             $driver->save();
             Session::flash('success', $driver->name . ' Deactivate successfuly' );
