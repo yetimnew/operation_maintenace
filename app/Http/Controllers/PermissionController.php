@@ -14,17 +14,11 @@ class PermissionController extends Controller
 
     public function index()
     {
-        // dd("ddddddddddd");
-        $permissions = Permission::all(); //Get all permissions
+        $permissions = Permission::orderBy('name')->get(); //Get all permissions
 
         return view('roles.permission.index')->with('permissions', $permissions);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = Role::get(); //Get all roles
@@ -32,12 +26,7 @@ class PermissionController extends Controller
         return view('roles.permission.create')->with('roles', $roles);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -66,17 +55,6 @@ class PermissionController extends Controller
 
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
@@ -84,13 +62,7 @@ class PermissionController extends Controller
         return view('roles.permission.edit', compact('permission'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
     //   dd($request->all());
@@ -109,12 +81,7 @@ class PermissionController extends Controller
             ->with('flash_message','Permission'. $permission->name.' updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $permission = Permission::findOrFail($id);

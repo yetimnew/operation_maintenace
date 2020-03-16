@@ -57,9 +57,7 @@ class PerformanceController extends Controller
         ->LEFTJOIN('drivers','drivers.id','=','driver_truck.driver_id')
         ->where('driver_truck.is_attached',1)
         ->get();
-        //  dd($driver_truck);
-
-        // $driver_truck = DriverTuck::all();
+  
     
        if($place->count() < 2){
            Session::flash('info', 'You must have two or more Place before attempting to create Performance' );
@@ -199,7 +197,6 @@ class PerformanceController extends Controller
 
     public function destroy($id)
     {
-        // dd($id);
         $performance = Performance::findOrFail($id);
         $performance->delete();
         Session::flash('success', 'Performance deleted successfuly' );

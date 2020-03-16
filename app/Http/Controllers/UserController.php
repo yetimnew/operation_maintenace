@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+        $this->middleware(['auth']);
+         //isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
 
 
     public function index()
     {
-        
         $users = User::all();
         $permissions = Permission::all();
  
@@ -35,19 +35,15 @@ class UserController extends Controller
         ->with('roles',$roles);
     }
 
-
     public function store(Request $request)
     {
-        // dd($request->all());
 
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email|unique:users',
             'password'=>'required|min:6|confirmed'
         ]);
-        
-        // $passwprd = $request['password']; //Retrieving the roles field//Checking if a role was selected
-        // $bcrypt = bcrypt( $passwprd); //Retrieving the roles field//Checking if a role was selected
+    
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -81,7 +77,6 @@ class UserController extends Controller
 
         ]);
            
-            //Redirect to the users.index view and display message
             return redirect()->route('user')
             ->with('flash_message','User successfully added.');
     }
@@ -91,9 +86,8 @@ class UserController extends Controller
   
     public function edit($id)
     {
-        // dd("dddddddddddddddddddddd");
         $user = User::findOrFail($id);
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name')->get(); //Get all permissions
         $roles = Role::all();
           return view('users.edit')
           ->with('user',$user)
@@ -105,7 +99,6 @@ class UserController extends Controller
     {
         
         $user = User::findOrFail($id); //Get role specified by id
-
         $this->validate($request, [
             'name'=>'required|max:120',
             'email'=>'required|email',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Place;
 use App\Region;
+use App\Distance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -12,11 +13,8 @@ class PlaceController extends Controller
 {
     public function index()
     {
-        // dd(App\place::find(2)->vehecletype->name);
-        $places = Place::where('status',1)->get();
-        // dd($places);
-        // $places =  DB::table('places')->join('regions','regions.id','=','region_id')
-        // ->select('places.*','regions.name as rname')->get();
+        $places = Place::active()->get();
+     
         return view('operation.place.index')->with('places',$places);
     }
 
@@ -89,10 +87,17 @@ class PlaceController extends Controller
     public function destroy($id)
     {
         $place = Place::findOrFail($id);
-        $place->status =0;
-        $place->save();
-        Session::flash('success', 'Region deleted successfuly' );
-        return redirect()->back();
+        $distance = Distance::where('origin_id','=',$place->id)->orwhere('destination_id','=',$place->id)->get();
+        if(isset($distance)){
+            Session::flash('error', 'UNABLE TO DELETE!!  Distance is registerd by this place' );
+            return redirect()->back();
+        }else{
+            $place->delete();
+            Session::flash('success', 'Place Deleted successfully!!' );
+            return redirect()->back();
+        }
+      
+      
 
     }
 }

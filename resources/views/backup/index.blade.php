@@ -17,12 +17,13 @@
 
                         <div class="card">
                             <div class="card-header">
-
+	                        @can('backup create')
                                 <a id="create-new-backup-button" href="{{ url('backup/create') }}"
                                     class="btn btn-primary pull-right" style="margin-bottom:2em;"><i
                                         class="fa fa-plus"></i>
                                     Create New Backup
                                 </a>
+                                @endcan 
 
                             </div>
                             <div class="card-body">
@@ -33,7 +34,12 @@
                                             <th scope="col">Fiel Name</th>
                                             <th scope="col">Size </th>
                                             <th scope="col">Data</th>
-                                            <th scope="col">Action</th>
+                                            @can('backup download')
+                                            <th scope="col">Download</th>
+                                            @endcan
+                                            @can('backup delete')
+                                            <th scope="col">Delete</th>
+                                            @endcan
                                         </tr>
                                     </thead>
 
@@ -45,15 +51,30 @@
                                             <td>{{ $backup['file_name']}}</td>
                                             <td>{{$backup['file_size']}}</td>
                                             <td> {{$backup['last_modified'] }}
-                                            </td>
+                                            </td>   @can('backup download')
                                             <td class="text-right">
                                                 <a class="btn btn-xs btn-default"
                                                     href="{{ route('backupDownload', $backup['file_name'])}}"> <i
                                                         class="fa fa-cloud-download"></i> Download</a>
-                                                <a class="btn btn-xs btn-danger" data-button-type="delete"
-                                                    href="{{ route('deleteDownload', $backup['file_name'])}}"><i
-                                                        class="fa fa-trash-o"></i>Delete</a>
                                             </td>
+                                            @endcan
+                                            <td>
+                                     @can('backup delete')
+                                                                                                  
+								<form action="{{route('deleteDownload',$backup['file_name'])}}"
+									id="deleteDownload" style="display: none" method="POST">
+									@csrf
+									@method('DELETE')
+								</form>
+								<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
+								event.preventDefault();
+								document.getElementById('deleteDownload').submit();
+									}else{
+										event.preventDefault();
+									}"> <i class="fa fa-trash red"></i> Delete
+                                </button>
+                                            </td>
+                                            @endcan
                                         </tr>
 
                                         @endforeach

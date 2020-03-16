@@ -42,7 +42,7 @@
 					<td class='m-1 p-1'>
 
 
-						<form action="{{route('region.destroy',['id'=> $region->id])}}" id="detach-form-{{$region->id}}"
+						<form action="{{route('region.destroy',['id'=> $region->id])}}" id="detach-form-{{$region->id}}" method="POST"
 							style="display: none">
 							@csrf @method('DELETE')
 						</form>

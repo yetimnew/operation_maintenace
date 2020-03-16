@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/vehecletype/destroy/{id}', ['uses'=>'VehecleController@destroy','as'=>'vehecletype.destroy'])->middleware('permission:truck_model delete');
 // Driver 
     Route::get('/driver',                    ['uses'=>'DriverController@index','as'=>'driver']);
+    Route::get('/driverdata',                ['uses'=>'DriverController@driverdata','as'=>'driver.driverdata']);
     Route::get('/driver/create',             ['uses'=>'DriverController@create','as'=>'driver.create']);
     Route::post('/driver/store',             ['uses'=>'DriverController@store','as'=>'driver.store']);
     Route::get('/driver/edit/{id}',          ['uses'=>'DriverController@edit','as'=>'driver.edit']);
@@ -67,29 +68,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/driver/destroy/{id}',       ['uses'=>'DriverController@destroy','as'=>'driver.destroy']);
 // Operation
     Route::get('/operation',                ['uses'=>'OperationController@index','as'=>'operation']);
-    Route::get('/operation/create',         ['uses'=>'OperationController@create','as'=>'operation.create']);
+    Route::get('/operation/create',         ['uses'=>'OperationController@create','as'=>'operation.create'])->middleware('permission:operation create');
     Route::post('/operation/store',         ['uses'=>'OperationController@store','as'=>'operation.store']);
-    Route::get('/operation/edit/{id}',      ['uses'=>'OperationController@edit','as'=>'operation.edit']);
-    Route::get('/operation/show/{id}',      ['uses'=>'OperationController@show','as'=>'operation.show']);
+    Route::get('/operation/edit/{id}',      ['uses'=>'OperationController@edit','as'=>'operation.edit'])->middleware('permission:operation edit');
+    Route::get('/operation/show/{id}',      ['uses'=>'OperationController@show','as'=>'operation.show'])->middleware('permission:operation view');
     Route::patch('/operation/update/{id}',   ['uses'=>'OperationController@update','as'=>'operation.update']);
     Route::post('/operation/update2/{id}',   ['uses'=>'OperationController@update2','as'=>'operation.update2']);
-    Route::delete('/operation/destroy/{id}',   ['uses'=>'OperationController@destroy','as'=>'operation.destroy']);
-    Route::get('/operation/close/{id}',     ['uses'=>'OperationController@close','as'=>'operation.close']);
-    Route::get('/operation/open/{id}',      ['uses'=>'OperationController@open','as'=>'operation.open']);
+    Route::delete('/operation/destroy/{id}',   ['uses'=>'OperationController@destroy','as'=>'operation.destroy'])->middleware('permission:operation delete');
+    Route::get('/operation/close/{id}',     ['uses'=>'OperationController@close','as'=>'operation.close'])->middleware('permission:operation close');
+    Route::get('/operation/open/{id}',      ['uses'=>'OperationController@open','as'=>'operation.open'])->middleware('permission:operation open');
 // Customer
     Route::get('/customer',                 ['uses'=>'CustomerController@index','as'=>'customer']);
     Route::get('/customer/create',          ['uses'=>'CustomerController@create','as'=>'customer.create'])->middleware('permission:customer create');
     Route::post('/customer/store',          ['uses'=>'CustomerController@store','as'=>'customer.store']);
     Route::get('/customer/edit/{id}',       ['uses'=>'CustomerController@edit','as'=>'customer.edit'])->middleware('permission:customer edit');;
     Route::patch('/customer/update/{id}',    ['uses'=>'CustomerController@update','as'=>'customer.update']);
-    Route::get('/customer/destroy/{id}',    ['uses'=>'CustomerController@destroy','as'=>'customer.destroy'])->middleware('permission:customer delete');;
+    Route::delete('/customer/destroy/{id}',    ['uses'=>'CustomerController@destroy','as'=>'customer.destroy'])->middleware('permission:customer delete');;
 // Region
     Route::get('/region',                   ['uses'=>'RegionController@index','as'=>'region']);
     Route::get('/region/create',            ['uses'=>'RegionController@create','as'=>'region.create']);
     Route::post('/region/store',            ['uses'=>'RegionController@store','as'=>'region.store']);
     Route::get('/region/edit/{id}',         ['uses'=>'RegionController@edit','as'=>'region.edit']);
     Route::post('/region/update/{id}',      ['uses'=>'RegionController@update','as'=>'region.update']);
-    Route::get('/region/destroy/{id}',      ['uses'=>'RegionController@destroy','as'=>'region.destroy']);
+    Route::delete('/region/destroy/{id}',      ['uses'=>'RegionController@destroy','as'=>'region.destroy']);
 // Status
     Route::get('/status',                   ['uses'=>'StatusController@index','as'=>'status']);
     Route::get('/status/create',            ['uses'=>'StatusController@create','as'=>'status.create']);
@@ -97,37 +98,37 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/status/store',            ['uses'=>'StatusController@store','as'=>'status.store']);
     Route::get('/status/edit/{id}',         ['uses'=>'StatusController@edit','as'=>'status.edit']);
     Route::post('/status/update/{id}',      ['uses'=>'StatusController@update','as'=>'status.update']);
-    Route::get('/status/destroy/{id}',      ['uses'=>'StatusController@destroy','as'=>'status.destroy']);
+    Route::delete('/status/destroy/{id}',      ['uses'=>'StatusController@destroy','as'=>'status.destroy']);
 // statusType
     Route::get('/statustype',              ['uses'=>'StatustypeController@index','as'=>'statustype']);
     Route::get('/statustype/create',       ['uses'=>'StatustypeController@create','as'=>'statustype.create']);
     Route::post('/statustype/store',       ['uses'=>'StatustypeController@store','as'=>'statustype.store']);
     Route::get('/statustype/edit/{id}',    ['uses'=>'StatustypeController@edit','as'=>'statustype.edit']);
     Route::post('/statustype/update/{id}', ['uses'=>'StatustypeController@update','as'=>'statustype.update']);
-    Route::get('/statustype/destroy/{id}', ['uses'=>'StatustypeController@destroy','as'=>'statustype.destroy']);
+    Route::delete('/statustype/destroy/{id}', ['uses'=>'StatustypeController@destroy','as'=>'statustype.destroy']);
         
 // statusType
     Route::get('/performace',              ['uses'=>'PerformanceController@index','as'=>'performace']);
-    Route::get('/performace/create',       ['uses'=>'PerformanceController@create','as'=>'performace.create']);
+    Route::get('/performace/create',       ['uses'=>'PerformanceController@create','as'=>'performace.create'])->middleware('permission:performance create');
     Route::post('/performace/store',       ['uses'=>'PerformanceController@store','as'=>'performace.store']);
-    Route::get('/performace/edit/{id}',    ['uses'=>'PerformanceController@edit','as'=>'performace.edit']);
-    Route::get('/performace/show/{id}',    ['uses'=>'PerformanceController@show','as'=>'performace.show']);
+    Route::get('/performace/edit/{id}',    ['uses'=>'PerformanceController@edit','as'=>'performace.edit'])->middleware('permission:performance edit');
+    Route::get('/performace/show/{id}',    ['uses'=>'PerformanceController@show','as'=>'performace.show'])->middleware('permission:performance view');
     Route::post('/performace/update/{id}', ['uses'=>'PerformanceController@update','as'=>'performace.update']);
-    Route::delete('/performace/destroy/{id}', ['uses'=>'PerformanceController@destroy','as'=>'performace.destroy']);
+    Route::delete('/performace/destroy/{id}', ['uses'=>'PerformanceController@destroy','as'=>'performace.destroy'])->middleware('permission:performance delete');
     // performance ajax request and response
     Route::get('ajaxRequest', 'PerformanceController@ajaxRequest')->name('performace.distance');
     Route::post('ajaxRequest', 'PerformanceController@ajaxRequestPost')->name('performace.distance');
     
 // statusType
     Route::get('/drivertruck',                              ['uses'=>'TruckDriverController@index','as'=>'drivertruck']);
-    Route::get('/drivertruck/create',                       ['uses'=>'TruckDriverController@create','as'=>'drivertruck.create']);
+    Route::get('/drivertruck/create',                       ['uses'=>'TruckDriverController@create','as'=>'drivertruck.create'])->middleware('permission:truck_driver create');
     Route::post('/drivertruck/store',                       ['uses'=>'TruckDriverController@store','as'=>'drivertruck.store']);
-    Route::get('/drivertruck/edit/{id}',                    ['uses'=>'TruckDriverController@edit','as'=>'drivertruck.edit']);
+    Route::get('/drivertruck/edit/{id}',                    ['uses'=>'TruckDriverController@edit','as'=>'drivertruck.edit'])->middleware('permission:truck_driver edit');
     Route::get('/drivertruck/show/{id}',                    ['uses'=>'TruckDriverController@show','as'=>'drivertruck.show']);
-    Route::get('/drivertruck/detach/{id}',                  ['uses'=>'TruckDriverController@detach','as'=>'drivertruck.detach']);
+    Route::get('/drivertruck/detach/{id}',                  ['uses'=>'TruckDriverController@detach','as'=>'drivertruck.detach'])->middleware('permission:truck_driver detach');
     Route::post('/drivertruck/update/{id}',                 ['uses'=>'TruckDriverController@update','as'=>'drivertruck.update']);
     Route::post('/drivertruck/update_dt/{id}',              ['uses'=>'TruckDriverController@update_dt','as'=>'drivertruck.update_dt']);
-    Route::delete('/drivertruck/destroy/{id}',              ['uses'=>'TruckDriverController@destroy','as'=>'drivertruck.destroy']);
+    Route::delete('/drivertruck/destroy/{id}',              ['uses'=>'TruckDriverController@destroy','as'=>'drivertruck.destroy'])->middleware('permission:truck_driver delete');
         
 // statusType
     Route::get('/place',                                    ['uses'=>'PlaceController@index','as'=>'place']);
@@ -135,7 +136,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/place/store',                             ['uses'=>'PlaceController@store','as'=>'place.store']);
     Route::get('/place/edit/{id}',                          ['uses'=>'PlaceController@edit','as'=>'place.edit']);
     Route::post('/place/update/{id}',                       ['uses'=>'PlaceController@update','as'=>'place.update']);
-    Route::get('/place/destroy/{id}',                       ['uses'=>'PlaceController@destroy','as'=>'place.destroy']);
+    Route::delete('/place/destroy/{id}',                       ['uses'=>'PlaceController@destroy','as'=>'place.destroy']);
 // statusType
     Route::get('/distance',                                    ['uses'=>'DistanceController@index','as'=>'distance']);
     Route::get('/distance/create',                             ['uses'=>'DistanceController@create','as'=>'distance.create']);
@@ -195,6 +196,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('backup/create', 'BackupController@create');
     Route::get('backup/download/{file_name}', 'BackupController@download');
     Route::get('backup/download/{file_name}', ['uses'=>'BackupController@download','as'=>'backupDownload']);
-    Route::get('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
+    Route::delete('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
         
 });

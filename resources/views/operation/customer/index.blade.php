@@ -66,9 +66,10 @@
 							@endcan
 							@can('customer delete')
 							<td class='m-1 p-1 text-center '>
-								<form action="{{route('customer.destroy',['id'=> $customer->id])}}"
-									id="delete-form-{{$customer->id}}" style="display: none">
-									@csrf @method('DELETE')
+								<form action="{{route('customer.destroy',['id'=> $customer->id])}}" id="delete-form-{{$customer->id}}" style="display: none" method="POST">
+									@csrf
+									
+									 @method('DELETE')
 								</form>
 
 								<button type="submit" onclick="if(confirm('Are you sure to delete this?')){

@@ -66,7 +66,7 @@
 					<td class='m-1 p-1 text-center'>
 
 						<form action="{{route('statustype.destroy',['id'=> $statustype->id])}}"
-							id="detach-form-{{$statustype->id}}" style="display: none">
+							id="detach-form-{{$statustype->id}}" style="display: none" method="POST">
 							@csrf @method('DELETE')
 						</form>
 						<button type="submit"  onclick="if(confirm('Are you sure to Delete this?')){

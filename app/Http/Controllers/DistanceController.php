@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class DistanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
@@ -26,11 +21,6 @@ class DistanceController extends Controller
         ->with('distances',$distances);
          }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $places = Place::all();
@@ -40,12 +30,7 @@ class DistanceController extends Controller
         ->with('places',$places);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -87,23 +72,7 @@ class DistanceController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Distance  $distance
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Distance $distance)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Distance  $distance
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $distances = Distance::all();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Place;
 use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -73,10 +74,16 @@ class RegionController extends Controller
     public function destroy($id)
     {
         $region = Region::findOrFail($id);
-        $region->status = 0;
-        $region->save();
-        Session::flash('success', 'Region deleted successfuly' );
-        return redirect()->back();
+        $place = Place::where('region_id','=', $region)->get();
+        if(isset($place)){
+            Session::flash('error', 'UNABLE TO DELETE!!  Distance is registerd by this Region' );
+            return redirect()->back();
+        }else{
+            $region->delete();
+            Session::flash('success', 'Region Deleted successfully!!' );
+            return redirect()->back();
+        }
 
-    }
+
+       }
 }

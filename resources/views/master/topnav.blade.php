@@ -27,10 +27,13 @@
               <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i>
               <span class="badge bg-red badge-corner">
+                @auth
                 {{count(auth()->user()->unreadNotifications)}}
+                    @endauth
               
               </span></a>
                 <ul aria-labelledby="notifications" class="dropdown-menu">
+                  @auth 
                   @if (count(auth()->user()->unreadNotifications)>0)
                   @foreach (auth()->user()->unreadNotifications as $notification)
                      
@@ -45,8 +48,7 @@
                   @else
                   <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>No notification</strong></a></li> 
                   @endif
-                                
-                
+                  @endauth
                 </ul>
               </li>
               {{-- <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange badge-corner">10</span></a>

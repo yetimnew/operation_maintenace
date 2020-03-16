@@ -63,14 +63,16 @@ return [
             //     'use_single_transaction',
             //     'timeout' => 60 * 5, // 5 minute timeout
             //     'exclude_tables' => ['table1', 'table2'],
-            //     'add_extra_option' => '--optionname=optionvalue', 
+            //     // 'add_extra_option' => '--optionname=optionvalue', 
             //  ]  
 
-            'dump' => [
-                'dump_binary_path' => 'C:/xampp/mysql/bin/', // only the path, so without `mysqldump` or `pg_dump`
-                'use_single_transaction',
-                'timeout' => 60 * 5, // 5 minute timeout
-             ],
+            // 'dump' => [
+            //     'dump_binary_path' => 'C:/xampp/mysql/bin/', // only the path, so without `mysqldump` or `pg_dump`
+            //     'use_single_transaction',
+            //     'timeout' => 60 * 5, // 5 minute timeout
+            //     'exclude_tables' => ['table1', 'table2'],
+            //     // 'add_extra_option' => '--optionname=optionvalue', 
+            //  ],
     
             // 'dump_command_timeout'=> 60 * 5,
             // 'dump_using_single_transaction' =>true,

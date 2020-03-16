@@ -9,7 +9,7 @@
 @section('content')
 
 <ol class="breadcrumb">
-	<li class="breadcrumb-item"><a href="{{route('dasboard')}}">Home</a>
+	<li class="breadcrumb-item"><a href="{{route('home')}}">Home</a>
 	</li>
 	<li class="breadcrumb-item active">Driver</li>
 </ol>
@@ -77,14 +77,14 @@
 							<td class='p-1 text-center'>{{$driver->hireddate}}</td>
 							@can('driver edit')
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-									href="{{route('driver.edit',['id'=> $driver->id])}}"><i class="fa fa-edit"></i></a>
+									href="{{route('driver.edit', $driver->id)}}"><i class="fa fa-edit"></i></a>
 							</td>
 							@endcan
 							@can('driver delete')
 
 							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
 
-								<form action="{{route('driver.destroy',['id'=> $driver->id])}}"
+								<form action="{{route('driver.destroy', $driver->id)}}"
 									id="delete-form-{{$driver->id}}" style="display: none">
 									@csrf @method('DELETE')
 								</form>
@@ -99,7 +99,7 @@
 							@endcan
 							@can('driver deactivate')
 							<td class='p-1 text-center'>
-								<form action="{{route('driver.deactivate',['id'=> $driver->id])}}"
+								<form action="{{route('driver.deactivate', $driver->id)}}"
 									id="deactivate-form-{{$driver->id}}" style="display: none">
 									@csrf
 									{{-- @method('DELETE') --}}

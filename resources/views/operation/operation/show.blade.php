@@ -56,7 +56,13 @@
 							<div class="form-group row m-0">
 								<label class="col-form-label col-lg-4">Cargo Type</label>
 								<div class="col-lg-8">
-									<h4 class="col-form-label ">{{$operation->cargotype}}</h4>
+									@if ($operation->cargotype == 1)
+										
+										<h4 class="col-form-label "> Commercial Cargo</h4>
+										@else
+										<h4 class="col-form-label ">Relief Cargo</h4>
+										
+									@endif
 								</div>
 							</div>
 							<div class="form-group row m-0">
@@ -109,7 +115,6 @@
 						</div>
 
 						<div class="col-lg-6 col-md-6 col-sm-12">
-								
 								<div class="form-group row m-0">
 									<label class="col-form-label col-lg-4 m-0">Uplifted Ton</label>
 									<div class="col-lg-8 m-0">

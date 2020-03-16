@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Status;
 use App\Statustype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -72,11 +73,16 @@ class StatustypeController extends Controller
    
     public function destroy($id)
     {
-        $statustype = Statustype::findOrFail($id);
-        $statustype->status = 0;
-        $statustype->save();
-        Session::flash('success', 'Status group deleted successfuly' );
-        return redirect()->back();
 
-    }
+        $statustype = Statustype::findOrFail($id);
+        $status = Status::where('statustype_id','=',$statustype->id)->first();
+            if (isset( $status)) {
+            Session::flash('error', 'UNABLE TO DELETE!!  Status Type is registerd !' );
+            return redirect()->back();
+            }else{
+            $statustype->delete();
+            Session::flash('success', 'Status Type Deleted successfully!!' );
+            return redirect()->back();
+            }
+}
 }

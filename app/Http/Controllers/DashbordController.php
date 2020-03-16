@@ -33,7 +33,6 @@ class DashbordController extends Controller
         ,DB::raw('SUM(performances.tonkm) as tonkm')
         )
         ->whereBetween('created_at',[$today, $now])
-        // ->groupBy('operations.id')
        ->get();
 
    
@@ -58,7 +57,7 @@ class DashbordController extends Controller
         $operationsReport = DB::table('operations')
         ->select('operations.operationid','operations.volume as Tone_Given','customers.name'
         ,DB::raw('SUM(performances.CargoVolumMT)as Tone')
-        ,DB::raw('COUNT(performances.FOnumber)as fo')
+        ,DB::raw('SUM(performances.trip)as fo')
         )
         ->join('customers','operations.customer_id','=','customers.id')
         ->leftjoin('performances','performances.operation_id','=','operations.id')

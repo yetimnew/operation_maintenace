@@ -53,7 +53,7 @@
 							</td>
 							<td class='m-1 p-1 text-center'>
 								<form action="{{route('place.destroy',['id'=> $place->id])}}"
-									id="detach-form-{{$place->id}}" style="display: none">
+									id="detach-form-{{$place->id}}" style="display: none" method="POST">
 									@csrf @method('DELETE')
 								</form>
 								<button type="submit"  onclick="if(confirm('Are you sure to Delete this?')){

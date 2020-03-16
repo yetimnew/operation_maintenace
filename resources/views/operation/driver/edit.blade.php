@@ -1,8 +1,6 @@
 @extends( 'master.app' )
 @section( 'title', 'TIMS | Truck Update' )
-
 @section( 'content' )
-
 
 <div class="col-md-12">
 	<ol class="breadcrumb">
@@ -18,8 +16,7 @@
 				@can('driver edit')
 				<div class="ml-auto">
 					<a href="{{route('driver')}}" class="btn btn-outline-primary">
-						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>
-						Back</a>
+						<i class="fa fa-caret-left mr-1" aria-hidden="true"></i>Back</a>
 
 				</div>
 				@endcan

@@ -105,7 +105,7 @@ class OperationController extends Controller
     public function show($id)
     {
 
-        $operation = Operation::where('id','=',$id)->first();
+         $operation = Operation::where('id','=',$id)->first();
          $performance =  DB::table('performances')
         ->select('performances.trip'
         ,DB::raw('count(performances.trip) as trip')
@@ -206,7 +206,6 @@ class OperationController extends Controller
     }
     public function close($id)
     {
-        // dd($id);
         $operation = Operation::findOrFail($id);
         return view('operation.operation.close')->with('operation',$operation);
     }
@@ -215,6 +214,7 @@ class OperationController extends Controller
     {
         $operation = Operation::findOrFail($id);
         $operation->closed = 1;
+        $operation->enddate = Null;
         $operation->save();
         alert()->success('SuccessAlert','Operation Opend successfuly.');
         // Session::flash('success', 'Operation Opend successfuly' );

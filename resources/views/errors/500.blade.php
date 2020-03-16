@@ -1,9 +1,9 @@
 @include('master.head')
 @include('master.topnav')
 <!-- Side Navbar -->
-@if (Auth::check())
+{{-- @if (Auth::check()) --}}
 @include('master.sidenav')
-@endif
+{{-- @endif --}}
 
 <div class="content-inner">
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Operation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -28,9 +29,9 @@ class CustomerController extends Controller
       $data = request()->validate([
         'name' => 'required|unique:customers,name', 
         'address' => 'required',
-        'officenumber' => 'required',
-        'mobile' => 'required',
-        'remark' => 'required',
+        'officenumber' => '',
+        'mobile' => '',
+        'remark' => '',
 
     ]);
 
@@ -67,11 +68,20 @@ class CustomerController extends Controller
    
     public function destroy($id)
     {
+
         $customer = Customer::findOrFail($id);
-        $customer->status = 0;
-        $customer->save();
-        Session::flash('success', 'Customer deleted successfuly' );
-        return redirect()->back();
+          $operation = Operation::where('customer_id','=', $customer->id)->first();
+        if(isset( $operation)){
+            // $customer->status = 0;
+            Session::flash('error', 'UNABLE TO DELETE !! Customer ' );
+            return redirect()->back();
+        }else{
+            $customer->delete();
+            Session::flash('success', 'Customer Deleted Successfuly!! ' );
+            return redirect()->back();
+            
+        }
+       
 
     }
 }
