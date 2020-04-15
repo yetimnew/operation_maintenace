@@ -48,7 +48,7 @@
 							<label class="control-label">Driver Name</label>
 
 							<select name="dname" class="form-control select" id="dname" readonly>
-								<option class="dropup" value="{{$dts->id}}|{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
+								<option class="dropup" value="{{$dts->driver_id}}|{{$dts->driverid}}" selected> {{$dts->NAME}} </option>
 
 							</select>
 

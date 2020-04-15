@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\operation;
 
 use App\User;
-use App\Truck;
+use App\Operation\Truck;
 use App\Driver;
 use App\DriverTuck;
 use App\Vehecletype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
 

@@ -41,14 +41,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/update/{id}',     ['uses'=>'UserController@update','as'=>'user.update'])->middleware('admin');
     Route::get('/user/destroy/{id}',     ['uses'=>'UserController@destroy','as'=>'user.destroy'])->middleware('admin');
 
-    Route::get('/truck',                  ['uses'=>'TruckController@index','as'=>'truck']);
-    Route::get('/truck/create',           ['uses'=>'TruckController@create','as'=>'truck.create'])->middleware('permission:truck create');;
-    Route::post('/truck/store',           ['uses'=>'TruckController@store','as'=>'truck.store']);
-    Route::get('/truck/edit/{id}',        ['uses'=>'TruckController@edit','as'=>'truck.edit'])->middleware('permission:truck edit');;
-    Route::get('/truck/show/{id}',        ['uses'=>'TruckController@show','as'=>'truck.show'])->middleware('permission:truck view');;
-    Route::get('/truck/deactivate/{id}',  ['uses'=>'TruckController@deactivate','as'=>'truck.deactivate'])->middleware('permission:truck deactivate');;
-    Route::post('/truck/update/{id}',     ['uses'=>'TruckController@update','as'=>'truck.update']);
-    Route::post('/truck/destroy/{id}',  ['uses'=>'TruckController@destroy','as'=>'truck.destroy'])->middleware('permission:truck delete');;
+    Route::get('/truck',                  ['uses'=>'operation\TruckController@index','as'=>'truck']);
+    Route::get('/truck/create',           ['uses'=>'operation\TruckController@create','as'=>'truck.create'])->middleware('permission:truck create');;
+    Route::post('/truck/store',           ['uses'=>'operation\TruckController@store','as'=>'truck.store']);
+    Route::get('/truck/edit/{id}',        ['uses'=>'operation\TruckController@edit','as'=>'truck.edit'])->middleware('permission:truck edit');;
+    Route::get('/truck/show/{id}',        ['uses'=>'operation\TruckController@show','as'=>'truck.show'])->middleware('permission:truck view');;
+    Route::get('/truck/deactivate/{id}',  ['uses'=>'operation\TruckController@deactivate','as'=>'truck.deactivate'])->middleware('permission:truck deactivate');;
+    Route::post('/truck/update/{id}',     ['uses'=>'operation\TruckController@update','as'=>'truck.update']);
+    Route::delete('/truck/destroy/{id}',  ['uses'=>'operation\TruckController@destroy','as'=>'truck.destroy'])->middleware('permission:truck delete');;
         
 // Truck 
     Route::get('/vehecletype',              ['uses'=>'VehecleController@index','as'=>'vehecletype']);
@@ -197,5 +197,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('backup/download/{file_name}', 'BackupController@download');
     Route::get('backup/download/{file_name}', ['uses'=>'BackupController@download','as'=>'backupDownload']);
     Route::delete('backup/delete/{file_name}', ['uses'=>'BackupController@delete','as'=>'deleteDownload']);
-        
+
+    ///////////////////////////////////////////////////////
+    // HRM //
+    /////////////////////////////////////////////////////////
+
+    Route::get('/personale',                                    ['uses'=>'hrm\PersonaleController@index','as'=>'personale']);
+    Route::get('/personale/create',                             ['uses'=>'hrm\PersonaleController@create','as'=>'personale.create']);
+    Route::post('/personale/store',                             ['uses'=>'hrm\PersonaleController@store','as'=>'personale.store']);
+    Route::get('/personale/edit/{id}',                          ['uses'=>'hrm\PersonaleController@edit','as'=>'personale.edit']);
+    Route::post('/personale/update/{id}',                       ['uses'=>'hrm\PersonaleController@update','as'=>'personale.update']);
+    Route::delete('/personale/destroy/{id}',                    ['uses'=>'hrm\PersonaleController@destroy','as'=>'personale.destroy']); 
 });

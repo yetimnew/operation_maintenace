@@ -3,9 +3,9 @@
         <div class="sidebar-header d-flex align-items-center">
                 @auth
                 @isset(Auth::user()->profile->image)
-                <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
-                        class="img-fluid rounded-circle" width="150" height="150">
-                </div>
+                        <div class="avatar"><img src="{{ asset(Auth::user()->profile->image)}}" alt="User Name"
+                                class="img-fluid rounded-circle" width="150" height="150">
+                        </div>
                 @endisset
                
        
@@ -15,9 +15,7 @@
         </div>  
                 @endauth
               
-                <div class="">
-                        <a href="{{route('profile')}}" alt="Edit Profile"> <i class="fa fa-cog"
-                                        aria-hidden="true"></i></a>
+                <div class=""> <a href="{{route('profile')}}" alt="Edit Profile"> <i class="fa fa-cog" aria-hidden="true"></i></a>
                 </div>
         </div>
 
@@ -26,7 +24,21 @@
         <ul>
                 <li class="{{ Request::is('dasboard') ? 'active' : ''}}"><a href="{{route('dasboard')}}">Home</a></li>
 
-
+                <li class="{{ Request::is('operation*') ? 'active' : ''}}"><a href="#exampledropdownDropdown16"
+                                aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user green"
+                                        aria-hidden="true"></i>Personale </a>
+                        <ul id="exampledropdownDropdown16" class="collapse list-unstyled ">
+                                <li class="{{ Request::is('operation*') ? 'active' : ''}}"><a
+                                                href="{{route('operation')}}">Department</a>
+                                </li>
+                                <li class="{{ Request::is('place') ? 'active' : ''}}"><a
+                                                href="{{route('place')}}">Jobs</a>
+                                </li>
+                                <li class="{{ Request::is('region') ? 'active' : ''}}"><a
+                                                href="{{route('region')}}">Personale</a></li>
+                         
+                        </ul>
+                </li>   
                 <li class="{{ Request::is('truck*') ? 'active' : ''}}"><a href="#exampledropdownDropdown"
                                 aria-expanded="false" data-toggle="collapse"> <i class="fa fa-truck"
                                         aria-hidden="true"></i> Trucks </a>
@@ -39,9 +51,6 @@
                                 </li>
                         </ul>
                 </li>
-
-                <li class="{{ Request::is('driver') ? 'active' : ''}}"><a href="{{route('driver')}}"> <i
-                                        class="fa fa-user green"></i>Driver </a></li>
 
                 <li class="{{ Request::is('operation*') ? 'active' : ''}}"><a href="#exampledropdownDropdown2"
                                 aria-expanded="false" data-toggle="collapse"> <i class="fa fa-tasks blue"
@@ -62,6 +71,7 @@
                                         </a></li>
                         </ul>
                 </li>
+
                 <li class="{{ Request::is('customer') ? 'active' : ''}}"><a href="{{route('customer')}}">
                                 <i class="fa fa-users green" aria-hidden="true"></i> Customers </a>
                 </li>
