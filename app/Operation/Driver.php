@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Truck;
 use App\DriverTuck;
@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Driver extends Model
 {
+    
     protected $fillable = [
         'id',
         'driverid',
@@ -33,13 +34,13 @@ class Driver extends Model
     }
     public function trucks()
     {
-        return $this->belongsToMany('App\Truck','driver_truck','driver_id', 'truck_id');
+        return $this->belongsToMany('App\Operation\Truck','driver_truck','driver_id', 'truck_id');
     }
     
 
     public function performances()
     {
-        return $this->hasMany('App\Performance');
+        return $this->hasMany('App\Operation\Performance');
     }
     public function scopeActive($query)
     {

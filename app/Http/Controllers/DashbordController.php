@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use DateTime;
-use App\Truck;
-use App\Driver;
-use App\Operation;
+use App\Operation\Truck;
+use App\Operation\Driver;
+use App\Operation\Operation;
+use App\Operation\Performance;
 use Carbon\Carbon;
-use App\Performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

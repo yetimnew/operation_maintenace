@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\User;
 use App\Truck;
@@ -40,7 +40,7 @@ class Performance extends Model
     // protected $append=['noOfDateItTakes'];
     public function operation()
     {
-        return $this->belongsTo('App\Operation');
+        return $this->belongsTo('App\Operation\Operation');
     }
       
     public function user()
@@ -50,11 +50,11 @@ class Performance extends Model
       
     public function orgion()
     {
-        return $this->belongsTo('App\Place');
+        return $this->belongsTo('App\Operation\Place');
     }
     public function destination()
     {
-        return $this->belongsTo('App\Place');
+        return $this->belongsTo('App\Operation\Place');
     }
 
     public function driver_truck()

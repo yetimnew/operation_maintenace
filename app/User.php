@@ -25,7 +25,7 @@ class User extends Authenticatable
  
    public function profile()
    {
-       return $this->hasOne('App\Profile');
+       return $this->hasOne('App\Hrm\Profile');
    }
 
     protected $casts = [

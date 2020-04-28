@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Hrm;
 
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;

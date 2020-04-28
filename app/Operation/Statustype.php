@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ class Statustype extends Model
     'comment'];
     public function statuses()
     {
-        return $this->belongsToMany('App\Status');
+        return $this->belongsToMany('App\Operation\Status');
     }
 
 }

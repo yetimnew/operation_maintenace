@@ -9,10 +9,10 @@
                 @endisset
                
        
-        <div class="title">
-                <h1 class="h4">{{Auth::user()->name}}</h1>
-                <p> Role: {{Auth::user()->roles()->pluck('name')->implode(' ')}}</p>
-        </div>  
+                <div class="title">
+                        <h1 class="h4">{{Auth::user()->name}}</h1>
+                        <p> Role: {{Auth::user()->roles()->pluck('name')->implode(' ')}}</p>
+                </div>  
                 @endauth
               
                 <div class=""> <a href="{{route('profile')}}" alt="Edit Profile"> <i class="fa fa-cog" aria-hidden="true"></i></a>
@@ -34,8 +34,8 @@
                                 <li class="{{ Request::is('place') ? 'active' : ''}}"><a
                                                 href="{{route('place')}}">Jobs</a>
                                 </li>
-                                <li class="{{ Request::is('region') ? 'active' : ''}}"><a
-                                                href="{{route('region')}}">Personale</a></li>
+                                <li class="{{ Request::is('personale') ? 'active' : ''}}"><a
+                                                href="{{route('personale')}}">Employee's</a></li>
                          
                         </ul>
                 </li>   

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\operation;
+namespace App\Operation;
 
-use App\Performance;
-use App\Vehecletype;
+use App\Operation\Performance;
+use App\Operation\Vehecletype;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 
 class Truck extends Model
 {
-    use HasRoles;
+    use HasRoles; 
     protected $guard_name = 'web';
     protected $fillable = [
         'id',
@@ -31,17 +31,17 @@ class Truck extends Model
     public function drivers()
     
     {
-        return $this->belongsToMany('App\Driver', 'driver_truck','driver_id','truck_id');
+        return $this->belongsToMany('App\Operation\Driver', 'driver_truck','driver_id','truck_id');
     }
 
     public function performances()
     {
-        return $this->hasMany('App\Performance');
+        return $this->hasMany('App\Operation\Performance');
     }
    
     public function vehecletype()
     {
-        return $this->belongsTo('App\Vehecletype');
+        return $this->belongsTo('App\Operation\Vehecletype');
     }
 
     public function scopeActive($query)

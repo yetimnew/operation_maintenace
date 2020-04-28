@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Region;
 use App\Customer;
@@ -33,10 +33,10 @@ class Operation extends Model
 
     public function region()
     {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo('App\Operation\Region');
     }
     public function performances()
     {
-        return $this->belongsToMany('App\Performance');
+        return $this->belongsToMany('App\Operation\Performance');
     }
 }

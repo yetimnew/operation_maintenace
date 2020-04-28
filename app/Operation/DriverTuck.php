@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Truck;
 use App\Driver;
@@ -38,7 +38,7 @@ class DriverTuck extends Model
 
     public function performances()
     {
-        return $this->belongsToMany('App\Performance');
+        return $this->belongsToMany('App\Operation\Performance');
     }
    
 

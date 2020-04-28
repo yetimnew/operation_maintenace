@@ -18,12 +18,12 @@
 	<div class="card text-left col-md-12">
 		<div class="card-header">
 			<div class="d-flex align-items-center">
-				<h2>All Drivers </h2>
+				<h2>All personales </h2>
 				@can('customer create')
 
 				<div class="ml-auto">
-					<a href="{{route('driver.create')}}" class="btn btn-outline-primary"><i
-							class="fafa-plus mr-1"></i>Add Driver</a>
+					<a href="{{route('personale.create')}}" class="btn btn-outline-primary"><i
+							class="fafa-plus mr-1"></i>Add Employees</a>
 
 				</div>
 				@endcan
@@ -32,90 +32,39 @@
 
 		<div class="card-body">
 			<div class="table-responsive text-nowrap">
-				<table class="table-sm table table-bordered table-sm table-striped" id="drivers">
+				<table class="table-sm table table-bordered table-sm table-striped" id="personales">
 					<thead>
 						<tr>
 							<th class="m-1 b-1" width="3%">No</th>
 							<th class="m-1 b-1">drivereID</th>
-							<th class="m-1 b-1"> Name</th>
-							<th class="m-1 b-1"> Sex</th>
+							<th class="m-1 b-1"> Full Name</th>
 							<th class="m-1 b-1"> birthdate</th>
-							<th class="m-1 b-1"> Zone</th>
-							<th class="m-1 b-1">Woreda</th>
-							<th class="m-1 b-1">Kebele</th>
-							<th class="m-1 b-1">HouseNumber</th>
 							<th class="m-1 b-1">Telephone</th>
 							<th class="m-1 b-1">HireDate</th>
 							@can('driver edit')
-							<th class="m-1 b-1" width="3%">Edit</th>
+							<th class="m-1 b-1" width="3%">details</th>
 							@endcan
-							@can('driver delete')
-							<th class="m-1 b-1" width="3%">Delete</th>
-							@endcan
-							@can('driver deactivate')
-							<th class="m-1 b-1" width="3%">Deactivate</th>
-							@endcan
+
 
 						</tr>
 					</thead>
 					<tbody>
 						<?php $no = 0 ?>
-						@if ($drivers->count()> 0)
-						@foreach ($drivers as $driver)
+						@if ($personales->count()> 0)
+						@foreach ($personales as $personale)
 						<tr>
-
 							<td class='p-1'>{{++$no}}</td>
-							<td class='p-1'>{{$driver->driverid}}</td>
-							<td class='p-1'>{{$driver->name}}</td>
-							<td class='p-1 text-center'>{{$driver->sex}}</td>
-							<td class='p-1 text-center'>{{$driver->birthdate}}</td>
-							<td class='p-1 text-center'>{{$driver->zone}}</td>
-							<td class='p-1 text-center'>{{$driver->woreda}}</td>
-							<td class='p-1 text-center'>{{$driver->kebele}}</td>
-							<td class='p-1 text-center'>{{$driver->housenumber}}</td>
-							<td class='p-1 text-center'>{{$driver->mobile}}</td>
-							<td class='p-1 text-center'>{{$driver->hireddate}}</td>
+							<td class='p-1'>{{$personale->driverid}}</td>
+							<td class='p-1'>{{$personale->fullname}}</td>
+							<td class='p-1 text-center'>{{$personale->birthdate}}</td>
+							<td class='p-1 text-center'>{{$personale->mobile}}</td>
+							<td class='p-1 text-center'>{{$personale->hireddate}}</td>
 							@can('driver edit')
-							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Edit"><a
-									href="{{route('driver.edit', $driver->id)}}"><i class="fa fa-edit"></i></a>
+							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="details">
+								<a href="{{route('personale.show', $personale->id)}}"><i class="fa fa-edit"></i></a>
 							</td>
 							@endcan
-							@can('driver delete')
-
-							<td class='p-1 text-center' data-toggle="tooltip" data-placement="top" title="Delete">
-
-								<form action="{{route('driver.destroy', $driver->id)}}"
-									id="delete-form-{{$driver->id}}" style="display: none">
-									@csrf @method('DELETE')
-								</form>
-								<button class="btn btn-sm" type="submit" onclick="if(confirm('Are you sure to delete this?')){
-								event.preventDefault();
-								document.getElementById('delete-form-{{$driver->id}}').submit();
-									}else{
-										event.preventDefault();
-									}"> <i class="fa fa-trash red"></i>
-								</button>
-							</td>
-							@endcan
-							@can('driver deactivate')
-							<td class='p-1 text-center'>
-								<form action="{{route('driver.deactivate', $driver->id)}}"
-									id="deactivate-form-{{$driver->id}}" style="display: none">
-									@csrf
-									{{-- @method('DELETE') --}}
-								</form>
-								<button class="btn btn-sm btn-outline-info" type="submit" onclick="if(confirm('Are you sure to deactivate this? if your answer is yes you don\'t insert any data by this dirive. ')){
-								event.preventDefault();
-								document.getElementById('deactivate-form-{{$driver->id}}').submit();
-									}else{
-										event.preventDefault();
-									}"> Deactivate
-
-								</button>
-							</td>
-
 						</tr>
-						@endcan
 						@endforeach
 						@else
 						<tr>
@@ -138,7 +87,7 @@
 
 	<script>
 		$( document ).ready( function () {
-				$( '#drivers' ).DataTable( {
+				$( '#personales' ).DataTable( {
 
 				"pageLength": 25,
 				// "scrollY": 100,
@@ -150,7 +99,7 @@
 
 				}]
 				});
-				
+
 			} );
 	</script>
 	@endsection

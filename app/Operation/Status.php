@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Statustype;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +20,7 @@ class Status extends Model
     }
     public function statustype()
     {
-        return $this->belongsTo('App\Statustype');
+        return $this->belongsTo('App\Operation\Statustype');
     }
     public function scopeOnGraje($query)
     {

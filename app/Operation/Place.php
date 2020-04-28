@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Operation;
 
 use App\Region;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,7 @@ class Place extends Model
     ];
     public function region()
     {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo('App\Operation\Region');
     }
     public function scopeActive($query)
     {

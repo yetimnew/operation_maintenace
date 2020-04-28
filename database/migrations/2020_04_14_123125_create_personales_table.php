@@ -12,7 +12,9 @@ class CreatePersonalesTable extends Migration
         Schema::create('personales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('driverid')->unique()->index();
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('fathername');
+            $table->string('gfathername');
             $table->boolean('sex')->default(0);
             $table->date('birthdate');
             $table->string('zone')->nullable();
@@ -21,6 +23,7 @@ class CreatePersonalesTable extends Migration
             $table->string('housenumber')->nullable();
             $table->string('mobile')->nullable();
             $table->date('hireddate')->nullable();
+            $table->boolean('driver')->default(0);
             $table->unsignedBigInteger('department_id')->index();
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('restrict');
             $table->unsignedBigInteger('job_id')->index();

@@ -1,15 +1,15 @@
 <footer class="main-footer">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-        <p>ERTE &copy; 2018</p>
-      </div>
-      <div class="col-sm-6 text-right">
-        <p>Design by <span class="external">Yetimesht T</span></p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>ERTE &copy; 2018</p>
+            </div>
+            <div class="col-sm-6 text-right">
+                <p>Design by <span class="external">Yetimesht T</span></p>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 </div>
 </div>
@@ -42,7 +42,7 @@
 <script src="{{ asset('js/custome_validation.js') }}"> </script>
 
 <script>
-  @if (Session::has('success'))
+    @if (Session::has('success'))
       toastr.success('{{ Session::get('success')}}');
       @endif
       @if (Session::has('info'))
@@ -51,7 +51,6 @@
       @if (Session::has('error'))
       toastr.error('{{ Session::get('error')}}');
       @endif
-      @include('sweetalert::alert');
 </script>
 @yield('javascript')
 </body>

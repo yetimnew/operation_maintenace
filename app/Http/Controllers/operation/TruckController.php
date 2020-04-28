@@ -4,9 +4,9 @@ namespace App\Http\Controllers\operation;
 
 use App\User;
 use App\Operation\Truck;
-use App\Driver;
-use App\DriverTuck;
-use App\Vehecletype;
+use App\Operation\Driver;
+use App\Operation\DriverTuck;
+use App\Operation\Vehecletype;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;

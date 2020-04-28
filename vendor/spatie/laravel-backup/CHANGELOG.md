@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-backup` will be documented in this file.
 
+## 6.9.0 - 2020-04-20
+
+- add right-aligned numbers in console output
+- don't resolve notifications from the IoC container, as per Laravel docs
+
+## 6.8.1 - 2020-03-11
+
+- added support to set execution timeout (#1046)
+
+## 6.8.0 - 2020-03-02
+
+- add support for Laravel 7
+
 ## 6.7.8 - 2020-02-19
 
 - add Finnish localization (#1039)
@@ -37,7 +50,6 @@ All notable changes to `laravel-backup` will be documented in this file.
 ## 6.7.0 - 2019-10-16
 
 - handle database urls for database connections (#980)
->>>>>>> 1f3d26cad457083fc18889db96335c293b6290d4
 
 ## 6.6.1 - 2019-10-09
 
